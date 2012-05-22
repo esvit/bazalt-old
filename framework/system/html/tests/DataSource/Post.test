@@ -1,0 +1,122 @@
+<?php
+
+class HtmlTest_DataSource_Post extends Test_BaseCase
+{
+    protected $form = null;
+
+    protected $dataSource = null;
+
+    public function setUp()
+    {
+        $_SERVER['REQUEST_URI'] = '/';
+        $_SERVER['REQUEST_METHOD'] = 'post';
+
+        $this->form = new Html_Form('test');
+
+        $this->dataSource = new Html_DataSource_Post($this->form);
+    }
+
+    public function tearDown()
+    {
+        unset($_SERVER['REQUEST_URI']);
+        unset($_SERVER['REQUEST_METHOD']);
+    }
+
+    public function testIsPostBackTrue()
+    {
+        $_POST = array('test' => array());
+        $this->dataSource = new Html_DataSource_Post($this->form);
+        $this->form->dataSource($this->dataSource);
+
+        $this->assertEquals(true, $this->dataSource->isPostBack());
+
+        $this->assertEquals(true, $this->form->isPostBack());
+    }
+
+    public function testIsPostBackFalse()
+    {
+        $_SERVER['REQUEST_METHOD'] = 'get';
+        $this->dataSource = new Html_DataSource_Post($this->form);
+        $this->form->dataSource($this->dataSource);
+
+        $_POST = array('test' => array());
+        $this->assertEquals(false, $this->dataSource->isPostBack());
+
+        $this->assertEquals(false, $this->form->isPostBack());
+    }
+
+    public function testIsPostBackFalse2()
+    {
+        $_POST = array('test2' => array());
+        $this->assertEquals(false, $this->dataSource->isPostBack());
+
+        $this->assertEquals(false, $this->form->isPostBack());
+    }
+
+    public function testFileInfo()
+    {
+        $_FILES = array(
+            'test' => array(
+                'name' => array('logo' => '400.png'),
+                'type' => array('logo' => 'image/png'),
+                'tmp_name' => array('logo' => '/tmp/php5Wx0aJ'),
+                'error' => array('logo' => 0),
+                'size' => array('logo' => 15726)
+            )
+        );
+        $_POST = array();
+        $this->dataSource = new Html_DataSource_Post($this->form);
+        $this->form->dataSource($this->dataSource);
+
+        $values = array(
+            'logo' => array(
+                'name' => '400.png',
+                'type' => 'image/png',
+                'tmp_name' => '/tmp/php5Wx0aJ',
+                'error' => 0,
+                'size' => 15726
+            )
+        );
+        $this->assertEquals($values, $this->dataSource->values());
+        // multiple
+        $_FILES = array(
+            'test' => array(
+                'name' => array('logo' => array(0 => '400.png', 1 => '500.png')),
+                'type' => array('logo' => array(0 => 'image/png', 1 => 'image/png')),
+                'tmp_name' => array('logo' => array(0 => '/tmp/php5Wx0aJ', 1 => '/tmp/php5Wx0a2')),
+                'error' => array('logo' => array(0 => 0, 1 => 0)),
+                'size' => array('logo' => array(0 => 15726, 1 => 15727))
+            )
+        );
+        $this->dataSource = new Html_DataSource_Post($this->form);
+        $this->form->dataSource($this->dataSource);
+
+        $values = array(
+            'logo' => array(
+                0 => array(
+                    'name' => '400.png',
+                    'type' => 'image/png',
+                    'tmp_name' => '/tmp/php5Wx0aJ',
+                    'error' => 0,
+                    'size' => 15726
+                ),
+                1 => array(
+                    'name' => '500.png',
+                    'type' => 'image/png',
+                    'tmp_name' => '/tmp/php5Wx0a2',
+                    'error' => 0,
+                    'size' => 15727
+                ),
+            )
+        );
+        $this->assertEquals($values, $this->dataSource->values());
+    }
+
+    public function testValues()
+    {
+        $values = array('test' => 'asdasd');
+        $this->dataSource->values($values);
+
+        $this->assertEquals($values, $this->dataSource->values());
+    }
+}

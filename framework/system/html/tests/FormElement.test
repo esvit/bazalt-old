@@ -1,0 +1,158 @@
+<?php
+
+using('Framework.System.Html');
+
+class TestFormElement extends Html_FormElement
+{
+    public function toString()
+    {
+        return 'test';
+    }
+}
+
+class TestContainerElement extends Html_ContainerElement
+{
+    protected function prependsName()
+    {
+        return false;
+    }
+}
+
+class HtmlTest_FormElement extends Test_BaseCase
+{
+    protected $element = null;
+
+    protected $element2 = null;
+
+    protected $element3 = null;
+
+    protected $group = null;
+
+    protected $group2 = null;
+
+    public function setUp()
+    {
+        $_SERVER['REQUEST_URI'] = '/';
+        $_SERVER['REQUEST_METHOD'] = 'get';
+
+        $this->form = new Html_Form('test');
+
+        $this->element = new Html_Element_Text('test');
+
+        $this->group = new Html_Element_Group('group');
+
+        $this->group2 = new TestContainerElement('group2');
+
+        $this->element2 = new Html_Element_Text('test');
+
+        $this->element3 = new Html_Element_Text('testInGroup');
+
+        $this->form->addElement($this->element);
+
+        $this->form->addElement($this->group);
+
+        $this->form->addElement($this->group2);
+
+        $this->group->addElement($this->element2);
+
+        $this->group2->addElement($this->element3);
+    }
+
+    public function tearDown()
+    {
+        unset($_SERVER['REQUEST_URI']);
+        unset($_SERVER['REQUEST_METHOD']);
+    }
+
+    public function testErrors()
+    {
+        $str = $this->element->addError('test', 'Error');
+        $this->assertEquals(array('test' => 'Error'), $this->element->getErrors());
+
+        $str = $this->element->removeError('test');
+        $this->assertEquals(array(), $this->element->getErrors());
+    }
+
+    public function testRequireField()
+    {
+        $this->assertEquals(false, $this->element->isRequireField());
+
+        $this->element->addRuleNonEmpty();
+
+        $this->assertEquals(true, $this->element->isRequireField());
+    }
+
+    public function testComment()
+    {
+        $this->element->comment('Test comment');
+        $this->assertEquals('Test comment', $this->element->comment());
+    }
+
+    public function testElementName()
+    {
+        $this->assertEquals('test[test]', $this->element->name());
+
+        $this->element->name('test2');
+        $this->assertEquals('test[test2]', $this->element->name());
+
+        $this->form->name(false);
+        $this->assertEquals('test2', $this->element->name());
+
+        $this->element->name(false);
+        $this->assertEquals(null, $this->element->name());
+
+        $this->form->name('form');
+        $this->assertEquals('form[group][test]', $this->element2->name());
+
+        $this->group->name(false);
+        $this->assertEquals('form[test]', $this->element2->name());
+
+        $this->assertEquals('form', $this->group2->name());
+
+        $this->assertEquals('form[testInGroup]', $this->element3->name());
+    }
+
+    public function testElementValue()
+    {
+        $this->form->name('form');
+        $this->element2->name('test2');
+        $this->assertEquals('', $this->element->value());
+
+        $this->assertEquals('', $this->element2->value());
+
+        $values = array(
+            'test' => '123',
+            'group' => array(
+                'test2' => '234'
+            ),
+            'testInGroup' => '345'
+        );
+        $this->form->dataSource(new Html_DataSource_Array($this->form, $values));
+
+        $this->assertEquals('123', $this->element->value());
+
+        $this->assertEquals('234', $this->element2->value());
+
+        $this->assertEquals('345', $this->element3->value());
+
+        $this->assertEquals(array('test2' => '234'), $this->group->value());
+
+        $this->group->name(false);
+        $values = array(
+            'test' => '123',
+            'test2' => '234'
+        );
+        $this->form->dataSource(new Html_DataSource_Array($this->form, $values));
+
+        $this->assertEquals('123', $this->element->value());
+
+        $this->assertEquals('234', $this->element2->value());
+
+        $this->assertEquals(null, $this->group->value());
+
+        $this->element2->value('test');
+        $this->assertEquals('test', $this->element2->value());
+
+        $this->assertEquals($values, $this->group2->value());
+    }
+}

@@ -1,0 +1,11 @@
+<td class="column-{{ element.id() }}">
+    {% if data %}
+    <div class="ui-table-content-date" title="{{ data|date('d.m.y H:i:s') }}">
+        <span class="ui-icon ui-icon-calendar ui-float-left"></span> {{ data|date('d.m.y') }}
+        <div class="spacer"></div>
+
+        <span class="ui-icon ui-icon-clock ui-float-left"></span> {{ data|date('H:i') }}
+    </div>
+    {% endif %}
+</td>
+

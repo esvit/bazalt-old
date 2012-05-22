@@ -1,0 +1,1 @@
+<div class="bz-form-row"><?php echo $element->renderLabel(); ?><?php echo $element->renderComment(); ?><?php echo $element->renderError(); ?><div <?php echo $element->getAttributesString() ?>><?php echo $content; ?></div></div>

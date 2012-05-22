@@ -1,0 +1,6 @@
+<?xml version="1.0"?>
+<library name="Framework.System.Metadata" version="1.0.0">
+    <require>
+        <library name="Framework.Vendors.JsMin" version="1.0.0"/>
+    </require>
+</library>

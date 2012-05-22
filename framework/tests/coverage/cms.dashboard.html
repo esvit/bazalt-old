@@ -1,0 +1,135 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+    <title>cms</title>
+    <link rel="stylesheet" type="text/css" href="style.css">
+    <script src="jquery.min.js" type="text/javascript"></script>
+    <script src="highcharts.js" type="text/javascript"></script>
+    <script type="text/javascript">
+    $(document).ready(function() {
+          var classCoverageDistribution = new Highcharts.Chart({
+             chart: {
+                renderTo: 'classCoverageDistribution',
+                type: 'column'
+             },
+             title: {text: ''},
+             legend: {enabled: false},
+             credits: {enabled: false},
+             tooltip: {enabled: false},
+             xAxis: {
+                 labels: {style: {fontSize: '8px'}},
+                 categories: [
+                 '0%','0-10%','10-20%','20-30%','30-40%','40-50%','50-60%','60-70%','70-80%','80-90%','90-100%','100%'
+                 ]
+            },
+            yAxis: {
+                title: '',
+                labels: {style: {fontSize: '8px'}},
+            },
+            series: [{
+                data: [7,2,2,1,2,0,1,3,3,3,1,4]
+            }],
+          });
+
+        var classComplexity = new Highcharts.Chart({
+            chart: {
+              renderTo: 'classComplexity',
+              type: 'scatter'
+            },
+            title: {text: ''},
+            legend: {enabled: false},
+            credits: {enabled: false},
+            xAxis: {
+               labels: {enabled: false},
+            },
+            yAxis: {
+              title: '',
+              labels: {enabled: false},
+            },
+            tooltip: {
+                formatter: function() {
+                    return this.point.config[2];
+                }
+            },
+            series: [{
+              data: [[25.242718446602,44,"<a href=\"cms_Bazalt.php.html#7\">CMS_Bazalt<\/a>"],[0,18,"<a href=\"cms_ErrorCatcher.php.html#5\">CMS_ErrorCatcher<\/a>"],[92,9,"<a href=\"cms_Form_Language_Tab.php.html#5\">CMS_Form_Language_Tab<\/a>"],[58.333333333333,31,"<a href=\"cms_Form_Language_Tabs.php.html#5\">CMS_Form_Language_Tabs<\/a>"],[38.095238095238,20,"<a href=\"cms_Language.php.html#3\">CMS_Language<\/a>"],[80.952380952381,8,"<a href=\"cms_Model_Base_Category.php.html#3\">CMS_Model_Base_Category<\/a>"],[71.428571428571,7,"<a href=\"cms_Model_Base_CategoryLocale.php.html#3\">CMS_Model_Base_CategoryLocale<\/a>"],[69.230769230769,8,"<a href=\"cms_Model_Base_Language.php.html#3\">CMS_Model_Base_Language<\/a>"],[76.923076923077,8,"<a href=\"cms_Model_Base_LanguageRefSite.php.html#3\">CMS_Model_Base_LanguageRefSite<\/a>"],[0,23,"<a href=\"cms_Model_Base_Record.php.html#3\">CMS_Model_Base_Record<\/a>"],[75,8,"<a href=\"cms_Model_Base_Role.php.html#3\">CMS_Model_Base_Role<\/a>"],[87.5,8,"<a href=\"cms_Model_Base_Site.php.html#3\">CMS_Model_Base_Site<\/a>"],[69.230769230769,8,"<a href=\"cms_Model_Base_SiteRefUser.php.html#3\">CMS_Model_Base_SiteRefUser<\/a>"],[82.608695652174,8,"<a href=\"cms_Model_Base_User.php.html#3\">CMS_Model_Base_User<\/a>"],[0,16,"<a href=\"cms_Model_Category.php.html#3\">CMS_Model_Category<\/a>"],[100,0,"<a href=\"cms_Model_CategoryLocale.php.html#29\">CMS_Model_CategoryLocale<\/a>"],[68.571428571429,13,"<a href=\"cms_Model_Guest.php.html#3\">CMS_Model_Guest<\/a>"],[13.04347826087,32,"<a href=\"cms_Model_Language.php.html#3\">CMS_Model_Language<\/a>"],[100,0,"<a href=\"cms_Model_LanguageRefSite.php.html#3\">CMS_Model_LanguageRefSite<\/a>"],[7.5471698113208,15,"<a href=\"cms_Model_Role.php.html#3\">CMS_Model_Role<\/a>"],[0,11,"<a href=\"cms_Model_Site.php.html#3\">CMS_Model_Site<\/a>"],[100,0,"<a href=\"cms_Model_SiteRefUser.php.html#19\">CMS_Model_SiteRefUser<\/a>"],[6.3218390804598,66,"<a href=\"cms_Model_User.php.html#3\">CMS_Model_User<\/a>"],[39.903846153846,59,"<a href=\"cms_ORM_Localizable.php.html#45\">CMS_ORM_Localizable<\/a>"],[0,20,"<a href=\"cms_Request.php.html#7\">CMS_Request<\/a>"],[17.948717948718,37,"<a href=\"cms_User.php.html#3\">CMS_User<\/a>"],[0,19,"<a href=\"cms_View.php.html#5\">CMS_View<\/a>"],[100,3,"<a href=\"cms_View_PhpEngine.php.html#3\">CMS_View_PhpEngine<\/a>"],[0,60,"<a href=\"cms_Webservice.php.html#8\">CMS_Webservice<\/a>"]],
+              marker: {
+                  symbol: 'diamond'
+              }
+            }],
+        });
+    });
+    </script>
+  </head>
+
+  <body>
+    <table width="100%" border="0" cellspacing="0" cellpadding="0">
+      <tr><td class="title">cms</td></tr>
+      <tr><td><div align="center"><p><a href="cms.html">Back to Code Coverage report</a></p></div></td></tr>
+      <tr><td class="ruler"><img src="glass.png" width="3" height="3" alt=""></td></tr>
+    </table>
+
+    <br />
+
+    <center>
+      <table width="90%" cellpadding="2" cellspacing="1" border="0">
+        <tr>
+          <td valign="top">
+            <h2>Class Coverage Distribution</h2>
+            <div id="classCoverageDistribution"></div>
+          </td>
+
+          <td valign="top">
+            <h2>Class Complexity</h2>
+            <div id="classComplexity"></div>
+          </td>
+        </tr>
+        <tr>
+          <td valign="top">
+            <h2>Top Project Risks</h2>
+            <ul>
+              <li><a href="cms_Webservice.php.html#8">CMS_Webservice</a> (3660)</li>
+              <li><a href="cms_Model_User.php.html#3">CMS_Model_User</a> (3646)</li>
+              <li><a href="cms_Bazalt.php.html#7">CMS_Bazalt</a> (852)</li>
+              <li><a href="cms_ORM_Localizable.php.html#45">CMS_ORM_Localizable</a> (814)</li>
+              <li><a href="cms_User.php.html#3">CMS_User</a> (793)</li>
+              <li><a href="cms_Model_Language.php.html#3">CMS_Model_Language</a> (705)</li>
+              <li><a href="cms_Model_Base_Record.php.html#3">CMS_Model_Base_Record</a> (552)</li>
+              <li><a href="cms_Request.php.html#7">CMS_Request</a> (420)</li>
+              <li><a href="cms_View.php.html#5">CMS_View</a> (380)</li>
+              <li><a href="cms_ErrorCatcher.php.html#5">CMS_ErrorCatcher</a> (342)</li>
+
+            </ul>
+          </td>
+
+          <td valign="top">
+            <h2>Least Tested Methods</h2>
+            <ul>
+              <li><a href="cms_Model_User.php.html#238">CMS_Model_User::setAvatar</a> (0%)</li>
+              <li><a href="cms_Model_User.php.html#243">CMS_Model_User::getAvatar</a> (0%)</li>
+              <li><a href="cms_Model_User.php.html#257">CMS_Model_User::getName</a> (0%)</li>
+              <li><a href="cms_Model_User.php.html#266">CMS_Model_User::getOnlineUsers</a> (0%)</li>
+              <li><a href="cms_Model_User.php.html#228">CMS_Model_User::getPhoto</a> (0%)</li>
+              <li><a href="cms_Model_User.php.html#223">CMS_Model_User::setPhoto</a> (0%)</li>
+              <li><a href="cms_Model_User.php.html#196">CMS_Model_User::getUsersCountFromDate</a> (0%)</li>
+              <li><a href="cms_Model_User.php.html#205">CMS_Model_User::getActivationKey</a> (0%)</li>
+              <li><a href="cms_Model_User.php.html#210">CMS_Model_User::getRemindKey</a> (0%)</li>
+              <li><a href="cms_Model_User.php.html#218">CMS_Model_User::removeSetting</a> (0%)</li>
+
+            </ul>
+          </td>
+        </tr>
+      </table>
+    </center>
+
+    <br />
+
+    <table width="100%" border="0" cellspacing="0" cellpadding="0">
+      <tr><td class="ruler"><img src="glass.png" width="3" height="3" alt=""></td></tr>
+      <tr><td class="versionInfo">Generated by <a href="http://github.com/sebastianbergmann/php-code-coverage" target="_top">PHP_CodeCoverage 1.1.1</a> using <a href="http://www.php.net/" target="_top">PHP 5.3.3</a> and PHPUnit 3.6.4 at Sat Apr 14 18:16:36 EEST 2012.</td></tr>
+    </table>
+
+    <br/>
+  </body>
+</html>

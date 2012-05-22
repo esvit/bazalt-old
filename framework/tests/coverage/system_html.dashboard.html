@@ -1,0 +1,135 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+    <title>html</title>
+    <link rel="stylesheet" type="text/css" href="style.css">
+    <script src="jquery.min.js" type="text/javascript"></script>
+    <script src="highcharts.js" type="text/javascript"></script>
+    <script type="text/javascript">
+    $(document).ready(function() {
+          var classCoverageDistribution = new Highcharts.Chart({
+             chart: {
+                renderTo: 'classCoverageDistribution',
+                type: 'column'
+             },
+             title: {text: ''},
+             legend: {enabled: false},
+             credits: {enabled: false},
+             tooltip: {enabled: false},
+             xAxis: {
+                 labels: {style: {fontSize: '8px'}},
+                 categories: [
+                 '0%','0-10%','10-20%','20-30%','30-40%','40-50%','50-60%','60-70%','70-80%','80-90%','90-100%','100%'
+                 ]
+            },
+            yAxis: {
+                title: '',
+                labels: {style: {fontSize: '8px'}},
+            },
+            series: [{
+                data: [1,0,1,0,1,1,1,4,0,2,1,9]
+            }],
+          });
+
+        var classComplexity = new Highcharts.Chart({
+            chart: {
+              renderTo: 'classComplexity',
+              type: 'scatter'
+            },
+            title: {text: ''},
+            legend: {enabled: false},
+            credits: {enabled: false},
+            xAxis: {
+               labels: {enabled: false},
+            },
+            yAxis: {
+              title: '',
+              labels: {enabled: false},
+            },
+            tooltip: {
+                formatter: function() {
+                    return this.point.config[2];
+                }
+            },
+            series: [{
+              data: [[14.285714285714,7,"<a href=\"system_html_Ajax_Form.php.html#3\">Html_Ajax_Form<\/a>"],[48.12030075188,54,"<a href=\"system_html_ContainerElement.php.html#3\">Html_ContainerElement<\/a>"],[53.846153846154,7,"<a href=\"system_html_DataSource_Abstract.php.html#3\">Html_DataSource_Abstract<\/a>"],[0,1,"<a href=\"system_html_DataSource_Array.php.html#3\">Html_DataSource_Array<\/a>"],[100,13,"<a href=\"system_html_DataSource_Post.php.html#23\">Html_DataSource_Post<\/a>"],[98.214285714286,78,"<a href=\"system_html_Element.php.html#23\">Html_Element<\/a>"],[67.741935483871,12,"<a href=\"system_html_Element_Checkbox.php.html#3\">Html_Element_Checkbox<\/a>"],[60.869565217391,44,"<a href=\"system_html_Element_Form.php.html#3\">Html_Element_Form<\/a>"],[100,1,"<a href=\"system_html_Element_Group.php.html#1\">Html_Element_Group<\/a>"],[100,1,"<a href=\"system_html_Element_Hidden.php.html#3\">Html_Element_Hidden<\/a>"],[82.142857142857,5,"<a href=\"system_html_Element_Input.php.html#3\">Html_Element_Input<\/a>"],[100,1,"<a href=\"system_html_Element_Text.php.html#3\">Html_Element_Text<\/a>"],[100,0,"<a href=\"system_html_Exception_Attribute.php.html#3\">Html_Exception_Attribute<\/a>"],[100,0,"<a href=\"system_html_Exception_Element.php.html#3\">Html_Exception_Element<\/a>"],[81.25,15,"<a href=\"system_html_Form.php.html#23\">Html_Form<\/a>"],[68.072289156627,62,"<a href=\"system_html_FormElement.php.html#23\">Html_FormElement<\/a>"],[60,4,"<a href=\"system_html_Validator_Base.php.html#3\">Html_Validator_Base<\/a>"],[33.333333333333,5,"<a href=\"system_html_Validator_NonEmpty.php.html#3\">Html_Validator_NonEmpty<\/a>"],[100,0,"<a href=\"system_html_Validator_Require.php.html#3\">Html_Validator_Require<\/a>"],[100,1,"<a href=\"system_html_jQuery_Tab.php.html#1\">Html_jQuery_Tab<\/a>"],[100,1,"<a href=\"system_html_jQuery_Tabs.php.html#1\">Html_jQuery_Tabs<\/a>"]],
+              marker: {
+                  symbol: 'diamond'
+              }
+            }],
+        });
+    });
+    </script>
+  </head>
+
+  <body>
+    <table width="100%" border="0" cellspacing="0" cellpadding="0">
+      <tr><td class="title">html</td></tr>
+      <tr><td><div align="center"><p><a href="system_html.html">Back to Code Coverage report</a></p></div></td></tr>
+      <tr><td class="ruler"><img src="glass.png" width="3" height="3" alt=""></td></tr>
+    </table>
+
+    <br />
+
+    <center>
+      <table width="90%" cellpadding="2" cellspacing="1" border="0">
+        <tr>
+          <td valign="top">
+            <h2>Class Coverage Distribution</h2>
+            <div id="classCoverageDistribution"></div>
+          </td>
+
+          <td valign="top">
+            <h2>Class Complexity</h2>
+            <div id="classComplexity"></div>
+          </td>
+        </tr>
+        <tr>
+          <td valign="top">
+            <h2>Top Project Risks</h2>
+            <ul>
+              <li><a href="system_html_ContainerElement.php.html#3">Html_ContainerElement</a> (461)</li>
+              <li><a href="system_html_FormElement.php.html#23">Html_FormElement</a> (187)</li>
+              <li><a href="system_html_Element_Form.php.html#3">Html_Element_Form</a> (160)</li>
+              <li><a href="system_html_Element.php.html#23">Html_Element</a> (78)</li>
+              <li><a href="system_html_Ajax_Form.php.html#3">Html_Ajax_Form</a> (37)</li>
+              <li><a href="system_html_Element_Checkbox.php.html#3">Html_Element_Checkbox</a> (16)</li>
+              <li><a href="system_html_Form.php.html#23">Html_Form</a> (16)</li>
+              <li><a href="system_html_Validator_NonEmpty.php.html#3">Html_Validator_NonEmpty</a> (12)</li>
+              <li><a href="system_html_DataSource_Abstract.php.html#3">Html_DataSource_Abstract</a> (11)</li>
+              <li><a href="system_html_Element_Input.php.html#3">Html_Element_Input</a> (5)</li>
+
+            </ul>
+          </td>
+
+          <td valign="top">
+            <h2>Least Tested Methods</h2>
+            <ul>
+              <li><a href="system_html_Element_Input.php.html#52">Html_Element_Input::isDisabled</a> (0%)</li>
+              <li><a href="system_html_Form.php.html#106">Html_Form::registerElement</a> (0%)</li>
+              <li><a href="system_html_FormElement.php.html#101">Html_FormElement::addFilter</a> (0%)</li>
+              <li><a href="system_html_FormElement.php.html#130">Html_FormElement::removeRequireValidators</a> (0%)</li>
+              <li><a href="system_html_Element_Input.php.html#47">Html_Element_Input::enable</a> (0%)</li>
+              <li><a href="system_html_Element_Input.php.html#42">Html_Element_Input::disable</a> (0%)</li>
+              <li><a href="system_html_Element_Form.php.html#111">Html_Element_Form::save</a> (0%)</li>
+              <li><a href="system_html_Element_Form.php.html#121">Html_Element_Form::validate</a> (0%)</li>
+              <li><a href="system_html_Element_Form.php.html#216">Html_Element_Form::invalidateCsrfToken</a> (0%)</li>
+              <li><a href="system_html_Element_Form.php.html#221">Html_Element_Form::csrfFields</a> (0%)</li>
+
+            </ul>
+          </td>
+        </tr>
+      </table>
+    </center>
+
+    <br />
+
+    <table width="100%" border="0" cellspacing="0" cellpadding="0">
+      <tr><td class="ruler"><img src="glass.png" width="3" height="3" alt=""></td></tr>
+      <tr><td class="versionInfo">Generated by <a href="http://github.com/sebastianbergmann/php-code-coverage" target="_top">PHP_CodeCoverage 1.1.1</a> using <a href="http://www.php.net/" target="_top">PHP 5.3.3</a> and PHPUnit 3.6.4 at Sat Apr 14 18:16:36 EEST 2012.</td></tr>
+    </table>
+
+    <br/>
+  </body>
+</html>

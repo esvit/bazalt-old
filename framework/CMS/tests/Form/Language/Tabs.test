@@ -1,0 +1,111 @@
+<?php
+
+using('Framework.System.Cache');
+using('Framework.CMS');
+WebConfig::load(SITE_DIR . '/configs/cms.xml');
+
+class CMSTest_Form_Language_Tabs extends Test_BaseCase
+{
+    protected $form = null;
+
+    protected $tabs = null;
+
+    public function setUp()
+    {
+        $_SERVER['REQUEST_URI'] = '/';
+        $_SERVER['REQUEST_METHOD'] = 'get';
+
+        $this->form = new Html_Form('cms_test');
+
+        $this->element = new Html_Element_Text('title');
+
+        $this->tabs = $this->form->addElement(new CMS_Form_Language_Tabs());
+
+        $this->tabs->addElement($this->element, 'title');
+    }
+
+    public function tearDown()
+    {
+        unset($_SERVER['REQUEST_URI']);
+        unset($_SERVER['REQUEST_METHOD']);
+    }
+
+    public function testTabs()
+    {
+        $this->tabs->initElement();
+        $tabs = $this->tabs->Tabs;
+        $alias = array();
+        foreach ($this->tabs->Tabs as $lname => $tab) {
+            $alias []= $lname;
+        }
+        $this->assertEquals(array('en', 'ru'), $alias);
+    }
+
+    public function testName()
+    {
+        $this->tabs->initElement();
+        $tabs = $this->tabs->Tabs;
+        $alias = array();
+        foreach ($this->tabs->Tabs as $lname => $tab) {
+            $alias []= $tab->name();
+        }
+        $this->assertEquals(array('cms_test[en]', 'cms_test[ru]'), $alias);
+    }
+
+    public function testElements()
+    {
+        $this->tabs->initElement();
+        $tabs = $this->tabs->Tabs;
+        $alias = array();
+        foreach ($this->tabs->Tabs as $lname => $tab) {
+            foreach ($tab->Elements as $element) {
+                $alias []= $element->name();
+            }
+        }
+        $this->assertEquals(array('cms_test[en][title]', 'cms_test[ru][title]', 'cms_test[ru][completed]'), $alias);
+    }
+
+    public function testElementsNames()
+    {
+        $this->tabs->initElement();
+        $elements = $this->tabs->Elements;
+        $alias = array();
+        foreach ($elements as $elem) {
+            $alias []= $elem->id();
+        }
+        $this->assertEquals(array('languages_tabs_en', 'languages_tabs_ru'), $alias);
+    }
+
+    public function testDataBind()
+    {
+        $category = new CMS_Model_Category();
+        $category->title = 'category en';
+        $category->save();
+
+        $_POST = array(
+            $this->form->name() => array(
+                'en' => array(
+                    'title' => 'Test'
+                ),
+                'ru' => array(
+                    'title' => 'Test2'
+                )
+            )
+        );
+
+        $this->form->dataBind($category);
+        $value = $this->form->toString();
+
+        $value = $this->tabs->value();
+        $this->assertEquals(array(
+            'en' => array(
+                'title' => 'Test'
+            ),
+            'ru' => array(
+                'title' => 'Test2'
+            )
+        ), $value);
+
+        $category->delete();
+    }
+}

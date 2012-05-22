@@ -1,0 +1,1 @@
+<input <?php echo $element->getAttributesString() ?> />

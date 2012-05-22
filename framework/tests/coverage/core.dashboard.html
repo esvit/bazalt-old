@@ -1,0 +1,135 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+    <title>core</title>
+    <link rel="stylesheet" type="text/css" href="style.css">
+    <script src="jquery.min.js" type="text/javascript"></script>
+    <script src="highcharts.js" type="text/javascript"></script>
+    <script type="text/javascript">
+    $(document).ready(function() {
+          var classCoverageDistribution = new Highcharts.Chart({
+             chart: {
+                renderTo: 'classCoverageDistribution',
+                type: 'column'
+             },
+             title: {text: ''},
+             legend: {enabled: false},
+             credits: {enabled: false},
+             tooltip: {enabled: false},
+             xAxis: {
+                 labels: {style: {fontSize: '8px'}},
+                 categories: [
+                 '0%','0-10%','10-20%','20-30%','30-40%','40-50%','50-60%','60-70%','70-80%','80-90%','90-100%','100%'
+                 ]
+            },
+            yAxis: {
+                title: '',
+                labels: {style: {fontSize: '8px'}},
+            },
+            series: [{
+                data: [1,1,0,2,2,1,2,2,1,0,0,8]
+            }],
+          });
+
+        var classComplexity = new Highcharts.Chart({
+            chart: {
+              renderTo: 'classComplexity',
+              type: 'scatter'
+            },
+            title: {text: ''},
+            legend: {enabled: false},
+            credits: {enabled: false},
+            xAxis: {
+               labels: {enabled: false},
+            },
+            yAxis: {
+              title: '',
+              labels: {enabled: false},
+            },
+            tooltip: {
+                formatter: function() {
+                    return this.point.config[2];
+                }
+            },
+            series: [{
+              data: [[56.521739130435,8,"<a href=\"core_Autoload.php.html#21\">Core_Autoload<\/a>"],[100,3,"<a href=\"core_DataType_Abstract.php.html#23\">DataType_Abstract<\/a>"],[54.545454545455,5,"<a href=\"core_DataType_Adaptee.php.html#24\">DataType_Adaptee<\/a>"],[0,30,"<a href=\"core_DataType_Array.php.html#23\">DataType_Array<\/a>"],[100,6,"<a href=\"core_DataType_Guid.php.html#24\">DataType_Guid<\/a>"],[3.7037037037037,15,"<a href=\"core_DataType_Number.php.html#24\">DataType_Number<\/a>"],[23.809523809524,9,"<a href=\"core_DataType_Storage.php.html#24\">DataType_Storage<\/a>"],[100,27,"<a href=\"core_DataType_String.php.html#24\">DataType_String<\/a>"],[36.945812807882,89,"<a href=\"core_DataType_Url.php.html#30\">DataType_Url<\/a>"],[42,39,"<a href=\"core_Event.php.html#30\">Event<\/a>"],[62.5,4,"<a href=\"core_Exception_Base.php.html#24\">Exception_Base<\/a>"],[100,1,"<a href=\"core_Exception_Interface.php.html#1\">Exception_Interface<\/a>"],[100,1,"<a href=\"core_Exception_Namespace.php.html#1\">Exception_Namespace<\/a>"],[100,3,"<a href=\"core_Exception_Property.php.html#24\">Exception_Property<\/a>"],[100,1,"<a href=\"core_Exception_Singleton.php.html#24\">Exception_Singleton<\/a>"],[100,235,"<a href=\"core_IDNConvertor.php.html#54\">Core_IDNConvertor<\/a>"],[72.340425531915,17,"<a href=\"core_Library.php.html#24\">Library<\/a>"],[24.675324675325,90,"<a href=\"core_Logger.php.html#32\">Logger<\/a>"],[64.912280701754,54,"<a href=\"core_Object.php.html#34\">Object<\/a>"],[34.48275862069,66,"<a href=\"core_Type.php.html#22\">Type<\/a>"]],
+              marker: {
+                  symbol: 'diamond'
+              }
+            }],
+        });
+    });
+    </script>
+  </head>
+
+  <body>
+    <table width="100%" border="0" cellspacing="0" cellpadding="0">
+      <tr><td class="title">core</td></tr>
+      <tr><td><div align="center"><p><a href="core.html">Back to Code Coverage report</a></p></div></td></tr>
+      <tr><td class="ruler"><img src="glass.png" width="3" height="3" alt=""></td></tr>
+    </table>
+
+    <br />
+
+    <center>
+      <table width="90%" cellpadding="2" cellspacing="1" border="0">
+        <tr>
+          <td valign="top">
+            <h2>Class Coverage Distribution</h2>
+            <div id="classCoverageDistribution"></div>
+          </td>
+
+          <td valign="top">
+            <h2>Class Complexity</h2>
+            <div id="classComplexity"></div>
+          </td>
+        </tr>
+        <tr>
+          <td valign="top">
+            <h2>Top Project Risks</h2>
+            <ul>
+              <li><a href="core_Logger.php.html#32">Logger</a> (3551)</li>
+              <li><a href="core_DataType_Url.php.html#30">DataType_Url</a> (2074)</li>
+              <li><a href="core_Type.php.html#22">Type</a> (1291)</li>
+              <li><a href="core_DataType_Array.php.html#23">DataType_Array</a> (930)</li>
+              <li><a href="core_Event.php.html#30">Event</a> (335)</li>
+              <li><a href="core_DataType_Number.php.html#24">DataType_Number</a> (215)</li>
+              <li><a href="core_Object.php.html#34">Object</a> (179)</li>
+              <li><a href="core_Library.php.html#24">Library</a> (23)</li>
+              <li><a href="core_Autoload.php.html#21">Core_Autoload</a> (13)</li>
+              <li><a href="core_DataType_Adaptee.php.html#24">DataType_Adaptee</a> (7)</li>
+
+            </ul>
+          </td>
+
+          <td valign="top">
+            <h2>Least Tested Methods</h2>
+            <ul>
+              <li><a href="core_Event.php.html#379">Event::clear</a> (0%)</li>
+              <li><a href="core_Event.php.html#360">Event::unregister</a> (0%)</li>
+              <li><a href="core_Event.php.html#340">Event::trigger</a> (0%)</li>
+              <li><a href="core_Event.php.html#297">Event::remove</a> (0%)</li>
+              <li><a href="core_Event.php.html#387">Event::clearAll</a> (0%)</li>
+              <li><a href="core_Exception_Base.php.html#38">Exception_Base::getInnerException</a> (0%)</li>
+              <li><a href="core_Logger.php.html#220">Logger::err</a> (0%)</li>
+              <li><a href="core_Logger.php.html#210">Logger::crit</a> (0%)</li>
+              <li><a href="core_Logger.php.html#105">Logger::startLog</a> (0%)</li>
+              <li><a href="core_Exception_Base.php.html#43">Exception_Base::getDetails</a> (0%)</li>
+
+            </ul>
+          </td>
+        </tr>
+      </table>
+    </center>
+
+    <br />
+
+    <table width="100%" border="0" cellspacing="0" cellpadding="0">
+      <tr><td class="ruler"><img src="glass.png" width="3" height="3" alt=""></td></tr>
+      <tr><td class="versionInfo">Generated by <a href="http://github.com/sebastianbergmann/php-code-coverage" target="_top">PHP_CodeCoverage 1.1.1</a> using <a href="http://www.php.net/" target="_top">PHP 5.3.3</a> and PHPUnit 3.6.4 at Sat Apr 14 18:16:36 EEST 2012.</td></tr>
+    </table>
+
+    <br/>
+  </body>
+</html>

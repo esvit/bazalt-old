@@ -1,0 +1,55 @@
+<?php
+
+using('Framework.System.Locale');
+
+class LocaleTest extends Test_BaseCase
+{
+    public function testGetDefaultLocale()
+    {
+        $locale = Locale::getDefaultLocale();
+        $this->assertEquals('en', $locale);
+    }
+
+    public function testGetInfo()
+    {
+        //$localeInfo = Locale::getInfo();
+    }
+
+    public function testGetLast()
+    {
+        $locale = Locale::getLast();
+        $this->assertEquals(array(), $locale);
+
+        Locale::setLocale('ru');
+
+        $locale = Locale::getLast();
+        $this->assertEquals(
+        array(
+            array(
+                'locale' => 'ru_RU',
+                'language' => 'ru',
+                'syslocale' => 'ru_RU.UTF-8'
+            )
+        ), $locale);
+    }
+
+    public function testSetLocale()
+    {
+        Locale::setLocale('UA');
+        $locale = Locale::getLanguage();
+
+        $this->assertEquals('uk', $locale);
+
+        Locale::setLocale('RU');
+        $locale = Locale::getLanguage();
+
+        $this->assertEquals('ru', $locale);
+    }
+
+    /**
+     * @expectedException Exception_Interface
+     */
+    //public function testException_Singleton_Interface()
+    //{
+    //}
+}
