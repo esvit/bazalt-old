@@ -1,0 +1,30 @@
+<bz:header>{% tr %}Components{% endtr %}</bz:header>
+
+{% for component in components %}
+<input class="cms-components-enable" rel="{{ component.id }}" type="checkbox"{% if component.isEnable() %} checked="checked"{% endif %} />{{ component.title }} <br />
+{% endfor %}
+
+<h2>{% tr %}Services{% endtr %}</h2>
+
+{% for service in services %}
+<input class="cms-services-enable" rel="{{ service.id }}" type="checkbox"{% if service.isEnable() %} checked="checked"{% endif %} />{{ service.name }} <br />
+{% endfor %}
+
+
+
+<script>
+$(function() {
+    $('.cms-components-enable').change(function() {
+        var id = $(this).attr('rel');
+        var checked = $(this).is(':checked');
+
+        Admin_Webservice_Main.enableComponent(id, checked);
+    });
+    $('.cms-services-enable').change(function() {
+        var id = $(this).attr('rel');
+        var checked = $(this).is(':checked');
+
+        Admin_Webservice_Main.enableService(id, checked);
+    });
+});
+</script>

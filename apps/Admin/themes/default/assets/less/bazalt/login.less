@@ -1,0 +1,65 @@
+@dialogWidth: 400px;
+@dialogHeight: 268px; // get from firebug
+
+#loginPage {
+    position:absolute;
+    top:0;
+    left:0;
+    z-index:70;
+    overflow:auto;
+    height:100%;
+    width:100%;
+    overflow:hidden;
+
+    .bz-popup {
+        display: block;
+        width: @dialogWidth;
+        padding: 0px;
+        position: absolute;
+        left: 50%;
+        top: 50%;
+
+        margin-left: -@dialogWidth / 2;
+        margin-top: -@dialogHeight / 2;
+
+        margin-right: auto;
+        margin-bottom: 0;
+
+        .bz-popup-content {
+            margin: 0px;
+            padding: 0;
+            overflow: hidden;
+            position: relative;
+            width: auto;
+            border-top: 0 none;
+
+            .bz-form-row {
+                padding: 0 20px;
+
+                .bz-form-label {
+                    display: block;
+                    float: left;
+                    font-weight: normal;
+                    margin: 10px 0 0;
+                }
+
+                input {
+                    float: right;
+                    margin:5px 0px 5px;
+                    padding:5px;
+                    width:200px;
+                }
+            }
+            .alert {
+                .border-radius(0);
+                border-left: 0 none;
+                border-right: 0 none;
+                border-top: 0 none;
+                margin: 0 0 15px;
+            }
+            .bz-form-actions {
+                text-align: center;
+            }
+        }
+    }
+}

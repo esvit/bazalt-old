@@ -1,0 +1,151 @@
+@import '../../../../../../less/variables.less';
+@import '../../../../../../less/mixins.less';
+@import '../../../../../../less/modals.less';
+@import '../../../../../../less/close.less';
+@import '../../../../../../less/buttons.less';
+
+/* General */
+.bootstrap_modalBlocker {
+    position:fixed;
+    left:0;
+    top:0;
+    .size(100%,100%);
+    .opacity(60);
+    background:@grayLight;
+    display:none;
+}
+
+.bootstrap {
+    &[role="dialog"]{
+        .modal;
+        margin: 0 auto; 
+    }
+    & {
+        position:absolute;
+        direction:ltr;
+    }
+
+    &.mceEventBlocker {position:fixed; left:0; top:0; width:100%; height:100%}
+
+    /* Reset */
+    &, div, span, a {vertical-align:baseline; text-align:left; position:absolute; border:0; padding:0; margin:0; background:transparent; font-family:Arial,Verdana; font-size:11px; color:#000; text-decoration:none; font-weight:normal; width:auto; height:auto; overflow:hidden; display:block}
+
+    .mceWrapper { position:static; }
+    .mcePlaceHolder {
+        .modal;
+        margin: 0;
+        border:1px solid #000;
+        background: @gray;
+        top:0; left:0;
+        .opacity(50);
+    }
+
+    /* Top */
+    .mceTop { .modal-header; padding: 0; }
+    .mceTop, .mceTop div {top:0; width:100%; height:23px}
+    .mceTop .mceLeft {width:6px; }
+    .mceTop .mceCenter {right:6px; width:100%; height:23px; clip:rect(auto auto auto 12px)}
+    .mceTop .mceRight {right:0; width:6px; height:23px; }
+    .mceTop span {width:100%; text-align:center; vertical-align:middle; line-height:23px; font-weight:bold}
+
+    /* Middle */
+    .mceMiddle, .mceMiddle div {top:0}
+    .mceMiddle {width:100%; height:100%; clip:rect(23px auto auto auto)}
+    .mceMiddle .mceLeft {left:0; width:5px; height:100%; }
+    .mceMiddle span {top:24px; left:5px; width:100%; height:100%; background:#FFF}
+    .mceMiddle .mceRight {right:0; width:5px; height:100%; }
+
+    /* Bottom */
+    .mceBottom, .mceBottom div {height:6px}
+    .mceBottom {left:0; bottom:0; width:100%}
+    .mceBottom div {top:0}
+    .mceBottom .mceLeft {left:0; width:5px; }
+    .mceBottom .mceCenter {left:5px; width:100%; }
+    .mceBottom .mceRight {right:0; width:5px; }
+    .mceBottom span {display:none}
+    .mceStatusbar .mceBottom, .mceStatusbar .mceBottom div {height:23px}
+    .mceStatusbar .mceBottom span {display:block; left:7px; font-family:Arial, Verdana; font-size:11px; line-height:23px}
+
+    /* Actions */
+    a { height:16px; top:3px;}
+    .mceClose { .close; right: 7px; }
+    .mceClose:after { content: "×"; }
+    .mceMin {display:none; right:68px; }
+    .mceMed {display:none; right:37px; }
+    .mceMax {display:none; right:37px; }
+    .mceMove {display:none;width:100%;cursor:move; }
+    .mceMovable .mceMove {display:block}
+
+    .mceFocus .mceMin {right:68px;}
+    .mceFocus .mceMed {right:37px; }
+    .mceFocus .mceMax {right:37px; }
+    .mceFocus .mceMin:hover {right:68px;}
+    .mceFocus .mceMed:hover {right:37px;}
+    .mceFocus .mceMax:hover {right:37px;}
+    
+    
+    /* Resize */
+    .mceResize {top:auto; left:auto; display:none; width:5px; height:5px; }
+    .mceResizable .mceResize {display:block}
+    .mceResizable .mceMin, .mceMax {display:none}
+    .mceMinimizable .mceMin {display:block}
+    .mceMaximizable .mceMax {display:block}
+    .mceMaximized .mceMed {display:block}
+    .mceMaximized .mceMax {display:none}
+    a.mceResizeN {top:0; left:0; width:100%; cursor:n-resize}
+    a.mceResizeNW {top:0; left:0; cursor:nw-resize}
+    a.mceResizeNE {top:0; right:0; cursor:ne-resize}
+    a.mceResizeW {top:0; left:0; height:100%; cursor:w-resize;}
+    a.mceResizeE {top:0; right:0; height:100%; cursor:e-resize}
+    a.mceResizeS {bottom:0; left:0; width:100%; cursor:s-resize}
+    a.mceResizeSW {bottom:0; left:0; cursor:sw-resize}
+    a.mceResizeSE {bottom:0; right:0; cursor:se-resize}
+
+    /* Alert/Confirm */
+    .mceButton {
+        .btn;
+        bottom:10px;
+        width:80px;
+        outline: 0;
+    }
+    .mceMiddle .mceIcon {left:15px; top:35px; width:32px; height:32px}
+    .mceAlert .mceMiddle span,
+    .mceConfirm .mceMiddle span {
+        background:transparent;left:60px; top:30px; width:330px; height:55px; overflow:auto; white-space:normal;
+    }
+
+    
+    .mceButton:active {
+        background-image: none;
+        @shadow: inset 0 2px 4px rgba(0,0,0,.15), 0 1px 2px rgba(0,0,0,.05);
+        .box-shadow(@shadow);
+        background-color: darken(@white, 10%);
+        background-color: darken(@white, 15%) e("\9");
+        outline: 0;
+    }
+
+    .mceAlert {
+        .mceOk {
+            .buttonBackground(@btnSuccessBackground, @btnSuccessBackgroundHighlight);
+            left:50%;
+            top:auto;
+            margin-left: -45px;
+            text-shadow: 0 -1px 0 rgba(0,0,0,.25);
+            color: @white;
+            text-transform: uppercase;
+        }
+        .mceIcon {background:url('img/alert.png')}
+    }
+    .mceConfirm {
+        .mceOk {
+            .buttonBackground(@btnSuccessBackground, @btnSuccessBackgroundHighlight);
+            left:50%;
+            top:auto;
+            margin-left: -110px;
+            text-shadow: 0 -1px 0 rgba(0,0,0,.25);
+            color: @white;
+        }
+        .mceCancel {left:50%; top:auto}
+        .mceIcon {background:url('img/confirm.png')}
+    }
+}

@@ -1,0 +1,15 @@
+
+/* bz.selectDialog */
+.bz-selectdialog .ui-dialog-content { list-style-type: none; margin: 0; padding: 0; display: none;}
+.bz-selectdialog ul { margin: 0; }
+.bz-selectdialog li { cursor: pointer; list-style: none outside none; margin: 3px; padding: 1px; }
+.bz-selectdialog .ui-icon { display: none; float: left; }
+.bz-selectdialog .bz-widgetselector-content { padding: 2px 7px; }
+.bz-selectdialog .bz-widgetselector-title { line-height: 16px; font-weight: bold; }
+.bz-selectdialog li.ui-state-active .ui-icon { display: block; }
+.bz-selectdialog .bz-widgetselector-loading-text { display: block; font-size: 18px; font-weight: bold; left: 0; position: absolute; right: 0; text-align: center; top: 40%;}
+.bz-selectdialog .bz-widgetselector-loading-overlay { background-color: white; position: absolute; top: 0; right: 0; bottom: 0; left: 0; }
+
+
+.bz-selectdialog .bz-paging { float: left; padding: 10px 4px; }
+.bz-selectdialog .bz-paging span { padding: 3px 7px; margin: 0 2px; }

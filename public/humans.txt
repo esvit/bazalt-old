@@ -1,0 +1,60 @@
+/* TEAM */
+
+    Creative mind/Developer: Vitalii Savchuk
+    Contact: esvit666 [at] gmail.com
+    From: Vinnitsa, Ukraine
+
+    Developer: Alex Slubsky
+    Contact: aslubsky [at] gmail.com
+    From: Dashkivtsi, Vinnyts'ka Oblast', Ukraine
+
+/* THANKS */
+
+    Beer
+    HTML5 Boilerplate:      http://html5boilerplate.com/
+    History.js:             https://github.com/balupton/History.js
+
+/* SITE */
+
+    Tools:PHP
+    Framework: Bazalt CMS
+    IDE:Notepad++
+
+
+
+                                                         TT
+                                                        TTT
+    EEEEEEEEEEEEEEEEEEEEEE                            TTTTTT    EEEEEE     AAAAAAA  MMMMMMMMMMMMMMM   LLLLLLLL
+    EEEEEEEEEEEEEEEEEEEEEE                            TTTTTTT  EEE   EEE  AA   AAAA MMMMMMMMMMMMMMMM  LLLLLLLL
+    EEEEEEEEEEEEEEEEEEEEEE                             TTTT   EEEEEEEEEE    AAAAAAA MMMM  MMMM  MMMM  LLLLLLLL
+        EEEEEEE     EEEEEE                             TTTT   EEE        AAAAAAAAAA MMMM  MMMM  MMMM    LLLLLL
+        EEEEEEE     EEEEEE                             TTTTTT EEE    EE AAAAA  AAAA MMMM  MMMM  MMMM    LLLLLL
+        EEEEEEE     EEEEEE                              TTTTT  EEEEEEEE  AAAAAAAAAA MMMM  MMMM  MMMM    LLLLLL
+        EEEEEEE     EEEEEE                                                                              LLLLLL
+        EEEEEEE     EEEEEE                                                                              LLLLLL
+        EEEEEEE                    QQQQQQ  QQQQQQQQQ  UUUUUUUU  UUUUUUUUU           AAAAAAAAA           LLLLLL
+        EEEEEEE                  QQQQQQQQQQQQQQQQQQQ  UUUUUUUU  UUUUUUUUU         AAAAAAAAAAAAA         LLLLLL
+        EEEEEEE                 QQQQQQQQQQQQQQQQQQQQ  UUUUUUUU  UUUUUUUUU        AAAAAAAAAAAAAAA        LLLLLL
+        EEEEEEEEEEEE            QQQQQQQ   QQQQQQQQQQ  UUUUUUUU  UUUUUUUUU       AAAAAA    AAAAAAA       LLLLLL
+        EEEEEEEEEEEE           QQQQQQQ     QQQQQQ       UUUUUU     UUUUUU       AAAAAA     AAAAAA       LLLLLL
+        EEEEEEEEEEEE           QQQQQQ      QQQQQQ       UUUUUU     UUUUUU                  AAAAAA       LLLLLL
+        EEEEEEEEEEEE           QQQQQQ      QQQQQQ       UUUUUU     UUUUUU                  AAAAAA       LLLLLL
+        EEEEEEE                QQQQQQ      QQQQQQ       UUUUUU     UUUUUU            AAA   AAAAAA       LLLLLL
+        EEEEEEE                QQQQQQ      QQQQQQ       UUUUUU     UUUUUU         AAAAAAAAAAAAAAA       LLLLLL
+        EEEEEEE                QQQQQQ      QQQQQQ       UUUUUU     UUUUUU        AAAAAAAAAAAAAAAA       LLLLLL
+        EEEEEEE                QQQQQQ      QQQQQQ       UUUUUU     UUUUUU       AAAAAAAAAAAAAAAAA       LLLLLL
+        EEEEEEE     EEEEEE     QQQQQQ      QQQQQQ       UUUUUU     UUUUUU      AAAAAAA     AAAAAA       LLLLLL
+        EEEEEEE     EEEEEE     QQQQQQ      QQQQQQ       UUUUUU     UUUUUU      AAAAAA      AAAAAA       LLLLLL
+        EEEEEEE     EEEEEE     QQQQQQ      QQQQQQ       UUUUUU     UUUUUU      AAAAAA      AAAAAA       LLLLLL
+        EEEEEEE     EEEEEE     QQQQQQ      QQQQQQ       UUUUUU     UUUUUU      AAAAAA      AAAAAA       LLLLLL
+        EEEEEEE     EEEEEE      QQQQQQ    QQQQQQQ       UUUUUU    UUUUUUU      AAAAAAA     AAAAAA       LLLLLL
+    EEEEEEEEEEEEEEEEEEEEEE      QQQQQQQ  QQQQQQQQ       UUUUUUUUUUUUUUUUUUU    AAAAAAAAAAAAAAAAAAAA LLLLLLLLLLL
+    EEEEEEEEEEEEEEEEEEEEEE       QQQQQQQQQQQQQQQQ        UUUUUUUUUUUUUUUUUU     AAAAAAAAAAAAAAAAAAA LLLLLLLLLLL
+    EEEEEEEEEEEEEEEEEEEEEE        QQQQQQQQQQQQQQQ         UUUUUUUUUUUUUUUUU      AAAAAAAA AAAAAAAAA LLLLLLLLLLL
+                                   QQQQQQ  QQQQQQ           UUUU   UUUUUUUU         AAAA    AAAAAAA  LLLLLLLLLL
+                                           QQQQQQ
+                                           QQQQQQ
+                                           QQQQQQ
+                                        QQQQQQQQQQQQ
+                                        QQQQQQQQQQQQ
+                                        QQQQQQQQQQQQ

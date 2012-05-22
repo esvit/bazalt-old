@@ -1,0 +1,175 @@
+#adminmenu {
+    float:left;
+    list-style:none outside none;
+    margin:15px 5px 15px 10px;
+    padding:0;
+    position:relative;
+    width:185px;
+
+    * { border-color:#DFDFDF; -moz-user-select:none; }
+
+    .menu-image.menu-image-dashboard,
+    .menu-image.menu-image-dev,
+    .menu-image.menu-image-settings { background-image: url('@{bazaltImagesPath}/menu/admin_icon.png'); background-repeat:no-repeat; }
+
+    // Dev
+    .menu-image.menu-image-dev { background-position: -28px 0; }
+    li.menu-open .menu-image.menu-image-dev,
+    li:hover .menu-image.menu-image-dev { background-position: -28px -28px; }
+
+    //Settings
+    li .menu-image.menu-image-settings { background-position: -56px 0px; }
+    li.menu-open .menu-image.menu-image-settings,
+    li:hover .menu-image.menu-image-settings { background-position: -56px -28px; }
+
+    /* Admin menu */
+    li.menu-top { min-height:26px; }
+    li { cursor:pointer; margin:0; padding:0; }
+
+    a { text-decoration:none; color:#1C6280; display:block; line-height:18px; padding:1px 5px 3px; }
+    a.menu-top {
+        background:url("@{bazaltImagesPath}/menu/menu-bits-vs.gif") repeat-x scroll left -379px #EAF3FA;
+        border-style:solid solid none;
+        border-width:1px 1px 0;
+        line-height:18px;
+        min-width:10em;
+        padding:5px;
+    }
+
+    .menu-separator { height:10px; margin:0; padding:0; }
+
+    .menu-image { float:left; height:28px; width:28px; }
+
+/* Toggle */
+    .menu-toggle { float:right; height:27px; margin:1px 0 0; padding:1px 2px 0 0; width:22px; cursor: s-resize; }
+    
+    li.menu-item-active .menu-toggle { cursor: default; }
+    
+    li.menu-has-submenu-active.menu-open .menu-toggle, 
+    li.menu-has-submenu-active:hover .menu-toggle { background:url("@{bazaltImagesPath}/menu/menu-bits-vs.gif") no-repeat scroll left -207px transparent; }
+    
+    .menu-has-submenu:hover .menu-toggle,
+    .menu-open .menu-toggle { background:url("@{bazaltImagesPath}/menu/menu-bits-vs.gif") no-repeat scroll left -109px transparent; }
+
+    /* First item */
+    .menu-first-item .menu-top,
+    .submenu .submenu-head {
+        -moz-border-radius-topleft: 6px;
+        -webkit-border-top-left-radius: 6px;
+        border-top-left-radius: 6px;
+        -moz-border-radius-topright: 6px;
+        -webkit-border-top-right-radius: 6px;
+        border-top-right-radius: 6px;
+        border-style:solid solid none;
+        border-width:1px 1px 0;
+    }
+
+    /* Last item */
+    .menu-last-item {
+        .submenu ul { border-style:none none solid; border-width:0 0 1px; }
+
+        a.menu-top {
+            -moz-border-radius-bottomleft: 6px;
+            -webkit-border-bottom-left-radius: 6px;
+            border-bottom-left-radius: 6px;
+            -moz-border-radius-bottomright: 6px;
+            -webkit-border-bottom-right-radius: 6px;
+            border-bottom-right-radius: 6px;
+            border-style:solid;
+            border-width:1px;
+        }
+    }
+
+    li.menu-preopen a.menu-top,
+    li.menu-last-item.menu-has-submenu.menu-open a.menu-top {
+        border-bottom: 0 none;
+        -moz-border-radius-bottomleft: 0px;
+        -webkit-border-bottom-left-radius: 0px;
+        border-bottom-left-radius: 0px;
+        -moz-border-radius-bottomright: 0px;
+        -webkit-border-bottom-right-radius: 0px;
+        border-bottom-right-radius: 0px;
+    }
+
+    /* Active */
+    .menu-has-submenu-active a.menu-has-submenu-active,
+    .menu-top .menu-item-active {
+        background:url("@{bazaltImagesPath}/menu/menu-bits-vs.gif") repeat-x scroll left top #3C6B95;
+        border-color:#6495bb;
+        color:#FFFFFF;
+        text-shadow: 1px 1px 0 rgba(0, 0, 0, 0.4);
+    }
+    .menu-has-submenu-active:hover .menu-toggle{ background:transparent url("@{bazaltImagesPath}/menu/menu-bits-vs.gif") no-repeat scroll left -207px; }
+
+    /* Awaiting */
+
+    .someinfo {
+        background-color:#D54E21;
+        color:#FFFFFF;
+        
+        .border-radius(7px);
+        margin-left:2px;
+        margin-top:2px;
+        position:absolute;
+        
+        span {
+            font-family:Helvetica,Arial,sans-serif;
+            font-size:7pt;
+            font-weight:bold;
+            display:block;
+            float:left;
+            height:1.6em;
+            line-height:1.6em;
+            padding:0 6px;
+        }
+    }
+} 
+
+
+
+
+
+/* Submenu */
+
+#adminmenu li.menu-has-submenu-active ul { border-bottom-style:solid; border-bottom-width:1px; }
+
+#adminmenu li.menu-open .menu-image, #adminmenu li:hover .menu-image {background-position: 0 -28px;}
+
+#adminmenu .menu-has-submenu:hover .menu-toggle,
+#adminmenu .menu-open .menu-toggle{ background:transparent url("@{bazaltImagesPath}/menu/menu-bits-vs.gif") no-repeat scroll left -109px; }
+
+#adminmenu .menu-has-submenu ul li a.menu-item-active { background:url("@{bazaltImagesPath}/menu/menu-dark.gif") no-repeat scroll left top transparent !important; }
+
+#adminmenu .submenu li.menu-item-active, 
+#adminmenu .submenu li.menu-item-active a.menu-item-active, 
+#adminmenu .submenu li.menu-item-active a.menu-item-active:hover { background-color:#F5F5F5; background-image:none; border-color:#E3E3E3; color:#333333; text-shadow:0 1px 0 #FFFFFF; font-weight:bold; }
+
+#adminmenu li.menu-has-submenu-active ul li a { background:url("@{bazaltImagesPath}/menu/menu-dark.gif") no-repeat scroll left bottom transparent !important; }
+
+#adminmenu li.menu-item-active ul { border-bottom-color:#AAAAAA; }
+
+#adminmenu li.menu-has-submenu-active ul,
+#adminmenu li.menu-has-submenu-active .submenu,
+#adminmenu li.menu-has-submenu-active ul li a { border-color:#AAAAAA !important; }
+
+#adminmenu .submenu a { background:url("@{bazaltImagesPath}/menu/menu-bits-vs.gif") no-repeat scroll 0 -310px #FFFFFF; }
+#adminmenu .submenu a { border-style:none solid none none; border-width:0 1px 0 0; margin:0; padding-left:12px; }
+#adminmenu .submenu a { font:11px/18px "Lucida Grande",Verdana,Arial,"Bitstream Vera Sans",sans-serif; }
+
+#adminmenu a.menu-top,
+#adminmenu .submenu-head { font:13px/18px Georgia,"Times New Roman","Bitstream Charter",Times,serif; }
+
+#adminmenu div.submenu { background-color:transparent; }
+#adminmenu .submenu { border-style:solid none none; border-width:1px 0 0; display:none; list-style:none outside none; margin:0; padding:0; position:relative; z-index:2; }
+#adminmenu .menu-item-active .submenu,
+#adminmenu .menu-open .submenu { display:block; }
+#adminmenu div.submenu-head { display:none; }
+#adminmenu .submenu ul { background-color:#FFFFFF; list-style: none; margin: 0; }
+
+#adminmenu .submenu li.menu-item-active,
+#adminmenu .submenu li.menu-item-active a,
+#adminmenu .submenu li.menu-item-active a:hover { font-weight:bold; }
+#adminmenu .submenu .submenu-head { border-style:solid; border-width:1px; cursor:default; padding:6px 4px 6px 10px; }
+
+#adminmenu li.menu-last-item .submenu ul { border-style:none none solid; border-width:0 0 1px; list-style-type:none; padding:0; margin: 0; }
+

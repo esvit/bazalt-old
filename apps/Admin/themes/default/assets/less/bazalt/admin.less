@@ -1,0 +1,196 @@
+@footerHeight: 45px;
+@adminMenuWidth: 215px;
+
+html, body { height: 100%; }
+
+body {
+    font-family: Georgia,"Times New Roman","Bitstream Charter",Times,serif;
+}
+header.navbar {
+    height: @footerHeight;
+    margin-bottom: 0;
+    border-bottom: 1px solid @bazaltBorderColor;
+    border-width: 0 0 1px;
+
+    .navbar-inner {
+        height: @footerHeight;
+
+        #gradient > .vertical(@bazaltBackgroundColor, darken(@bazaltBackgroundColor, 2%));
+        .border-radius(0);
+        @shadow: 0 1px 5px rgba(0,0,0,.15), inset 0 -1px 3px rgba(0,0,0,.05);
+        .box-shadow(@shadow);
+        border-bottom: 1px solid @bazaltBorderColor;
+    }
+    .brand {
+        color: @bazaltLinkColor;
+        background-image: url("@{bazaltImagesPath}/logo.png");
+        background-position: 10px 6px;
+        background-repeat: no-repeat;
+        padding: 11px 20px 14px 45px;
+        &:hover {
+            text-decoration: underline;
+        }
+    }
+    .nav > li > a {
+        color: @bazaltLinkColor;
+        padding: 12px 10px 14px;
+        text-shadow: 0 -1px 0 rgba(255, 255, 255, 0.25);
+    }
+    .nav > li > a:hover, .dropdown.open .dropdown-toggle {
+        color: @bazaltLinkHoverColor;
+    }
+    .nav .dropdown-toggle .caret, .nav .open.dropdown .caret {
+        border-bottom-color: @bazaltLinkColor;
+        border-top-color: @bazaltLinkColor;
+    }
+    .nav.pull-right.user-profile {
+        .buttonBackground(#FFFFFF, #E6E6E6);
+        
+        border: 1px solid #CCC;
+        color: @textColor;
+        text-shadow: 0 1px 1px rgba(255,255,255,.75);
+
+        @shadow: inset 0 1px 0 rgba(255, 255, 255, 0.2), 0 1px 2px rgba(0, 0, 0, 0.05);
+        .box-shadow(@shadow);
+        .border-radius();
+
+        .transition(.1s linear background-image);
+
+        margin-top: 4px;
+        height: 35px;
+        position: relative;
+
+        .caret { float: right; margin-top: 11px; }
+        .avatar {
+            float: left;
+            margin-right: 4px;
+            margin-top: 1px;
+        }
+        .username {
+            display: block;
+            font-size: 12px;
+            white-space: nowrap;
+            overflow: hidden;
+        }
+        .login {
+            white-space: nowrap;
+            display: block;
+            font-size: 10px;
+            font-weight: normal;
+            overflow: hidden;
+        }
+
+        & > li > a {
+            width: 150px;
+            padding: 4px 6px 10px;
+            line-height: 13px;
+        }
+        &:hover {
+            background-color: darken(@white, 10%);
+            background-position: 0 -15px;
+
+            // transition is only when going to hover, otherwise the background
+            // behind the gradient (there for IE<=9 fallback) gets mismatched
+            .transition(background-position .1s linear);
+        }
+    }
+}
+footer {
+    #gradient > .vertical(@bazaltBackgroundColor, darken(@bazaltBackgroundColor, 2%));
+
+    height: @footerHeight;
+    position: relative;
+    margin-top: -@footerHeight - 1; // height + 1px border
+    border-top: 1px solid @bazaltBorderColor;
+    border-width: 1px 0 0;
+    clear:both;
+    width: 100%;
+
+    .bz-admin-links {
+        font-style: italic;
+        padding: 13px;
+    }
+}
+/*Opera Fix*/
+body:before {
+    content:"";
+    height:100%;
+    float:left;
+    width:0;
+    margin-top:-32767px;
+}
+#wrapper { min-height:100%; width:100%; }
+#container { padding-bottom: @footerHeight; }
+
+.bz-admin-loading {
+    .progress;
+
+    display: none;
+    position: fixed;
+    top: 10px;
+    height: 23px;
+    left: 50%;
+    margin-left: -75px;
+    width: 150px;
+    line-height: 100%;
+    padding: 0px;
+    text-align: center;
+    color: white;
+    font-family: Tahoma, Verdana;
+    font-weight: bold;
+    z-index: 1000;
+    
+    .bar {
+        #gradient > .striped(#D54E21);
+        .background-size(40px 40px);
+        -webkit-animation: progress-bar-stripes 2s linear infinite;
+           -moz-animation: progress-bar-stripes 2s linear infinite;
+                animation: progress-bar-stripes 2s linear infinite;
+
+        width: 100%;
+        height: 100%;
+        padding: 4px;
+    }
+}
+
+
+.bz-admin-menu {
+    width: @adminMenuWidth;
+}
+.bz-admin-content-wrapper {
+    width: 100%;
+    float: right;
+    margin-left: -@adminMenuWidth;
+}
+.bz-admin-content {
+    position:relative;
+    padding-left: @adminMenuWidth;
+    padding-right: 10px;
+
+    .page-header {
+        margin: 18px 0 10px;
+        padding-bottom: 10px;
+
+        h1 {
+            font-weight: normal;
+        }
+    }
+}
+
+
+.bz-overlay {
+    .well;
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    .opacity(60);
+    .border-radius(0);
+    background-color: white;
+    display: none;
+    z-index: 10;
+    box-shadow: none;
+    border: 0 none;
+    margin: 0;
+}

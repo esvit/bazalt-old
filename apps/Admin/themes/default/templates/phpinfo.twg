@@ -1,0 +1,27 @@
+<style>
+#phpinfo {}
+#phpinfo pre {}
+#phpinfo .h a { float: right; }
+#phpinfo .v a { float: right; margin-right: 4px; text-decoration: underline; }
+#phpinfo a:link {}
+#phpinfo a:hover {}
+#phpinfo table { width: 100% !important; }
+#phpinfo .center {}
+#phpinfo .center table {}
+#phpinfo .center th { font-weight: bold; background-color: #EEEEEE; }
+#phpinfo td { border-bottom: 1px solid #EEEEEE;  }
+#phpinfo tr:hover td { background-color: #F4F4F4;  }
+#phpinfo td, th { padding: 5px; font-family: Verdana, Tahome; font-size: 12px; }
+#phpinfo h1 {}
+#phpinfo h2, #phpinfo h2 a { font-size: 20px; color: #1C6280; border-bottom: 1px solid #C6D9E9; }
+#phpinfo .p {}
+#phpinfo .e { font-weight: bold; }
+#phpinfo .h {}
+#phpinfo .v { }
+#phpinfo .vr {}
+#phpinfo img {}
+#phpinfo hr { display: none }
+</style>
+<div id="phpinfo">
+{{ phpinfo|raw }}
+</div>

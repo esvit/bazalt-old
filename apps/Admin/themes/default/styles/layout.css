@@ -1,0 +1,230 @@
+html, body {
+    height: 100%;
+}
+
+body {
+    font-family: Georgia,"Times New Roman","Bitstream Charter",Times,serif;
+}
+
+header, footer {
+    background-color: #E4F2FD;
+    height: 45px;
+    border-color: #C6D9E9;
+    border-style: solid;
+}
+.spacer, .clear { clear: both; height: 0px; overflow: hidden; }
+
+.ui-float-left { float: left; }
+.ui-float-right { float: right; }
+
+#main-container, .container-fluid .sidebar { padding-bottom: 40px; }
+#main-container.container-fluid { margin-bottom: 46px; padding: 0; }
+.folded #main-container.container-fluid .sidebar { width: 55px; }
+.folded #main-container.container-fluid .content { margin-left: 55px; }
+#main-container.container-fluid .sidebar { width: 210px; }
+#main-container.container-fluid .content { padding: 10px 10px 50px 0; margin-left: 210px; }
+
+#container { height:auto; min-height:100%; width:100%; }
+
+.content h1 { font-weight: normal; }
+
+.content .page-header { padding: 2px 0; margin-bottom: 10px; }
+
+optgroup { font-style: normal; }
+
+/* Header */
+header { border-bottom-width: 1px; }
+header .logo {
+    background-image: url('../images/logo.png');
+    width: 30px;
+    height: 30px;
+    float: left;
+    margin: 7px 0 0 7px;
+}
+header .user-info {
+    float: right;
+}
+a#site-heading {
+    float:left;
+    margin:0;
+    max-height:25px;
+    max-width:500px;
+    overflow:hidden;
+    padding: 9px 8px 5px;
+    font-size: 20px;
+    text-decoration: none;
+}
+.tipsy {
+    font-family: "Helvetica Neue", Helvetica, Arial, sans-serif;
+    font-size: 13px;
+}
+
+/* Footer */
+footer { clear: left; margin-top:-46px; border-top-width: 1px; }
+footer .bz-admin-links { padding: 14px; font-style:italic; }
+
+/* Forms */
+.bz-admin-settings-group {
+    position: relative;
+    border-bottom: 1px solid #EEEEEE;
+    padding: 20px 0;
+}
+.bz-admin-settings-group > .title {
+    font-weight: bold;
+    position: absolute;
+    left: 0;
+    top: 20px;
+    width: 160px;
+    padding-left: 10px
+}
+.bz-admin-settings-group > .settings-container {
+    padding-left: 170px;
+}
+.bz-admin-settings-secret-key { width: 320px; position: relative; display: block; font-family: Monospace; }
+.bz-admin-settings-secret-key .uneditable-input { width: 320px; }
+.bz-admin-settings-secret-key a { position: absolute; right: 0px; top: 6px; }
+
+.bz-form-label { display: block; text-align: left; }
+
+.bz-required-field {
+    font-weight: bold;
+    color: red;
+}
+
+.bz-admin-login-info {
+    float: right;
+    position: relative;
+    margin-top: 5px;
+    margin-right: 5px;
+    height: 27px;
+    padding: 3px 6px;
+}
+.bz-admin-login-info ul {
+    position: absolute;
+    display: none;
+    z-index: 1000;
+    list-style: none;
+    padding: 0px;
+    top: 33px;
+    right: 0;
+    background-color: white;
+    border: 1px solid #C6D9E9;
+    box-shadow: 0 2px 3px #CCCCCC;
+}
+.bz-admin-login-info:hover ul {
+    display: block;
+}
+.bz-admin-login-info ul li {
+    padding: 3px 6px;
+    font-weight: normal;
+    white-space: nowrap;
+}
+.bz-admin-login-info ul li:hover {
+    background-color: #E4F2FD;
+}
+.bz-admin-login-userlink {
+    width: 150px;
+    overflow: hidden;
+    display: block;
+}
+.bz-admin-login-username, .bz-admin-login-login {
+    white-space: nowrap;
+}
+.bz-admin-login-info img {
+    float: left;
+    margin-top: 1px;
+    margin-right: 4px;
+}
+.bz-admin-login-info ul li .ui-icon {
+    float: left;
+}
+.bz-admin-login-info .bz-admin-login-username { display: block; font-size: 12px; }
+.bz-admin-login-info .bz-admin-login-login { display: block; font-weight: normal; font-size: 10px; }
+
+/* Forms */
+.ui-large-input {
+    font-size: 250% !important;
+    width: 100%;
+    height: 48px;
+box-sizing: border-box;
+-webkit-box-sizing:border-box;
+-moz-box-sizing: border-box;
+-ms-box-sizing: border-box;
+}
+input.ui-input {
+    height: 26px;
+}
+.ui-input {
+    width: 100%;
+    max-width: 100%;
+box-sizing: border-box;
+-webkit-box-sizing:border-box;
+-moz-box-sizing: border-box;
+-ms-box-sizing: border-box;
+}
+form.form-stacked .actions {
+    margin-left: 0;
+    padding-left: 20px;
+    text-align: center;
+}
+form.form-stacked div.clearfix.error {
+    padding-right: 10px;
+}
+.bz-form-optiongroup {
+    padding: 5px 0 0 15px;
+}
+.bz-from-fieldset {
+    padding: 0 10px;
+}
+.form-stacked .bz-from-fieldset legend{
+    padding: 0 3px;
+}
+
+/* About */
+.equalteam {
+    background-image: url('../images/equalteam.png');
+    display: block;
+    width: 150px;
+    height: 150px;
+    float: left;
+    text-indent: -1000px;
+    overflow: hidden;
+}
+.about-equalteam {
+    padding: 15px 10px;
+}
+
+/* el */
+
+
+.el-dialogform-content table, .el-dialogform-content td {
+    border: 0 none;
+}
+.el-dialogform input, .el-dialogform textarea {
+    padding: 0;
+}
+.el-dialogform select {
+    height: 20px;
+}
+
+.ui-widget-content.bz-form-cms-aclselector {
+    border-left-width: 0;
+    border-right-width: 0;
+    border-bottom-width: 0;
+    padding: 7px 15px;
+}
+.form-stacked .bz-form-cms-aclselector legend{
+    padding: 0 6px;
+}
+.bz-form-cms-aclselector .ui-icon {
+    left: 0.2em;
+    margin: -8px 5px 0 0;
+    position: absolute;
+    top: 50%;
+}
+.bz-form-cms-aclselector a.ui-state-default {
+    padding: 0.4em 1em 0.4em 20px;
+    position: relative;
+    text-decoration: none;
+    margin-left: 10px;
+}

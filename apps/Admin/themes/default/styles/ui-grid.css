@@ -1,0 +1,42 @@
+.ui-grid { padding: .4em;  background-image: none; position: relative; }
+.ui-grid-loading { display: none; position: absolute; left: 0; top: 0; right: 0; bottom: 0; background-color: white; z-index: 1000; opacity: 0.5; }
+.ui-grid .ui-grid-content { width: 100%; border-collapse: collapse; }
+.ui-grid table tbody td, .ui-grid .ui-grid-header, .ui-grid table thead a, .ui-grid table tfoot a { padding: .4em;  }
+.ui-grid table tbody td { vertical-align:middle; font-weight: normal; }
+.ui-grid .ui-grid-header, .ui-grid .ui-grid-footer { padding: .8em .4em; text-align: center; }
+.ui-grid .ui-grid-footer { background-image: none; font-weight: normal; text-align: left; }
+.ui-grid table thead a, .ui-grid table tfoot a { display: block;  }
+.ui-grid .ui-icon { float: right; }
+.ui-grid .ui-grid-paging { float: right; }
+.ui-grid .ui-grid-paging-prev { float: left; width: 16px; height: 16px; }
+.ui-grid .ui-grid-paging-next { float: right; width: 16px; height: 16px; }
+.ui-grid .ui-grid-results {  }
+
+th.header span.ui-icon { margin-top:-2px; background-position:-128px -16px; }
+th.header.headerSortUp span.ui-icon { background-position: -64px -16px; }
+th.header.headerSortDown span.ui-icon { background-position: 0 -16px; }
+
+.without-text {
+}
+.without-text .custom-checkbox, .without-text  .custom-radio {
+    width: 24px;
+    margin:0 auto;
+}
+
+.ui-no-hover {
+    cursor: default;
+}
+
+.ui-lang-notcomplete, .ui-lang-complete {
+    font-size:10px;
+    margin:0 1px;
+    padding:0 2px;
+    vertical-align:super;
+    border:0 none !important;
+    opacity: .5;
+    cursor:help;
+}
+
+.ui-lang-notcomplete:hover, .ui-lang-complete:hover {
+    opacity: 1;
+}

@@ -1,0 +1,297 @@
+.bz-imageuploader {
+
+
+
+
+
+.info .transparent {
+    display: block;
+    height: 150px;
+    left: 0;
+    position: absolute;
+    right: 0;
+    top: 12px;
+}
+
+.bz-gallery-preview,
+.info .transparent {
+    background-image: url('../images/imageuploader/transparent.png');
+    background-position: center center;
+}
+.bz-gallery-preview {
+    background-position: center center;
+    height: 100px;
+    width: 100px;
+    display: block;
+    margin: 10px;
+    float: left;
+}
+.bz-gallery-info {
+    bottom: 0;
+    display: block;
+    float: left;
+    left: 120px;
+    overflow: hidden;
+    position: absolute;
+    right: 10px;
+    top: 10px;
+
+    a.title {
+        font-weight: bold;
+    }
+    .info {
+        display: block;
+        color: #777777;
+        margin-top: 4px;
+
+        .ui-icon {
+            display: block;
+            float: left;
+        }
+    }
+    .info.description {
+        max-height: 16px;
+        overflow: hidden;
+    }
+}
+
+.bz-gallery-category-container {
+    position: relative;
+    height: 118px;
+    width: 50%;
+    float:left;
+    border-bottom: 1px solid #EEE;
+}
+
+.bz-gallery-uploader {
+    &.qq-uploader { margin-right: 20px; position:relative; width: 150px; float: left; }
+
+    .qq-upload-button-focus {outline:1px dotted black;}
+    .qq-upload-drop-area {
+        border: 3px dashed #DDD;
+        color: #CCC;
+        font-weight: bold;
+        position:absolute; z-index:2;
+        background: white; text-align:center;
+        display: block !important;
+        padding-top: 55px;
+        text-decoration: none;
+        bottom: -3px;
+        left: -3px;
+        right: -3px;
+        top: -3px;
+        height: 150px;
+        position: absolute;
+        width: 150px;
+    }
+
+    .qq-upload-drop-area:hover {
+        text-decoration: none;
+    }
+    .qq-upload-drop-area input {
+        height: 100% !important;
+    }
+    .qq-upload-drop-area span {
+        display:block; position:absolute; top: 50%; width:100%; margin-top:-8px; font-size:16px;
+    }
+    .qq-upload-drop-area-active {background:#EFEFEF;}
+
+    .qq-upload-list { display: none !important; }
+    .qq-upload-file, 
+    .qq-upload-spinner, 
+    .qq-upload-size, 
+    .qq-upload-cancel, 
+    .qq-upload-failed-text {
+        margin-right: 7px;
+    }
+
+    .qq-upload-file {}
+    .qq-upload-spinner {display:inline-block; background: url("loading.gif"); width:15px; height:15px; vertical-align:text-bottom;}
+    .qq-upload-size,
+    .qq-upload-cancel {font-size:11px;}
+
+    .qq-upload-failed-text, .qq-upload-loading {display:none;}
+    .qq-upload-fail .qq-upload-failed-text {display:inline;}
+
+}
+.bz-gallery-uploader-container {
+    border: 3px dashed #DDD;
+    display: block;
+    width: 150px;
+    height: 150px;
+    overflow: hidden;
+    margin-top: 5px;
+    margin-left: 7px;
+}
+
+
+.bz-image-preloading {
+    background-image: url('../images/imageuploader/loading.gif');
+    background-position: center center;
+    background-repeat: no-repeat;
+    display: block;
+    width: 150px;
+    height: 150px;
+}
+
+.bz-gallery-image .progressbar {
+    bottom: 23px;
+    height: 9px;
+    left: 5px;
+    position: absolute;
+    right: 4px;
+}
+
+
+
+
+.bz-image {
+    float: left;
+
+    .image-container {
+        position: relative;
+
+        &:hover {
+            z-index: 99;
+
+            span.title { display: none; }
+            img{
+                z-index: 999;
+            }
+            .info {display: block;}
+        }
+        span.title {
+            background: url('../images/imageuploader/infobg.png');
+            z-index: 10;
+            font-size: 11px;
+            padding: 2px 6px;
+            bottom: 0;
+            cursor: move;
+            display: block;
+            font-family: Tahoma;
+            overflow: hidden;
+            position: absolute;
+            white-space: nowrap;
+            width: 150px;
+        }
+        img {
+            position: relative;
+        }
+        .info {
+            z-index: 900;
+            position: absolute;
+            left: -35px; top: -5px;
+            padding: 170px 10px 10px;
+            width: 200px;
+            display: none;
+            background: url('../images/imageuploader/infobg.png');
+            box-shadow: 0 1px 2px rgba(0, 0, 0, 0.4);
+            font-size: 1.2em;
+            -webkit-border-radius: 6px;
+            -moz-border-radius: 6px;
+            border-radius: 6px;
+            a {
+                background: none;
+                border: 0 none;
+                display: block;
+                font-size: 12px;
+                
+                .ui-icon {
+                    float: left;
+                }
+            }
+        }
+        h2 {
+            font-size: 14px;
+            font-weight: normal;
+            margin: 0; padding: 0;
+            overflow: hidden;
+        }
+        p {
+            padding: 0; margin: 0; font-size: 12px;
+            height: 36px;
+            max-height: 36px;
+        }
+    }
+}
+
+.image-container {
+    width: 150px;
+    display: inline-block;
+    margin-left: 10px;
+    margin-right: 10px;
+    position: relative;
+
+    .image {
+        background-image: url('../images/imageuploader/transparent.png');
+        background-position: center center;
+        display: block;
+        height: 150px;
+        margin: 0.5em 0;
+        overflow: hidden;
+        position: relative;
+        width: 150px;
+        box-shadow: 0 1px 2px rgba(0, 0, 0, 0.4);
+        -moz-box-shadow: 0 1px 2px rgba(0, 0, 0, 0.4);
+        -webkit-box-shadow: 0 1px 2px rgba(0, 0, 0, 0.4);
+
+        img {
+            width: 150px;
+            height: 150px;
+        }
+        .preview {
+            background-image: url('../images/imageuploader/fullsize-icon.png');
+            background-position: center center;
+            background-repeat: no-repeat;
+            display: none;
+            height: 150px;
+            position: absolute;
+            width: 150px;
+            cursor: pointer;
+        }
+        &:hover .preview {
+            display: block;
+        }
+    }
+    span.title {
+        width: 150px;
+        overflow: hidden;
+        white-space: nowrap;
+        display: block;
+        cursor: move;
+        font-family: Tahoma;
+        position: absolute;
+        bottom: 0;
+    }
+    &:hover .image, &.selected .image {
+        box-shadow: 0 1px 2px #70A8D2;
+        -moz-box-shadow: 0 1px 2px #70A8D2;
+        -webkit-box-shadow: 0 1px 2px #70A8D2;
+    }
+    p {
+        display: block;
+        height: 30px;
+        max-height: 30px;
+        overflow: hidden;
+        padding: 0 3px;
+    }
+    .bz-gallery-delete:hover {
+        width: auto;
+        background-color: white;
+    }
+}
+.bz-small-images {
+    .image-container {
+        width: 100px;
+
+        .image, .image img, .image .preview {
+            width: 100px;
+            height: 100px;
+        }
+        span.title {
+            width: 100px;
+        }
+    }
+}
+
+}

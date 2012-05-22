@@ -1,0 +1,23 @@
+
+@jqueryImageBase: "../../images/jquery";
+
+@borderColorDefault: #CCC;
+@borderColorHeader: #666;
+
+@fwDefault: normal;
+
+@fcHighlight: #404040;
+@fcError: @white;
+
+#jqueryGradient {
+    .horizontal(@startColor: #fff, @endColor: #E6E6E6) {
+        background-repeat: no-repeat;
+        background-image: -webkit-gradient(linear, 0 0, 0 100%, from(@startColor), color-stop(25%, @startColor), to(@endColor));
+        background-image: -webkit-linear-gradient(@startColor, @startColor 25%, @endColor);
+        background-image: -moz-linear-gradient(top, @startColor, @startColor 25%, @endColor);
+        background-image: -ms-linear-gradient(@startColor, @startColor 25%, @endColor);
+        background-image: -o-linear-gradient(@startColor, @startColor 25%, @endColor);
+        background-image: linear-gradient(@startColor, @startColor 25%, @endColor);
+        filter: e(%("progid:DXImageTransform.Microsoft.gradient(startColorstr='%d', endColorstr='%d', GradientType=0)",@startColor,@endColor));
+    }
+}

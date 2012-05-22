@@ -1,0 +1,94 @@
+<?php
+
+class StringTest extends Test_BaseCase
+{
+    protected $str;
+
+    public function setUp()
+    {
+        $this->str = new DataType_String('Привіт');
+    }
+
+    public function testValue()
+    {
+        $str = new DataType_String('Привіт');
+        $this->assertEquals('Привіт', $str->__toString());
+
+        $str2 = new DataType_String($str);
+
+        $this->assertEquals(DataType_String::isValid('Привіт'), true);
+
+        $str3 = $str2->copy();
+
+        $this->assertEquals($str3->toString(), $str2->toString());
+    }
+
+    public function testLength()
+    {
+        if (EXT_MBSTRING) {
+            $this->assertEquals(6, $this->str->Length);
+        } else {
+            $this->assertEquals(12, $this->str->Length);
+        }
+    }
+
+    public function testFormat()
+    {
+        $str = 'test {0} string {1}, {2}';
+        $this->assertEquals(DataType_String::format($str, 'str1', 'str2', 'str3'), 'test str1 string str2, str3');
+
+        $this->assertEquals(DataType_String::format($str, array('str1', 'str2', 'str3')), 'test str1 string str2, str3');
+    }
+
+    public function testToCamelCase()
+    {
+        $str = 'test_to_camel_case';
+        $this->assertEquals(DataType_String::toCamelCase($str), 'testToCamelCase');
+
+        $this->assertEquals(DataType_String::toCamelCase($str, true), 'TestToCamelCase');
+    }
+
+    public function testFromCamelCase()
+    {
+        $str = 'testToCamelCase';
+        $this->assertEquals(DataType_String::fromCamelCase($str), 'test_to_camel_case');
+    }
+
+    public function testReplaceConstants()
+    {
+        $str = 'Test string {TEST_CONST} {TEST_CONST test';
+        $test = DataType_String::replaceConstants($str, array('TEST_CONST' => 'test'));
+        $this->assertEquals($test, 'Test string test {TEST_CONST test');
+
+        define('TEST_CONST', 'test');
+
+        $str = 'Test string {TEST_CONST} test {TEST_CONST';
+        $test = DataType_String::replaceConstants($str);
+        $this->assertEquals($test, 'Test string test test {TEST_CONST');
+
+        $str = '{TEST_CONST} Test string {TEST_CONST} test {TEST_CONST';
+        $test = DataType_String::replaceConstants($str);
+        $this->assertEquals($test, 'test Test string test test {TEST_CONST');
+
+        $test = DataType_String::replaceConstants('test');
+        $this->assertEquals($test, 'test');
+    }
+
+    public function testStrChop()
+    {
+        $longtext = "this is some really long text with long words that should be chopped";
+        $longlink = "http://thisisareally.longlink/with/lots/of/stupid/paths/";
+
+        // Chop at default length
+        $test = DataType_String::chop($longtext);
+        $this->assertEquals($test, 'this is some really long text with long words that shoul ...');
+
+        // Chop in the middle
+        $test = DataType_String::chop($longtext, 60, true);
+        $this->assertEquals($test, 'this is some really long text  ... ds that should be chopped');
+
+        // Chop a link
+        $test = DataType_String::chop($longlink, 40, true);
+        $this->assertEquals($test, 'http://thisisareally ... f/stupid/paths/');
+    }
+}

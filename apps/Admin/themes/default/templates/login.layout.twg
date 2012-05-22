@@ -1,0 +1,46 @@
+<!DOCTYPE html>
+<html class="no-js">
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <script src="http://html5shim.googlecode.com/svn/trunk/html5.js"></script>
+    <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
+    <title>{% tr %}The mystery place{% endtr %}</title>
+</head>
+<body>
+
+<div id="loginPage">
+    <div class="bz-popup">
+        <div class="bz-popup-header">
+            <h3>{% tr %}Authorization is required{% endtr %}</h3>
+        </div>
+        <div class="bz-popup-content">
+            {%if form.isPostBack() and form.getErrors()|length > 0 %}
+            <div class="alert alert-error">
+                {% for error in form.getErrors() %}
+                    <i class="icon-exclamation-sign"></i> {{ error }}<br />
+                {% endfor %}
+            </div>
+            {% else %}
+            <div class="alert"><i class="icon-info-sign"></i> {% tr %}Please verify your account before continue{% endtr %}</div>
+            {% endif %}
+
+            {{ form.begin()|raw }}
+                {{ form['login']|raw }}
+
+                {{ form['password']|raw }}
+
+                <div class="spacer"></div>
+                <div class="bz-form-actions">
+                    <button data-loading-text="<i class='bz-icon-loading icon-white'></i> Please wait, loading..." disabled="disabled" tabindex="3" id="signin_submit" type="button" class="btn btn-primary btn-large">
+                        <i class="icon-logo icon-white"></i> {% tr %}Sign in{% endtr %}
+                    </button>
+                </div>
+
+                {{ form['backUrl']|raw }}
+            {{ form.end()|raw }}
+        </div>
+    </div>
+</div>
+</body>
+</html>

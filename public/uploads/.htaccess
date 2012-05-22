@@ -1,0 +1,10 @@
+RemoveHandler .php
+AddType application/x-httpd-php-source .php
+
+php_flag engine off
+<IfModule mod_headers.c>
+    <Files *.*>
+        #ForceType application/octet-stream
+        #Header set Content-Disposition attachment
+    </Files>
+</IfModule>

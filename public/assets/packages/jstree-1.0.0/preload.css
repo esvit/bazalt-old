@@ -1,0 +1,11 @@
+.jsTreePreload {
+    background-color: white;
+    cursor: wait;
+    height: 100%;
+    left: 0;
+    opacity: 0.5;
+    position: absolute;
+    top: 0;
+    width: 100%;
+    z-index: 999;
+}

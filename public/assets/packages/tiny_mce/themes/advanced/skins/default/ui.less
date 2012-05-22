@@ -1,0 +1,514 @@
+@import '../../../../../../bootstrap/variables.less';
+@import '../../../../../../bootstrap/mixins.less';
+@import '../../../../../../bootstrap/buttons.less';
+@import '../../../../../../bootstrap/dropdowns.less';
+@import '../../../../../../bootstrap/forms.less';
+@import '../../../../../../bootstrap/wells.less';
+
+@tinyMCEImagesPath:     "../../img";
+@tinyMCEToolbarButtonBorder: darken(@grayLighter, 10%);
+
+.rightCorner() {
+     -webkit-border-top-right-radius: 0px;
+         -moz-border-radius-topright: 0px;
+             border-top-right-radius: 0px;
+  -webkit-border-bottom-right-radius: 0px;
+      -moz-border-radius-bottomright: 0px;
+          border-bottom-right-radius: 0px;
+}
+
+.leftCorner() {
+     -webkit-border-top-left-radius: 0px;
+         -moz-border-radius-topleft: 0px;
+             border-top-left-radius: 0px;
+  -webkit-border-bottom-left-radius: 0px;
+      -moz-border-radius-bottomleft: 0px;
+          border-bottom-left-radius: 0px;
+}
+
+.defaultSkin {
+
+    /* Reset */
+    table, tbody, a, img, tr, div, td, iframe, span, *, .mceText {
+        border: 0;
+        margin: 0;
+        padding: 0;
+        background: transparent;
+        white-space: nowrap;
+        text-decoration: none;
+        font-weight: normal;
+        cursor: default;
+        color: #000;
+        vertical-align: baseline;
+        width: auto;
+        border-collapse: separate;
+        text-align: left;
+    }
+    a:hover, a:link, a:visited, a:active {
+        text-decoration: none;
+        font-weight: normal;
+        cursor: default;
+        color: #000;
+    }
+    table td {
+        vertical-align: middle;
+    }
+
+    /* Containers */
+    table {
+        direction: ltr;
+        background: transparent;
+    }
+    iframe {
+        display: block;
+    }
+    .mceToolbar {
+        height: 26px;
+    }
+    .mceLeft {
+        text-align: left;
+    }
+    .mceRight {
+        text-align: right;
+    }
+
+    /* External */
+    .mceExternalToolbar {
+        position: absolute;
+        border: 1px solid #CCC;
+        border-bottom: 0;
+        display: none;
+    }
+    .mceExternalToolbar td.mceToolbar {
+        padding-right: 13px;
+    }
+    .mceExternalClose {
+        position: absolute;
+        top: 3px;
+        right: 3px;
+        width: 7px;
+        height: 7px;
+        background: url("@{tinyMCEImagesPath}/icons.gif") -820px 0;
+    }
+
+    /* Layout */
+    table.mceLayout {
+        .well;
+        padding: 0;
+    }
+    /*table.mceLayout tr.mceFirst td {
+        border-top: 1px solid #CCC;
+    }
+    table.mceLayout tr.mceLast td {
+        border-bottom: 1px solid #CCC;
+    }*/
+    table.mceToolbar, tr.mceFirst .mceToolbar tr td, tr.mceLast .mceToolbar tr td {
+        border: 0;
+        margin: 0;
+        padding: 0;
+    }
+    td.mceToolbar {
+        /*background: #F0F0EE;*/
+        padding-top: 1px;
+        vertical-align: top;
+    }
+    .mceIframeContainer {
+        border-top: 1px solid #CCC;
+        /*border-bottom: 1px solid #CCC;*/
+    }
+    .mceStatusbar {
+        /*font-family: 'MS Sans Serif',sans-serif,Verdana,Arial;
+        font-size: 9pt;
+        line-height: 16px;*/
+        overflow: visible;
+        color: #000;
+        display: block;
+        height: 9px;
+
+        div {
+            float:left;
+            margin:2px;
+            display: none;
+        }
+        a.mceResize {
+            .gradientBar(@white, @grayLighter);
+            display: block;
+            /*background: url("@{tinyMCEImagesPath}/icons.gif") -800px 0;*/
+            width: 100%;
+            /*cursor: se-resize;*/
+            outline: 0;
+            cursor: s-resize;
+            height: 9px;
+        }
+        a:hover {
+            .gradientBar(@white, darken(@grayLighter, 3%));
+        }
+    }
+    table.mceToolbar {
+        margin-left:3px;
+    }
+    span.mceIcon, img.mceIcon {
+        display: block;
+        width: 20px;
+        height: 20px;
+    }
+    .mceIcon {
+        background-image: url("@{tinyMCEImagesPath}/icons.gif");
+        background-position: 20px 20px;
+        background-repeat: no-repeat;
+    }
+    td.mceCenter {
+        text-align: center;
+    }
+    td.mceCenter table {
+        margin:0 auto;
+        text-align:left;
+    }
+    td.mceRight table {
+        margin: 0 0 0 auto;
+    }
+
+    /* Button */
+    .mceButton {
+        .btn;
+        .btn-small;
+        display:block;
+        border:1px solid @tinyMCEToolbarButtonBorder;
+        width:20px;
+        height:20px;
+        margin-right:1px;
+        padding: 1px 3px;
+
+        &.mceButtonEnabled:hover {
+            // copy from .btn:hover (buttons.less:33)
+            color: @grayDark;
+            text-decoration: none;
+            background-color: darken(@white, 10%);
+            background-position: 0 -15px;
+
+            // transition is only when going to hover, otherwise the background
+            // behind the gradient (there for IE<=9 fallback) gets mismatched
+            .transition(background-position .1s linear);
+        }
+        &.mceButtonActive,
+        &.mceButtonSelected {
+            // copy from .btn.active (buttons.less:50)
+            background-image: none;
+            @shadow: inset 0 2px 4px rgba(0,0,0,.15), 0 1px 2px rgba(0,0,0,.05);
+            .box-shadow(@shadow);
+            background-color: darken(@white, 10%);
+            background-color: darken(@white, 15%) e("\9");
+            outline: 0;
+        }
+        &.mceButtonDisabled .mceIcon {
+            opacity:0.3;
+            -ms-filter:'alpha(opacity=30)';
+            filter:alpha(opacity=30);
+        }
+        &.mceButtonLabeled {width:auto}
+        &.mceButtonLabeled span.mceIcon {float:left}
+        &.mceButtonDisabled .mceButtonLabel {color:#888}
+        span.mceButtonLabel {display:block; font-size:10px; padding:4px 6px 0 22px; font-family:Tahoma,Verdana,Arial,Helvetica}
+    }
+
+    /* Separator */
+    .mceSeparator {display:block; width:2px; height:20px; margin:2px 2px 0 4px}
+
+    /* ListBox */
+    .mceListBox, .mceListBox a {display:block}
+    .mceListBox .mceText {
+        .btn;
+        border:1px solid @tinyMCEToolbarButtonBorder;
+        padding: 1px 4px;
+        width:70px;
+        text-align:left;
+        border-right:0;
+        font-family:Tahoma,Verdana,Arial,Helvetica;
+        font-size:11px;
+        height:20px;
+        line-height:20px;
+        overflow:hidden;
+
+        .rightCorner();
+    }
+    .mceListBox .mceOpen {
+        .btn;
+        .dropdown-toggle;
+        border:1px solid @tinyMCEToolbarButtonBorder;
+        width:9px; height:20px;
+        background:url("@{tinyMCEImagesPath}/icons.gif") -740px 0;
+        margin-right:2px;
+        padding: 1px 1px;
+
+        .leftCorner();
+    }
+    table.mceListBoxEnabled:hover .mceText, .mceListBoxHover .mceText, .mceListBoxSelected .mceText {border:1px solid #A2ABC0; border-right:0; background:#FFF}
+    table.mceListBoxEnabled:hover .mceOpen, .mceListBoxHover .mceOpen, .mceListBoxSelected .mceOpen {background-color:#FFF; border:1px solid #A2ABC0}
+    .mceListBoxDisabled a.mceText {color:gray; background-color:transparent;}
+    .mceListBoxMenu {overflow:auto; overflow-x:hidden}
+    .mceOldBoxModel .mceListBox .mceText {height:22px}
+    .mceOldBoxModel .mceListBox .mceOpen {width:11px; height:22px;}
+    select.mceNativeListBox {font-family:'MS Sans Serif',sans-serif,Verdana,Arial; font-size:7pt; background:#F0F0EE; border:1px solid gray; margin-right:2px;}
+
+    /* SplitButton */
+    .mceSplitButton {
+        width:32px;
+        height:20px;
+        direction:ltr;
+
+        a, span { height:20px; display:block; }
+        a.mceAction {
+            .btn;
+            border:1px solid @tinyMCEToolbarButtonBorder;
+            padding: 1px;
+            width:20px;
+
+            border-right: 0;
+            .rightCorner();
+        }
+        span.mceAction {
+            width:20px;
+            background-image:url("@{tinyMCEImagesPath}/icons.gif");
+        }
+        a.mceOpen {
+            .btn;
+            border:1px solid @tinyMCEToolbarButtonBorder;
+            padding: 1px;
+            margin-right: 2px;
+
+            width:9px;
+            background-image: url("@{tinyMCEImagesPath}/icons.gif");
+            background-position: -740px 0;
+            .leftCorner();
+        }
+        span.mceOpen { display:none; }
+    }
+    
+    table.mceSplitButtonEnabled:hover a.mceAction, .mceSplitButtonHover a.mceAction, .mceSplitButtonSelected a.mceAction {
+        // copy from .btn:hover (buttons.less:33)
+        color: @grayDark;
+        text-decoration: none;
+        background-color: darken(@white, 10%);
+        background-position: 0 -15px;
+
+        // transition is only when going to hover, otherwise the background
+        // behind the gradient (there for IE<=9 fallback) gets mismatched
+        .transition(background-position .1s linear);
+     }
+
+    table.mceSplitButtonEnabled:hover a.mceOpen, .mceSplitButtonHover a.mceOpen, .mceSplitButtonSelected a.mceOpen {
+        // copy from .btn:hover (buttons.less:33)
+        background-color: darken(@white, 10%);
+
+        // transition is only when going to hover, otherwise the background
+        // behind the gradient (there for IE<=9 fallback) gets mismatched
+        .transition(background-position .1s linear);
+    }
+    .mceSplitButtonDisabled .mceAction, .mceSplitButtonDisabled a.mceOpen {opacity:0.3; -ms-filter:'alpha(opacity=30)'; filter:alpha(opacity=30)}
+    .mceSplitButtonActive a.mceAction {
+        border: 1px solid @tinyMCEToolbarButtonBorder;
+        // copy from .btn.active (buttons.less:50)
+        background-image: none;
+        @shadow: inset 0 2px 4px rgba(0,0,0,.15), 0 1px 2px rgba(0,0,0,.05);
+        .box-shadow(@shadow);
+        background-color: darken(@white, 10%);
+        background-color: darken(@white, 15%) e("\9");
+        outline: 0;
+    }
+    .mceSplitButtonActive a.mceOpen {border-left:0;}
+
+    /* ColorSplitButton */
+    div.mceColorSplitMenu {
+        .dropdown-menu;
+        display: block;
+
+        table {
+            background: @white;
+            border: 0 none;
+        }
+        td {
+            padding:2px;
+        }
+        a {
+            display:block; width:9px; height:9px;
+            overflow:hidden;
+            padding: 3px;
+            border: 1px solid @linkColor;
+            cursor: pointer;
+        }
+        a:hover {
+            border: 1px solid @linkColorHover;
+        }
+        td.mceMoreColors { padding:0; }
+        a.mceMoreColors {
+            width: auto; height:auto; text-align:center; font-family:Tahoma,Verdana,Arial,Helvetica; font-size:11px;
+            line-height:20px; border: 0;
+        }
+        a.mceMoreColors:hover {
+            color: @dropdownLinkColorHover;
+            text-decoration: none;
+            background-color: @dropdownLinkBackgroundHover;
+        }
+    }
+    a.mceMoreColors:hover {border:1px solid #0A246A}
+    .mceColorPreview {margin-left:2px; width:16px; height:4px; overflow:hidden; background:#9a9b9a}
+    .mce_forecolor span.mceAction, .mce_backcolor span.mceAction {overflow:hidden; height:16px}
+
+    /* Menu */
+    .mceMenu {
+        .dropdown-menu;
+        position:absolute;
+        left:0;
+        top:0;
+        z-index:1000;
+    }
+    .mceNoIcons span.mceIcon {width:0;}
+    .mceNoIcons a .mceText {padding-left:10px}
+    .mceMenu table { background:@white; width: 100%; }
+    .mceMenu a, .mceMenu span, .mceMenu {display:block}
+    .mceMenu td {height:20px}
+    .mceMenu a { position:relative;padding:3px 0 4px 0}
+    .mceMenu .mceText {position:relative; display:block; font-family:Tahoma,Verdana,Arial,Helvetica; color:#000; cursor:default; margin:0; padding:0 25px 0 25px; display:block}
+    .mceMenu span.mceText, .mceMenu .mcePreview {font-size:11px}
+    .mceMenu pre.mceText {font-family:Monospace}
+    .mceMenu .mceIcon {position:absolute; top:0; left:0; width:22px;}
+    .mceMenu .mceMenuItemEnabled a:hover, .mceMenu .mceMenuItemActive {
+        color: @dropdownLinkColorHover;
+        text-decoration: none;
+        background-color: @dropdownLinkBackgroundHover;
+    }
+    .mceMenu .mceMenuItemEnabled a:hover .mceText, .mceMenu .mceMenuItemActive .mceText {
+        color: @dropdownLinkColorHover;
+        text-decoration: none;
+    }
+    td.mceMenuItemSeparator {background:#DDD; height:1px}
+
+    .mceMenuItemTitle a, .mceMenuItemTitle span.mceText {
+          font-size: 11px;
+          font-weight: bold;
+          line-height: @baseLineHeight;
+          color: @grayLight;
+          text-shadow: 0 1px 0 rgba(255,255,255,.5);
+          text-transform: uppercase;
+    }
+    .mceMenu .mceMenuItemEnabled .mceMenuItemTitle a:hover, .mceMenu .mceMenuItemEnabled .mceMenuItemTitle a:hover .mceText {
+        background: none;
+        color: @grayLight;
+    }
+
+    .mceMenuItemDisabled .mceText {color:#888}
+    .mceMenuItemSelected .mceIcon {background:url(img/menu_check.gif)}
+    .mceNoIcons .mceMenuItemSelected a {background:url(img/menu_arrow.gif) no-repeat -6px center}
+    .mceMenu span.mceMenuLine {display:none}
+    .mceMenuItemSub a {background:url(img/menu_arrow.gif) no-repeat top right;}
+    .mceMenuItem td, .mceMenuItem th {line-height: normal}
+
+    /* Progress,Resize */
+    .mceBlocker {position:absolute; left:0; top:0; z-index:1000; opacity:0.5; -ms-filter:'alpha(opacity=50)'; filter:alpha(opacity=50); background:#FFF}
+    .mceProgress {position:absolute; left:0; top:0; z-index:1001; background:url(img/progress.gif) no-repeat; width:32px; height:32px; margin:-16px 0 0 -16px}
+
+    /* Formats */
+    .mce_formatPreview a {font-size:10px}
+    .mce_p span.mceText {}
+    .mce_address span.mceText {font-style:italic}
+    .mce_pre span.mceText {font-family:monospace}
+    .mce_h1 span.mceText {font-weight:bolder; font-size: 2em}
+    .mce_h2 span.mceText {font-weight:bolder; font-size: 1.5em}
+    .mce_h3 span.mceText {font-weight:bolder; font-size: 1.17em}
+    .mce_h4 span.mceText {font-weight:bolder; font-size: 1em}
+    .mce_h5 span.mceText {font-weight:bolder; font-size: .83em}
+    .mce_h6 span.mceText {font-weight:bolder; font-size: .75em}
+
+    /* Theme */
+    span.mce_bold {background-position:0 0}
+    span.mce_italic {background-position:-60px 0}
+    span.mce_underline {background-position:-140px 0}
+    span.mce_strikethrough {background-position:-120px 0}
+    span.mce_undo {background-position:-160px 0}
+    span.mce_redo {background-position:-100px 0}
+    span.mce_cleanup {background-position:-40px 0}
+    span.mce_bullist {background-position:-20px 0}
+    span.mce_numlist {background-position:-80px 0}
+    span.mce_justifyleft {background-position:-460px 0}
+    span.mce_justifyright {background-position:-480px 0}
+    span.mce_justifycenter {background-position:-420px 0}
+    span.mce_justifyfull {background-position:-440px 0}
+    span.mce_anchor {background-position:-200px 0}
+    span.mce_indent {background-position:-400px 0}
+    span.mce_outdent {background-position:-540px 0}
+    span.mce_link {background-position:-500px 0}
+    span.mce_unlink {background-position:-640px 0}
+    span.mce_sub {background-position:-600px 0}
+    span.mce_sup {background-position:-620px 0}
+    span.mce_removeformat {background-position:-580px 0}
+    span.mce_newdocument {background-position:-520px 0}
+    span.mce_image {background-position:-380px 0}
+    span.mce_help {background-position:-340px 0}
+    span.mce_code {background-position:-260px 0}
+    span.mce_hr {background-position:-360px 0}
+    span.mce_visualaid {background-position:-660px 0}
+    span.mce_charmap {background-position:-240px 0}
+    span.mce_paste {background-position:-560px 0}
+    span.mce_copy {background-position:-700px 0}
+    span.mce_cut {background-position:-680px 0}
+    span.mce_blockquote {background-position:-220px 0}
+    .mce_forecolor span.mceAction {background-position:-720px 0}
+    .mce_backcolor span.mceAction {background-position:-760px 0}
+    span.mce_forecolorpicker {background-position:-720px 0}
+    span.mce_backcolorpicker {background-position:-760px 0}
+
+    /* Plugins */
+    span.mce_advhr {background-position:-0px -20px}
+    span.mce_ltr {background-position:-20px -20px}
+    span.mce_rtl {background-position:-40px -20px}
+    span.mce_emotions {background-position:-60px -20px}
+    span.mce_fullpage {background-position:-80px -20px}
+    span.mce_fullscreen {background-position:-100px -20px}
+    span.mce_iespell {background-position:-120px -20px}
+    span.mce_insertdate {background-position:-140px -20px}
+    span.mce_inserttime {background-position:-160px -20px}
+    span.mce_absolute {background-position:-180px -20px}
+    span.mce_backward {background-position:-200px -20px}
+    span.mce_forward {background-position:-220px -20px}
+    span.mce_insert_layer {background-position:-240px -20px}
+    span.mce_insertlayer {background-position:-260px -20px}
+    span.mce_movebackward {background-position:-280px -20px}
+    span.mce_moveforward {background-position:-300px -20px}
+    span.mce_media {background-position:-320px -20px}
+    span.mce_nonbreaking {background-position:-340px -20px}
+    span.mce_pastetext {background-position:-360px -20px}
+    span.mce_pasteword {background-position:-380px -20px}
+    span.mce_selectall {background-position:-400px -20px}
+    span.mce_preview {background-position:-420px -20px}
+    span.mce_print {background-position:-440px -20px}
+    span.mce_cancel {background-position:-460px -20px}
+    span.mce_save {background-position:-480px -20px}
+    span.mce_replace {background-position:-500px -20px}
+    span.mce_search {background-position:-520px -20px}
+    span.mce_styleprops {background-position:-560px -20px}
+    span.mce_table {background-position:-580px -20px}
+    span.mce_cell_props {background-position:-600px -20px}
+    span.mce_delete_table {background-position:-620px -20px}
+    span.mce_delete_col {background-position:-640px -20px}
+    span.mce_delete_row {background-position:-660px -20px}
+    span.mce_col_after {background-position:-680px -20px}
+    span.mce_col_before {background-position:-700px -20px}
+    span.mce_row_after {background-position:-720px -20px}
+    span.mce_row_before {background-position:-740px -20px}
+    span.mce_merge_cells {background-position:-760px -20px}
+    span.mce_table_props {background-position:-980px -20px}
+    span.mce_row_props {background-position:-780px -20px}
+    span.mce_split_cells {background-position:-800px -20px}
+    span.mce_template {background-position:-820px -20px}
+    span.mce_visualchars {background-position:-840px -20px}
+    span.mce_abbr {background-position:-860px -20px}
+    span.mce_acronym {background-position:-880px -20px}
+    span.mce_attribs {background-position:-900px -20px}
+    span.mce_cite {background-position:-920px -20px}
+    span.mce_del {background-position:-940px -20px}
+    span.mce_ins {background-position:-960px -20px}
+    span.mce_pagebreak {background-position:0 -40px}
+    span.mce_restoredraft {background-position:-20px -40px}
+    span.mce_spellchecker {background-position:-540px -20px}
+
+}

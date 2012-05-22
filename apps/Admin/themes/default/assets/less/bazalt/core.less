@@ -1,0 +1,49 @@
+/*!
+ * Bazalt CMS v2.0.0
+ *
+ * Copyright 2012 Equalteam LLC
+ * Licensed under the Apache License v2.0
+ * http://www.apache.org/licenses/LICENSE-2.0
+ */
+
+@import "../bootstrap/bootstrap.less";
+@import "../jquery/jquery.ui.all.less";
+
+@import "variables.less";
+
+@import "reset.less";
+
+@import "form.less";
+@import "popup.less";
+
+@import "admin.less";
+@import "iphone.less";
+@import "context-help.less";
+@import "admin-menu.less";
+@import "bz-table.less";
+
+.ui-float-left { float: left !important; }
+.ui-float-right { float: right !important; }
+
+.icon-logo {
+    background-image: url('@{bazaltImagesPath}/icons/logo-mini.png');
+    background-position: 0px 0px;
+}
+.icon-logo.icon-white {
+    background-position: 0px -14px;
+}
+
+.bz-icon-loading {
+    display: block;
+    width: 16px;
+    height: 11px;
+    float: left;
+    background: url('@{bazaltImagesPath}/icons/loading.gif');
+    margin: 3px 7px 0 0;
+}
+.bz-icon-loading.icon-white {
+    background: url('@{bazaltImagesPath}/icons/loading-white.gif');
+}
+
+/* Page */
+@import "login.less";

@@ -1,0 +1,104 @@
+.cms-widget-placeholder {
+    border: 1px dashed #666;
+    background-color: #F0F0F0;
+    min-height: 50px;
+    padding: 10px;
+}
+
+.cms-widget-title-text {
+    cursor: move;
+}
+
+.cms-manage-widgets .cms-widgets-border-around {
+padding: 19px 3px 3px;
+}
+.cms-widgets-position-title, .cms-widgets-settings, .cms-widget-title {
+display: none;
+}
+.cms-manage-widgets .cms-widgets-border-around {
+border: 1px dotted #1B75BB;
+position:relative;
+overflow:visible;
+min-height: 20px;
+min-width: 100px;
+}
+.cms-manage-widgets .cms-widgets-position-title {
+font-family:Verdana;
+font-size:10px;
+line-height: 12px;
+position:absolute;
+top: 0px;
+right: 0px;
+padding: 0 5px; z-index: 20000;
+border-top: 0px;
+border-right: 0px;
+line-height: 13px;
+}
+.cms-manage-widgets .cms-widgets-position-title, .cms-manage-widgets .cms-widget-title {
+display: block;
+}
+.cms-manage-widgets .cms-widget-container {
+position: relative;
+border: 1px solid #C5DBEC;
+min-height: 20px;
+}
+.cms-widgets-settings {
+/*position: absolute;
+left: 1px;
+top: 18px;
+background-color: white;
+z-index: 200;
+padding: 5px;
+border: 1px solid #C6D9E9;*/
+}
+.cms-widget-title {
+position:absolute;
+top: 0px;
+padding: 0 5px;
+z-index:10000;
+border-top: 0px;
+border-left: 0px;
+}
+.cms-widget-title .ui-icon, .cms-widgets-position-title .ui-icon {
+padding: 0 !important;
+margin: 0 !important;
+}
+.cms-widget-title .ui-icon, .cms-widget-title-text {
+float: left;
+font-family:Verdana;
+font-size:10px;
+line-height: 13px;
+}
+.cms-widgets-add-widget {
+float: right;
+}
+.cms-widgets-settings .btn-delete {
+padding: 0 !important;
+margin: 0 !important;
+line-height: 24px;
+font-weight: normal;
+font-size: 12px;
+text-transform: none;
+}
+#cms_plugin_overlay {
+display: none;
+border: 1px solid #5B80B2;  position: absolute;
+}
+#cms_plugin_overlay .cms_plugin_overlay_bg
+{
+background:#5b80b2;
+opacity:.50;
+-ms-filter:alpha(opacity=50);
+filter:alpha(opacity=50);
+-khtml-opacity:.50;
+-moz-opacity:.50;
+height:100%;
+}
+.cms-widget-container.ui-sortable-helper {
+    width: 300px !important;
+    height: 40px !important;
+}
+
+.cms-widget-container.ui-sortable-helper .cms-widget {
+    display: none;
+}

@@ -1,0 +1,54 @@
+<bz:header>{% tr %}Outgoing email settings{% endtr %}</bz:header>
+
+{{ form|raw }}
+
+<script>
+$(function() {
+    $('#admin_form_mail_Admin_Form_Element_SettingsGroup_useSmtp').click(function() {
+        $('.bz-group-smtp').toggle(100);
+    });
+
+    if ($('#admin_form_mail_Admin_Form_Element_SettingsGroup_useSmtp').is(':checked')) {
+        $('.bz-group-smtp').show();
+    }
+
+    // Show/Hide smtp authorization
+    $('.settings-container input[type="radio"]').click(function(){
+        var el = $(this);
+        var blk = $('.bz-group-smtp-auth');
+        if (el.val() == 'none') {
+            blk.hide(100);
+        } else {
+            blk.show(100);
+        }
+    });
+    if ($('#admin_form_mail_Admin_Form_Element_SettingsGroup_0_smtpSecurity_0,#admin_form_mail_Admin_Form_Element_SettingsGroup_0_smtpSecurity_1').is(':checked')) {
+        $('.bz-group-smtp-auth').show();
+    }
+    
+    $('#admin_form_mail_Admin_Form_Element_SettingsGroup_1_testBtn').click(function() {
+        var email = $.trim($('#admin_form_mail_Admin_Form_Element_SettingsGroup_1_testEmail').val());
+        if (email == '' || email == null) {
+            return false;
+        }
+        $.cookie('test_email_address', email);
+        Admin_Webservice_Mail.sendTestEmail(email, function() {
+            alert('Test email successfully been sent on address "' + email + '"');
+        });
+        return false;
+    });
+    
+    var email = $.cookie('test_email_address');
+    if (email != '' && email != null) {
+        $('#admin_form_mail_Admin_Form_Element_SettingsGroup_1_testEmail').val(email);
+    }
+
+    $('#admin_form_mail_Admin_Form_Element_SettingsGroup_1_testEmail').keypress(function(e){
+        if ((e.which && e.which == 13) || (e.keyCode && e.keyCode == 13)) {
+            $('#admin_form_mail_Admin_Form_Element_SettingsGroup_1_testBtn').click();
+        }
+    });
+
+    $('#admin_form_mail_Admin_Form_Element_SettingsGroup_0_Html_Element_Group_smtpPassword').attr('autocomplete', 'off');
+});
+</script>

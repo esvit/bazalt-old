@@ -1,0 +1,50 @@
+.iphone {
+    display: block;
+    width: 94px;
+    height: 27px;
+    overflow: hidden;
+    border-radius: 3px;
+
+    input[type=checkbox] {
+        display: none;
+    }
+
+    input[type=checkbox] + label {
+        cursor: pointer;
+        text-indent: -9999px;
+        display: block;
+        width: 150px;
+        height: 27px;
+        line-height: 27px;
+        background: transparent url("@{bazaltImagesPath}/iphone-checkbox.png") no-repeat -56px 0;
+        -webkit-transition: background-position 0.3s ease-in-out;
+        -moz-transition: background-position 0.3s ease-in-out;
+    }
+
+    /**
+     * For IE
+     *
+     *  if ($.browser.msie) {
+     *      $('.iphone label').click(function() {
+     *          var el = $(this);
+     *          el.toggleClass('checked');
+     *          el.parent()
+     *            .find('input')
+     *            .click()
+     *            .change();
+     *          console.info(el.parent().find('input').is(':checked'));
+     *      });
+     *  } else {
+     *      $('.iphone label').removeClass('checked');
+     *  }
+     */
+    label.checked {
+        background-position: -3px 0 !important;
+    }
+
+    input[type=checkbox]:checked + label {
+        -webkit-transition: background-position 0.3s ease-in-out;
+        -moz-transition: background-position 0.3s ease-in-out;
+        background-position: -3px 0;
+    }
+}

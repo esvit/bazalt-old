@@ -1,0 +1,2 @@
+<h1>{{ article.title }}</h1>
+<div class="node_content">{{ article.body|raw }}</div>

@@ -1,0 +1,3 @@
+<bz:header>{% tr %}General settings{% endtr %}</bz:header>
+
+{{ form|raw }}

@@ -1,0 +1,317 @@
+msgid ""
+msgstr "Project-Id-Version: BAZALT CMS\n"
+"Report-Msgid-Bugs-To: support@equalteam.net\n"
+"POT-Creation-Date: 2012-01-24 22:57+0200\n"
+"PO-Revision-Date: 2012-01-24 23:32+0200\n"
+"Last-Translator: BAZALT CMS <support@equalteam.net>\n"
+"Language-Team: Russian\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+"Plural-Forms: nplurals=3; plural=((n%10==1) && (n%100!=11)) ? 0 : (( (n%10>=2) && (n%10<=4) && (n%100<10 || n%100>=20)) ? 1 : 2 );"
+
+#: /apps/admin/themes/default/templates/examples/uitable.tpl:35
+msgid "All"
+msgstr "Все"
+
+#: /apps/admin/Form/Settings.php:64
+msgid "Allow indexing"
+msgstr "Разрешить индексацию"
+
+#: /apps/admin/Form/Settings.php:65
+msgid "Allow indexing site search bots"
+msgstr "Разрешить индексацию сайта поисковыми ботами"
+
+#: /apps/admin/themes/default/templates/login.layout.twg:15
+msgid "Authorization is required"
+msgstr "Требуется авторизация"
+
+#: /apps/admin/Form/Settings.php:68
+msgid "Cache"
+msgstr "Кеш"
+
+#: /apps/admin/Form/Settings.php:71
+msgid "Cache salt"
+msgstr "Соль кеша"
+
+#: /apps/admin/Form/Settings.php:70
+msgid "Cache salt:"
+msgstr "Соль кеша:"
+
+#: /apps/admin/Form/BaseSettings.php:53
+msgid "Cancel"
+msgstr "Отмена"
+
+#: /apps/admin/themes/default/templates/layout.twg:1
+msgid "Change site"
+msgstr "Изменить сайт"
+
+#: /apps/admin/Form/Settings.php:73
+msgid "Clear cache"
+msgstr "Очистить кеш"
+
+#: /apps/admin/themes/default/templates/components.twg:1
+msgid "Components"
+msgstr "Компоненты"
+
+#: /apps/admin/themes/default/templates/index.twg:36
+msgid "Dashboard"
+msgstr "Рабочая панель"
+
+#: /apps/admin/themes/default/templates/examples/uitable.tpl:29
+msgid "Delete"
+msgstr "Удалить"
+
+#: /apps/admin/themes/default/templates/about.twg:1
+msgid "Developers"
+msgstr "Разработчики"
+
+#: /apps/admin/themes/default/templates/layout.twg:1
+msgid "Documentation"
+msgstr "Документация"
+
+#: /apps/admin/Form/Mail.php:35
+msgid "Email sent from the application will be addressed from the following address"
+msgstr "Письмо будет отправлено со следующего адреса"
+
+#: /apps/admin/Form/Mail.php:33
+msgid "Email:"
+msgstr "Email:"
+
+#: /apps/admin/Form/Mail.php:55
+msgid "Example: for SSL - 465, for TLS - 587"
+msgstr "Пример: для SSL - 465, для TLS - 587"
+
+#: /apps/admin/Form/Mail.php:51
+msgid "Example: smtp.gmail.com"
+msgstr "Пример: smtp.gmail.com"
+
+#: /apps/admin/themes/default/templates/settings.twg:1
+msgid "General settings"
+msgstr "Основные настройки"
+
+#: /apps/admin/themes/default/templates/elements/admin/secretkey.php:5
+msgid "Generate new secret key"
+msgstr "Генерировать новый секретный ключ"
+
+#: /apps/admin/themes/default/templates/index.twg:28
+msgid "Help"
+msgstr "Справка"
+
+#: /apps/admin/Form/Settings.php:54
+msgid "Language admin panel"
+msgstr "Язык панели администрирования"
+
+#: /apps/admin/Form/Settings.php:43
+msgid "Language settings"
+msgstr "Языковые параметры"
+
+#: /apps/admin/Form/Settings.php:55
+msgid "Language, by default, which will be displayed admin panel"
+msgstr "Язык, отображаемый по-умолчанию в панели администрирования"
+
+#: /apps/admin/tags/bz/languages.php:8
+msgid "Language:"
+msgstr "Язык:"
+
+#: /apps/admin/themes/default/templates/login.layout.twg:43
+msgid "Loading..."
+msgstr "Загрузка..."
+
+#: /apps/admin/themes/default/templates/layout.twg:1
+#: /apps/admin/themes/default/templates/layout.twg:1
+msgid "Logout"
+msgstr "Выход"
+
+#: /apps/admin/Form/Settings.php:46
+msgid "Multilanguage site"
+msgstr "Многоязычный сайт"
+
+#: /apps/admin/Form/Mail.php:27
+msgid "Name:"
+msgstr "Имя:"
+
+#: /apps/admin/Form/Mail.php:62
+msgid "None"
+msgstr "Нет"
+
+#: /apps/admin/themes/default/templates/examples/uitable.tpl:37
+msgid "Not published"
+msgstr "Не опубликовано"
+
+#: /apps/admin/themes/default/templates/examples/uitable.tpl:26
+msgid "OFF"
+msgstr "ВЫКЛ"
+
+#: /apps/admin/themes/default/templates/examples/uitable.tpl:23
+msgid "ON"
+msgstr "ВКЛ"
+
+#: /apps/admin/themes/default/templates/login.layout.twg:40
+msgid "Oops! I hit a wrong page"
+msgstr "Упс! Я не туда попал"
+
+#: /apps/admin/themes/default/templates/mail_settings.twg:1
+msgid "Outgoing email settings"
+msgstr "Настройки исходящих писем"
+
+#: /apps/admin/themes/default/templates/login.layout.twg:27
+msgid "Please verify your account before continue"
+msgstr "Проверьте ваш аккаунт прежде чем продолжить"
+
+#: /apps/admin/themes/default/templates/login.layout.twg:43
+msgid "Please wait, loading..."
+msgstr "Подождите, идет загрузка..."
+
+#: /apps/admin/themes/default/templates/examples/uitable.tpl:36
+msgid "Published"
+msgstr "Опубликовано"
+
+#: /apps/admin/Form/Mail.php:49
+msgid "SMTP Host:"
+msgstr "SMTP Host:"
+
+#: /apps/admin/Form/Mail.php:77
+msgid "SMTP Password:"
+msgstr "Пароль SMTP:"
+
+#: /apps/admin/Form/Mail.php:54
+msgid "SMTP Port:"
+msgstr "SMTP Порт:"
+
+#: /apps/admin/Form/Mail.php:58
+msgid "SMTP Security:"
+msgstr "Безопасность SMTP:"
+
+#: /apps/admin/Form/Mail.php:73
+msgid "SMTP User:"
+msgstr "Пользователь SMTP:"
+
+#: /apps/admin/Form/Mail.php:45
+msgid "SMTP settings"
+msgstr "Настройки SMTP:"
+
+#: /apps/admin/Form/BaseSettings.php:49
+msgid "Save setting"
+msgstr "Сохранить настройки"
+
+#: /apps/admin/Form/Settings.php:61
+msgid "Search engines"
+msgstr "Поисковые движки"
+
+#: /apps/admin/Form/Settings.php:38
+msgid "Secret key:"
+msgstr "Секретный ключ:"
+
+#: /apps/admin/Form/Mail.php:90
+msgid "Send test email"
+msgstr "Отправить тестовое письмо"
+
+#: /apps/admin/themes/default/templates/components.twg:7
+msgid "Services"
+msgstr "Услуги"
+
+#: /apps/admin/themes/default/templates/index.twg:31
+msgid "Settings"
+msgstr "Параметры"
+
+#: /apps/admin/Form/BaseSettings.php:29
+msgid "Settings successfully been saved!"
+msgstr "Параметры успешно сохранены!"
+
+#: /apps/admin/themes/default/templates/index.twg:13
+msgid "Show on screen"
+msgstr "Показать на экране"
+
+#: /apps/admin/themes/default/templates/login.layout.twg:37
+msgid "Sign in"
+msgstr "Войти"
+
+#: /apps/admin/Form/Settings.php:27
+msgid "Site Title to appear at the top in the administration panel"
+msgstr "Название сайта - отображается в верху панели администрирования"
+
+#: /apps/admin/Form/Settings.php:31
+msgid "Site host:"
+msgstr "Хост сайта:"
+
+#: /apps/admin/Form/Settings.php:22
+msgid "Site settings"
+msgstr "Параметры сайта"
+
+#: /apps/admin/Form/Settings.php:25
+msgid "Site title:"
+msgstr "Название сайта:"
+
+#: /apps/admin/Form/Settings.php:50
+msgid "Store the selected user language"
+msgstr "Сохранять язык, который выбрал пользователь"
+
+#: /apps/admin/Form/Mail.php:85
+msgid "Test address:"
+msgstr "Адрес теста:"
+
+#: /apps/admin/Form/Mail.php:82
+msgid "Testing"
+msgstr "Тестируем"
+
+#: /apps/admin/themes/default/templates/layout.twg:1
+msgid "Thank you for using"
+msgstr "Спасибо за использование"
+
+#: /apps/admin/Form/Settings.php:33
+msgid "The main domain which is the site"
+msgstr ""
+
+#: /apps/admin/themes/default/templates/login.layout.twg:6
+msgid "The mystery place"
+msgstr "Секретное место"
+
+#: /apps/admin/Form/Settings.php:51
+msgid "The site will automatically save the language chosen by the user and display the main page in this language"
+msgstr ""
+
+#: /apps/admin/Form/Login.php:25
+msgid "This is not your site"
+msgstr "Это не Ваш сайт"
+
+#: /apps/admin/Form/Settings.php:47
+msgid "Turn on the \"Multilanguage\" section, where you can add multiple languages"
+msgstr "Включите раздел «Многоязычность», где вы можете добавить несколько языков"
+
+#: /apps/admin/Form/Mail.php:40
+msgid "Use an SMTP server to send email"
+msgstr "Использовать SMTP сервер для отправки почты"
+
+#: /apps/admin/Form/Settings.php:39
+msgid "Used for basic security settings site. If someone found the key, in the security it needs to change"
+msgstr ""
+
+#: /apps/admin/themes/default/templates/layout.twg:1
+#: /apps/admin/themes/default/templates/layout.twg:1
+msgid "User profile"
+msgstr "Профиль пользователя"
+
+#: /apps/admin/themes/default/templates/layout.twg:1
+msgid "Version"
+msgstr "Версия"
+
+#: /apps/admin/themes/default/templates/layout.twg:1
+msgid "View site"
+msgstr "Просмотреть сайт"
+
+#: /apps/admin/Form/Mail.php:41
+msgid "We will attempt to use the local mail server to send email by default"
+msgstr "Мы попытаемся использовать местный почтовый сервер для отправки электронной почты по умолчанию"
+
+#: /apps/admin/Form/Login.php:22
+msgid "You have not permission for access"
+msgstr "У Вас нет разрежения на вход"
+
+#: /apps/admin/themes/default/templates/login.layout.twg:16
+msgid "close"
+msgstr "закрыть"
+
+#: /apps/admin/themes/default/templates/error404.twg:22
+msgid "Извините, страница не найдена"
+msgstr "Извините,  страница  не  найдена"

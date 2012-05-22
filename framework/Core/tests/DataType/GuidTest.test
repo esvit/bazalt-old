@@ -1,0 +1,40 @@
+<?php
+
+class GuidTest extends Test_BaseCase
+{
+    protected $str;
+
+    public function setUp()
+    {
+        $this->guid = new DataType_Guid();
+    }
+
+    public function tearDown()
+    {
+        unset($this->guid);
+    }
+
+    public function testNewGuid()
+    {
+        $str = DataType_Guid::NewGuid();
+        $this->assertNotEquals($str->__toString(), $this->guid->__toString());
+
+        $str2 = new DataType_Guid('00000000-0000-0000-0000-000000000000');
+        $this->assertEquals($str2->__toString(), '00000000-0000-0000-0000-000000000000');
+    }
+
+    public function testIsValid()
+    {
+        $this->assertTrue(DataType_Guid::isValid('00000000-0000-0000-0000-000000000000'));
+
+        $this->assertFalse(DataType_Guid::isValid(''));
+    }
+
+    /**
+     * @expectedException InvalidArgumentException
+     */
+    public function testInvalidArgumentException()
+    {
+        $str = new DataType_Guid('not guid');
+    }
+}
