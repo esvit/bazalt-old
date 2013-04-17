@@ -1,3 +1,0 @@
-<th{% if element.width() %} width="{{ element.width() }}"{% endif %} class="bz-table-header-checkbox column-{{ element.id() }}">
-    <input type="checkbox" autocomplete="off" />
-</th>

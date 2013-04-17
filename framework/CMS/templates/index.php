@@ -1,1 +1,0 @@
-Create index template

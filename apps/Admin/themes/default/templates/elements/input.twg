@@ -1,6 +1,0 @@
-<div class="clearfix">
-    <label for="xlInput3">{{ element.label() }}{% if element.isRequireField() %}*{% endif %}</label>
-    <div class="input">
-      <input {{ element.getAttributesString()|raw }} />
-    </div>
-</div>

@@ -1,5 +1,0 @@
-<td class="column-{{ element.id() }}">
-
-{{ data }}
-
-</td>

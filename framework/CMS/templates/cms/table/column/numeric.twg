@@ -1,3 +1,0 @@
-<td class="column-{{ element.id() }}">
-    <input autocomplete="off" id="n_{{ item.id }}" name="{{ element.name() }}" class="editable-number spinner" type="text" min="{{ attributes.min }}" max="{{ attributes.max }}" value="{{ value }}"/>
-</td>

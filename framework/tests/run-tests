@@ -1,5 +1,0 @@
-#!/bin/sh
-
-DIR="$( cd "$( dirname "$0" )" && pwd )";
-
-/usr/local/bin/phpunit ${DIR}/AllTests.php

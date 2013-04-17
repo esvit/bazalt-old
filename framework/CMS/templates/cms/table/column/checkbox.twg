@@ -1,5 +1,0 @@
-<td class="bz-table-column-checkbox column-{{ element.id() }}">
-    <label class="bz-table-column-checkbox-label">
-        <input type="checkbox"{% if data %} value="{{ data }}"{% endif %} {% if element.checked() %} checked="checked"{% endif %} autocomplete="off" />
-    </label>
-</td>

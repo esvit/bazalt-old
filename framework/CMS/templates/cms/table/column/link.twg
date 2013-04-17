@@ -1,3 +1,0 @@
-<td>
-    <strong><a href="{% url params.mapper, params.mapperAttrs %}">{{ data }}</a></strong>
-</td>

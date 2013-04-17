@@ -1,1 +1,0 @@
-<?phpfinal class Exception_Namespace extends Exception_Base{    public function __construct($message)    {        parent::__construct($message);    }}

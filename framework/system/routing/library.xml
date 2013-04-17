@@ -1,6 +1,0 @@
-<?xml version="1.0"?>
-<library name="Framework.System.Routes" version="1.0.0">
-    <require>
-        <library name="Framework.System.Cache"  version="1.0.0"/>
-    </require>
-</library>

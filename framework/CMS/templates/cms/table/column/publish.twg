@@ -1,6 +1,0 @@
-<td class="bz-table-column-publish column-{{ element.id() }}">
-    <div class="iphone">
-        <input autocomplete="off" type="checkbox"{% if data %} value="{{ data }}"{% endif %} {% if element.checked() %} checked="checked"{% endif %} id="{{ element.id() }}{{ data }}" />
-        <label {% if element.checked() %} class="checked"{% endif %}  for="{{ element.id() }}{{ data }}"></label>
-    </div>
-</td>
