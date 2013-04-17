@@ -1,0 +1,25 @@
+<?php
+
+namespace Framework\System\Assets\tests;
+
+use Framework\System\Assets\CSS;
+
+class CSS_Test extends \tests\BaseCase
+{
+    protected $session;
+
+    protected function setUp()
+    {
+    }
+
+    protected function tearDown()
+    {
+    }
+
+    public function testAdd()
+    {
+        //CSS::add();
+
+        //$this->assertEquals('test', $this->session->getNamespace());
+    }
+}

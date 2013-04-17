@@ -1,0 +1,15 @@
+{% macro breadcrumb(breadcrumb, level, divider) %}
+    {% set level = level|default(0) %}
+    {% set divider = divider|default('/') %}
+
+    <span itemtype="http://data-vocabulary.org/Breadcrumb"{% if level > 0 %} itemprop="child"{% endif %} itemscope>
+        <a itemprop="url" href="{{ breadcrumb.url() }}"><span itemprop="title">{{ breadcrumb.title() }}</span></a>
+        {% set next = breadcrumb.next() %}
+        {% if next %}
+            {% if divider %}<span class="divider">{{ divider }}</span>{% endif %}
+            {{ _self.breadcrumb(next, level + 1, divider) }}
+        {% endif %}
+    </span>
+{% endmacro %}
+
+{{ _self.breadcrumb(breadcrumbs, 0, divider) }}

@@ -1,0 +1,41 @@
+<div class="pagination" ng-controller="BazaltCMSPagination">
+<ul>
+{% for page in pager.pages %}
+{% if page.role == 'pager-item' %}
+    <li><a href="{{ page.url }}" data-page="{{ page.page }}">{{ page.page }}</a></li>
+{% elseif page.role == 'pager-current' %}
+    <li class="active"><a data-page="{{ page.page }}" href="{{ page.url }}">{{ page.page }}</a></li>
+{% elseif page.role == 'pager-ellipsis' %}
+    <li class="disabled"><a href="#" onclick="return false;">…</a></li>
+{% elseif page.role == 'pager-prev' %}
+    {% if page.enable %}{% metadata %}<link rel="prev" href="{{ page.url }}" />{% endmetadata %}{% endif %}
+    <li class=" prev{% if not page.enable %} disabled{% endif %}"><a data-page="{{ page.page }}" title="Ctrl + &larr;" rel="prev" href="{% if not page.enable %}javascript:;{% else %}{{ page.url }}{% endif %}">&laquo; {% tr %}Previous{% endtr %}</a></li>
+{% elseif page.role == 'pager-next' %}
+    {% if page.enable %}{% metadata %}<link rel="next" href="{{ page.url }}" />{% endmetadata %}{% endif %}
+    <li class="next{% if not page.enable %} disabled{% endif %}"><a data-page="{{ page.page }}" title="Ctrl + &rarr;" rel="next" href="{% if not page.enable %}javascript:;{% else %}{{ page.url }}{% endif %}">{% tr %}Next{% endtr %} &raquo;</a></li>
+{% endif %}
+{% endfor %}
+</ul>
+</div>
+
+<script>
+$(function() {
+    console.info(bazaltCMS);
+    // Ctrl + arrow event handle
+    $(document).keydown(function(event) {
+        var linkNext = $('.pagination li.prev a').attr('href');
+        var linkPrev = $('.pagination li.next a').attr('href');
+
+        var href = null;  
+        if (event.ctrlKey && event.keyCode == 37) {
+            href = linkPrev;
+        }
+        if (event.ctrlKey && event.keyCode == 39) {
+            href = linkNext;
+        }
+        if (href) {
+            $location.url(href);
+        }
+    });
+});
+</script>
