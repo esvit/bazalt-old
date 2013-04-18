@@ -1,0 +1,12 @@
+<?php
+
+class RelativePathTest extends tests\BaseCase
+{
+    public function testPath()
+    {
+        $fileName = '/test/path';
+        $basePath = '/test';
+
+        $this->assertEquals(relativePath($fileName, $basePath), '/path');
+    }
+}
