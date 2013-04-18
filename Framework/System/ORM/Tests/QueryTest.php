@@ -2,7 +2,7 @@
 
 require_once 'bootstrap.inc';
 
-class ORMTest_Query extends tests\BaseCase
+class ORMTest_Query extends Tests\BaseCase
 {
     protected $testObj;
 

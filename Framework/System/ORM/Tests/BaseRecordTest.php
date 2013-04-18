@@ -2,7 +2,7 @@
 
 require_once 'bootstrap.inc';
 
-class ORMTest_BaseRecord extends tests\BaseCase
+class ORMTest_BaseRecord extends Tests\BaseCase
 {
     protected $testObj;
 
@@ -47,7 +47,7 @@ class ORMTest_BaseRecord extends tests\BaseCase
     }
 
     /**
-     * @covers ORM_BaseRecord::__get
+     * @covers Framework\System\ORM\BaseRecord::__get
      */
     public function test__get()
     {
@@ -61,7 +61,7 @@ class ORMTest_BaseRecord extends tests\BaseCase
     }
 
     /**
-     * @covers ORM\BaseRecord::getField
+     * @covers Framework\System\ORM\BaseRecord::getField
      */
     public function testGetField()
     {

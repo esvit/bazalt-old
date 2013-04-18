@@ -212,8 +212,21 @@ final class Event extends Object
     {
         $className = get_class($object);
         if (!isset(self::$validEvents[$className])) {
-            $classType = typeOf($object);
-            self::$validEvents[$className] = $classType->getEvents();
+            $classType = new \ReflectionClass($object);
+
+            $vars = $classType->getProperties();
+
+            $events = array();
+            foreach ($vars as $property) {
+                $prefixLen = strlen(Event::EVENT_PREFIX);
+
+                if (substr($property->name, 0, $prefixLen) == Event::EVENT_PREFIX &&
+                    !$property->isStatic()) {
+                    $eventName = substr($property->name, $prefixLen);
+                    $events[] = $eventName;
+                }
+            }
+            self::$validEvents[$className] = $events;
         }
         return self::$validEvents[$className];
     }

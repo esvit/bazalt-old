@@ -2,7 +2,7 @@
 
 require_once 'bootstrap.inc';
 
-class ORMTest_Adapter extends tests\BaseCase
+class ORMTest_Adapter extends Tests\BaseCase
 {   
     public function testMysqlConnectionString()
     {

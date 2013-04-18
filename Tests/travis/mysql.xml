@@ -28,6 +28,7 @@
         <testsuite name="Bazalt Test Suite">
             <directory>../../Framework/Core/Tests/</directory>
             <directory>../../Framework/System/ORM/Tests/</directory>
+            <directory>../../Framework/System/ORM/Routing/</directory>
         </testsuite>
     </testsuites>
 

@@ -2,7 +2,7 @@
 
 require_once dirname(__FILE__) . '/../bootstrap.inc';
 
-class ORM_Test_Relation_Many2Many extends tests\BaseCase
+class ORM_Test_Relation_Many2Many extends Tests\BaseCase
 {
     protected $testObj;
 

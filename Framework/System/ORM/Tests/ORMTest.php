@@ -4,7 +4,7 @@ use Framework\System\ORM\ORM;
 
 require_once 'bootstrap.inc';
 
-class ORMTest_ORM extends tests\BaseCase
+class ORMTest_ORM extends Tests\BaseCase
 {
     public function testSelectt()
     {

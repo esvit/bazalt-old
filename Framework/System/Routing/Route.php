@@ -255,7 +255,7 @@ class Route
 
         // for url like /index_dev.php/etc/...
         if (array_key_exists('PATH_INFO', $_SERVER) && !ROUTING_NO_SCRIPT_NAME) {
-            $prefix = $_SERVER['SCRIPT_NAME'] . $prefix;
+            $prefix = $_SERVER['PATH_INFO'] . $prefix;
         }
         $prefix = rtrim($prefix, '/');
         $url = $prefix . $url;

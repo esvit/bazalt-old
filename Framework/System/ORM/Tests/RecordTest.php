@@ -1,11 +1,11 @@
 <?php
-use Framework\System\ORM\ORM;
+use Framework\System\ORM as ORM;
 use Framework\System\ORM\Record;
 use Framework\System\ORM\Plugin\AbstractPlugin;
 
 require_once 'bootstrap.inc';
 
-class ORMTest_Record extends tests\BaseCase
+class ORMTest_Record extends Tests\BaseCase
 {
     protected $testObj;
 
@@ -15,7 +15,7 @@ class ORMTest_Record extends tests\BaseCase
         $this->testObj->first_name = substr(mt_rand().time(),16);
         $this->testObj->last_name = '123456';
         
-        $builder = ORM::insert('ORMTest_Model_Actor');
+        $builder = ORM\ORM::insert('ORMTest_Model_Actor');
         $builder->set($this->testObj)
                 ->exec();
         $this->testObj->actor_id = $builder->Connection->getLastInsertId();
@@ -32,7 +32,7 @@ class ORMTest_Record extends tests\BaseCase
     }
 
     /**
-     * @covers ORM\BaseRecord::getTable
+     * @covers Framework\System\ORM\BaseRecord::getTable
      */
     public function testGetTable()
     {
@@ -42,7 +42,7 @@ class ORMTest_Record extends tests\BaseCase
     }
 
     /**
-     * @covers ORM\BaseRecord::getTableName
+     * @covers Framework\System\ORM\BaseRecord::getTableName
      */
     public function testGetTableName()
     {
@@ -51,7 +51,7 @@ class ORMTest_Record extends tests\BaseCase
     }
 
     /**
-     * @covers ORM\BaseRecord::getTableName
+     * @covers Framework\System\ORM\BaseRecord::getTableName
      * @expectedException ORM_Exception_Table
      */
     public function testGetTableNameException()
