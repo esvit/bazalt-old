@@ -9,7 +9,7 @@
          processIsolation="false"
          stopOnFailure="false"
          syntaxCheck="false"
-         bootstrap="tests/AllTests.php"
+         bootstrap="../AllTests.php"
 >
     <php>
         <ini name="intl.default_locale" value="en"/>
@@ -18,8 +18,8 @@
     </php>
 
     <testsuites>
-        <testsuite name="Symfony Test Suite">
-            <directory>./src/Framework/Core/tests/</directory>
+        <testsuite name="Bazalt Test Suite">
+            <directory>../../Framework/Core/tests/</directory>
         </testsuite>
     </testsuites>
 
@@ -31,9 +31,9 @@
 
     <filter>
         <whitelist>
-            <directory>./Framework/</directory>
+            <directory>../Framework/</directory>
             <exclude>
-                <directory>./Framework/Vendors/*</directory>
+                <directory>../Framework/Vendors/*</directory>
             </exclude>
         </whitelist>
     </filter>
