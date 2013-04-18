@@ -4,8 +4,8 @@ namespace Framework\System\Routing;
 
 // add trailed slash in url
 // example:  http://../test => http://.../test/
-if (!defined('SEO_LAST_SLASH_IN_URL')) {
-    define('SEO_LAST_SLASH_IN_URL', true);
+if (!defined('ROUTING_TRAILING_SLASH_IN_URL')) {
+    define('ROUTING_TRAILING_SLASH_IN_URL', true);
 }
 
 // Allow add script name to url like: /index.php/test/
@@ -243,7 +243,7 @@ class Route
             $patterns[$name] = $url;
 
             //Додає в кінень посилання шлеш, для СЕО
-            if (SEO_LAST_SLASH_IN_URL && substr($url, -1) != '/') {
+            if (ROUTING_TRAILING_SLASH_IN_URL && substr($url, -1) != '/') {
                 if (substr($url, -4, 1) != '.') { // якщо не файл
                     $url .= '/';
                 }
