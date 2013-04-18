@@ -1,6 +1,6 @@
 <?php
 /**
- * Підключає ядро фреймворка
+ * Initialize framework core
  *
  * @category  Core
  * @package   BAZALT
@@ -22,8 +22,8 @@ if (!defined('E_USER_DEPRECATED')) {
     define('E_USER_DEPRECATED',         16384);
 }
 
-if (version_compare(PHP_VERSION, '5.2.0', '<')) {
-    die('Update you PHP first. Needed 5.2.0 min. You are using ' . PHP_VERSION . ' now;');
+if (version_compare(PHP_VERSION, '5.4.0', '<')) {
+    die('Update you PHP first. Needed 5.4.0 min. You are using ' . PHP_VERSION . ' now;');
 }
 
 @date_default_timezone_set(@date_default_timezone_get());
@@ -46,9 +46,9 @@ ini_set('default_charset',              'UTF-8');  // default encoding
 ini_set('allow_call_time_pass_reference', 1);
 
 /**
- * Константа вказує шлях до папки ядра
+ * Path to core folder
  */
-define('CORE_DIR',                      dirname(__FILE__));
+define('CORE_DIR',                      __DIR__);
 
 if (!defined('SITE_DIR')) {
     die('Constant SITE_DIR not defined!');
@@ -56,9 +56,9 @@ if (!defined('SITE_DIR')) {
 
 if (!defined('FRAMEWORK_DIR')) {
     /**
-     * Шлях до фреймворку
+     * Framework
      */
-    define('FRAMEWORK_DIR',             realpath(dirname( __FILE__ ) . '/..'));
+    define('FRAMEWORK_DIR',             realpath(CORE_DIR . '/..'));
 }
 
 /**
