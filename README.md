@@ -18,7 +18,5 @@ Features
 - multisite on one and the same engine;
 - multi-language interface and content;
 - modularity;
-- [Sphinx](http://sphinxsearch.com/)-based search;
 - search engine friendly;
-- [Neon](http://ne-on.org/) configuration files;
 - Ajax (based on jQuery) in those places where it is reasonable. 
