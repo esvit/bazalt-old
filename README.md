@@ -1,9 +1,7 @@
-BAZALT
+BAZALT [![Build Status](https://secure.travis-ci.org/Equalteam/bazalt.png)](http://travis-ci.org/Equalteam/bazalt)
 ======
 
 ![BAZALT](https://github.com/Equalteam/bazalt/wiki/assets/images/bazalt-logo.png)
-
-[![Build Status](https://secure.travis-ci.org/Equalteam/bazalt.png)](http://travis-ci.org/Equalteam/bazalt)
 
 This is enviroment for create web applications (CMF) the base of which developed content management system (CMS).
 
