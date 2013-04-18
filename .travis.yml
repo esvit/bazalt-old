@@ -8,7 +8,7 @@ env:
 before_install:
   - mysql -u$DB_USERNAME -e 'create database tests;'
   - unzip Framework/System/ORM/Tests/sakila.zip
-  - mysql -u$DB_USERNAME tests < Framework/System/ORM/Tests/sakila.sql
+  - mysql -u$DB_USERNAME tests < sakila.sql
 
 
 script: phpunit --configuration Tests/travis/$DB.xml
