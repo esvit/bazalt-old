@@ -18,4 +18,4 @@ script:
   - phpunit --configuration Tests/travis/$DB.xml
 
 after_script:
-    - php vendor/bin/coveralls.php
+  - php vendor/bin/coveralls.php
