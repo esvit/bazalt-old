@@ -5,4 +5,4 @@ php:
 env:
   - APPLICATION_ENV="testing" DB="mysql"
 
-script: phpunit --configuration tests/travis/$DB.xml
+script: phpunit --configuration Tests/travis/$DB.xml
