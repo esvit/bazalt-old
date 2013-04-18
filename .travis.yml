@@ -3,6 +3,12 @@ php:
   - 5.4
 
 env:
-  - APPLICATION_ENV="testing" DB="mysql"
+  - APPLICATION_ENV="testing" DB="mysql" DB_USERNAME="root"
+
+before_install:
+  - mysql -u$DB_USERNAME -e 'create database tests;'
+  - unzip Framework/System/ORM/Tests/sakila.zip
+  - mysql -u$DB_USERNAME tests < Framework/System/ORM/Tests/sakila.sql
+
 
 script: phpunit --configuration Tests/travis/$DB.xml
