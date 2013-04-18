@@ -43,7 +43,7 @@ class ObjectPropertyTestClass extends Object
     }
 }
 
-class ObjectTest extends tests\BaseCase
+class ObjectTest extends Tests\BaseCase
 {
     public function testGetAllObjects()
     {

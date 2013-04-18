@@ -2,7 +2,7 @@
 
 use Framework\Core\Helper\String;
 
-class StringTest extends tests\BaseCase
+class StringTest extends Tests\BaseCase
 {
     public function testFormat()
     {

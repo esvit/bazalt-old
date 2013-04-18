@@ -2,7 +2,7 @@
 
 use Framework\Core\Library;
 
-class LibraryTest extends tests\BaseCase
+class LibraryTest extends Tests\BaseCase
 {
     protected $namespace;
 

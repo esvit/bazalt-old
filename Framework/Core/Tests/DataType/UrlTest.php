@@ -2,7 +2,7 @@
 
 use Framework\Core\Helper\Url;
 
-class UrlTest extends tests\BaseCase
+class UrlTest extends Tests\BaseCase
 {
     protected $url;
 

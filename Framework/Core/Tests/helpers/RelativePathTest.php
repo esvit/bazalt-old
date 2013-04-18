@@ -1,6 +1,6 @@
 <?php
 
-class RelativePathTest extends tests\BaseCase
+class RelativePathTest extends Tests\BaseCase
 {
     public function testPath()
     {

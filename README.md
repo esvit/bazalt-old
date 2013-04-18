@@ -1,4 +1,4 @@
-BAZALT
+BAZALT [![Build Status](https://travis-ci.org/Equalteam/bazalt.png?branch=2.x)](https://travis-ci.org/Equalteam/bazalt)
 ======
 
 ![BAZALT](https://github.com/Equalteam/bazalt/wiki/assets/images/bazalt-logo.png)

@@ -2,7 +2,7 @@
 
 use Framework\Core\Helper\Guid;
 
-class GuidTest extends tests\BaseCase
+class GuidTest extends Tests\BaseCase
 {
     public function testNewGuid()
     {
