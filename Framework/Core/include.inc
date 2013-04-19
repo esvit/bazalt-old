@@ -92,7 +92,7 @@ if (defined('APPLICATION_ENV') && in_array(APPLICATION_ENV, array(DEVELOPMENT_ST
         switch(getenv('APPLICATION_ENV')) {
         case PRODUCTION_STAGE:
         case TESTING_STAGE:
-            define('STAGE', $_SERVER['APPLICATION_ENV']);
+            define('STAGE', getenv('APPLICATION_ENV'));
             break;
         default:
             define('STAGE', DEVELOPMENT_STAGE);

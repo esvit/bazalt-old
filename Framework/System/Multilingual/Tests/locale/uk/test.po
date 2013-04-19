@@ -10,11 +10,11 @@ msgstr "Project-Id-Version: BAZALT CMS\n"
        "Content-Transfer-Encoding: 8bit\n"
        "Plural-Forms: nplurals=3; plural=((n%10==1) && (n%100!=11)) ? 0 : (( (n%10>=2) && (n%10<=4) && (n%100<10 || n%100>=20)) ? 1 : 2 );"
 
-#: /themes/mistinfo/templates/company/page.view.twg:199
+#: file:1
 msgid "Test"
 msgstr "Ya, ya, good!"
 
-#: /themes/mistinfo/templates/block.company_info.twg:50
+#: file:1
 msgid "%d review"
 msgid_plural "%d reviews"
 msgstr[0] "%d відгук"
