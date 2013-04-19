@@ -14,6 +14,7 @@ before_install:
   - mysql -u$DB_USERNAME tests < sakila.sql
 
 script:
+  - mkdir -p tmp/logs
   - mkdir -p build/logs
   - phpunit --configuration Tests/travis/$DB.xml
 
