@@ -28,10 +28,10 @@
         <testsuite name="Bazalt Test Suite">
             <directory>../../Framework/Core/Tests/</directory>
             <directory>../../Framework/System/ORM/Tests/</directory>
-            <directory>../../Framework/System/ORM/Routing/</directory>
-            <directory>../../Framework/System/ORM/Multilingual/</directory>
-            <directory>../../Framework/System/ORM/Session/</directory>
-            <directory>../../Framework/System/ORM/View/</directory>
+            <directory>../../Framework/System/Routing/Tests/</directory>
+            <directory>../../Framework/System/Multilingual/Tests/</directory>
+            <directory>../../Framework/System/Session/Tests/</directory>
+            <directory>../../Framework/System/View/Tests/</directory>
         </testsuite>
     </testsuites>
 
