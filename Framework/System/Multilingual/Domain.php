@@ -4,8 +4,8 @@ namespace Framework\System\Multilingual;
 
 use Framework\System\Multilingual\GetText as GetText;
 
-require_once dirname(__FILE__) . '/helpers/__.php';
-require_once dirname(__FILE__) . '/helpers/_p.php';
+require_once __DIR__ . '/helpers/__.php';
+require_once __DIR__ . '/helpers/_p.php';
 
 class Domain
 {
@@ -105,8 +105,16 @@ class Domain
     public static function newDomain($domain, $folders = [], $localeFolder = null)
     {
         $oDomain = new Domain($domain, $folders, $localeFolder);
-        self::$domains []= $oDomain;
+        self::$domains[$domain] = $oDomain;
         return $oDomain;
+    }
+
+    public static function getDomain($domain)
+    {
+        if (isset(self::$domains[$domain])) {
+            return self::$domains[$domain];
+        }
+        return null;
     }
 
     public function translate($string, $pluralString = null, $count = null)
