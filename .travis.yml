@@ -5,3 +5,17 @@ php:
 
 env:
   - APPLICATION_ENV="testing" DB="mysql" DB_USERNAME="root"
+
+before_install:
+  - curl -s http://getcomposer.org/installer | php
+  - php composer.phar install --dev --no-interaction
+  - mysql -u$DB_USERNAME -e 'create database tests;'
+  - unzip Framework/System/ORM/Tests/sakila.zip
+  - mysql -u$DB_USERNAME tests < sakila.sql
+
+script:
+  - mkdir -p build/logs
+  - phpunit --configuration Tests/travis/$DB.xml
+
+after_script:
+  - php vendor/bin/coveralls.php
