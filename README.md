@@ -1,4 +1,4 @@
-BAZALT [![Build Status](https://travis-ci.org/Equalteam/bazalt.png)](https://travis-ci.org/Equalteam/bazalt)
+BAZALT [![Build Status](https://travis-ci.org/Equalteam/bazalt.png)](https://travis-ci.org/Equalteam/bazalt) [![Still Maintained](http://stillmaintained.com/stillmaintained/stillmaintained.png)](http://stillmaintained.com/Equalteam/bazalt)
 ======
 
 ![BAZALT](https://github.com/Equalteam/bazalt/wiki/assets/images/bazalt-logo.png)
