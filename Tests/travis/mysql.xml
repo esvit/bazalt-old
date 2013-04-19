@@ -29,6 +29,9 @@
             <directory>../../Framework/Core/Tests/</directory>
             <directory>../../Framework/System/ORM/Tests/</directory>
             <directory>../../Framework/System/ORM/Routing/</directory>
+            <directory>../../Framework/System/ORM/Multilingual/</directory>
+            <directory>../../Framework/System/ORM/Session/</directory>
+            <directory>../../Framework/System/ORM/View/</directory>
         </testsuite>
     </testsuites>
 
