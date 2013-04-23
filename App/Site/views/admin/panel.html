@@ -1,0 +1,22 @@
+<link rel="stylesheet" type="text/css" href="/less.php/App/Site/assets/less/panel.less" />
+<div ng-controller="PanelCtrl" id="bz-admin-bar">
+
+
+    <div id="adm-userpanel">
+        <div class="bz-adminpanel-container">
+            <a class="dashboard" href="/admin.php" onclick="javascript:location.href='/admin.php'"><span></span> Dashboard</a>
+
+            <a ng-click="manageWidgets()" href="#">Widgets</a>
+        </div>
+    </div>
+
+    <div id="cms_widgets_panel">
+        <div class="cms_widget_panel-container" widgets="base">
+            <div ng-repeat="item in widgets" widget="{[item.id]}" data-id="{[item.id]}" class="cms_widget_panel-widget">
+                <div class="cms_widget-title">{[item.title|language]}</div>
+                <div class="cms_widget-description">{[item.description|language]}</div>
+                <div class="cms_widget-icon"></div>
+            </div>
+        </div>
+    </div>
+</div>
