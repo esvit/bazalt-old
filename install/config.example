@@ -1,0 +1,11 @@
+<?php
+
+using('Framework.System.ORM');
+$connectionString = new ORM_Adapter_Mysql([
+    'server' => '%host%',
+    'port' => '%port%',
+    'database' => '%database%',
+    'username' => '%user%',
+    'password' => '%password%'
+]);
+ORM_Connection_Manager::add($connectionString, 'default');

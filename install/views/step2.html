@@ -1,0 +1,15 @@
+<h2>Check requirements</h2>
+
+<div class="row">
+    <ul ng-repeat="(group, requirement) in requirements" class="list-requirements list-unstyled col-span-2">
+    <li class="nav-header">{{requirement.title}}</li>
+    <li ng-repeat="(key, test) in requirement.tests">
+        <span ng-show="result[group][key] == true" class="btn btn-success btn-mini glyphicon glyphicon-ok"></span>
+        <span ng-show="result[group][key] == false" class="btn btn-danger btn-mini glyphicon glyphicon-remove"></span>
+        <span ng-show="result[group][key] == 'unknown'" class="btn btn-warning btn-mini glyphicon glyphicon-cog"></span>
+        <strong>{{test}}</strong>
+    </li>
+    </ul>
+</div>
+
+<button ng-disabled="loading" ng-click="checkRequirements()" class="btn btn-primary">Check again</button>

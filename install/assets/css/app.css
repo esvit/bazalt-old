@@ -1,0 +1,31 @@
+body {
+    font: 12px/14px 'Open Sans';
+    background-color: #F1F1F1;
+    padding: 10px 50px;
+}
+
+.ng-view {
+    min-height: 200px;
+}
+
+.panel-heading {
+    margin: -16px;
+    padding: 0;
+    border: 0;
+    background-color: #F1F1F1;
+}
+.panel-heading .nav.nav-tabs a {
+}
+.form-actions {
+    margin: 10px -15px -15px;
+}
+h2 {
+    font-weight: 200;
+}
+
+.list-requirements  li {
+    margin-bottom: 10px;
+}
+.list-requirements  li .btn {
+    font-size: 10px;
+}
