@@ -70,6 +70,7 @@
                                             <small class="pull-right">Ctrl+Alt+{[$index+1]}</small>
                                         </a>
                                     </li>
+                                    <li class="nav-header">in the near future there will be more languages</li>
                                 </ul>
                             </div>
                             <div class="btn-group pull-right" ng-show="$user.authorized()">
