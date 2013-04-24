@@ -1,0 +1,1 @@
+copy /Y .\ui-bootstrap-tpls-0.2.0.min.js /B + .\ui-bootstrap-0.2.0.min.js /B .\ui-bootstrap.min.js
