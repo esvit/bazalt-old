@@ -124,6 +124,14 @@ class View extends Scope
 
     protected function replaceTags($content)
     {
+        $components = Bazalt::getComponents();
+        $loadedComponents = [];
+        foreach ($components as $component) {
+            $loadedComponents []= $component::getName();
+        }
+        $insert = ' bazalt-cms-components="' . implode(',', $loadedComponents) . '"';
+        $content = preg_replace('#<body([^>]*)>#i',"<body$1{$insert}>", $content);
+
         return $content;
         if (!self::$addScripts) {
             return $content;

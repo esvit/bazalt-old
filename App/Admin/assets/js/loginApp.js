@@ -1,4 +1,4 @@
-require(['BazaltCMS', '/Components/Users/component.js'], function(bazaltCMS) {
+require(['BazaltCMS'], function(bazaltCMS) {
 
     app = angular.module('loginApp', ['bazaltCMS']).
         config(function($routeProvider, $locationProvider, $httpProvider) {

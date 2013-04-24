@@ -11,7 +11,160 @@ bazaltCMS.addMessages = function(locale, domain, messages) {
 };
 bazaltCMS.controller('bazaltGlobalController', function($scope, $rootScope, languages) {
     $rootScope.languages = languages;
-});bazaltCMS.directive('grid', function($compile, $parse) {
+});/**
+ * @license HTTP Auth Interceptor Module for AngularJS
+ * (c) 2012 Witold Szczerba
+ * License: MIT
+ */
+bazaltCMS.provider('AuthService', function () {
+    /**
+     * Holds all the requests which failed due to 401 response,
+     * so they can be re-requested in future, once login is completed.
+     */
+    var buffer = [];
+
+    /**
+     * Holds a list of functions that define rules for ignoring
+     * the addition of requests to the buffer.
+     */
+    var ignoreUrlExpressions = [];
+
+    /**
+     * Adds functions to the `ignoreUrlExpressions` array.
+     * The fn function takes a URL as a response as an argument and returns
+     * `true` (to ignore the URL) or `false` (to allow the URL). When `true` is
+     * returned no other expressions will be tested.
+     */
+    this.addIgnoreUrlExpression = function (fn) {
+      if (angular.isFunction(fn)) { ignoreUrlExpressions.push(fn); }
+      return this;
+    };
+
+    /**
+     * Executes each of the ignore expressions to determine whether the URL
+     * should be ignored.
+     * 
+     * Example:
+     *
+     *     angular.module('mod', ['http-auth-interceptor'])
+     *       .config(function (authServiceProvider) {
+     *         authServiceProvider.addIgnoreUrlExpression(function (response) {
+     *           return response.config.url === "/api/auth";
+     *         });
+     *       });
+     */
+    this.shouldIgnoreUrl = function (response) {
+      var fn, i, j = ignoreUrlExpressions.length;
+
+      for (i = 0; i < j; i++) {
+        fn = ignoreUrlExpressions[i];
+        if (fn(response) === true) { return true; }
+      }
+
+      return false;
+    };
+
+    /**
+     * Required by HTTP interceptor.
+     * Function is attached to provider to be invisible for regular users of this service.
+     */
+    this.pushToBuffer = function (config, deferred) {
+      buffer.push({
+        config: config,
+        deferred: deferred
+      });
+    };
+
+    this.$get = ['$rootScope', '$injector', function ($rootScope, $injector) {
+      var $http; //initialized later because of circular dependency problem
+      function retry(config, deferred) {
+        $http = $http || $injector.get('$http');
+        $http(config).then(function (response) {
+          deferred.resolve(response);
+        });
+      }
+      function retryAll() {
+        var i;
+
+        for (i = 0; i < buffer.length; ++i) {
+          retry(buffer[i].config, buffer[i].deferred);
+        }
+        buffer = [];
+      }
+
+      return {
+        loginConfirmed: function () {
+          $rootScope.$broadcast('event:auth-loginConfirmed');
+          retryAll();
+        }
+      };
+    }];
+  })
+
+  /**
+   * $http interceptor.
+   * On 401 response - it stores the request and broadcasts 'event:angular-auth-loginRequired'.
+   */
+  .config(['$httpProvider', 'AuthServiceProvider', function ($httpProvider, AuthServiceProvider) {
+
+    var interceptor = ['$rootScope', '$q', function ($rootScope, $q) {
+      function success(response) {
+        return response;
+      }
+
+      function error(response) {
+        if (response.status === 401) {
+          var deferred = $q.defer();
+
+          if (!AuthServiceProvider.shouldIgnoreUrl(response)) {
+            AuthServiceProvider.pushToBuffer(response.config, deferred);
+          }
+
+          $rootScope.$broadcast('event:auth-loginRequired');
+          return deferred.promise;
+        }
+        // otherwise
+        return $q.reject(response);
+      }
+
+      return function (promise) {
+        return promise.then(success, error);
+      };
+
+    }];
+    $httpProvider.responseInterceptors.push(interceptor);
+  }]);bazaltCMS.directive('compareValidate', function() {
+
+    return {
+        restrict: 'A',
+        require: 'ngModel',
+        link: function(scope, elm, attrs, ctrl) {
+
+            function validateEqual(myValue, otherValue) {
+                if (myValue === otherValue) {
+                    ctrl.$setValidity('equal', true);
+                    return myValue;
+                } else {
+                    ctrl.$setValidity('equal', false);
+                    return undefined;
+                }
+            }
+
+            scope.$watch(attrs.compareValidate, function(otherModelValue) {
+                validateEqual(ctrl.$viewValue, otherModelValue);               
+            });
+
+            ctrl.$parsers.unshift(function(viewValue) {
+                return validateEqual(viewValue, scope.$eval(attrs.compareValidate));
+            });
+
+            ctrl.$formatters.unshift(function(modelValue) {
+                return validateEqual(modelValue, scope.$eval(attrs.compareValidate));                
+            });
+        }
+    };
+});
+bazaltCMS.directive('grid', function($compile, $parse) {
     var template = '<thead> \
                         <tr> \
                             <th class="header" \
@@ -156,66 +309,30 @@ bazaltCMS.controller('bazaltGlobalController', function($scope, $rootScope, lang
             };
         }
     };
-});bazaltCMS.directive('compareValidate', function() {
+});bazaltCMS.directive('link', function($rootScope) {
+  return {
+    restrict: 'E',
+    terminal: true,
+    compile: function(element, attr) {
+      if (attr.type == 'text/x-gettext-translation') {
+        var domain = attr.id,
+            url = attr.href;
 
-    return {
-        restrict: 'A',
-        require: 'ngModel',
-        link: function(scope, elm, attrs, ctrl) {
-
-            function validateEqual(myValue, otherValue) {
-                if (myValue === otherValue) {
-                    ctrl.$setValidity('equal', true);
-                    return myValue;
-                } else {
-                    ctrl.$setValidity('equal', false);
-                    return undefined;
-                }
+        Pomo.unescapeStrings = true;
+        Pomo.returnStrings = true;
+        Pomo.load(url, {
+            translation_domain: domain,
+            format:'po',
+            mode:'ajax'
+        }).ready(function(){
+            $rootScope.tr = new Date().getTime();
+            if (!$rootScope.$$phase) {
+                $rootScope.$apply();
             }
-
-            scope.$watch(attrs.compareValidate, function(otherModelValue) {
-                validateEqual(ctrl.$viewValue, otherModelValue);               
-            });
-
-            ctrl.$parsers.unshift(function(viewValue) {
-                return validateEqual(viewValue, scope.$eval(attrs.compareValidate));
-            });
-
-            ctrl.$formatters.unshift(function(modelValue) {
-                return validateEqual(modelValue, scope.$eval(attrs.compareValidate));                
-            });
-        }
-    };
-});
-bazaltCMS.directive('translate', function($filter, $interpolate, $rootScope) {
-
-    var translate = $filter('translate');
-
-    return {
-        restrict: 'A',
-        scope: true,
-        link: function linkFn(scope, element, attr) {
-
-            attr.$observe('translate', function (translationDomain) {
-                scope.translationId = $interpolate(element.text())(scope.$parent);
-                if (translationDomain != '') {
-                    scope.translationDomain = translationDomain;
-                }
-            });
-
-            attr.$observe('values', function (interpolateParams) {
-                scope.interpolateParams = interpolateParams;
-            });
-
-            scope.$watch('translationDomain + interpolateParams', function () {
-                element.html(translate(scope.translationId, scope.translationDomain, scope.interpolateParams));
-            });
-            $rootScope.$watch('tr', function () {
-                element.html(translate(scope.translationId, scope.translationDomain, scope.interpolateParams));
-            });
-        }
-    };
-
+        });
+      }
+    }
+  };
 });bazaltCMS.directive('regexValidate', function() {
     return {
         // restrict to an attribute type.
@@ -259,89 +376,6 @@ bazaltCMS.directive('translate', function($filter, $interpolate, $rootScope) {
             });
         }
     };
-});bazaltCMS.directive('ngUpload', function($parse) {
-    var counter = 0;
-
-    return {
-        restrict: 'A',
-        'scope':false,
-        link: function(scope, element, attrs) {
-            var name = attrs['name'];
-            var target = attrs['ngUpload'];
-            var model = attrs['model'];
-
-            scope.$watch(function() {
-                return attrs['ngUpload'];
-            }, function(value) {
-                target = value;
-            });
-            var onChange = function(e) {
-                var form = angular.element('<form style="display:none;"></form>');
-                //var file = e.target.files !== undefined ? e.target.files[0] : (e.target.value ? { name: e.target.value.replace(/^.+\\/, '') } : null)
-
-                // build iframe
-                var iframe = angular.element(
-                                '<iframe src="javascript:false;" name="iframe-transport-' +
-                                    (counter += 1) + '"></iframe>'
-                            )// add iframe to app
-                form
-                    .attr('accept-charset', 'UTF-8')
-                    .prop('target', iframe.prop('name'))
-                    .prop('action', target)
-                    .prop('method', 'POST');
-
-                // attach function to load event
-                iframe.bind('load', function() {
-                    var response;
-                    // Wrap in a try/catch block to catch exceptions thrown
-                    // when trying to access cross-domain iframe contents:
-                    try {
-                        response = iframe.contents();
-                        // Google Chrome and Firefox do not throw an
-                        // exception when calling iframe.contents() on
-                        // cross-domain requests, so we unify the response:
-                        if (!response.length || !response[0].firstChild) {
-                            throw new Error();
-                        }
-                        response = JSON.parse($(response[0].body).text());
-                    } catch (e) {
-                        response = undefined;
-                    }
-                    if (!response) {
-                        return;
-                    }
-                    var result = response[name];
-                    if (model) {
-                        scope.$apply(function() {
-                            var fn = $parse(model);
-                            fn.assign(scope, result);
-                        });
-                    }
-                    // Fix for IE endless progress bar activity bug
-                    // (happens on form submits to iframe targets):
-                    frame = angular.element('<iframe src="javascript:false;"></iframe>');
-                    form.append(frame);
-                    form.remove();
-                });
-
-                var clone = element.clone();
-                    clone.bind('change', onChange);
-                    element.replaceWith(clone);
-
-                form.append(element)
-                    .prop('enctype', 'multipart/form-data')
-                    // enctype must be set as encoding for IE:
-                    .prop('encoding', 'multipart/form-data')
-                    .append(iframe);
-
-                element = clone;
-
-                form.appendTo('body');
-                form.submit();
-            };
-            element.bind('change', onChange);
-        }
-    }
 });bazaltCMS.directive('serverSubmit', function ($http) {
         function IllegalArgumentException(message) {
             this.message = message;
@@ -446,7 +480,158 @@ bazaltCMS.directive('translate', function($filter, $interpolate, $rootScope) {
                 });
             }
         }
-    });bazaltCMS.controller('FileUploadCtrl', function($scope) {
+    });    bazaltCMS.factory('$session', function($rootScope, $resource, $location, AuthService, $route) {
+        var Session = $resource('/rest.php/app/auth/', {}, {
+          'get': { method: 'GET' },
+          'login': { method: 'POST' },
+          'logout': { method: 'DELETE' }
+        });
+        Session.prototype.login = function(cb) {
+            this.$login({}, function(user) {
+                $rootScope.$user = new Session(user);
+                AuthService.loginConfirmed();
+                $rootScope.$broadcast('event:loginConfirmed');
+                $route.reload();
+            }, function(err) {
+                cb = cb || function() {};
+                cb(err);
+            });
+        }
+        Session.prototype.logout = function() {
+            this.$logout(function() {
+                $rootScope.$user = new Session();
+                $location.path('/');
+                $route.reload();
+            });
+        }
+        Session.prototype.authorized = function() {
+            return this.id != null;
+        }
+
+        if (!$rootScope.$user) {
+            $rootScope.$user = new Session();
+            $rootScope.$user = Session.get(function(user) {
+                if (user.authorized()) {
+                    $rootScope.$broadcast('event:loginConfirmed');
+                    $route.reload();
+                }
+            });
+        }
+        $rootScope.$session = Session;
+        return Session;
+    });bazaltCMS.directive('translate', function($filter, $interpolate, $rootScope) {
+
+    var translate = $filter('translate');
+
+    return {
+        restrict: 'A',
+        scope: true,
+        link: function linkFn(scope, element, attr) {
+
+            attr.$observe('translate', function (translationDomain) {
+                scope.translationId = $interpolate(element.text())(scope.$parent);
+                if (translationDomain != '') {
+                    scope.translationDomain = translationDomain;
+                }
+            });
+
+            attr.$observe('values', function (interpolateParams) {
+                scope.interpolateParams = interpolateParams;
+            });
+
+            scope.$watch('translationDomain + interpolateParams', function () {
+                element.html(translate(scope.translationId, scope.translationDomain, scope.interpolateParams));
+            });
+            $rootScope.$watch('tr', function () {
+                element.html(translate(scope.translationId, scope.translationDomain, scope.interpolateParams));
+            });
+        }
+    };
+
+});bazaltCMS.directive('ngUpload', function($parse) {
+    var counter = 0;
+
+    return {
+        restrict: 'A',
+        'scope':false,
+        link: function(scope, element, attrs) {
+            var name = attrs['name'];
+            var target = attrs['ngUpload'];
+            var model = attrs['model'];
+
+            scope.$watch(function() {
+                return attrs['ngUpload'];
+            }, function(value) {
+                target = value;
+            });
+            var onChange = function(e) {
+                var form = angular.element('<form style="display:none;"></form>');
+                //var file = e.target.files !== undefined ? e.target.files[0] : (e.target.value ? { name: e.target.value.replace(/^.+\\/, '') } : null)
+
+                // build iframe
+                var iframe = angular.element(
+                                '<iframe src="javascript:false;" name="iframe-transport-' +
+                                    (counter += 1) + '"></iframe>'
+                            )// add iframe to app
+                form
+                    .attr('accept-charset', 'UTF-8')
+                    .prop('target', iframe.prop('name'))
+                    .prop('action', target)
+                    .prop('method', 'POST');
+
+                // attach function to load event
+                iframe.bind('load', function() {
+                    var response;
+                    // Wrap in a try/catch block to catch exceptions thrown
+                    // when trying to access cross-domain iframe contents:
+                    try {
+                        response = iframe.contents();
+                        // Google Chrome and Firefox do not throw an
+                        // exception when calling iframe.contents() on
+                        // cross-domain requests, so we unify the response:
+                        if (!response.length || !response[0].firstChild) {
+                            throw new Error();
+                        }
+                        response = JSON.parse($(response[0].body).text());
+                    } catch (e) {
+                        response = undefined;
+                    }
+                    if (!response) {
+                        return;
+                    }
+                    var result = response[name];
+                    if (model) {
+                        scope.$apply(function() {
+                            var fn = $parse(model);
+                            fn.assign(scope, result);
+                        });
+                    }
+                    // Fix for IE endless progress bar activity bug
+                    // (happens on form submits to iframe targets):
+                    frame = angular.element('<iframe src="javascript:false;"></iframe>');
+                    form.append(frame);
+                    form.remove();
+                });
+
+                var clone = element.clone();
+                    clone.bind('change', onChange);
+                    element.replaceWith(clone);
+
+                form.append(element)
+                    .prop('enctype', 'multipart/form-data')
+                    // enctype must be set as encoding for IE:
+                    .prop('encoding', 'multipart/form-data')
+                    .append(iframe);
+
+                element = clone;
+
+                form.appendTo('body');
+                form.submit();
+            };
+            element.bind('change', onChange);
+        }
+    }
+});bazaltCMS.controller('FileUploadCtrl', function($scope) {
     //============== DRAG & DROP =============
     // source for drag&drop: http://www.webappers.com/2011/09/28/drag-drop-file-upload-with-html5-javascript/
     var dropbox = document.getElementById("dropbox")
@@ -547,31 +732,7 @@ bazaltCMS.directive('translate', function($filter, $interpolate, $rootScope) {
     }
 });
 
-bazaltCMS.directive('link', function($rootScope) {
-  return {
-    restrict: 'E',
-    terminal: true,
-    compile: function(element, attr) {
-      if (attr.type == 'text/x-gettext-translation') {
-        var domain = attr.id,
-            url = attr.href;
-
-        Pomo.unescapeStrings = true;
-        Pomo.returnStrings = true;
-        Pomo.load(url, {
-            translation_domain: domain,
-            format:'po',
-            mode:'ajax'
-        }).ready(function(){
-            $rootScope.tr = new Date().getTime();
-            if (!$rootScope.$$phase) {
-                $rootScope.$apply();
-            }
-        });
-      }
-    }
-  };
-});bazaltCMS.factory('appLoading', function($rootScope) {
+bazaltCMS.factory('appLoading', function($rootScope) {
     var timer;
     return {
         loading : function() {
@@ -594,6 +755,53 @@ bazaltCMS.directive('link', function($rootScope) {
             }
         }
     };
+});bazaltCMS.filter('default', function() {
+    return function(value, defaultValue) {
+        return value ? value : defaultValue;
+    }
+});bazaltCMS
+.value('languages', {
+        all: [
+            {
+                title: 'English',
+                alias: 'en'
+            }/*,
+            {
+                title: 'UA',
+                alias: 'ukr'
+            }*/
+        ],
+        current: 'en'
+    })
+.run(function(languages, $rootScope) {
+    $(document).keydown(function(e) {
+        var shiftNums = {
+            "1": "!", "2": "@", "3": "#", "4": "$", "5": "%", "6": "^", "7": "&", "8": "*", "9": "(", "0": ")"
+        }
+    
+      if(e.ctrlKey && e.altKey) {
+        var character = parseInt(String.fromCharCode(e.which).toLowerCase());
+        if (character > 0 && character <= languages.all.length) {
+            e.preventDefault();
+            languages.current = languages.all[character - 1].alias;
+            if (!$rootScope.$$phase) {
+                $rootScope.$apply();
+            }
+        }
+      }
+    });
+})
+.filter('language', function(languages) {
+    return function(value, language) {
+        if (typeof value == 'undefined' || value == null) {
+            return value;
+        }
+        language = language || languages.current;
+        if (!value[language] && value['orig']) {
+            return value[value['orig']] + " (" + value['orig'] + ")";
+        }
+        return value[language];
+    }
 });'use strict';
 
 /*
@@ -681,52 +889,5 @@ bazaltCMS.filter('translate', function($locale) {
         }
 
         return str;
-    }
-});bazaltCMS.filter('default', function() {
-    return function(value, defaultValue) {
-        return value ? value : defaultValue;
-    }
-});bazaltCMS
-.value('languages', {
-        all: [
-            {
-                title: 'English',
-                alias: 'en'
-            }/*,
-            {
-                title: 'UA',
-                alias: 'ukr'
-            }*/
-        ],
-        current: 'en'
-    })
-.run(function(languages, $rootScope) {
-    $(document).keydown(function(e) {
-        var shiftNums = {
-            "1": "!", "2": "@", "3": "#", "4": "$", "5": "%", "6": "^", "7": "&", "8": "*", "9": "(", "0": ")"
-        }
-    
-      if(e.ctrlKey && e.altKey) {
-        var character = parseInt(String.fromCharCode(e.which).toLowerCase());
-        if (character > 0 && character <= languages.all.length) {
-            e.preventDefault();
-            languages.current = languages.all[character - 1].alias;
-            if (!$rootScope.$$phase) {
-                $rootScope.$apply();
-            }
-        }
-      }
-    });
-})
-.filter('language', function(languages) {
-    return function(value, language) {
-        if (typeof value == 'undefined' || value == null) {
-            return value;
-        }
-        language = language || languages.current;
-        if (!value[language] && value['orig']) {
-            return value[value['orig']] + " (" + value['orig'] + ")";
-        }
-        return value[language];
     }
 });

@@ -2,7 +2,8 @@
 
 namespace Components\Pages\Model;
 
-use Framework\CMS as CMS;
+use Framework\CMS as CMS,
+    Framework\System\ORM\ORM;
 
 class Category extends Base\Category
 {
@@ -51,9 +52,9 @@ class Category extends Base\Category
 
         if ($category != null) {
             if(is_numeric($category)) {
-                $q->andWhere('r.category_id = ?', (int)$category);
+                $q->andWhere('r.site_id = ?', (int)$category);
             } elseif ($category instanceof Components\Pages\Model\Category) {
-                $q->andWhere('r.category_id = ?', $category->category_id);
+                $q->andWhere('r.site_id = ?', $category->site_id);
                 $q->andWhere('r.lft > ?', $category->lft);
                 $q->andWhere('r.rgt < ?', $category->rgt);
             }
@@ -64,24 +65,24 @@ class Category extends Base\Category
     /**
      * Return category by path parts
      */
-    public static function getByPath(array $parts, ComPages_Model_Category $root = null)
+    public static function getByPath(array $parts, Category $root = null)
     {
         if (!is_array($parts) || count($parts) == 0) {
             return null;
         }
 
-        $langId = CMS_Language::getCurrentLanguage()->id;
+        $langId = CMS\Language::getCurrentLanguage()->id;
 
         $nextElement = $root;
         foreach ($parts as $i => $part) {
-            $qByAlias = ORM::select('ComPages_Model_Category c')
+            $qByAlias = ORM::select('Components\Pages\Model\Category c')
                             ->andWhere('c.alias = ?', $part)
                             ->andWhere('c.is_publish = ?', 1);
 
             if ($nextElement) {
                 $qByAlias->andWhere('c.depth = ?', $nextElement->depth + 1)
                          ->andWhere('c.lft >= ? AND c.rgt <= ?', array($nextElement->lft, $nextElement->rgt))
-                         ->andWhere('c.category_id = ?', $nextElement->category_id);
+                         ->andWhere('c.site_id = ?', $nextElement->site_id);
             }
 
             $nextElement = $qByAlias->fetch();

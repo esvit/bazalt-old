@@ -2,7 +2,7 @@
 
 namespace Components\Pages\Model\Base;
 
-abstract class CategoryLocale extends \Framework\CMS\Model\Base\Record
+abstract class CategoryLocale extends \Framework\CMS\ORM\Record
 {
     const TABLE_NAME = 'com_pages_categories_locale';
 
@@ -22,4 +22,4 @@ abstract class CategoryLocale extends \Framework\CMS\Model\Base\Record
         $this->hasColumn('description', 'mediumtext');
         $this->hasColumn('completed', 'tinyint(4)|0');
     }
-
+}

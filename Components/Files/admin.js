@@ -15,6 +15,13 @@ define([
                 });
 
         })
+    .run(function(dashboard) {
+        dashboard.mainMenu.push({
+            url: '#!/files',
+            title: 'Files',
+            icon: 'ico-file'
+        });
+    })
     .directive('elFinder', function() {
         return {
             restrict: 'C',

@@ -2,7 +2,7 @@
 
 namespace Components\Pages\Model\Base;
 
-abstract class Category extends \Framework\CMS\Model\Base\Record
+abstract class Category extends \Framework\CMS\ORM\Record
 {
     const TABLE_NAME = 'com_pages_categories';
 
