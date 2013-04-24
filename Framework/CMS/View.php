@@ -172,5 +172,4 @@ class View extends Scope
 
 View::engine('php', new View\PHPEngine());
 View::engine('twg', new View\TwigEngine());
-View::engine('tpl', new View\SmartyEngine());
 View::engine('inc', new View\PHPEngine());
