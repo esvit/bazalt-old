@@ -1,0 +1,11 @@
+<div class="tags-cloud">
+    <div class="tags-container" itemprop="keywords">
+    {% for row in tagCloud %}
+        <div>
+        {% for tag in row %}
+            <a class="tag-{{ tag.size }}" href="{{ tag.url }}">{{ tag.title }}</a>
+        {% endfor %}
+        </div>
+    {% endfor %}
+    </div>
+</div>

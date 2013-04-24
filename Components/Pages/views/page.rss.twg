@@ -1,0 +1,31 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<rss xmlns:yandex="http://news.yandex.ru" xmlns:media="http://search.yahoo.com/mrss/" version="2.0">
+    <channel>
+      <title>{{ site.title }}</title>
+      <link>{% url 'home', { 'host': true } %}</link>
+      <description>Liftoff to Space Exploration.</description>
+      <language>en-us</language>
+      <pubDate>Tue, 10 Jun 2003 04:00:00 GMT</pubDate>
+      <lastBuildDate>Tue, 10 Jun 2003 09:41:01 GMT</lastBuildDate>
+      <docs>http://blogs.law.harvard.edu/tech/rss</docs>
+      <generator>Weblog Editor 2.0</generator>
+      <managingEditor>editor@example.com</managingEditor>
+      <webMaster>webmaster@example.com</webMaster>
+    {% for newsitem in news %}
+    <item>
+        <title>{{ newsitem.title }}</title>
+        <link>{% url 'ComNewsChannel.ShowByAlias', { 'url' : newsitem.url, 'host': true } %}</link>
+        <description>{{ newsitem.body|truncate(500) }}</description>
+        <pubDate>{{ newsitem.created_at|date('D, d M Y H:i:s T') }}</pubDate>
+        <guid>http://liftoff.msfc.nasa.gov/2003/06/03.html#item573</guid>
+        {% if newsitem.Images.count() > 0%}
+        <image>
+            <title>{{ newsitem.title }}</title>
+            <url>{% url 'home', { 'host': true } %}{{ newsitem.Images.get()[0].getThumb('100x100')|trim('/') }}</url>
+            <link>{% url 'ComNewsChannel.ShowByAlias', { 'url' : newsitem.url, 'host': true } %}</link>
+        </image>
+        {% endif %}
+    </item>
+    {% endfor %}  
+    </channel>
+</rss>

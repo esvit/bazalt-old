@@ -1,0 +1,40 @@
+<div class="news-list">
+    <nav>
+        {% include 'block.breadcrumbs_ul' %}
+    </nav>
+
+    <header class="page-header">
+        <h1>{% tr %}News{% endtr %}</h1>
+    </header>
+
+    <div class="content">
+        {% set currentDate = '' %}
+        {% for newsitem in news %}
+        {% if currentDate != newsitem.created_at|date('dmY') %}
+            <div class="date-title">
+                <span class="weekday">{% spaceless %}
+                {% if newsitem.created_at|date('dmY') == 'now'|date('dmY') %}
+                    {% tr %}Today{% endtr %}
+                {% else %}
+                    {{ newsitem.created_at|format_date('%A')|capitalize }}
+                {% endif %}
+                {% endspaceless %}</span>,
+                {{ newsitem.created_at|format_date('%d %B %Y') }}
+            </div>
+            {% set currentDate = newsitem.created_at|date('dmY') %}
+        {% endif %}
+        {% if newsitem.item_type == 0 %}
+            {% include 'news/block.newsitem.twg' %}
+        {% else %}
+            {% include 'news/block.newsitem_photo.twg' %}
+        {% endif %}
+        <hr />
+        {% else %}
+            {% tr %}no news{% endtr %}
+        {% endfor %}
+        <div class="clearfix"></div>
+
+        {% include 'block.pagination' %}
+    </div>
+
+</div>

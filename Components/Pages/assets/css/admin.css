@@ -1,0 +1,27 @@
+.menu-image-comnews{background-image:url('../images/admin_icon.png');background-repeat:no-repeat;}
+
+.broadcasts {
+    padding: 0 0 20px;
+}
+.vk_button {
+    border: 1px solid #3B6798;
+    text-shadow: 0 1px 0 #45688E;
+    display: block;
+    float: left;
+}
+.vk_button span {
+    display: block;
+    cursor: pointer;
+    font-family: tahoma,arial,verdana,sans-serif,Lucida Sans;
+    font-size: 11px;
+    padding: 4px 14px;
+    text-align: center;
+    background-color: #6D8FB3;
+    border-color: #7E9CBC #5C82AB #5C82AB;
+    border-style: solid;
+    border-width: 1px;
+    color: #FFFFFF;
+}
+.vk_button:hover {
+    color: white;
+}
