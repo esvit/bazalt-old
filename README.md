@@ -14,9 +14,13 @@ Features
 
 - simple, fast and easy to use;
 - easy access to the database because of its lightweight and simple ORM;
-- templates for using Twig, Smarty or PHP;
+- templates for using Twig;
 - multisite on one and the same engine;
 - multi-language interface and content;
 - modularity;
-- search engine friendly;
-- Ajax (based on jQuery) in those places where it is reasonable. 
+- search engine friendly.
+
+Technologies
+------------
+
+- jQuery and AngularJS on frontend
