@@ -1,8 +1,0 @@
-{
-    "name": "Bazalt CMS",
-    "homepage": "https://github.com/Equalteam/bazalt/",
-
-    "require-dev": {
-        "satooshi/php-coveralls": "dev-master"
-    }
-}

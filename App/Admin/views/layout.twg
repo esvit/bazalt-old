@@ -11,7 +11,6 @@
     <script data-main="/App/Admin/assets/js/app.js" src="/assets/require-jquery.js"></script>
     <script data-main="/App/Admin/assets/js/date.js" src="/App/Admin/assets/js/date.js"></script>
     <script data-main="/App/Admin/assets/js/daterangepicker.js" src="/App/Admin/assets/js/daterangepicker.js"></script>
-    <meta name="fragment" content="!" />
 
     <link rel="stylesheet" type="text/css" href="/App/Admin/assets/css/font-awesome.min.css" media="all">
     <link rel="stylesheet" type="text/css" href="/App/Admin/assets/css/bootstrap.css" media="all">
