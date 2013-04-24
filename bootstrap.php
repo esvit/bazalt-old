@@ -21,7 +21,7 @@ define('TEMP_DIR', SITE_DIR . '/tmp');
 require_once 'Framework/Core/include.inc';
 
 if (!is_file('config.php') || !filesize('config.php')) {
-    header('Location: /install/index.php');
+    header('Location: /install.php');
 }
 require_once 'config.php';
 
