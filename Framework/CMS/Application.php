@@ -44,6 +44,11 @@ abstract class Application
         $this->config = $config;
     }
 
+    public function view()
+    {
+        return $this->view;
+    }
+
     public function config()
     {
         return $this->config;

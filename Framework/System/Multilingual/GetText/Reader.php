@@ -58,12 +58,10 @@ class Reader extends ArrayTranslate
         if (!$f) {
             return false;
         }
-
         $lineno = 0;
         $header = null;
         while (true) {
             $entry = $this->readEntry($f, $lineno);
-
             if (!$entry) {
                 break;
             }
@@ -90,7 +88,7 @@ class Reader extends ArrayTranslate
         return $context == 'msgstr' || $context == 'msgstr_plural';
     }
 
-    public function readEntry($f, &$lineno = 0)
+    public function readEntry($f, $lineno = 0)
     {
         $entry = [];
         // where were we in the last step
@@ -117,10 +115,10 @@ class Reader extends ArrayTranslate
                     return false;
                 }
             }
-            $line = trim($line);
-            if ($line == "\n" || empty($line)) {
+            if ($line == "\n") {
                 continue;
             }
+            $line = trim($line);
             if (preg_match('/^#/', $line, $m)) {
                 # the comment is the start of a new entry
             } elseif (preg_match('/^msgctxt\s+(".*")/', $line, $m)) {

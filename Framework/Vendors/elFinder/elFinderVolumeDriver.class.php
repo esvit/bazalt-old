@@ -1146,6 +1146,7 @@ abstract class elFinderVolumeDriver {
 	 **/
 	public function tmb($hash) {
 		$path = $this->decode($hash);
+
 		$stat = $this->stat($path);
 		
 		if (isset($stat['tmb'])) {

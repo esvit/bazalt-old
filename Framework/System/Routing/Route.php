@@ -65,6 +65,14 @@ class Route
         self::$root = null;
     }
 
+    public static function urlPrefix($urlPrefix = null)
+    {
+        if ($urlPrefix !== null) {
+            self::$urlPrefix = $urlPrefix;
+        }
+        return self::$urlPrefix;
+    }
+
     public static function get($name)
     {
         if (!array_key_exists($name, self::$names)) {
@@ -255,7 +263,7 @@ class Route
 
         // for url like /index_dev.php/etc/...
         if (array_key_exists('PATH_INFO', $_SERVER) && !ROUTING_NO_SCRIPT_NAME) {
-            $prefix = $_SERVER['PATH_INFO'] . $prefix;
+            $prefix = $_SERVER['SCRIPT_NAME'] . $prefix;
         }
         $prefix = rtrim($prefix, '/');
         $url = $prefix . $url;

@@ -4,9 +4,12 @@ if (version_compare(PHP_VERSION, '5.4.0', '<')) {
     die('Update you PHP first. Needed 5.4.0 min. You are using ' . PHP_VERSION . ' now;');
 }
 
+define('SITE_DIR', __DIR__);
+define('INSTALLER_DIR', __DIR__ . '/install');
+
 \spl_autoload_register(function($file) {
     $file = str_replace('\\', '/', $file);
-    $path = __DIR__ . '/../Framework/Vendors/';
+    $path = SITE_DIR . '/Framework/Vendors/';
     $filepath = $path . $file . '.php';
 
     if (file_exists($filepath)) {
@@ -26,7 +29,7 @@ class Installer extends \Tonic\Resource
      */
     public function index()
     {
-        return file_get_contents(__DIR__ . '/views/layout.html');
+        return file_get_contents(INSTALLER_DIR . '/views/layout.html');
     }
 
     /**
@@ -56,10 +59,10 @@ class Installer extends \Tonic\Resource
                 'curl'  => in_array('curl', $load_ext),
             ],
             'folders' => [
-                'config_writable'  => touch(__DIR__ . '/../config.php') !== false && is_writable(__DIR__ . '/../config.php'),
-                'uploads_writable'  => is_writable(__DIR__ . '/../uploads'),
-                'static_writable'  => is_writable(__DIR__ . '/../static'),
-                'tmp_writable'  => is_writable(__DIR__ . '/../tmp')
+                'config_writable'   => touch(SITE_DIR . '/config.php') !== false && is_writable(SITE_DIR . '/config.php'),
+                'uploads_writable'  => is_writable(SITE_DIR . '/uploads'),
+                'static_writable'   => is_writable(SITE_DIR . '/static'),
+                'tmp_writable'      => is_writable(SITE_DIR . '/tmp')
             ]
         ];
         return new \Tonic\Response(200, $result);
@@ -94,18 +97,20 @@ class Installer extends \Tonic\Resource
         }
         $result = [];
         try {
+            // create database
             $connectionStr = sprintf('mysql:host=%s;port=%d', $data['host'], $data['port']);
-            $connectionDbStr = sprintf('mysql:host=%s;port=%d;dbname=%s', $data['host'], $data['port'], $data['database']);
             if (isset($data['create']) && $data['create'] == true) {
                 $dbh = new PDO($connectionStr, $data['user'], $data['password']);
                 $dbh->exec("CREATE DATABASE `" . $data['database'] . "`");
             }
+            // upload database dump
+            $connectionDbStr = $connectionStr . sprintf(';dbname=%s', $data['database']);
             $dbh = new PDO($connectionDbStr, $data['user'], $data['password']);
-            self::loadDump($dbh, __DIR__ . '/install.sql');
-            foreach (glob(__DIR__ . '/components/*.sql') as $file) {
+            self::loadDump($dbh, INSTALLER_DIR . '/install.sql');
+            foreach (glob(INSTALLER_DIR . '/components/*.sql') as $file) {
                 self::loadDump($dbh, $file);
             }
-
+            // select languages
             $sql = 'SELECT * FROM cms_languages';
             $res = $dbh->query($sql, PDO::FETCH_ASSOC);
             foreach ($res as $row) {
@@ -130,7 +135,7 @@ class Installer extends \Tonic\Resource
         if (empty($data['password'])) {
             $data['password'] = '';
         }
-        $config = file_get_contents(__DIR__ . '/config.example');
+        $config = file_get_contents(INSTALLER_DIR . '/config.example');
         $connection = (array)$data['connection'];
         if (empty($connection['port'])) {
             $connection['port'] = 3306;
@@ -141,7 +146,7 @@ class Installer extends \Tonic\Resource
         foreach ($connection as $key => $value) {
             $config = str_replace('%' . $key . '%', $value, $config);
         }
-        file_put_contents(__DIR__ . '/../config.php', $config);
+        file_put_contents(SITE_DIR . '/config.php', $config);
         try {
             $connectionDbStr = sprintf('mysql:host=%s;port=%d;dbname=%s', $connection['host'], $connection['port'], $connection['database']);
             $dbh = new PDO($connectionDbStr, $connection['user'], $connection['password']);

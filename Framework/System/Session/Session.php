@@ -45,7 +45,7 @@ class Session
     /**
      * Час життя сесії по замовчуванню
      */
-    const DEFAULT_TIME_OUT = 2000;
+    const DEFAULT_TIME_OUT = 300;
 
     /**
      * Час життя сесії
@@ -121,16 +121,6 @@ class Session
         return self::$instance;
     }
 
-    /**
-     * Повератє Time Out сесії
-     *
-     * @return integer
-     */
-    public function getTimeOut()
-    {
-        return $this->timeOut;
-    }
-
     public function getNamespace()
     {
         return $this->namespace;
@@ -166,6 +156,24 @@ class Session
             $this->filesHandlerPath = Config_Loader::replaceConstants($path);
         }
         $this->memcachedServer = isset($config['server']) ? $config['server'] : null;
+    }
+
+    /**
+     * @return integer the number of seconds after which data will be seen as 'garbage' and cleaned up, defaults to 300 seconds.
+     */
+    public static function getTimeout()
+    {
+        self::_start();
+        return (int)ini_get('session.gc_maxlifetime');
+    }
+
+    /**
+     * @param integer $value the number of seconds after which data will be seen as 'garbage' and cleaned up
+     */
+    public static function setTimeout($value)
+    {
+        self::$timeOut = $value;
+        ini_set('session.gc_maxlifetime',$value);
     }
 
     /**
@@ -235,10 +243,13 @@ class Session
         session_name(self::$cookieName);
         session_set_cookie_params(self::$timeOut, self::$cookiePath, self::$cookieDomain, false, true);
 
+        // default session gc probability is 1%
+        ini_set('session.gc_probability',1);
+        ini_set('session.gc_divisor',100);
+
         if (!@session_start()) {
             throw new \Exception('Session not start');
         }
-
         Logger::getInstance()->info('Start session ' . session_id() . ' Variables count: ' . count($_SESSION));
 
         self::$isStarted = true;

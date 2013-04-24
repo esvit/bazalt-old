@@ -1,6 +1,6 @@
 <?php
 /**
- * Initialize framework core
+ * Підключає ядро фреймворка
  *
  * @category  Core
  * @package   BAZALT
@@ -46,9 +46,9 @@ ini_set('default_charset',              'UTF-8');  // default encoding
 ini_set('allow_call_time_pass_reference', 1);
 
 /**
- * Path to core folder
+ * Константа вказує шлях до папки ядра
  */
-define('CORE_DIR',                      __DIR__);
+define('CORE_DIR',                      dirname(__FILE__));
 
 if (!defined('SITE_DIR')) {
     die('Constant SITE_DIR not defined!');
@@ -56,9 +56,9 @@ if (!defined('SITE_DIR')) {
 
 if (!defined('FRAMEWORK_DIR')) {
     /**
-     * Framework
+     * Шлях до фреймворку
      */
-    define('FRAMEWORK_DIR',             realpath(CORE_DIR . '/..'));
+    define('FRAMEWORK_DIR',             realpath(dirname( __FILE__ ) . '/..'));
 }
 
 /**
@@ -92,7 +92,7 @@ if (defined('APPLICATION_ENV') && in_array(APPLICATION_ENV, array(DEVELOPMENT_ST
         switch(getenv('APPLICATION_ENV')) {
         case PRODUCTION_STAGE:
         case TESTING_STAGE:
-            define('STAGE', getenv('APPLICATION_ENV'));
+            define('STAGE', $_SERVER['APPLICATION_ENV']);
             break;
         default:
             define('STAGE', DEVELOPMENT_STAGE);

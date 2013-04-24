@@ -424,7 +424,7 @@ abstract class BaseRecord implements \IteratorAggregate
     {
         if (!array_key_exists($this->tableName, self::$allTables)) {
             //return array();
-            throw new Exception('Table "' . $this->tableName . '" not found');
+            throw new \Exception('Table "' . $this->tableName . '" not found');
         }
         return self::$allTables[$this->tableName];
     }
@@ -439,7 +439,7 @@ abstract class BaseRecord implements \IteratorAggregate
     {
         if (!array_key_exists($this->tableName, self::$allReferences)) {
             //return array();
-            throw new Exception('Table "' . $this->tableName . '" not found ');
+            throw new \Exception('Table "' . $this->tableName . '" not found ');
         }
         return self::$allReferences[$this->tableName];
     }
@@ -962,7 +962,7 @@ abstract class BaseRecord implements \IteratorAggregate
                 }
             }
         }
-        throw new Exception('Cannot find function ' . $func);
+        throw new \Exception('Cannot find function ' . $func);
     }
 
 

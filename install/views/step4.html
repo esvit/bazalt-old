@@ -1,47 +1,27 @@
-<h2>Setup site</h2>
+<div class="page-header">
+    <h2>Complete!</h2>
+</div>
+
+<h3>Welcome on board</h3>
+
+<div class="alert alert-danger alert-block">
+<strong>Warning!</strong> Remove <code>install.php</code> before continue
+</div>
 
 <div class="row">
-    <div class="col-span-6">
-
-        <form name="connectionForm" class="form-horizontal">
-        
-        <div ng-show="error" class="alert alert-error alert-block">
-            {{error}}
-        </div>
-
-        <div class="control-group">
-            <label class="control-label" for="host">Site title</label>
-            <div class="controls">
-                <input type="text" id="host" required ng-model="site.title" />
-            </div>
-        </div>
-        <div class="control-group">
-            <label class="control-label" for="language">Default site language</label>
-            <div class="controls">
-                <select ng-options="language.id as language.title for language in languages" id="language" required ng-model="site.language"></select>
-            </div>
-        </div>
-        <div class="control-group">
-            <label class="control-label" for="user">Admin username</label>
-            <div class="controls">
-                <input type="text" required id="user" ng-model="site.user" />
-            </div>
-        </div>
-        <div class="control-group">
-            <label class="control-label" for="password">Admin password</label>
-            <div class="controls">
-                <input type="text" required id="password" ng-model="site.password" />
-            </div>
-        </div>
-        <div class="control-group">
-            <label class="control-label">&nbsp;</label>
-            <div class="controls">
-                <label class="checkbox">
-                    <input ng-model="site.samples" type="checkbox"> Load sample data
-                </label>
-            </div>
-        </div>
-        </form>
-
-    </div>
+<div class="col-span-6 text-right">
+    <a class="btn btn-primary btn-choose" href="/">
+        <span class="glyphicon glyphicon-globe"></span>
+        View site
+    </a>
 </div>
+<div class="col-span-6 text-left">
+    <a class="btn btn-primary btn-choose" href="/admin.php">
+        <span class="glyphicon glyphicon-lock"></span>
+        Dashboard
+    </a>
+</div>
+</div>
+
+<p>&nbsp;</p>
+<p>You also can visit our site: <a target="_blank" href="http://bazalt-cms.com/">http://bazalt-cms.com/</a>

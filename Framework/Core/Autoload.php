@@ -6,7 +6,7 @@
  * @package   Core
  * @copyright 2010 Equalteam
  * @license   GPLv3
- * @version   $Id$
+ * @version   SVN: $Revision: 133 $
  */
 
 namespace Framework\Core;
@@ -18,12 +18,12 @@ namespace Framework\Core;
  * @package   Core
  * @copyright 2010 Equalteam
  * @license   GPLv3
- * @version   $Id$
+ * @version   $Revision: 133 $
  */
 class Autoload
 {
     /**
-     * @var array All registred namespaces
+     * @var array Усі зареєстровані області імен
      */
     protected static $namespaces = array();
 

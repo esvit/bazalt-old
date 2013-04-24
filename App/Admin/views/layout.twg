@@ -1,0 +1,103 @@
+<!DOCTYPE html>
+<!--  ╭∩╮（︶︿︶）╭∩╮  //-->
+<!--[if lt IE 7]>      <html class="no-js lt-ie9 lt-ie8 lt-ie7"> <![endif]-->
+<!--[if IE 7]>         <html class="no-js lt-ie9 lt-ie8"> <![endif]-->
+<!--[if IE 8]>         <html class="no-js lt-ie9"> <![endif]-->
+<!--[if gt IE 8]><!--> <html class="no-js"> <!--<![endif]-->
+<head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+    <script data-main="/App/Admin/assets/js/app.js" src="/assets/require-jquery.js"></script>
+    <script data-main="/App/Admin/assets/js/date.js" src="/App/Admin/assets/js/date.js"></script>
+    <script data-main="/App/Admin/assets/js/daterangepicker.js" src="/App/Admin/assets/js/daterangepicker.js"></script>
+    <meta name="fragment" content="!" />
+
+    <link rel="stylesheet" type="text/css" href="/App/Admin/assets/css/font-awesome.min.css" media="all">
+    <link rel="stylesheet" type="text/css" href="/App/Admin/assets/css/bootstrap.css" media="all">
+    <link rel="stylesheet" type="text/css" href="/App/Admin/assets/css/daterangepicker.css" media="all">
+    <link rel="stylesheet" type="text/css" href="/App/Admin/assets/css/bootstrap-fileupload.css" media="all">
+    <link rel="stylesheet" type="text/css" href="/less.php/App/Admin/assets/less/style.less" />
+    <link href='http://fonts.googleapis.com/css?family=Open+Sans:400,400italic,700,300&subset=cyrillic-ext,latin' rel='stylesheet' type='text/css'>
+
+    <!--[if lt IE 9]>
+      <script src="http://html5shim.googlecode.com/svn/trunk/html5.js"></script>
+    <![endif]-->
+</head>
+<body ng-controller="bazaltGlobalController">
+    <div class="navbar navbar-fixed-top m-header">
+        <!-- .navbar-toggle is used as the toggle for collapsed navbar content -->
+        <button type="button" class="navbar-toggle" data-toggle="collapse" data-target=".navbar-responsive-collapse">
+            <span class="icon-bar"></span>
+            <span class="icon-bar"></span>
+            <span class="icon-bar"></span>
+        </button>
+        <div class="navbar-inner m-inner">
+            <div class="row">
+                <a class="col-span-1" href="/">
+                    <span class="navbar-brand">
+                        <!--span class="ico-caret-left"></span> сайт-->
+                    </span>
+                </a>
+
+                <div class="col-span-6 breadcrumb-container">
+                    <ul class="breadcrumb ng-cloak" ng-show="breadcrumbs.length">
+                        <li ng-repeat="breadcrumb in breadcrumbs">
+                            <a ng-hide="$last" ng-href="{[breadcrumb.url]}">{[breadcrumb.title]}</a>
+                            <span ng-show="$last">{[breadcrumb.title]}</span>
+                        </li>
+                    </ul>
+                </div>
+
+                <div class="nav-collapse collapse navbar-responsive-collapse">
+                    <div class="col-span-5 adm-user">
+
+                        <div class="btn-toolbar pull-right ng-cloak">
+                            <div class="btn-group pull-right">
+                                <a class="btn btn-link" href="#!/settings"><span class="glyphicon glyphicon-cog"></span> Settings</a>
+                            </div>
+                            <div class="btn-group pull-right" ng-show="languages.all.length">
+                                <a class="btn dropdown-toggle" data-toggle="dropdown" href="#">
+                                <span ng-repeat="language in languages.all" ng-show="language.alias == languages.current">
+                                    <i class="icon-user"></i> {[language.title]}
+                                <span>
+                                <span class="caret"></span>
+                                </a>
+                                <ul class="dropdown-menu">
+                                    <li ng-repeat="language in languages.all">
+                                        <a href="javascript:;" ng-click="languages.current = language.alias">
+                                            {[language.title]}
+                                            <small class="pull-right">Ctrl+Alt+{[$index+1]}</small>
+                                        </a>
+                                    </li>
+                                </ul>
+                            </div>
+                            <div class="btn-group pull-right" ng-show="$user.authorized()">
+                                <a class="btn dropdown-toggle" data-toggle="dropdown" href="#">
+                                    <i class="glyphicon glyphicon-user"></i> {[$user.login]}
+                                    <span class="caret"></span>
+                                </a>
+                                <ul class="dropdown-menu">
+                                    <!--li><a href="#"><i class="icon-user"></i>Profile</a></li>
+                                    <li><a href="#"><i class="icon-cog"></i>Settings</a></li>
+                                    <li class="divider"></li-->
+                                    <li><a href="/" ng-click="$user.logout()"><i class="icon-off"></i> Logout</a></li>
+                                </ul>
+                            </div>
+                        </div>
+                    </div>
+                </div><!-- /.nav-collapse -->
+
+
+            </div>
+        </div>
+    </div>
+    <div class="wrapper">
+        <aside class="sidebar" ng-include="'/App/Admin/views/menu.html'"></aside>
+
+        <div class="main-container">
+            <section ng-view></section>
+        </div>
+    </div>
+</body>
+</html>

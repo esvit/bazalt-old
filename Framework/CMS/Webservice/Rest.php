@@ -27,6 +27,13 @@ abstract class Rest extends \Tonic\Resource
         });
     }
 
+    protected function action($action)
+    {
+        if (!isset($_GET['action']) || $_GET['action'] != $action) {
+            throw new \Tonic\ConditionException;
+        }
+    }
+
     protected function param($type, $name, $r)
     {
         $name = trim($name, '$');

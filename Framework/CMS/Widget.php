@@ -23,6 +23,11 @@ abstract class Widget
         return null;
     }
 
+    public function view()
+    {
+        return $this->view;
+    }
+
     public function config()
     {
         return $this->widgetConfig;
@@ -41,7 +46,7 @@ abstract class Widget
         $class = get_class($this);
         $baseDir = dirname(\Framework\Core\Autoload::getFilename($class));
 
-        $this->view = View::root()->newScope([$baseDir . '/views']);
+        $this->view = Application::current()->view()->newScope([$baseDir . '/../views']);
     }
 
     public static function getAllComponentWidgets()
@@ -108,7 +113,7 @@ abstract class Widget
     {
         $template = $this->getTemplate();
         $user = User::get();
-        $this->view->assign('hasPermition', WIDGET_BORDER_AROUND && $user->hasRight(null, CMS\Bazalt::ACL_CAN_ADMIN_WIDGETS));
+        $this->view->assign('hasPermition', WIDGET_BORDER_AROUND && $user->hasRight(null, Bazalt::ACL_CAN_ADMIN_WIDGETS));
 
         $this->view->assign('widget', $this);
         $this->view->assign('widgetConfig', $this->widgetConfig);
@@ -125,78 +130,8 @@ abstract class Widget
             }
         }
 
-        $js = '';
-        $file = $this->getJavascriptFile();
-        if ($file !== null) {
-            $className = get_class($this);
-
-            self::addWidgetWebservice($className);
-            $js = '
-                window.bz = window.bz || {}, bz.widgetConfigs = bz.widgetConfigs || {}, bz.widgetConfigs[' . $this->widgetConfig->id . '] = "' . $className . '";
-                '; // додає на сторінку масив асоціацій id - name
-
-            $jsFile =  'widget::' . $className . filemtime($file) . '::' . $file;
-            if (!Assets_FileManager::exists($jsFile)) {
-                if (!file_exists($file)) {
-                    throw new Exception('File "' . $file . '" not found');
-                }
-                $jsContent = file_get_contents($file);
-                $jsContent = 'bz.initWidgets = bz.initWidgets || {}, bz.initWidgets.' . $className . " = function(widget) {\n" . $jsContent . "\n}";
-                Assets_FileManager::save($jsFile, $jsContent);
-            }
-            Assets_JS::add(Assets_FileManager::filename($jsFile));
-
-            $js = '<script>' . $js . '</script>';
-        }
-
         $this->view->assign('content', $content);
-        return $this->view->fetch('cms/widgets/widget') . $js;
-    }
-
-    public static function addWidgetWebservice($name)
-    {
-        $file = CMS\Webservice::getServiceFile('widget::' . $name);
-
-        if (!Assets_FileManager::exists($file)) {
-            $comService = new eazyJsonRPC_Server($name);
-
-            $content = $comService->__getJavascript($name);
-            $content .= '
-                bz.widgets = bz.widgets || {};
-                bz.widgets.' . $name . ' = function(id, container) {
-                    this.id = id;
-                    this.container = container;
-                    this.rpc = bz.webservices.' . $name . ';
-                    this.rpc.options.smd.target = "' . CMS\Mapper::patternFor(CMS\Webservice::WIDGET_ROUTE_NAME) . '".replace("{widgetId}", id);
-                }';
-            Assets_FileManager::save($file, $content);
-        }
-        CMS\Webservice::addWebservice(Assets_FileManager::filename($file));
-    }
-
-    public function getTemplates()
-    {
-        return array();
-    }
-
-    public function getCustomTemplates()
-    {
-        $files = array();
-        $template = $this->getTemplate();
-        $folders = $this->view->getFolders();
-        $engines = $this->view->getEngines();
-        $baseName = $this->widgetConfig->Widget->default_template;
-
-        foreach ($folders as $folder) {
-            foreach ($engines as $ext => $engine) {
-                $path = $folder . PATH_SEP . $baseName;
-                foreach (glob($path . PATH_SEP . '*.' . $ext, GLOB_NOSORT) as $file) {
-                    $fileName = relativePath($file, $folder . PATH_SEP);
-                    $files[$fileName] = $file;
-                }
-            }
-        }
-        return $files;
+        return $this->view->fetch('cms/widgets/widget');
     }
 
     public static function getWidgetInstance(Model\WidgetInstance $config)

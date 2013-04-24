@@ -1,0 +1,78 @@
+<!DOCTYPE html>
+<!--  ╭∩╮（︶︿︶）╭∩╮  //-->
+<!--[if lt IE 7]>      <html class="no-js lt-ie9 lt-ie8 lt-ie7"> <![endif]-->
+<!--[if IE 7]>         <html class="no-js lt-ie9 lt-ie8"> <![endif]-->
+<!--[if IE 8]>         <html class="no-js lt-ie9"> <![endif]-->
+<!--[if gt IE 8]><!--> <html class="no-js"> <!--<![endif]-->
+<head>
+    <style>
+    [ng\:cloak], [ng-cloak], [data-ng-cloak], [x-ng-cloak], .ng-cloak, .x-ng-cloak {
+        display: none !important;
+    }
+    </style>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
+    <script data-main="/App/Admin/assets/js/loginApp.js" src="/assets/require-jquery.js"></script>
+
+    <link rel="stylesheet" type="text/css" href="/App/Admin/assets/css/font-awesome.min.css" media="all">
+    <link rel="stylesheet" type="text/css" href="/App/Admin/assets/css/bootstrap.css" media="all">
+    <link rel="stylesheet" type="text/css" href="/less.php/App/Admin/assets/less/login.less" media="all">
+    <link href='http://fonts.googleapis.com/css?family=Open+Sans:400,400italic,700,300&subset=cyrillic-ext,latin' rel='stylesheet' type='text/css'>
+
+    <meta name="viewport" content="initial-scale=1,maximum-scale=1,user-scalable=no">
+    <!--[if lt IE 9]>
+      <script src="http://html5shim.googlecode.com/svn/trunk/html5.js"></script>
+    <![endif]-->
+</head>
+<body ng-controller="bazaltGlobalController">
+
+<div class="admin-form">
+
+    <div class="row">
+        <div class="panel panel-primary col-span-12">
+            <div class="panel-heading">
+                <span class="glyphicon glyphicon-user"></span> Login
+            </div>
+
+            <form ng-show="!$user.id" novalidate server-submit="login" target="/rest.php/users" method="post" class="form-horizontal" name="loginForm" ng-controller="LoginCtrl">
+
+                <div class="control-group" ng-class="{error: loginForm.$dirty && loginForm.nickname.$invalid}">
+                    <label class="control-label" for="nickname">Username</label>
+                    <div class="controls">
+                        <input type="text" id="nickname" remote-form-component required ng-model="$user.nickname" name="nickname" placeholder="" />
+                        <div class="ng-cloak help-block" ng-show="loginForm.nickname.$error.server">
+                            {[remoteForm.errors.nickname.exist_user]}
+                        </div>
+                    </div>
+                </div>
+
+                <div class="control-group">
+                    <label class="control-label" for="password">Password</label>
+                    <div class="controls">
+                        <input type="password" id="password" remote-form-component required ng-model="$user.password" name="password" placeholder="" />
+                    </div>
+                </div>
+
+                <div class="control-group">
+                    <div class="controls">
+                        <button ng-disabled="loginForm.$pristine || is_submitting" disabled="disabled" class="btn btn-success">
+                            <span class="ng-cloak" ng-show="!is_submitting">Увійти</span>
+                            <span ng-show="is_submitting">Зачекайте...</span>
+                        </button>
+                    </div>
+                </div>
+            </form>
+            
+            <div ng-cloak ng-show="$user.id">
+                <h4 class="text-danger">Warning!</h4>
+                <p>Ви увійшли як: <strong>{[$user.login]}</strong>, але у Вас немає прав доступу
+                <p><button class="btn" ng-click="$user.logout()"><i class="icon-off"></i> Logout</button>
+                   <a class="btn btn-link" href="/">Go away</a>
+            </div>
+        
+        </div>
+    </div>
+</div>
+
+</body>
+</html>

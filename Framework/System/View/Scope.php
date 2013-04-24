@@ -126,6 +126,38 @@ class Scope implements \ArrayAccess
         return array_merge($vars, self::$assignedGlobalVars, $this->assignedVars);
     }
 
+    // @todo merge with findTemplate
+    public function findTemplates($pattern = null, &$folders = [])
+    {
+        $engines = self::$engines;
+        if (!empty($ext)) {
+            if (array_key_exists($ext, self::$engines)) {
+                $engines = array($ext => self::$engines[$ext]);
+            } else {
+                $template .= '.' . $ext;
+            }
+        }
+        $folders = $this->folders();
+        if ($this->parentScope) {
+            $folders = array_merge($this->parentScope->folders(), $folders);
+        }
+        $folders = array_reverse($folders);
+
+        $templates = [];
+        foreach ($folders as $folder) {
+            foreach ($engines as $ext => $engine) {
+                foreach (glob($folder . PATH_SEP . $pattern . '.' . $ext, GLOB_NOSORT) as $file) {
+                    $templates []= [
+                        'engine'   => $engine,
+                        'folder'   => $folder,
+                        'file'     => relativePath($file, $folder)
+                    ];
+                }
+            }
+        }
+        return $templates;
+    }
+
     protected function findTemplate($template, $ext = null, &$folders = [])
     {
         $engines = self::$engines;

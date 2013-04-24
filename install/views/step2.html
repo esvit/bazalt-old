@@ -1,15 +1,49 @@
-<h2>Check requirements</h2>
-
-<div class="row">
-    <ul ng-repeat="(group, requirement) in requirements" class="list-requirements list-unstyled col-span-2">
-    <li class="nav-header">{{requirement.title}}</li>
-    <li ng-repeat="(key, test) in requirement.tests">
-        <span ng-show="result[group][key] == true" class="btn btn-success btn-mini glyphicon glyphicon-ok"></span>
-        <span ng-show="result[group][key] == false" class="btn btn-danger btn-mini glyphicon glyphicon-remove"></span>
-        <span ng-show="result[group][key] == 'unknown'" class="btn btn-warning btn-mini glyphicon glyphicon-cog"></span>
-        <strong>{{test}}</strong>
-    </li>
-    </ul>
+<div class="page-header">
+    <h2>Setup database connection</h2>
 </div>
 
-<button ng-disabled="loading" ng-click="checkRequirements()" class="btn btn-primary">Check again</button>
+<form ng-submit="checkConnection(connection)" name="connectionForm" class="form-horizontal">
+
+<div ng-show="error" class="alert alert-error alert-block">
+    {{error}}
+</div>
+
+<div class="control-group">
+    <label class="control-label" for="host">Host</label>
+    <div class="controls">
+        <input type="text" id="host" required ng-model="connection.host" />
+    </div>
+</div>
+<div class="control-group">
+    <label class="control-label" for="port">Port</label>
+    <div class="controls">
+        <input type="number" required class="input-small col-span-3" id="port" ng-model="connection.port" />
+    </div>
+</div>
+<div class="control-group">
+    <label class="control-label" for="user">User</label>
+    <div class="controls">
+        <input type="text" required id="user" ng-model="connection.user" />
+    </div>
+</div>
+<div class="control-group">
+    <label class="control-label" for="password">Password</label>
+    <div class="controls">
+        <input type="password" id="password" ng-model="connection.password" />
+    </div>
+</div>
+<div class="control-group">
+    <label class="control-label" for="database">Database</label>
+    <div class="controls">
+        <input type="text" required id="database" ng-model="connection.database" />
+    </div>
+</div>
+<div class="control-group">
+    <label class="control-label">&nbsp;</label>
+    <div class="controls">
+        <label class="checkbox">
+            <input ng-model="connection.create" type="checkbox"> Create database
+        </label>
+    </div>
+</div>
+</form>

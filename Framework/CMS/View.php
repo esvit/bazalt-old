@@ -153,7 +153,7 @@ class View extends Scope
     {
         //CMS_Theme::addMetadata();
         if (strpos($_SERVER['HTTP_ACCEPT'], 'application/json') === 0) {
-            Response::output($content);
+            Response::output('<div class="ng-view-container">' . $content . '</div>');
             exit;
         }
 

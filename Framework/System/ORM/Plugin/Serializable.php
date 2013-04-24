@@ -49,7 +49,7 @@ class Serializable extends AbstractPlugin
             $options = explode(',', $options);
         }
         foreach ($options as $field) {
-            $itemArray[$field] = unserialize($record->{$field});
+            $itemArray[$field] = $record->{$field};
         }
         return $itemArray;
     }
@@ -73,9 +73,9 @@ class Serializable extends AbstractPlugin
 
         $options = $options[$record->getModelName()];
         if (!is_array($options)) {
-            $options = array('fields' => explode(',', $options));
+            $options = explode(',', $options);
         }
-        if (in_array($field, $options['fields'])) {
+        if (in_array($field, $options)) {
             $return = unserialize($record->getField($field));
         }
     }
@@ -100,9 +100,9 @@ class Serializable extends AbstractPlugin
 
         $options = $options[$record->getModelName()];
         if (!is_array($options)) {
-            $options = array('fields' => explode(',', $options));
+            $options = explode(',', $options);
         }
-        if (in_array($field, $options['fields'])) {
+        if (in_array($field, $options)) {
             $record->setField($field, serialize($value));
             $return = true;
         }

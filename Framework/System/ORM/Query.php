@@ -363,7 +363,8 @@ class ORM_Query extends Object implements Eventable
             throw new Exception('Unknown class ' . $class);
         }
         $resObj = new $class();
-        if ($resObj instanceof BaseRecord) {
+
+        if ($resObj instanceof Framework\System\ORM\BaseRecord) {
             $resObj->fromArray($data);
         } else {
             foreach ($data as $field => $value) {

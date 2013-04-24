@@ -213,6 +213,7 @@ class Bazalt
      */
     public static function getComponent($name)
     {
+        $name = 'Components\\' . $name . '\\Component';
         if (!array_key_exists($name, self::$loadedComponents)) {
             return null;
         }

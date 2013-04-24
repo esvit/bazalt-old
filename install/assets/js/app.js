@@ -4,12 +4,11 @@ var steps = [
     'Step 1',
     'Step 2',
     'Step 3',
-    'Step 4',
-    'Step 5'
+    'Step 4'
 ];
 
 var app = angular.module('bazaltInstaller', []).
-    value('InstallScriptUrl', '/install/index.php').
+    value('InstallScriptUrl', '/install.php').
     config(function($routeProvider, $locationProvider) {
         var newSteps = [];
         for (var i = 0, max = steps.length; i < max; i++) {
@@ -26,7 +25,7 @@ var app = angular.module('bazaltInstaller', []).
             newSteps.push(step);
             $routeProvider.when(url, {
                 controller: 'Step' + step.index + 'Ctrl',
-                templateUrl: 'views/step' + step.index + '.html',
+                templateUrl: 'install/views/step' + step.index + '.html',
                 currentStep: step
             });
             if (i > 0) {
@@ -66,12 +65,15 @@ var app = angular.module('bazaltInstaller', []).
         });
     });
 
-    app.controller('Step1Ctrl', function ($scope) {
+    app.controller('Step1Ctrl', function ($scope, $location, $http, InstallScriptUrl) {
         $scope.currentStep.invalid = false;
-    });
-
-    app.controller('Step2Ctrl', function ($scope, $http, InstallScriptUrl) {
-        $scope.currentStep.invalid = false;
+        $scope.currentStep.callback = function() {
+            if ($scope.isValid()) {
+                $location.url($scope.currentStep.next.url);
+            } else {
+                $scope.checkRequirements();
+            }
+        };
         $scope.requirements = {
             env: {
                 title: 'Enviroment',
@@ -105,18 +107,30 @@ var app = angular.module('bazaltInstaller', []).
             }
         };
 
+        $scope.isValid = function() {
+            var valid = true;
+            angular.forEach($scope.result, function(item) {
+                angular.forEach(item, function(test) {
+                    if (test === false) {
+                        valid = false;
+                    }
+                });
+            });
+            return valid;
+        }
         $scope.checkRequirements = function() {
             $scope.loading = true;
             $http.get(InstallScriptUrl)
                  .success(function(result) {
                     $scope.loading = false;
                     $scope.result = result;
+                    $scope.currentStep.buttonText = $scope.isValid() ? 'Next' : 'Check again';
                 });
         }
         $scope.checkRequirements();
     });
 
-    app.controller('Step3Ctrl', function ($scope, $location, $http, $rootScope, InstallScriptUrl) {
+    app.controller('Step2Ctrl', function ($scope, $location, $http, $rootScope, InstallScriptUrl) {
         $scope.currentStep.invalid = false;
         $scope.currentStep.callback = function() {
             $scope.checkConnection($scope.connection);
@@ -150,7 +164,7 @@ var app = angular.module('bazaltInstaller', []).
         }
     });
 
-    app.controller('Step4Ctrl', function ($scope, $location, $http, InstallScriptUrl) {
+    app.controller('Step3Ctrl', function ($scope, $location, $http, InstallScriptUrl) {
         $scope.currentStep.invalid = false;
         $scope.currentStep.callback = function() {
             $scope.createSite($scope.site);
@@ -175,7 +189,7 @@ var app = angular.module('bazaltInstaller', []).
         }
     });
 
-    app.controller('Step5Ctrl', function ($scope) {
+    app.controller('Step4Ctrl', function ($scope) {
         $scope.currentStep.invalid = false;
         $scope.currentStep.callback = function() {
             location.href = '/';

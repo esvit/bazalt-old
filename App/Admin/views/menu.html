@@ -1,0 +1,58 @@
+<ul ng-controller="MenuCtrl" class="nav nav-tabs nav-stacked">
+<li ng-repeat="item in sideMenu" class="">
+    <a href="{[item.url]}">
+        <span ng-show="item.notification" class="badge badge-important m-badge-notification">{[item.notification]}</span>
+        <div>
+            <div class="ico">
+                <i class="{[item.icon]} ico-3x"></i>
+            </div>
+            <div class="title">{[item.title]}</div>
+        </div>
+
+        <div class="arrow">
+            <div class="bubble-arrow-border"></div>
+            <div class="bubble-arrow"></div>
+        </div>
+    </a>
+</li>
+<li class="btn-more">
+    <a href="javascript:;" ng-click="more.show = !more.show" ng-show="more.menu.length" id="btn-more">
+        <span>
+            <span class="ico">
+                <i class="ico-th-large ico-3x"></i>
+            </span>
+            <span class="title">
+                More
+            </span>
+        </span>
+    </a>
+    <div class="m-sidebar-collapsed ng-cloak" ng-show="more.show && more.menu.length">
+        <ul class="nav nav-pills">
+            <li ng-repeat="item in more.menu" class="">
+                <a href="{[item.url]}">
+                    <span ng-show="item.notification" class="badge badge-important m-badge-notification">{[item.notification]}</span>
+                    <div>
+                        <div class="ico">
+                            <i class="{[item.icon]} ico-3x"></i>
+                        </div>
+                        <div class="title">{[item.title]}</div>
+                    </div>
+
+                    <div class="arrow">
+                        <div class="bubble-arrow-border"></div>
+                        <div class="bubble-arrow"></div>
+                    </div>
+                </a>
+            </li>
+        </ul>
+        <div class="arrow-border">
+            <div class="arrow-inner"></div>
+        </div>
+    </div>
+</li>
+</ul>
+
+<a class="bazalt-cms" target="_blank" href="http://bazalt-cms.com/">
+    <strong>Bazalt CMS</strong>
+    <span>version 2.0</span>
+</a>
