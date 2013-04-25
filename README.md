@@ -18,6 +18,7 @@ Features
 - multisite on one and the same engine;
 - multi-language interface and content;
 - modularity;
+- RBAC (Role Based Access Control);
 - search engine friendly.
 
 Technologies
