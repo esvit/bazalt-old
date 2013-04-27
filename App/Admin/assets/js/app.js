@@ -9,12 +9,9 @@ for (var i = 0; i < components.length; i++) {
     angularComponents.push('Component.' + component + '.Admin');
 }
 
-require([
-    '/assets/modules/jquery/jquery-migrate-1.1.1.js',
-    'BazaltCMS', 'Bootstrap', 'UIBootstrap',
-    '/App/Admin/assets/js/jquery-scrolltofixed-min.js'].concat(modules), function(bazaltCMS) {
+require(['bazalt-cms', 'bootstrap'].concat(modules), function(bazaltCMS) {
 
-    app = angular.module('bazalt-cms', ['ui.bootstrap', 'bazaltCMS'].concat(angularComponents)).
+    app = angular.module('admin', ['bazalt-cms'].concat(angularComponents)).
     config(function($routeProvider, $locationProvider, $httpProvider) {
         $routeProvider.
         when('/', {controller: 'IndexCtrl', templateUrl:'/App/Admin/views/index.html'}).
@@ -24,38 +21,56 @@ require([
         //$locationProvider.html5Mode(true);
         $locationProvider.hashPrefix('!');
     }).
+    run(function($rootScope, LanguageService) {
+        $rootScope.languages = LanguageService.query();
+    }).
     value('dashboard', {
         mainMenu: []
+    }).factory('LanguageService', function($resource) {
+        return $resource('/rest.php/app/language');
     });
 
-	app.directive('help', function ($timeout) {
-	  return {
-		restrict: 'E',
-		scope: {
-		  title:        '@title',
-		  placement:    '@placement',
-		  height:   '@height',
-		  data:     '=data',
-		  selectFn: '&select',
-		  hoverFn: '&hover'
-		},
-		link: function($scope, $elm, $attr) {
-			var html = $('<a href="javascript:;"><i class="glyphicon glyphicon-question-sign"></i></a>');
-			var content = $elm.html();
-			$elm.replaceWith(html);
+    app.directive('loadingContainer', function () {
+        return {
+            restrict: 'A',
+            scope: false,
+            link: function(scope, element, attrs) {
+                var loadingLayer = $('<div class="loading"></div>').appendTo(element);
+                $(element).addClass('loading-container');
+                scope.$watch(attrs.loadingContainer, function(value) {
+                    loadingLayer.toggle(value);
+                });
+            }
+        };
+    });
+    app.directive('help', function ($timeout) {
+        return {
+            restrict: 'E',
+            scope: {
+            title:        '@title',
+            placement:    '@placement',
+            height:   '@height',
+            data:     '=data',
+            selectFn: '&select',
+            hoverFn: '&hover'
+            },
+            link: function($scope, $elm, $attr) {
+                var html = $('<a href="javascript:;"><i class="glyphicon glyphicon-question-sign"></i></a>');
+                var content = $elm.html();
+                $elm.replaceWith(html);
 
-			html.popover({
-				html: true,
-				placement: $attr.placement || 'bottom',
-				trigger: 'click',
-				//delay: {hide: '300'},
-				content: content,
-				title: $attr.title,
-				container: 'body'
-			});
-		}
-	  };
-	});
+                html.popover({
+                    html: true,
+                    placement: $attr.placement || 'bottom',
+                    trigger: 'click',
+                    //delay: {hide: '300'},
+                    content: content,
+                    title: $attr.title,
+                    container: 'body'
+                });
+            }
+        };
+    });
 
     app.controller('IndexCtrl', function ($scope, $rootScope) {
         $rootScope.breadcrumbs = [
@@ -77,6 +92,7 @@ require([
             }
         ];
     });
+
     app.controller('MenuCtrl', function ($scope, $location, $session, $window, dashboard) {
         $(window).bind('resize', function(){
             $scope.wHeight = $(window).innerHeight();
@@ -84,7 +100,6 @@ require([
                 $scope.$apply();
             }
         }).trigger('resize');
-console.info(dashboard);
 
         $scope.more = { width: 0, menu: [], show: false };
         $scope.menu = dashboard.mainMenu; /*[
@@ -159,7 +174,7 @@ console.info(dashboard);
                 if ($scope.menu.length == menu.length) {
                     break;
                 }
-            } while (height < sidebar.height())
+            } while (height < sidebar.height());
             $scope.sideMenu = menu;
             menu = [];
             for (var j = i, max = $scope.menu.length, width = 0; j < max; j++, width += 60) {
@@ -168,9 +183,8 @@ console.info(dashboard);
             $scope.more.width = width;
             $scope.more.menu = menu;
         });
-    })
+    });
 
-
-    angular.bootstrap(document, ['bazalt-cms']);
+    angular.bootstrap(document, ['admin']);
 
 });

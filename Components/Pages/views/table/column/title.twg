@@ -1,4 +1,0 @@
-<td>
-    <strong><a title="{% tr %}Edit news{% endtr %}" class="tooltip" href="{% url 'ComNewsChannel.Edit', { 'id' : item.id } %}">{{ item.title }}</a></strong>
-    <p>{{ item.body|truncate(100)|raw }}</p>
-</td>

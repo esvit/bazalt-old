@@ -1,31 +1,36 @@
+<div class="page-header">
+    <div class="row">
+        <div class="col-span-3">
+            <h2>{['Pages'|translate:'Pages']}</h2>
+        </div>
+    </div>
+</div>
+
 <form>
-    <div ng-repeat="language in languages">
-        {[language.title]}
+    <div ng-repeat="language in languages.all">
         <div class="control-group">
             <label class="control-label" for="title">Заголовок</label>
             <div class="controls">
-                <input class="input-block" type="text" id="title" placeholder="" ng-model="article.title[language.alias]"/>
+                <input class="input-block input-xlarge" type="text" id="title" placeholder="" required ng-model="page.title[language.alias]"/>
             </div>
         </div>
         <div class="control-group">
             <label class="control-label" for="body">Текст</label>
             <div class="controls">
-                <textarea style="height: 800px" ckeditor="article.body[language.alias]" i-tinymce ng-model="article.body[language.alias]" class="input-block" id="body" placeholder=""></textarea>
+                <textarea ckeditor required ng-model="page.body[language.alias]" class="input-block" id="body"></textarea>
             </div>
         </div>
     </div>
     <div class="control-group">
         <div class="controls">
             <label class="checkbox">
-                <input type="checkbox" ng-checked="article.publish == '1'" ng-model="article.publish"> Опублікована новина
+                <input type="checkbox" ng-model="page.publish"> Опублікована новина
             </label>
         </div>
     </div>
-</form>
 
-<style>
-.wysihtml5-sandbox {
-    height: auto !important;
-    min-height: 400px;
-}
-</style>
+    <div class="form-actions text-center">
+        <button ng-click="savePage(page)" class="btn btn-primary">Save</button>
+        <button ng-click="cancel()" class="btn btn-link">Cancel</button>
+    </div>
+</form>

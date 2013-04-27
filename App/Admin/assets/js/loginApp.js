@@ -1,6 +1,6 @@
-require(['BazaltCMS'], function(bazaltCMS) {
+require(['angular', 'bazalt-cms'], function() {
 
-    app = angular.module('loginApp', ['bazaltCMS']).
+    app = angular.module('loginApp', ['bazalt-cms']).
         config(function($routeProvider, $locationProvider, $httpProvider) {
             //$locationProvider.html5Mode(true);
             $locationProvider.hashPrefix('!');

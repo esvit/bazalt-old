@@ -1,3 +1,0 @@
-{% for category in categories %}
-    {{ category.title }}
-{% endfor %}

@@ -1,15 +1,12 @@
 'use strict';
 
 define([
-    'angular-nestedtree/module',
-    'angular-ui/angular-ui',
-    'jquery-ui/jquery-ui.min',
-    '/App/Admin/assets/js/bootstrapSwitch.js',
-    'angular-ckeditor/module',
-    'bootstrap-tree/bootstrap-tree'
+    'ng-editable-tree',
+    'ckeditor/ckeditor',
+    'ng-table'
 ], function() {
 
-    angular.module('Component.Pages.Admin', ['ui']).
+    angular.module('Component.Pages.Admin', ['ngEditableTree', 'ngTable']).
         config(function($routeProvider, $locationProvider) {
             $routeProvider
                 .when('/pages', {
@@ -18,37 +15,42 @@ define([
                     reloadOnSearch: false
                 })
                 .when('/pages/edit:id', {
-                    controller: 'NewsArticleCtrl',
-                    templateUrl: '/Components/News/views/admin/edit.html'
+                    controller: 'PageCtrl',
+                    templateUrl: '/Components/Pages/views/admin/edit.html'
                 })
                 .when('/pages/create', {
-                    controller: 'NewsArticleCtrl',
-                    templateUrl: '/Components/News/views/admin/edit.html'
+                    controller: 'PageCtrl',
+                    templateUrl: '/Components/Pages/views/admin/edit.html'
                 });
         })
     .run(function(dashboard) {
+        // add item to admin main menu
         dashboard.mainMenu.push({
             url: '#!/pages',
             title: 'Pages',
-            icon: 'ico-file-alt'
+            icon: 'icon-file-alt'
         });
     })
-    .factory('NewsService', function($resource) {
-            return $resource('/rest.php/news/:id/', { 'id': '@id' }, {
-                updateOrder: { method: 'PUT', data: { 'orders': '@orders' }, isArray: true }
-            });
+    .factory('PagesService', function($resource) {
+        return $resource('/rest.php/pages/', { 'id': '@id' });
     })
-    .factory('LanguageService', function($resource) {
-            return $resource('/rest.php/app/language');
-    })
+    /*
     .factory('AuthorsService', function($resource) {
             return $resource('/rest.php/news/authors/');
+    })*/
+    .factory('CategoryService', function(ngNestedResource) {
+        var CategoryService = ngNestedResource('/rest.php/pages/categories/');
+
+        return CategoryService;
     })
-    .factory('CategoriesService', function($resource) {
-            return $resource('/rest.php/news/categories/');
-    })
-    .controller('PagesCtrl', function($scope, $location, $routeParams, $q, NewsService, AuthorsService, CategoriesService) {
-        return;
+    .controller('PagesCtrl', function($scope, $location, $routeParams, $q, PagesService, CategoryService) {
+        $scope.loading = {
+            category: true,
+            pages: true
+        };
+        $scope.category = CategoryService.getTree(function() {
+            $scope.loading.category = false;
+        });
         $scope.activeCategory = null;
         $scope.params = {};
         $scope.filterByCategory = function(category) {
@@ -56,18 +58,18 @@ define([
             $scope.params.category_id = category.id;
             $scope.update($scope.params);
         }
-        $scope.news = NewsService.get($routeParams);
-        $scope.category = CategoriesService.get();
 
         $scope.update = function(params) {
             $scope.params = params;
-            $scope.loading = true;
+            $scope.loading.pages = true;
             $location.search(params);
-            NewsService.get(params, function(result) {
-                $scope.loading = false;
-                $scope.news = result;
+            PagesService.get(params, function(result) {
+                $scope.loading.pages = false;
+                $scope.pages = result;
             });
         }
+        $scope.update();
+
         $scope.checked = function() {
             var checked = [];
             angular.forEach($scope.news, function(item) {
@@ -81,7 +83,7 @@ define([
             console.info('delete');
         }
 
-        $scope.users = function() {
+        /*$scope.users = function() {
             var q = $q.defer();
             AuthorsService.query(function(authors) {
                 var result = [];
@@ -94,11 +96,41 @@ define([
                 q.resolve(result);
             });
             return q.promise;
+        }*/
+    })
+    .controller('CategoriesCtrl', function($scope, $routeParams, CategoryService) {
+        $scope.addCategory = function (child) {
+            child.$insertItem(function(item) {
+                item.focus = true;
+                item.$settings = true;
+            });
+        };
+
+        $scope.move = function(item, before, index) {
+            item.$moveItem(before, index);
+        };
+    })
+    .controller('PageCtrl', function($scope, $routeParams, $location, $timeout, PagesService) {
+        if ($routeParams.id) {
+            $scope.page = PagesService.get({ id: $routeParams.id });
+        } else {
+            $scope.page = new PagesService({
+                title: {},
+                body: {}
+            });
+        }
+
+        $scope.savePage = function(page) {
+            page.$save(function() {
+                $timeout(function() {
+                $location.url('/pages')
+                }, 10)
+            });
+        }
+
+        $scope.cancel = function(page) {
+            $location.url('/pages');
         }
     })
-    .controller('NewsArticleCtrl', function($scope, $routeParams, NewsService, LanguageService) {
-        $scope.languages = LanguageService.query();
-        $scope.article = NewsService.get({ id: $routeParams.id });
-    });
 
 });

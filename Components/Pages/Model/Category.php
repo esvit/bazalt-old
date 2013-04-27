@@ -11,6 +11,7 @@ class Category extends Base\Category
     {
         $category = new Category();
         $category->site_id = CMS\Bazalt::getSiteId();
+        $category->is_publish = 0;
 
         return $category;
     }
@@ -93,11 +94,30 @@ class Category extends Base\Category
         return $nextElement;
     }
 
+
+
     public function toArray()
     {
-        $arr = parent::toArray();
-        $arr['childrens_count'] = isset($this->Childrens) ? count($this->Childrens) : 0;
-
-        return $arr;
+        $res = parent::toArray();
+        $res['is_publish'] = $this->is_publish == 1;
+        unset($res['Childrens']);
+        $elements = $this->Elements->get();
+        $count = 0;
+        $toArray = function($items) use (&$toArray, &$count) {
+            $result = [];
+            foreach ($items as $key => $item) {
+                $count++;
+                $res = $item->toArray();
+                $res['children'] = (is_array($item->Childrens) && count($item->Childrens)) ? $toArray($item->Childrens) : [];
+                $result[$key] = $res;
+            }
+            return $result;
+        };
+        $res['children'] = $toArray($elements);
+        $res['count'] = $count;
+        if (!$res['config']) {
+            $res['config'] = new \stdClass();
+        }
+        return $res;
     }
 }

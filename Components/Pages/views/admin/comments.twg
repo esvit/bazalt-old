@@ -1,8 +1,0 @@
-<div class="page-header">
-    <h1>
-        {% tr %}List of comments{% endtr %}
-
-    </h1>
-</div>
-
-{{ form|raw }}

@@ -20,7 +20,7 @@
  */
 namespace Components\Pages\Model\Base;
 
-abstract class Page extends \Framework\CMS\Model\Base\Record
+abstract class Page extends \Framework\CMS\ORM\Record
 {
     const TABLE_NAME = 'com_pages_pages';
     
@@ -56,9 +56,6 @@ abstract class Page extends \Framework\CMS\Model\Base\Record
     {
         $this->hasPlugin('Framework\CMS\ORM\Localizable', ['title', 'body']);
 
-        $this->hasPlugin('ORM_Plugin_Timestampable', array(
-                'created' => 'created_at',
-                'updated' => 'updated_at'
-            ));
+        $this->hasPlugin('Framework\System\ORM\Plugin\Timestampable', ['created' => 'created_at', 'updated' => 'updated_at']);
     }
 }

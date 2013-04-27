@@ -1,0 +1,38 @@
+## Turn on production mode
+#SetEnv PRODUCTION true
+
+## This is Sparta, only UTF-8
+AddDefaultCharset UTF-8
+
+Options +IncludesNoExec -ExecCGI -Includes -Indexes +Followsymlinks -MultiViews
+
+## Enable pretty urls
+<IfModule mod_rewrite.c>
+    RewriteEngine On
+    RewriteBase /
+
+    RewriteRule .htaccess$ - [F]
+
+    # denied scaners
+    RewriteRule ((%3A|:)25|%0D%0A) - [G]
+
+    # To redirect all users to access the site WITHOUT the 'www.' prefix,
+    # (http://www.example.com/... will be redirected to http://example.com/...)
+    RewriteCond %{HTTP_HOST} ^www\.(.+)$ [NC]
+    RewriteRule ^ http://%1%{REQUEST_URI} [L,R=301]
+
+    RewriteCond %{REQUEST_URI} ^(/static/)
+    RewriteCond %{SCRIPT_FILENAME} !-f
+    RewriteRule ^(.*)$ index.php [L]
+
+    # Rewrite for trailing slash (SEO friendly)
+    RewriteCond %{REQUEST_FILENAME} !-f
+    RewriteCond %{REQUEST_FILENAME} !-d
+    RewriteCond %{REQUEST_METHOD} ^(GET)
+    RewriteCond %{REQUEST_URI} !(\.[a-zA-Z0-9]{1,5}|/)$
+    RewriteRule ^(.*)$ $1/ [L,NE,QSA,R=301]
+    # Note NE - required parameter, else Apache encode breckets twice [ => %5B => %255B
+
+    RewriteCond %{SCRIPT_FILENAME} !-f
+    RewriteRule ^(.*)$ index.php [L]
+</IfModule>

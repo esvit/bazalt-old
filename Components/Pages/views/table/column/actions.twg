@@ -1,3 +1,0 @@
-<td style="vertical-align: middle;">
-    <a rel="{{ item.id }}" href="#" class="btn danger" onclick="$('#news-deleting').data('btn', $(this)).modal({ keyboard: true, backdrop: true, show: true }); return false;">{% tr %}Delete{% endtr %}</a>
-</td>

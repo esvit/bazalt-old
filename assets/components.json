@@ -10,6 +10,10 @@
     "jquery": "1.9.1",
     "angularjs-bower": "https://github.com/mjaric/angularjs-bower.git",
     "requirejs": "~2.1.5",
-    "underscore": "~1.4.4"
+    "ng-table": "https://github.com/esvit/ng-table.git",
+    "ng-finder": "https://github.com/esvit/ng-finder.git",
+    "ng-editable-tree": "https://github.com/esvit/ng-editable-tree.git",
+    "bootstrap": "~2.3.1",
+    "ckeditor": "latest"
   }
 }

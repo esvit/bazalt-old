@@ -1,7 +1,0 @@
-{% tr %}Rates:{% endtr %}<br>
-
-{% for code,info in rates %}
-<div>
-    <label class="checkbox"><input type="checkbox" value="1" name="{{ code }}" {% if options[code] %} checked="checked" {% endif %}>{{ info.size }} {{ info.name }}</label>
-</div>
-{% endfor %}

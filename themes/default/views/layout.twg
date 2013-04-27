@@ -3,13 +3,150 @@
 <!--[if IE 7]>         <html class="no-js lt-ie9 lt-ie8"> <![endif]-->
 <!--[if IE 8]>         <html class="no-js lt-ie9"> <![endif]-->
 <!--[if gt IE 8]><!--> <html class="no-js"> <!--<![endif]-->
+
 <head>
     <meta charset="utf-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
+    <title>MakeupIdea | Main page</title>
+    <meta name="fragment" content="!" />
+    
+    <script data-main="/App/Site/assets/js/app.js" src="/assets/require-jquery.js"></script>
 
+    <meta name="description" content="">
     <meta name="viewport" content="width=device-width">
-</head>
-<body>
+    <link rel='stylesheet' type='text/css' href='http://fonts.googleapis.com/css?family=Open+Sans+Condensed:300&subset=latin,cyrillic-ext,cyrillic' />
 
+    <link rel="stylesheet" type="text/css" href="/less.php/themes/default/assets/less/fonts.less"/>
+    <link rel="stylesheet" type="text/css" href="/themes/default/assets/css/bootstrap.min.css">
+    <link rel="stylesheet" type="text/css" href="/themes/default/assets/css/nivo-slider.css">
+    <link rel="stylesheet" type="text/css" href="/less.php/themes/default/assets/less/main.less"/>
+</head>
+<body ng-controller="bazaltGlobalController">
+
+
+<div class="navbar navbar-inverse navbar-fixed-top">
+    <div class="navbar-inner">
+        <div class="container">
+            <button type="button" class="btn btn-navbar" data-toggle="collapse" data-target=".nav-collapse">
+                <span class="icon-bar"></span>
+                <span class="icon-bar"></span>
+                <span class="icon-bar"></span>
+            </button>
+            <!--a class="brand" href="#">Project name</a-->
+            <div class="nav-collapse collapse">
+                <ul class="nav">
+                    <li class="active"><a href="/">Главная<div class="negative"><p></p></div></a></li>
+                    <li><a href="/gallery/">Галерея<div class="negative"><p></p></div></a></li>
+                    <li><a href="/makeupidea/return">Возврат<div class="negative"><p></p></div></a></li>
+                    <li><a href="/makeupidea/basket.html">Корзина<div class="negative"><p></p></div></a></li>
+                </ul>
+            </div>
+            <!--/.nav-collapse -->
+            <!--/basket-->
+            <div class="b-basket pull-right btn-group">
+                <a class="dropdown-toggle" data-toggle="dropdown" href="#"><i class="icon-shopping-cart icon-white"></i>Моя корзина <span>(0 товаров)</span></a>
+                <ul class="dropdown-menu">
+                    <li>
+                        <a href="/makeupidea/product-page.html" class="product-img"><img src="/themes/default/assets/img/medium_aruba1.jpg" width="50" /></a>
+                        <a href="/makeupidea/product-page.html" class="product-title">Smokey KIT</a>
+                        <a href="/makeupidea/product-page.html" class="product-count"><b>1 X 1050 руб</b></a>
+                        <a herf="/makeupidea/product-page.html" class="product-delete icon-remove"></a>
+                    </li>
+                    <li>
+                        <a href="/makeupidea/product-page.html" class="product-img"><img src="/themes/default/assets/img/medium_aruba1.jpg" width="50" /></a>
+                        <a href="/makeupidea/product-page.html" class="product-title">Smokey KIT</a>
+                        <a href="/makeupidea/product-page.html" class="product-count"><b>1 X 1050 руб</b></a>
+                        <a herf="/makeupidea/product-page.html" class="product-delete icon-remove"></a>
+                    </li>
+                    <li class="go-basket">
+                        <a class="btn btn-success" href="/makeupidea/basket.html">Перейти в корзину</a>
+                    </li>
+                </ul>
+            </div>
+            <!--/basket-->
+        </div>
+    </div>
+</div>
+
+<div class="container-fluid">
+    <div class="masthead">
+        <div class="b-tel-mail pull-right">
+            <nobr><noskype></noskype>+7(967) 078 46 03</nobr>
+            <a href="mailto:info@makeupidea.ru">info@makeupidea.ru</a>
+        </div>
+        <a href="#home" class="b-logotype muted">&nbsp;</a>
+    </div>
+    <hr />
+    <div class="container-head">
+        <a class="btn pull-right btn-success" href="/catalog">Каталог</a>
+        <ul class="nav nav-pills b-container-menu">
+            <li><a href="/makeupidea/catalog.html">Каталог</a></li>
+            <li><a href="/makeupidea/blog.html">Блог</a></li>
+            <li><a href="/makeupidea/index.html">О нас</a></li>
+            <li><a href="/admin.php">Админка</a></li>
+        </ul>
+        {% widgets 'menu' %}
+    </div>
+</div>
+{[status]}
+<div class="container-fluid">
+    <div id="ng-view" data-ng-view ng-animate="{enter: 'view-enter'}">
+    {{content|raw}}
+    </div>
+
+    <div class="clearfix"></div>
+    <hr />
+</div>
+<div class="footer">
+    <div class="container">
+        <div class="pull-right b-copyright">Makeupidea &copy; 2013. Все права защищены.</div>
+        <ul class="nav nav-pills b-container-menu">
+            <li><a href="/makeupidea/index.html">Главная</a></li>
+            <li><a href="/makeupidea/catalog.html">Каталог</a></li>
+            <li><a href="/makeupidea/blog.html">Блог</a></li>
+            <li><a href="/makeupidea/index.html">О нас</a></li>
+            <li><a href="/makeupidea/index.html">Сотрудничество</a></li>
+        </ul>
+    </div>
+</div>
+<style>
+#ng-view {
+position: relative;
+min-height: 500px;
+}
+.image {
+    width: 140px;
+    height: 140px;
+}
+.view-enter-setup, .view-leave-setup, .slide-enter-setup, .slide-leave-setup, .wave-enter-setup, .wave-leave-setup {
+  -webkit-transition:all cubic-bezier(0.250, 0.460, 0.450, 0.940) 0.5s;
+  -moz-transition:all cubic-bezier(0.250, 0.460, 0.450, 0.940) 0.5s;
+  -o-transition:all cubic-bezier(0.250, 0.460, 0.450, 0.940) 0.5s;
+  transition:all cubic-bezier(0.250, 0.460, 0.450, 0.940) 0.5s;
+}
+
+.view-enter-setup {
+  opacity:0;
+  left:100px;
+  width:100%;
+  position:absolute;
+}
+.view-enter-setup.view-enter-start {
+  left:0;
+  opacity:1;
+}
+
+.view-leave-setup {
+  position:absolute;
+  left:0;
+  width:100%;
+  opacity:1;
+}
+.view-leave-setup.view-leave-start {
+  left:-100px;
+  opacity:0;
+}
+</style>
+<!-- /container -->
 </body>
 </html>

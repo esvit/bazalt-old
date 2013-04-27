@@ -8,9 +8,6 @@
     <meta charset="utf-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
     <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
-    <script data-main="/App/Admin/assets/js/app.js" src="/assets/require-jquery.js"></script>
-    <script data-main="/App/Admin/assets/js/date.js" src="/App/Admin/assets/js/date.js"></script>
-    <script data-main="/App/Admin/assets/js/daterangepicker.js" src="/App/Admin/assets/js/daterangepicker.js"></script>
 
     <link rel="stylesheet" type="text/css" href="/App/Admin/assets/css/font-awesome.min.css" media="all">
     <link rel="stylesheet" type="text/css" href="/App/Admin/assets/css/bootstrap.css" media="all">
@@ -33,13 +30,13 @@
         </button>
         <div class="navbar-inner m-inner">
             <div class="row">
-                <a class="col-span-1" href="/">
+                <a class="pull-left logo" href="/">
                     <span class="navbar-brand">
                         <!--span class="ico-caret-left"></span> сайт-->
                     </span>
                 </a>
 
-                <div class="col-span-6 breadcrumb-container">
+                <div class="col-span-5 breadcrumb-container visible-desktop">
                     <ul class="breadcrumb ng-cloak" ng-show="breadcrumbs.length">
                         <li ng-repeat="breadcrumb in breadcrumbs">
                             <a ng-hide="$last" ng-href="{[breadcrumb.url]}">{[breadcrumb.title]}</a>
@@ -49,7 +46,7 @@
                 </div>
 
                 <div class="nav-collapse collapse navbar-responsive-collapse">
-                    <div class="col-span-5 adm-user">
+                    <div class="col-span-6 adm-user">
 
                         <div class="btn-toolbar pull-right ng-cloak">
                             <div class="btn-group pull-right">
@@ -99,5 +96,9 @@
             <section ng-view></section>
         </div>
     </div>
+    <script data-main="admin" src="/assets/require.js"></script>
+    <script src="/assets/components/ckeditor/ckeditor.js"></script>
+    <script data-main="/App/Admin/assets/js/date.js" src="/App/Admin/assets/js/date.js"></script>
+    <script data-main="/App/Admin/assets/js/daterangepicker.js" src="/App/Admin/assets/js/daterangepicker.js"></script>
 </body>
 </html>

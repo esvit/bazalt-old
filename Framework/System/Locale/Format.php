@@ -52,7 +52,7 @@ class Format
     public static function loadLocaleData($encoding)
     {
         self::$localeEncoding = $encoding;
-        self::$info = Locale_Config::getInfo();
+        self::$info = Config::getInfo();
 
         $jan = $mon = mktime(1, 1, 1, 1, 1, 1990);
         $feb = $tue = mktime(1, 1, 1, 2, 6, 1990);
@@ -154,11 +154,11 @@ class Format
             LOCALE_NUMBER_INTEGER => array('0', self::$info['decimal_point'], self::$info['thousands_sep'])
         );
 
-        if (Locale_Config::getLocale() == null) {
+        if (Config::getLocale() == null) {
         
         }
-        self::$dateFormats = Locale_Config::getLocale()->getDateFormats();
-        self::$timeFormats = Locale_Config::getLocale()->getTimeFormats();
+        self::$dateFormats = Config::getLocale()->getDateFormats();
+        self::$timeFormats = Config::getLocale()->getTimeFormats();
 
         if (!count(self::$dateTimeFormats)) {
             self::$dateTimeFormats = array(

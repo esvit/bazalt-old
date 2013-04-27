@@ -1,5 +1,7 @@
 <?php
 
-class ComPages_Model_PageLocale extends ComPages_Model_Base_PageLocale
+namespace Components\Pages\Model;
+
+class PageLocale extends Base\PageLocale
 {
 }

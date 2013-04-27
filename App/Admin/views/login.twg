@@ -12,7 +12,7 @@
     </style>
     <meta charset="utf-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
-    <script data-main="/App/Admin/assets/js/loginApp.js" src="/assets/require-jquery.js"></script>
+    <script data-main="admin-login" src="/assets/require.js"></script>
 
     <link rel="stylesheet" type="text/css" href="/App/Admin/assets/css/font-awesome.min.css" media="all">
     <link rel="stylesheet" type="text/css" href="/App/Admin/assets/css/bootstrap.css" media="all">

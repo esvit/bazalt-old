@@ -3,6 +3,10 @@ bin
 obj
 build
 tmp
+node_modules
+assets/components/*
+themes/*
+.svn
 .idea
 
 # mstest test results

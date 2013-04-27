@@ -1,6 +1,6 @@
 define([
     'jquery',
-    'elfinder/elfinder.min'
+    'elfinder'
 ], function(jQuery) {
 
 "use strict";

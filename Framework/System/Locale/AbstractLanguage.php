@@ -1,6 +1,8 @@
 <?php
 
-abstract class Locale_AbstractLanguage extends Object implements ISingleton
+namespace Framework\System\Locale;
+
+abstract class AbstractLanguage
 {
     /**
      * Називний (Хто? Що?) (весна, явір)

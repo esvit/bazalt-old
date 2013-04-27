@@ -10,6 +10,10 @@
  * @link       http://bazalt-cms.com/
  */
 
+namespace Framework\System\Locale;
+
+use Framework\Core\Logger;
+
 /**
  * Locale
  *
@@ -19,7 +23,7 @@
  * @license    GPLv3
  * @version    Release: $Revision: 154 $
  */
-class Locale_Config
+class Config
 {
     protected static $instance = null;
 
@@ -129,7 +133,7 @@ class Locale_Config
         if (self::$instance == null) {
             $className = __CLASS__;
             self::$instance = new $className;
-            Config_Loader::init('locale', self::$instance);
+            //Config_Loader::init('locale', self::$instance);
         }
         return self::$instance;
     }
@@ -284,7 +288,7 @@ class Locale_Config
         self::$info = localeConv();
         self::_setCurrentLocale($locale);
 
-        return Locale_Config::getInstance();
+        return Config::getInstance();
     }
 
     public static function &getLocale()
@@ -306,7 +310,7 @@ class Locale_Config
 
         self::$localeObject = self::findLocaleByAlias(self::languageOf($locale));
 
-        Locale_Format::loadLocaleData(self::$localeEncoding);
+        Format::loadLocaleData(self::$localeEncoding);
     }
 
     /**
@@ -352,11 +356,11 @@ class Locale_Config
      */
     public static function findLocaleByAlias($alias)
     {
-        $className = 'Locale_Language_' .  ucfirst(strToLower($alias));
+        $className = 'Framework\\System\\Locale\\Language\\' .  ucfirst(strToLower($alias));
         if (!class_exists($className)) {
-            throw new Exception('Invalid locale "' . $className . '"');
+            throw new \Exception('Invalid locale "' . $className . '"');
         }
-        return Object::Singleton($className);
+        return new $className();
     }
 
     /**

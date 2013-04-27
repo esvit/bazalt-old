@@ -35,8 +35,9 @@ class Application extends CMS\Application
             'uri' => $this->url
         ]);
 
+        // @todo remove
+        \Framework\System\Locale\Config::setLocale('en_GB');
         try {
-
             $resource = $app->getResource($request);
 
             $response = $resource->exec();

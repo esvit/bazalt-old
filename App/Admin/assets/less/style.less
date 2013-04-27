@@ -2,6 +2,7 @@
 @import "bootstrap/mixins.less";
 @import "dashboard-columns.less";
 @import "nav-nested.less";
+@import "nav-nested-editable.less";
 @import "bootstrapSwitch.less";
 
 /* For Angular */
@@ -17,6 +18,10 @@
 /* Base styles */
 @topBarHeight: 55px;
 
+html, body, .wrapper, .main-container {
+    height: 100%;
+    min-height: 100%;
+}
 body {
     font: 12px/14px 'Open Sans';
 }
@@ -34,6 +39,9 @@ h2 {
 }
 .btn-toolbar {
     margin-bottom: 10px;
+}
+.navbar-toggle {
+  z-index: 2;
 }
 .nav-pills.nav-stacked li {
     position: relative;
@@ -146,7 +154,7 @@ h2 {
     .quick-action {
       background: transparent;
       border: none;
-      [class^="ico-"] {
+      [class^="icon-"] {
         font-size: 1.5em;
         color: #a3a3a3;
         margin-bottom: 1px;
@@ -156,7 +164,7 @@ h2 {
         font-size: 13px;
       }
       &:hover {
-        [class^="ico-"] {
+        [class^="icon-"] {
           color: #555555;
         }
         div {
@@ -174,6 +182,52 @@ h2 {
     .make-column(11);
     .make-column-offset(1);
     padding-top: @topBarHeight + 15;
+    position: relative;
+
+    .locked {
+        position: absolute;
+        top: @topBarHeight;
+        left: 0;
+        right: 0;
+        bottom: 0;
+        overflow-x: hidden;
+        overflow-y: auto;
+        & > .row {
+            position: absolute;
+            z-index: (@zindex-modal-background - 9);
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            [class*="col-span-"], .modal-content {
+                height: 100%;
+            }
+            .modal-content {
+                border-radius: 0;
+                border: 0 none;
+                overflow-y: scroll;
+            }
+        }
+        .locked-content {
+            padding: 15px;
+            .btn {
+                &.close-edit {
+                    margin-right:-25px;
+                }
+            }
+        }
+
+        .backdrop {
+            z-index: (@zindex-modal-background - 10);
+            background-color: #000;
+            .opacity(.5);
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+        }
+    }
 }
 .m-header {
     padding: 0;
@@ -192,7 +246,9 @@ h2 {
         background-color: transparent;
     }
   .m-inner {
-    .col-span-1 {
+    .pull-left {
+        width: 8.33333%;
+        min-width: 65px;
       .navbar-brand {
         background: url('../img/logo30.png') no-repeat 0 0 transparent;
         display: block;
@@ -371,6 +427,12 @@ h2 {
     }
 }
 
+.page-header {
+  .col-span-6 {
+    max-width: 445px;
+  }
+}
+
 /*\**\*/
 
 // For forms in list
@@ -381,13 +443,25 @@ li.nav-form.nav-header {
 .loading-container {
     position: relative;
     .loading {
-        position: absolute;
-        top: 0;
-        left: 0;
-        right: 0;
-        bottom: 0;
-        background-color: white;
-        opacity: 0.5;
+        &:before, &:after {
+            content: " ";
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            min-height: 50px;
+            min-width: 50px;
+        }
+        &:before {
+            background-color: white;
+            opacity: 0.5;
+        }
+        &:after {
+            background-image: url('../img/preloader.gif');
+            background-position: center center;
+            background-repeat: no-repeat;
+        }
     }
 }
 

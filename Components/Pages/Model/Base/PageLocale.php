@@ -21,7 +21,7 @@
  */
 namespace Components\Pages\Model\Base;
 
-abstract class PageLocale extends \Framework\CMS\Model\Base\Record
+abstract class PageLocale extends \Framework\CMS\ORM\Record
 {
     const TABLE_NAME = 'com_pages_pages_locale';
 
@@ -40,3 +40,4 @@ abstract class PageLocale extends \Framework\CMS\Model\Base\Record
         $this->hasColumn('body', 'N:text');
         $this->hasColumn('completed', 'U:tinyint(4)|0');
     }
+}
