@@ -25,3 +25,15 @@ Technologies
 ------------
 
 - jQuery and AngularJS on frontend
+
+Development
+-----------
+
+At first download and install [npm manager](https://npmjs.org/)
+
+```
+git clone https://github.com/Equalteam/bazalt.git .
+npm install
+bower install
+grunt
+```
