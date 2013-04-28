@@ -8,7 +8,7 @@
   ],
   "dependencies": {
     "jquery": "1.9.1",
-    "angularjs-bower": "https://github.com/mjaric/angularjs-bower.git",
+    "angular": "https://github.com/jmeiss/bower-angular-unstable.git#~1.1.4",
     "requirejs": "~2.1.5",
     "ng-table": "https://github.com/esvit/ng-table.git",
     "ng-finder": "https://github.com/esvit/ng-finder.git",

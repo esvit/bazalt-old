@@ -3,6 +3,8 @@ bin
 obj
 build
 tmp
+config.php
+installer.zip
 node_modules
 assets/components/*
 themes/*

@@ -17,18 +17,18 @@ abstract class Category extends \Framework\CMS\ORM\Record
     {
         $this->hasColumn('id', 'PUA:int(10)');
         $this->hasColumn('site_id', 'U:int(10)');
-        $this->hasColumn('image', 'varchar(255)');
         $this->hasColumn('title', 'varchar(255)');
-        $this->hasColumn('description', 'mediumtext');
         $this->hasColumn('alias', 'varchar(255)');
+        $this->hasColumn('image', 'varchar(255)');
+        $this->hasColumn('description', 'mediumtext');
         $this->hasColumn('is_hidden', 'U:tinyint(1)|0');
-        $this->hasColumn('is_publish', 'U:tinyint(1)');
+        $this->hasColumn('is_published', 'U:tinyint(1)');
     }
 
     public function initRelations()
     {
         $this->hasRelation('Elements', new \ORM_Relation_NestedSet('Components\Pages\Model\Category', 'site_id'));
-        $this->hasRelation('PublicElements', new \ORM_Relation_NestedSet('Components\Pages\Model\Category', 'site_id', null, array('is_hidden' => '0', 'is_publish' => 1)));
+        $this->hasRelation('PublicElements', new \ORM_Relation_NestedSet('Components\Pages\Model\Category', 'site_id', null, array('is_hidden' => '0', 'is_published' => 1)));
     }
 
     public function initPlugins()

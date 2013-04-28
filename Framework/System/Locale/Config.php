@@ -236,7 +236,7 @@ class Config
         }
         // get Win32 locale code (en_US => enu)
         if (OS == OS_WIN) { // @codeCoverageIgnoreStart
-            $windows = Locale_Info::getWindowsLocales();
+            $windows = Info::getWindowsLocales();
             $setlocale = array_key_exists($locale, $windows) ? $windows[$locale] : $locale;
         } else {            // @codeCoverageIgnoreEnd
             $setlocale = $locale . '.UTF-8'; // и неипёт

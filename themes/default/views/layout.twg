@@ -8,20 +8,14 @@
     <meta charset="utf-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
     <title>MakeupIdea | Main page</title>
-    <meta name="fragment" content="!" />
-    
-    <script data-main="/App/Site/assets/js/app.js" src="/assets/require-jquery.js"></script>
 
     <meta name="description" content="">
     <meta name="viewport" content="width=device-width">
     <link rel='stylesheet' type='text/css' href='http://fonts.googleapis.com/css?family=Open+Sans+Condensed:300&subset=latin,cyrillic-ext,cyrillic' />
 
-    <link rel="stylesheet" type="text/css" href="/less.php/themes/default/assets/less/fonts.less"/>
-    <link rel="stylesheet" type="text/css" href="/themes/default/assets/css/bootstrap.min.css">
-    <link rel="stylesheet" type="text/css" href="/themes/default/assets/css/nivo-slider.css">
-    <link rel="stylesheet" type="text/css" href="/less.php/themes/default/assets/less/main.less"/>
+    <link rel="stylesheet" type="text/css" href="/themes/default/assets/css/theme.css"/>
 </head>
-<body ng-controller="bazaltGlobalController">
+<body>
 
 
 <div class="navbar navbar-inverse navbar-fixed-top">
@@ -35,40 +29,21 @@
             <!--a class="brand" href="#">Project name</a-->
             <div class="nav-collapse collapse">
                 <ul class="nav">
-                    <li class="active"><a href="/">Главная<div class="negative"><p></p></div></a></li>
-                    <li><a href="/gallery/">Галерея<div class="negative"><p></p></div></a></li>
-                    <li><a href="/makeupidea/return">Возврат<div class="negative"><p></p></div></a></li>
-                    <li><a href="/makeupidea/basket.html">Корзина<div class="negative"><p></p></div></a></li>
+                    <li class="active"><a href="/">Главная</a></li>
+                    <li><a href="/gallery/">Галерея</a></li>
+                    <li><a href="/makeupidea/return">Возврат</a></li>
+                    <li><a href="/makeupidea/basket.html">Корзина</a></li>
                 </ul>
             </div>
             <!--/.nav-collapse -->
-            <!--/basket-->
-            <div class="b-basket pull-right btn-group">
-                <a class="dropdown-toggle" data-toggle="dropdown" href="#"><i class="icon-shopping-cart icon-white"></i>Моя корзина <span>(0 товаров)</span></a>
-                <ul class="dropdown-menu">
-                    <li>
-                        <a href="/makeupidea/product-page.html" class="product-img"><img src="/themes/default/assets/img/medium_aruba1.jpg" width="50" /></a>
-                        <a href="/makeupidea/product-page.html" class="product-title">Smokey KIT</a>
-                        <a href="/makeupidea/product-page.html" class="product-count"><b>1 X 1050 руб</b></a>
-                        <a herf="/makeupidea/product-page.html" class="product-delete icon-remove"></a>
-                    </li>
-                    <li>
-                        <a href="/makeupidea/product-page.html" class="product-img"><img src="/themes/default/assets/img/medium_aruba1.jpg" width="50" /></a>
-                        <a href="/makeupidea/product-page.html" class="product-title">Smokey KIT</a>
-                        <a href="/makeupidea/product-page.html" class="product-count"><b>1 X 1050 руб</b></a>
-                        <a herf="/makeupidea/product-page.html" class="product-delete icon-remove"></a>
-                    </li>
-                    <li class="go-basket">
-                        <a class="btn btn-success" href="/makeupidea/basket.html">Перейти в корзину</a>
-                    </li>
-                </ul>
+            <div style="margin: 10px 0 -10px" ng-show="status == 'loading'" class="ng-cloak progress progress-success progress-striped active">
+                <div class="bar" style="width: 100%;">Loading...</div>
             </div>
-            <!--/basket-->
         </div>
     </div>
 </div>
 
-<div class="container-fluid">
+<div class="container">
     <div class="masthead">
         <div class="b-tel-mail pull-right">
             <nobr><noskype></noskype>+7(967) 078 46 03</nobr>
@@ -85,11 +60,12 @@
             <li><a href="/makeupidea/index.html">О нас</a></li>
             <li><a href="/admin.php">Админка</a></li>
         </ul>
+
         {% widgets 'menu' %}
     </div>
 </div>
-{[status]}
-<div class="container-fluid">
+
+<div class="container">
     <div id="ng-view" data-ng-view ng-animate="{enter: 'view-enter'}">
     {{content|raw}}
     </div>
@@ -148,5 +124,7 @@ min-height: 500px;
 }
 </style>
 <!-- /container -->
+
+    <script data-main="site" src="/assets/require.js"></script>
 </body>
 </html>

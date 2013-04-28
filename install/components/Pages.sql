@@ -2,6 +2,7 @@
 /*!40101 SET NAMES utf8 */;
 /*!40014 SET FOREIGN_KEY_CHECKS=0 */;
 
+DROP TABLE IF EXISTS `com_pages_categories`;
 CREATE TABLE IF NOT EXISTS `com_pages_categories` (
   `id` int(10) unsigned NOT NULL AUTO_INCREMENT,
   `site_id` int(10) unsigned DEFAULT NULL,
@@ -11,12 +12,13 @@ CREATE TABLE IF NOT EXISTS `com_pages_categories` (
   `rgt` int(10) NOT NULL,
   `depth` int(10) unsigned NOT NULL,
   `is_hidden` tinyint(1) unsigned NOT NULL DEFAULT '0',
-  `is_publish` tinyint(1) unsigned NOT NULL DEFAULT '1',
+  `is_published` tinyint(1) unsigned NOT NULL DEFAULT '1',
   PRIMARY KEY (`id`),
   KEY `FK_com_pages_categories_cms_sites` (`site_id`),
   CONSTRAINT `FK_com_pages_categories_cms_sites` FOREIGN KEY (`site_id`) REFERENCES `cms_sites` (`id`) ON DELETE CASCADE ON UPDATE NO ACTION
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 
+DROP TABLE IF EXISTS `com_pages_categories_locale`;
 CREATE TABLE IF NOT EXISTS `com_pages_categories_locale` (
   `id` int(10) unsigned NOT NULL,
   `lang_id` int(10) unsigned NOT NULL,
@@ -29,6 +31,7 @@ CREATE TABLE IF NOT EXISTS `com_pages_categories_locale` (
   CONSTRAINT `FK_com_pages_categories_locale_com_pages_categories` FOREIGN KEY (`id`) REFERENCES `com_pages_categories` (`id`) ON DELETE CASCADE ON UPDATE NO ACTION
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 
+DROP TABLE IF EXISTS `com_pages_images`;
 CREATE TABLE IF NOT EXISTS `com_pages_images` (
   `id` int(10) unsigned NOT NULL AUTO_INCREMENT,
   `page_id` int(10) unsigned NOT NULL,
@@ -39,19 +42,16 @@ CREATE TABLE IF NOT EXISTS `com_pages_images` (
   CONSTRAINT `FK_com_pages_images_com_pages_pages` FOREIGN KEY (`page_id`) REFERENCES `com_pages_pages` (`id`) ON DELETE CASCADE ON UPDATE NO ACTION
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 
+DROP TABLE IF EXISTS `com_pages_pages`;
 CREATE TABLE IF NOT EXISTS `com_pages_pages` (
   `id` int(10) unsigned NOT NULL AUTO_INCREMENT,
   `site_id` int(10) unsigned NOT NULL,
   `user_id` int(10) unsigned DEFAULT NULL,
   `category_id` int(10) unsigned DEFAULT NULL,
-  `create_date` datetime DEFAULT NULL,
+  `url` varchar(255) DEFAULT NULL,
   `updated_at` timestamp NULL DEFAULT NULL,
   `created_at` timestamp NULL DEFAULT NULL,
-  `edit_date` datetime DEFAULT NULL,
-  `publish` tinyint(1) unsigned NOT NULL DEFAULT '0',
-  `url` varchar(255) DEFAULT NULL,
-  `template` varchar(255) DEFAULT NULL,
-  `order` tinyint(3) unsigned NOT NULL DEFAULT '0',
+  `is_published` tinyint(1) unsigned NOT NULL DEFAULT '0',
   PRIMARY KEY (`id`),
   KEY `FK_com_pages_pages_cms_users` (`user_id`),
   KEY `FK_com_pages_pages_cms_sites` (`site_id`),
@@ -61,6 +61,7 @@ CREATE TABLE IF NOT EXISTS `com_pages_pages` (
   CONSTRAINT `FK_com_pages_pages_com_pages_categories` FOREIGN KEY (`category_id`) REFERENCES `com_pages_categories` (`id`) ON DELETE SET NULL ON UPDATE NO ACTION
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 
+DROP TABLE IF EXISTS `com_pages_pages_locale`;
 CREATE TABLE IF NOT EXISTS `com_pages_pages_locale` (
   `id` int(10) unsigned NOT NULL DEFAULT '0',
   `lang_id` int(10) unsigned NOT NULL,
@@ -71,15 +72,6 @@ CREATE TABLE IF NOT EXISTS `com_pages_pages_locale` (
   KEY `FK_com_pages_pages_cms_languages` (`lang_id`),
   CONSTRAINT `FK_com_pages_pages_locale_cms_languages` FOREIGN KEY (`lang_id`) REFERENCES `cms_languages` (`id`) ON DELETE CASCADE ON UPDATE NO ACTION,
   CONSTRAINT `FK_com_pages_pages_locale_com_pages_pages` FOREIGN KEY (`id`) REFERENCES `com_pages_pages` (`id`) ON DELETE CASCADE ON UPDATE NO ACTION
-) ENGINE=InnoDB DEFAULT CHARSET=utf8;
-
-CREATE TABLE IF NOT EXISTS `com_pages_ref_categories` (
-  `page_id` int(10) unsigned NOT NULL,
-  `category_id` int(10) unsigned NOT NULL,
-  PRIMARY KEY (`page_id`,`category_id`),
-  KEY `FK_com_pages_ref_categories_com_categories_elements` (`category_id`),
-  CONSTRAINT `FK_com_pages_ref_categories_com_categories_elements` FOREIGN KEY (`category_id`) REFERENCES `cms_categories` (`id`) ON DELETE CASCADE ON UPDATE NO ACTION,
-  CONSTRAINT `FK_com_pages_ref_categories_com_pages_pages` FOREIGN KEY (`page_id`) REFERENCES `com_pages_pages` (`id`) ON DELETE CASCADE ON UPDATE NO ACTION
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 
 INSERT INTO `cms_components` (`name`, `dependencies`, `is_active`) VALUES ('Pages', NULL, 1);

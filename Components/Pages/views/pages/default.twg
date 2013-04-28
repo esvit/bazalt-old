@@ -1,0 +1,5 @@
+<div class="page-header">
+    {{page.title}}
+</div>
+
+{{page.body|raw}}

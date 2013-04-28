@@ -9,6 +9,9 @@ use Framework\Core\Helper\Url;
 
 class Page extends Base\Page
 {
+    /**
+     * Create new page without saving in database
+     */
     public static function create()
     {
         $page = new Page();
@@ -16,17 +19,20 @@ class Page extends Base\Page
         return $page;
     }
 
-    public static function getByUrl($url, $publish = null, $userId = null)
+    /**
+     * Get page by url
+     */
+    public static function getByUrl($url, $is_published = null, $userId = null)
     {
         $q = Page::select()
-            ->where('url = ?', $url)
-            ->andWhere('f.site_id = ?', CMS\Bazalt::getSiteId());
+                ->where('url = ?', $url)
+                ->andWhere('f.site_id = ?', CMS\Bazalt::getSiteId());
 
-        if ($publish != null) {
-            $q->andWhere('publish = ?', $publish);
+        if ($is_published != null) {
+            $q->andWhere('is_published = ?', $is_published);
         }
-        if ($publish == null && $userId != null) {
-            $q->andWhere('user_id = ? OR publish = 1', $userId);
+        if ($userId != null) {
+            $q->andWhere('user_id = ?', $userId);
         }
         $q->limit(1);
         return $q->fetch();
@@ -44,16 +50,7 @@ class Page extends Base\Page
         return $q->exec();
     }
 
-    public function getCut()
-    {
-        $mPos = strpos($this->body, '<!-- pagebreak -->');
-        if($mPos!== false) {
-            return substr($this->body, 0, $mPos);
-        }
-        return $this->body;
-    }
-
-    public static function getCollection($published = null)
+    public static function getCollection($is_publisheded = null)
     {
         $q = ORM::select('Components\Pages\Model\Page f')
                 //->innerJoin('ComPages_Model_PageLocale ref', array('id', 'f.id'))
@@ -61,31 +58,14 @@ class Page extends Base\Page
                 //->where('ref.lang_id = ?', CMS_Language::getCurrentLanguage()->id)
                 ->andWhere('f.site_id = ?', CMS\Bazalt::getSiteId());
 
-        if ($published) {
-            $q->andWhere('publish = ?', 1);
-        }
-        return new CMS\ORM\Collection($q);
-    }
-
-    public static function getCollectionByCategory($category, $published = null)
-    {
-        $q = ORM::select('ComPages_Model_Page f', 'f.*')
-                ->innerJoin('ComPages_Model_Category c', array('id', 'f.category_id'))
-                ->andWhere('c.lft >= ?', $category->lft)
-                ->andWhere('c.rgt <= ?', $category->rgt)
-                ->andWhere('c.site_id = ?', CMS\Bazalt::getSiteId())
-                ->andWhere('f.site_id = ?', CMS\Bazalt::getSiteId())
-                ->groupBy('f.id');
-
-        if ($published) {
-            $q->andWhere('publish = ?', 1);
+        if ($is_publisheded) {
+            $q->andWhere('is_published = ?', 1);
         }
         return new CMS\ORM\Collection($q);
     }
 
     public function getUrl()
     {
-        $url = $this->url;
-        return Route::urlFor('ComPages.ShowByAlias', array('url' => $url));
+        return Route::urlFor('Pages.Page', array('page' => $this->url));
     }
 }

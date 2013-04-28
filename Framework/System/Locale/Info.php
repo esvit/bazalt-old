@@ -1,6 +1,9 @@
 <?php
 
-class Locale_Info
+
+namespace Framework\System\Locale;
+
+class Info
 {
     protected static $windows = array(
 

@@ -1,6 +1,6 @@
 module.exports = function(grunt) {
 
-    var isDev = true;
+    var isDev = false;
 
     // Project configuration.
     grunt.initConfig({
@@ -17,15 +17,15 @@ module.exports = function(grunt) {
                     'assets/components/requirejs/require.js',
                     'assets/components/jquery/jquery.js',
                     'assets/components/jquery/jquery-migrate.js',
-                    'assets/components/angularjs-bower/angular-loader.js',
+                    'assets/components/angular/angular-loader.js',
                     'assets/config.js'
                 ],
                 dest: 'assets/require.js'
             },
             'angular.js': {
                 src: [
-                    'assets/components/angularjs-bower/angular.js',
-                    'assets/components/angularjs-bower/angular-resource.js'
+                    'assets/components/angular/angular.js',
+                    'assets/components/angular/angular-resource.js'
                 ],
                 dest: 'assets/components/angular.js'
             },
@@ -93,6 +93,23 @@ module.exports = function(grunt) {
                 ],
                 dest: 'assets/components/jquery.ui.nestedSortable.js'
             },
+            'site.js': {
+                src: [
+                    'App/Site/assets/js/app.js'
+                ],
+                dest: 'assets/components/site.js'
+            }
+        },
+        less: {
+            "themes/default": {
+                options: {
+                    paths: ["assets/components/bootstrap/less"],
+                    yuicompress: !isDev
+                },
+                files: {
+                    "themes/default/assets/css/theme.css": "themes/default/assets/less/theme.less"
+                }
+            }
         },
         compress: {
             main: {
@@ -137,10 +154,12 @@ module.exports = function(grunt) {
     // Load the plugin that provides the "uglify" task.
     grunt.loadNpmTasks('grunt-contrib-uglify');
     grunt.loadNpmTasks('grunt-contrib-copy');
+    grunt.loadNpmTasks('grunt-contrib-less');
     grunt.loadNpmTasks('grunt-contrib-compress');
 
     // Default task(s).
     grunt.registerTask('default', [
+        'less',
         'uglify',
         'compress'
     ]);

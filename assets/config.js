@@ -3,19 +3,18 @@
 require.config({
     baseUrl: "/assets/components",
     paths: {
+        //'site': '../../App/Site/assets/js/app',
+
         'admin': '../../App/Admin/assets/js/app',
         'admin-login': '../../App/Admin/assets/js/loginApp',
+
         'elfinder': '../modules/elfinder/elfinder.min'
-        /*Angular : 'angular/module',
-        BazaltCMS : 'bazalt/module',
-        UIBootstrap : 'ui-bootstrap/module',
-        Bootstrap : 'bootstrap.min',
-        bootstrap : 'bootstrap.min',
-        'load-image' : 'bootstrap-image-gallery/load-image.min',
-        "underscore": "underscore/underscore-min"*/
     },
     urlArgs: 'v=1.0',
     shim: {
+        "site": {
+            deps: ['angular', 'bazalt-cms']
+        },
         "jquery-ui": {
             exports: "$",
             deps: ['jquery']
