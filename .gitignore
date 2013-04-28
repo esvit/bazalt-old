@@ -7,7 +7,9 @@ config.php
 installer.zip
 node_modules
 assets/components/*
-themes/*
+themes/default/assets/css/*
+themes/default/assets/img/*
+themes/default/assets/js/*
 .svn
 .idea
 

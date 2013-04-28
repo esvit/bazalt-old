@@ -98,6 +98,19 @@ module.exports = function(grunt) {
                     'App/Site/assets/js/app.js'
                 ],
                 dest: 'assets/components/site.js'
+            },
+            'themes/default': {
+                src: [
+                    'assets/components/bootstrap/js/*.js'
+                ],
+                dest: 'themes/default/assets/js/bootstrap.js'
+            }
+        },
+        copy: {
+            "themes/default": {
+                files: [
+                    { flatten: true, expand: true, src: ["assets/components/bootstrap/img/*"], dest: "themes/default/assets/img/", filter: 'isFile'}
+                ]
             }
         },
         less: {
@@ -159,6 +172,7 @@ module.exports = function(grunt) {
 
     // Default task(s).
     grunt.registerTask('default', [
+        'copy',
         'less',
         'uglify',
         'compress'
