@@ -16,6 +16,8 @@
     "ng-editable-tree": "https://github.com/esvit/ng-editable-tree.git",
     "bootstrap": "~2.3.1",
     "ckeditor": "latest",
-    "plupload": "https://github.com/gregmolnar/plupload-bower.git"
+    "plupload": "https://github.com/gregmolnar/plupload-bower.git",
+    "jquery-ui-touch-punch": "latest",
+    "jquery-ui": "~1.10.2"
   }
 }

@@ -117,6 +117,11 @@ module.exports = function(grunt) {
             }
         },
         copy: {
+            "ckeditor/bazalt-cms": {
+                files: [
+                    { flatten: true, expand: true, src: ["assets/bazalt-cms/ckeditor/bazalt-cms/*"], dest: "assets/components/ckeditor/plugins/bazalt-cms/", filter: 'isFile'}
+                ]
+            },
             "themes/default": {
                 files: [
                     { flatten: true, expand: true, src: ["assets/components/bootstrap/img/*"], dest: "themes/default/assets/img/", filter: 'isFile'}
