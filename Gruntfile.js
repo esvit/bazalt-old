@@ -1,6 +1,6 @@
 module.exports = function(grunt) {
 
-    var isDev = false;
+    var isDev = true;
 
     // Project configuration.
     grunt.initConfig({
