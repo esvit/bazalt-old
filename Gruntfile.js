@@ -29,9 +29,15 @@ module.exports = function(grunt) {
                 ],
                 dest: 'assets/components/angular.js'
             },
+            'angular-cookies.js': {
+                src: [
+                    'assets/components/angular/angular-cookies.js'
+                ],
+                dest: 'assets/components/angular-cookies.js'
+            },
             'jquery-ui.js': {
                 src: [
-                    'assets/components/jquery-ui/ui/*.js',
+                    'assets/components/jquery-ui/ui/minified/jquery-ui.custom.min.js',
                     //'assets/components/jquery-ui/ui/i18n/*.js'
                 ],
                 dest: 'assets/components/jquery-ui.js'

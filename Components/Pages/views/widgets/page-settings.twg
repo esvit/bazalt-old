@@ -1,0 +1,9 @@
+{% tr %}Select page:{% endtr %}
+<select name="pageId">
+    {% for page in all_pages %}
+    {if $page->publish}
+    <option value="{$page->id}"{if $options.pageId == $page->id} selected="selected"{/if}>{$page->title}</option>
+    {/if}
+    {% endfor %}
+</select> <br />
+{% tr %}Show title ?{% endtr %}  <input type="checkbox" name="show_title"{if $options.show_title} checked="checked"{/if} />

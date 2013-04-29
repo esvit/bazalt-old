@@ -1,21 +1,37 @@
-define(['angular/angular-cookies.min', 'jquery-ui/jquery-ui.min'], function() {
+'use strict';
 
-    var app = angular.module('Admin.Panel', ['ngCookies']);
-    app.controller('PanelCtrl', function($scope, $cookieStore, WidgetsService) {
-        $scope.$watch('showWidgets', function(value) {
-            $('body').toggleClass('cms-manage-widgets', value);
-            $cookieStore.put('showWidgets', value);
-            if (value) {
-                $('body').css('marginLeft', '200px');
-            } else {
-                $('body').css('marginLeft', '0px');
+define(['jquery-ui', 'angular-cookies'], function() {
+
+    angular.module('Component.AdminPanel', ['ngCookies'])
+    .run(['$rootScope', '$compile', function($rootScope, $compile) {
+        $('body').append($compile('<admin-panel />')($rootScope));
+    }])
+    .directive('adminPanel', function() {
+        return { 
+            restrict:'E',
+            replace:false,
+            templateUrl:'/Components/AdminPanel/views/admin/panel.html',
+            controller: ['$scope', '$cookieStore', 'WidgetsService', function($scope, $cookieStore, WidgetsService) {
+                $scope.$watch('showWidgets', function(value) {
+                    $('body').toggleClass('cms-manage-widgets', value);
+                    $cookieStore.put('showWidgets', value);
+                    if (value) {
+                        $('body').css('marginLeft', '200px');
+                    } else {
+                        $('body').css('marginLeft', '0px');
+                    }
+                });
+                $scope.showWidgets = !!$cookieStore.get('showWidgets');
+                $scope.manageWidgets = function() {
+                    $scope.showWidgets = !$scope.showWidgets;
+                }
+                $scope.widgets = WidgetsService.query();
+            }],
+            link: function() {
+                // body and bootstrap nav fixed
+                $('body, .navbar-fixed-top').css('marginTop', 40);
             }
-        });
-        $scope.showWidgets = !!$cookieStore.get('showWidgets');
-        $scope.manageWidgets = function() {
-            $scope.showWidgets = !$scope.showWidgets;
         }
-        $scope.widgets = WidgetsService.query();
     })
     .factory('WidgetsService', function($resource) {
             return $resource('/rest.php/app/widgets/:id', { 'id': '@' }, {
@@ -25,11 +41,13 @@ define(['angular/angular-cookies.min', 'jquery-ui/jquery-ui.min'], function() {
             });
     })
 
-    app.directive('widgets', function($compile, WidgetsService) {
+    .directive('widgets', function($compile, WidgetsService) {
         return {
-            controller: function($scope) {
-                this.addWidget = function(id, widget) {
-                    if ($scope.isBase) {
+            link: function(scope, element,attrs) {
+                scope.isBase = attrs.widgets == 'base';
+
+                scope.addWidget = function(id, widget) {
+                    if (scope.isBase) {
                         widget.draggable({
                             connectToSortable: '.cms-widgets-border-around',
                             helper: "clone",
@@ -37,9 +55,6 @@ define(['angular/angular-cookies.min', 'jquery-ui/jquery-ui.min'], function() {
                         });
                     }
                 }
-            },
-            link: function(scope, element,attrs) {
-                scope.isBase = attrs.widgets == 'base';
 
                 var opts = {
                     revert: 'invalid',
@@ -120,10 +135,9 @@ define(['angular/angular-cookies.min', 'jquery-ui/jquery-ui.min'], function() {
                 element.sortable(opts);
             }
         };
-    });
-    app.directive('widget', function($compile, WidgetsService) {
+    })
+    .directive('widget', function($compile, WidgetsService) {
         return {
-            require: ['^widgets'],
             scope: true,
             controller: function($scope) {
                 $scope.deleteWidget = function() {
@@ -175,9 +189,11 @@ define(['angular/angular-cookies.min', 'jquery-ui/jquery-ui.min'], function() {
                     });
                 }
             },
-            link: function(scope, element, attrs, ctrls) {
-                var widgets = ctrls[0];
-                widgets.addWidget(attrs.widget, element);
+            link: function(scope, element, attrs) {
+                var widgets = angular.element(element).closest('[widgets]').scope();
+                if (widgets) {
+                    widgets.addWidget(attrs.widget, element);
+                }
 
                 scope.element = element;
                 scope.widget = {
@@ -196,69 +212,4 @@ define(['angular/angular-cookies.min', 'jquery-ui/jquery-ui.min'], function() {
             }
         };
     })
-
-    // SEO
-    $('#show-seo-link').click(function() {
-        $('#comseo-content-for-page').hide();
-        $('#show-seo-content').slideToggle('fast');
-        return false;
-    });
-    $('#show-seo-link-page').click(function() {
-        $('#show-seo-content').hide();
-        $('#comseo-content-for-page').slideToggle('fast');
-        return false;
-    });
-    
-    
-    
-    $('#cms_overlay .btn-cancel').click(function() {
-        $('#cms_overlay').removeClass('show');
-    });
-    $('.btn-settings').on('click', function() {
-        //var el = $(this).parents('.cms-widget-container');
-        /*$('#' + el.attr('id') + '-settings').dialog("open");//.toggle();
-        
-        return false;*/
-         var el = $(this),
-             target = el.data('id'),
-             overlay = $('#cms_overlay').addClass('show');
-             settingsForm = $('.cms_dialog .cms_dialog-content', overlay).empty();
-
-             settingsForm.data('id', target);
-             ComPanel_Webservice_Widget.getWidgetSettings(target, {
-                success: function(res) {
-                    settingsForm.html(res);
-                }
-             });
-        return false;
-    });
-    
-    $('.cms-widgets-settings .add').click(function(){
-        $('.tplTitle', $(this).parent().parent()).parent().show();
-        $('.editTemplate', $(this).parent().parent()).show();
-    });
-    $('.widget-templates').change(function(){
-        $('.cms-widgets-settings .edit').hide();
-        if($(this).find('option:selected').parent().attr('rel') == 'custom') {
-            $(this).parent().find('.edit').show();
-        }
-    });
-    $('#cms_overlay .cms_dialog .btn-apply').click(function(){
-        var btn = $(this),
-            form = btn.closest('.cms_dialog').find('.cms_dialog-content'),
-            id = form.data('id'),
-            settings = form.serializeArray();
-
-            btn.attr('disabled', 'disabled')
-               .addClass('disabled')
-               .data('text', btn.text())
-               .text('Loading...');
-            ComPanel_Webservice_Widget.saveWidgetSettings(id, settings, function(res) {
-                $('#bz-widget-' + id).replaceWith(res.html);
-                btn.removeAttr('disabled')
-                   .removeClass('disabled')
-                   .text(btn.data('text'));
-                $('#cms_overlay').removeClass('show');
-            });
-    });
 });

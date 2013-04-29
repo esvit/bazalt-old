@@ -2,11 +2,11 @@
     <div class="page-header">
         <h2 class="">
             {['Categories'|translate:'Pages']}
-            <button ng-click="addCategory(category)" class="btn btn-success" translate="News">
+            <button ng-click="addCategory(category)" class="btn btn-success">
                 <i class="glyphicon glyphicon-plus"></i>
-                {['Add new category'|translate:'News']}
+                {['Add new category'|translate:'Pages']}
             </button>
-            <a class="btn btn-primary pull-right close-edit visible-phone" ng-show="edit_categories" href="javascript:;" ng-click="toggleEdit()">Close editing</a>
+            <a class="btn btn-primary pull-right close-edit visible-phone" ng-show="edit_categories" href="javascript:;" ng-click="toggleEdit()">{['Close editing'|translate:'Pages']}</a>
         </h2>
         <div class="clearfix"></div>
     </div>
@@ -30,9 +30,8 @@
                                     <span class="glyphicon glyphicon-eye-open"></span>
                                 </a-->
                                 <a class="btn" ng-click="addCategory(child)" ng-class="{'btn-primary':child.is_publish}"><span class="glyphicon glyphicon-plus"></span></a>
-                                <a class="btn" ng-class="{'btn-primary':child.is_publish}" placement="right" title="Видалення" href="javascript:;"
-                                   confirm-button="remove(child)" message="Ви дійно бажаєте видалити елемент меню?" yes="Так"
-                                   no="Ні"><span class="glyphicon glyphicon-trash"></span>
+                                <a class="btn" ng-class="{'btn-primary':child.is_publish}" placement="right" title="Deleting..." href="javascript:;"
+                                   bz-confirm="remove(child)" message="Are you sure want to delete this category?"><span class="glyphicon glyphicon-trash"></span>
                                 </a>
                                 <a class="btn" ng-class="{'btn-primary':child.is_publish, 'active': child.$settings}"
                                    ng-click="child.$settings = !child.$settings; child.focus = child.showsettings"><span
@@ -41,23 +40,23 @@
                             </div>
                             <div class="details" ng-show="child.$settings">
                                 <div>
-                                    <label>Назва категорії</label>
-                                    <input type="text" focus-me="child.focus" placeholder="Input text"
+                                    <label>{['Category title'|translate:'Pages']}</label>
+                                    <input type="text" focus-me="child.focus"
                                            ng-model="child.title[languages.current]"/>
                                 </div>
                                 <div class="help-block">
                                     <a href="javascript:;" ng-hide="child.config.css != null"
-                                       ng-click="child.config.css = '';" class="label">Add CSS Class</a>
+                                       ng-click="child.config.css = '';" class="label">{['Add CSS class'|translate:'Pages']}</a>
                                 </div>
 
                                 <div class="bz-form-row" ng-show="child.config.css != null">
-                                    <label>CSS Class</label>
-                                    <input type="text" placeholder="Enter valid css class"
+                                    <label>{['CSS Class'|translate:'Pages']}</label>
+                                    <input type="text" placeholder="{['Enter valid css class'|translate:'Pages']}"
                                            ng-model="child.config.css"/>
                                 </div>
 
                                 <div class="bz-form-row">
-                                    <label>Опис категорії</label>
+                                    <label>{['Category description'|translate:'Pages']}</label>
                                     <textarea style="height: 200px" class="input-block" id="body" placeholder=""></textarea>
                                 </div>
 
@@ -65,8 +64,8 @@
                                 <legend></legend>
 
                                 <div class="text-center">
-                                    <button class="btn btn-primary" ng-click="child.$save()">Save</button>
-                                    <button class="btn btn-link">Cancel</button>
+                                    <button class="btn btn-primary" ng-click="child.$save()">{['Save'|translate:'Pages']}</button>
+                                    <button class="btn btn-link">{['Cancel'|translate:'Pages']}</button>
                                 </div>
                                 <div class="clearfix"></div>
                             </div>
