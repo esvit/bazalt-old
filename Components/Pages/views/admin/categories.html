@@ -1,11 +1,12 @@
 <div ng-controller="CategoriesCtrl" class="categories-list edit">
     <div class="page-header">
-        <h2 class="col-span-6">
+        <h2 class="">
             {['Categories'|translate:'Pages']}
-            <button ng-click="addCategory(category)" class="btn btn-success pull-right" translate="News">
+            <button ng-click="addCategory(category)" class="btn btn-success" translate="News">
                 <i class="glyphicon glyphicon-plus"></i>
                 {['Add new category'|translate:'News']}
             </button>
+            <a class="btn btn-primary pull-right close-edit visible-phone" ng-show="edit_categories" href="javascript:;" ng-click="toggleEdit()">Close editing</a>
         </h2>
         <div class="clearfix"></div>
     </div>

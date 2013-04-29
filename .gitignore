@@ -10,6 +10,8 @@ assets/components/*
 themes/default/assets/css/*
 themes/default/assets/img/*
 themes/default/assets/js/*
+uploads/*
+static/*
 .svn
 .idea
 

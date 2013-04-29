@@ -36,7 +36,7 @@
                     </span>
                 </a>
 
-                <div class="col-span-5 breadcrumb-container visible-desktop">
+                <div class="col-span-5 breadcrumb-container">
                     <ul class="breadcrumb ng-cloak" ng-show="breadcrumbs.length">
                         <li ng-repeat="breadcrumb in breadcrumbs">
                             <a ng-hide="$last" ng-href="{[breadcrumb.url]}">{[breadcrumb.title]}</a>
@@ -75,9 +75,6 @@
                                     <span class="caret"></span>
                                 </a>
                                 <ul class="dropdown-menu">
-                                    <!--li><a href="#"><i class="icon-user"></i>Profile</a></li>
-                                    <li><a href="#"><i class="icon-cog"></i>Settings</a></li>
-                                    <li class="divider"></li-->
                                     <li><a href="/" ng-click="$user.logout()"><i class="icon-off"></i> Logout</a></li>
                                 </ul>
                             </div>

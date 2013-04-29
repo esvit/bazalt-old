@@ -9,9 +9,9 @@ for (var i = 0; i < components.length; i++) {
     angularComponents.push('Component.' + component + '.Admin');
 }
 
-require(['bazalt-cms', 'bootstrap'].concat(modules), function(bazaltCMS) {
+require(['bazalt-cms', 'bootstrap', 'bz-switcher'].concat(modules), function(bazaltCMS) {
 
-    app = angular.module('admin', ['bazalt-cms'].concat(angularComponents)).
+    var app = angular.module('admin', ['bazalt-cms', 'bzSwitcher'].concat(angularComponents)).
     config(function($routeProvider, $locationProvider, $httpProvider) {
         $routeProvider.
         when('/', {controller: 'IndexCtrl', templateUrl:'/App/Admin/views/index.html'}).

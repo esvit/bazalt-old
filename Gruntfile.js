@@ -77,9 +77,17 @@ module.exports = function(grunt) {
             },
             'ng-editable-tree.js': {
                 src: [
+                    'assets/components/nestedSortable/jquery.ui.nestedSortable.js',
                     'assets/components/ng-editable-tree/ng-editable-tree.js'
                 ],
                 dest: 'assets/components/ng-editable-tree.js'
+            },
+            'bz-switcher.js': {
+                src: [
+                    'assets/modules/bz-switcher/bootstrapSwitch.js',
+                    'assets/modules/bz-switcher/bz-switcher.js'
+                ],
+                dest: 'assets/components/bz-switcher.js'
             },
             'jquery.ui.touch-punch.js': {
                 src: [
@@ -87,11 +95,13 @@ module.exports = function(grunt) {
                 ],
                 dest: 'assets/components/jquery.ui.touch-punch.js'
             },
-            'jquery.ui.nestedSortable.js': {
+            'uploader.js': {
                 src: [
-                    'assets/components/nestedSortable/jquery.ui.nestedSortable.js'
+                    'assets/components/plupload/js/plupload.full.js',
+                    'assets/modules/uploadkit/uploadkit.js',
+                    'assets/modules/uploadkit/directive.js'
                 ],
-                dest: 'assets/components/jquery.ui.nestedSortable.js'
+                dest: 'assets/components/uploader.js'
             },
             'site.js': {
                 src: [

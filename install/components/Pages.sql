@@ -34,9 +34,9 @@ CREATE TABLE IF NOT EXISTS `com_pages_categories_locale` (
 DROP TABLE IF EXISTS `com_pages_images`;
 CREATE TABLE IF NOT EXISTS `com_pages_images` (
   `id` int(10) unsigned NOT NULL AUTO_INCREMENT,
-  `page_id` int(10) unsigned NOT NULL,
-  `image` varchar(255) DEFAULT NULL,
-  `order` int(10) unsigned NOT NULL DEFAULT '0',
+  `page_id` INT(10) unsigned NULL DEFAULT NULL,
+  `url` varchar(255) DEFAULT NULL,
+  `sort_order` int(10) unsigned NOT NULL DEFAULT '0',
   PRIMARY KEY (`id`),
   KEY `FK_com_pages_images_com_pages_pages` (`page_id`),
   CONSTRAINT `FK_com_pages_images_com_pages_pages` FOREIGN KEY (`page_id`) REFERENCES `com_pages_pages` (`id`) ON DELETE CASCADE ON UPDATE NO ACTION

@@ -12,8 +12,10 @@
     "requirejs": "~2.1.5",
     "ng-table": "https://github.com/esvit/ng-table.git",
     "ng-finder": "https://github.com/esvit/ng-finder.git",
+    "nestedSortable": "https://github.com/mjsarfatti/nestedSortable.git",
     "ng-editable-tree": "https://github.com/esvit/ng-editable-tree.git",
     "bootstrap": "~2.3.1",
-    "ckeditor": "latest"
+    "ckeditor": "latest",
+    "plupload": "https://github.com/gregmolnar/plupload-bower.git"
   }
 }

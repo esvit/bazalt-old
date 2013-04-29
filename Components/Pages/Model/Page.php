@@ -50,7 +50,7 @@ class Page extends Base\Page
         return $q->exec();
     }
 
-    public static function getCollection($is_publisheded = null)
+    public static function getCollection($is_publisheded = null, $category)
     {
         $q = ORM::select('Components\Pages\Model\Page f')
                 //->innerJoin('ComPages_Model_PageLocale ref', array('id', 'f.id'))
@@ -61,11 +61,27 @@ class Page extends Base\Page
         if ($is_publisheded) {
             $q->andWhere('is_published = ?', 1);
         }
+        if ($category) {
+            $q->andWhere('category_id = ?', $category->id);
+        }
         return new CMS\ORM\Collection($q);
     }
 
     public function getUrl()
     {
         return Route::urlFor('Pages.Page', array('page' => $this->url));
+    }
+
+    public function toArray()
+    {
+        $res = parent::toArray();
+        $res['is_published'] = $res['is_published'] == '1';
+
+        $res['images'] = [];
+        $images = $this->Images->get();
+        foreach ($images as $image) {
+            $res['images'][] = $image->toArray();
+        }
+        return $res;
     }
 }

@@ -46,8 +46,7 @@ abstract class Page extends \Framework\CMS\ORM\Record
     public function initRelations()
     {
         $this->hasRelation('Category', new \ORM_Relation_One2One('Components\Pages\Model\Category', 'category_id', 'id'));
-        $this->hasRelation('Categories', new \ORM_Relation_Many2Many('Framework\CMS\Model\Category', 'page_id', 'Components\Pages\Model\PageRefCategory', 'category_id'));
-        $this->hasRelation('Images', new \ORM_Relation_One2Many('Components\Pages\Model\PageImage', 'id', 'page_id'));
+        $this->hasRelation('Images', new \ORM_Relation_One2Many('Components\Pages\Model\Image', 'id', 'page_id'));
     }
 
     public function initPlugins()

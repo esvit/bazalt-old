@@ -3,3 +3,7 @@
 </div>
 
 {{page.body|raw}}
+
+{% for image in images %}
+    <img width="100" src="{{ image.url|thumb({'width': '100'}) }}" />
+{% endfor %}

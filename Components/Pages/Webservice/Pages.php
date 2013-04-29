@@ -7,8 +7,9 @@ use Framework\CMS\Webservice\Response,
     Framework\System\Data as Data,
     Framework\CMS as CMS;
 use Framework\Core\Helper\Url;
-use Components\Pages\Model\Page;
-use Components\Pages\Model\Category;
+use Components\Pages\Model\Page,
+    Components\Pages\Model\Category,
+    Components\Pages\Model\Image;
 
 /**
  * @uri /pages
@@ -36,9 +37,18 @@ class Pages extends CMS\Webservice\Rest
         }
         $page->title = $data['title']->en;
         $page->body = $data['body']->en;
-        $page->publish = $data['publish'] == 'true';
+        $page->is_published = $data['is_published'] == true;
         $page->url = Url::cleanUrl(\Framework\System\Locale\Config::getLocale()->translit($page->title));
         $page->save();
+
+        if (isset($data['images'])) {
+            foreach ($data['images'] as $image) {
+                $image = Image::getById($image->id);
+                if ($image) {
+                    $page->Images->add($image);
+                }
+            }
+        }
 
         return new Response(200, $page);
     }
@@ -49,9 +59,11 @@ class Pages extends CMS\Webservice\Rest
      * @json
      * @return \Tonic\Response
      */
-    public function logout()
+    public function deletePage()
     {
-        CMS\User::logout();
+        if (isset($_GET['ids'])) {
+            Page::deleteByIds($_GET['ids']);
+        }
         return new Response(200, true);
     }
 

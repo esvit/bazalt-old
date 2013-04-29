@@ -1,0 +1,92 @@
+<ul class="breadcrumb">
+<li><a href="/">Ads</a> <span class="divider">/</span></li>
+<li class="active">{[campaign.title]}</li>
+</ul>
+
+<div class="page-header">
+    <h1 class="pull-left">{[campaign.title]}
+    <input ng-click="addAdvertisement()" class="btn btn-primary" type="submit" value="Add ads">
+    </h1>
+    
+    <div class="budget pull-right">
+        Бюджет: {[campaign.budget-campaign.budget_spent]} грн.
+    </div>
+
+    <div class="clearfix"></div>
+</div>
+
+<div class="row">
+<div class="span8">
+
+<table class="table table-striped">
+    <thead>
+        <tr>
+            <th></th>
+            <th>Title</th>
+            <th>Status</th>
+            <th>Clicks</th>
+            <th>
+                Views
+                <help> 
+                <ul>
+                    <li>CPC – аббревиатура англоязычной фразы «cost per click», переводящейся на русский язык как «цена за клик».</li>
+                </ul>
+                </help>
+            </th>
+            <th>
+                CTR
+                <help> 
+                    <p><strong>CTR</strong> — (синоним — кликабельность, от англ. click-through rate — показатель кликабельности) CTR определяется как отношение числа кликов на баннер или рекламное объявление к числу показов, измеряется в процентах.
+
+                    <p>Например: ваш рекламный блок показан 1 раз и на него кликнул один человек. Значит его CTR — 100 %. Формула вычисления CTR:
+
+                    <p>CTR = (количество кликов / количество показов) * 100
+
+                    <p>Аббревиатура CTR произносится как «си-ти-ар». CTR является важным показателем эффективности любой рекламной кампании. Показатель CTR может быть применим к любой гипертекстовой ссылке в интернете, если учитываются её показы и клики.
+
+                    <p>CTR для динамических баннеров в Рунете обычно колеблется от 0,01 % до 2 %. При хорошем медиапланировании и эффективном таргетинге значение CTR может быть значительно выше и составлять десятки процентов. Самый высокий CTR может обеспечить контекстная реклама в поисковых системах, когда объявления рекламодателей показываются в зависимости от поисковых запросов пользователей.
+
+                    <p>Важное влияние на CTR (кликабельность) рекламы оказывают её размер, яркость, контрастность, использование медиа (звук, видео) и место расположения на веб-странице.
+
+                    <p>Зачастую CTR считают мерой качества рекламного блока или рекламной площадки. Однако нужно иметь в виду, что для имиджевой, а не «продающей» рекламы значение CTR гораздо менее существенно, чем количество пользователей, которые её увидят, и то внимание, которое они ей уделят.
+                </help>
+            </th>
+            <th>Spend</th>
+        </tr>
+    </thead>
+    <tbody>
+    <tr ng-repeat="ad in campaign.ads" ng-class="{info:$index==hoveredRow}">
+        <td><input type="checkbox" ng-model="ad.done"></td>
+        <td>
+            <div><a href="/campaign{[campaign.id]}/ad{[ad.id]}">{[ad.title]}</a></div>
+            <small ng-show="ad.status==3" class="label label-important">Canceled by administrator</small>
+        </td>
+        <td>
+            <div class="btn-group">
+            <a class="btn btn-mini"
+                    ng-disabled="ad.status==-1"
+                    ng-class="{'btn-inverse':ad.status==2, 'btn-danger':ad.status==3, 'btn-success': ad.status==1}"
+                    ng-click="statusChange(ad)" href="javascript:;">
+                <i ng-show="ad.status==-1" class="icon-refresh"></i>
+                <i ng-show="ad.status==0" class="icon-play"></i>
+                <i ng-show="ad.status==1" class="icon-pause"></i>
+                <i ng-show="ad.status==2" class="icon-user"></i>
+                <i ng-show="ad.status==3" class="icon-remove"></i>
+            </a>
+            </div>
+        </td>
+        <td>{[ad.clicks]}</td>
+        <td>{[ad.views]}</td>
+        <td>{[ad.views|ctr:ad.clicks|number:2]}%</td>
+        <td>{[ad.budget|number:2]} грн.</td>
+    </tr>
+    </tbody>
+</table>
+</div>
+<div class="span4">
+
+    <pie-chart data="chartData" title="{[chartTitle]}" 
+               width="{[chartWidth]}" height="{[chartHeight]}"
+               hover="hoverRow(hoveredRowIndex)"></pie-chart>
+</div>
+</div>

@@ -3,10 +3,11 @@
 define([
     'ng-editable-tree',
     'ckeditor/ckeditor',
-    'ng-table'
+    'ng-table',
+    'uploader'
 ], function() {
 
-    angular.module('Component.Pages.Admin', ['ngEditableTree', 'ngTable']).
+    angular.module('Component.Pages.Admin', ['ngEditableTree', 'ngTable', 'bzUploader']).
         config(function($routeProvider, $locationProvider) {
             $routeProvider
                 .when('/pages', {
@@ -43,19 +44,35 @@ define([
 
         return CategoryService;
     })
-    .controller('PagesCtrl', function($scope, $location, $routeParams, $q, PagesService, CategoryService) {
+    .controller('PagesCtrl', function($scope, $rootScope, $filter, $location, $routeParams, $q, PagesService, CategoryService) {
+        // for access from other controller
+        $rootScope.toggleEdit = function() {
+            $scope.edit_categories = !$scope.edit_categories;
+        }
+
         $scope.loading = {
             category: true,
             pages: true
         };
-        $scope.category = CategoryService.getTree(function() {
+
+        // get categories
+        $scope.category = CategoryService.getTree(function(res) {
+            var parents = [];
             $scope.loading.category = false;
+
+            // select active category
+            $scope.activeCategory = CategoryService.find(res, function(item) { return item.id == $routeParams.category_id; }, parents);
+
+            // open all nodes to active category
+            if ($scope.activeCategory) {
+                angular.forEach(parents, function(node) { node.$expanded = true; });
+            }
         });
-        $scope.activeCategory = null;
-        $scope.params = {};
+
         $scope.filterByCategory = function(category) {
             $scope.activeCategory = category;
-            $scope.params.category_id = category.id;
+            $scope.params = $scope.params || {};
+            $scope.params.category_id = (category) ? category.id : null;
             $scope.update($scope.params);
         }
 
@@ -68,19 +85,30 @@ define([
                 $scope.pages = result;
             });
         }
-        $scope.update();
+        $scope.update($routeParams);
 
-        $scope.checked = function() {
-            var checked = [];
-            angular.forEach($scope.news, function(item) {
-                if (item.checked) {
-                    checked.push(item.id);
+        $scope.selected = function() {
+            var selected = [];
+            if (angular.isUndefined($scope.pages)) {
+                return selected;
+            }
+            angular.forEach($scope.pages.data, function(item) {
+                if (item.$selected) {
+                    selected.push(item.id);
                 }
             });
-            return checked;
+            return selected;
         }
-        $scope.delete = function() {
-            console.info('delete');
+        $scope.delete = function(ids) {
+            PagesService.delete({ 'ids[]': ids }, {}, function(){
+                $scope.update();
+            });
+        }
+        $scope.togglePublished = function(page) {
+            var service = new PagesService(page);
+            $scope.$apply(function() {
+                service.$save();
+            });
         }
 
         /*$scope.users = function() {
@@ -97,8 +125,31 @@ define([
             });
             return q.promise;
         }*/
+
+        $rootScope.$watch('tr', function() {
+            $rootScope.breadcrumbs = [
+                {
+                    'title' : $filter('translate')('Dashboard', 'Pages'),
+                    'url': '#!/'
+                },
+                {
+                    'title' : $filter('translate')('Pages', 'Pages'),
+                    'url': '#!/pages'
+                }
+            ];
+        });
+        $rootScope.breadcrumbs = [
+            {
+                'title' : $filter('translate')('Dashboard', 'Pages'),
+                'url': '#!/'
+            },
+            {
+                'title' : $filter('translate')('Pages', 'Pages'),
+                'url': '#!/pages'
+            }
+        ];
     })
-    .controller('CategoriesCtrl', function($scope, $routeParams, CategoryService) {
+    .controller('CategoriesCtrl', function($scope, $rootScope, $filter, $routeParams, CategoryService) {
         $scope.addCategory = function (child) {
             child.$insertItem(function(item) {
                 item.focus = true;
@@ -110,27 +161,72 @@ define([
             item.$moveItem(before, index);
         };
     })
-    .controller('PageCtrl', function($scope, $routeParams, $location, $timeout, PagesService) {
+    .controller('PageCtrl', function($scope, $rootScope, $routeParams, $filter, $location, $timeout, PagesService) {
+        $scope.loading = true;
+        var pageTitle = 'New page';
         if ($routeParams.id) {
-            $scope.page = PagesService.get({ id: $routeParams.id });
+            var pageTitle = 'Edit page';
+            $scope.page = PagesService.get({ id: $routeParams.id }, function() {
+                $scope.loading = false;
+            });
         } else {
             $scope.page = new PagesService({
                 title: {},
                 body: {}
             });
+            $scope.loading = false;
         }
 
         $scope.savePage = function(page) {
+            $scope.loading = true;
             page.$save(function() {
-                $timeout(function() {
-                $location.url('/pages')
-                }, 10)
+                $scope.loading = false;
+                $location.url('/pages');
             });
         }
 
         $scope.cancel = function(page) {
             $location.url('/pages');
         }
+
+        $scope.addImage = function(page, file) {
+            if (angular.isUndefined(!page.images)) {
+                page.images = [];
+            }
+            $scope.$apply(function(){
+                page.images.push(file);
+            });
+        }
+
+
+        $rootScope.$watch('tr', function() {
+            $rootScope.breadcrumbs = [
+                {
+                    'title' : $filter('translate')('Dashboard', 'Pages'),
+                    'url': '#!/'
+                },
+                {
+                    'title' : $filter('translate')('Pages', 'Pages'),
+                    'url': '#!/pages'
+                },
+                {
+                    'title' : $filter('translate')(pageTitle, 'Pages')
+                }
+            ];
+        });
+        $rootScope.breadcrumbs = [
+            {
+                'title' : $filter('translate')('Dashboard', 'Pages'),
+                'url': '#!/'
+            },
+            {
+                'title' : $filter('translate')('Pages', 'Pages'),
+                'url': '#!/pages'
+            },
+            {
+                'title' : $filter('translate')(pageTitle, 'Pages')
+            }
+        ];
     })
 
 });

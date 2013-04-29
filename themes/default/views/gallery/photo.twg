@@ -1,0 +1,22 @@
+<ul class="breadcrumb">
+    <li><a href="#!/">Dashboard</a> <span class="divider">/</span></li>
+    <li class="active">Themes</li>
+</ul>
+
+<div class="row-fluid">
+    <div class="span4">
+        <ul class="thumbnails">
+            <li class="thumbnail">
+                <a href="{{ image.url() }}">
+                    <img alt="{{ image.title }}" src="http://placehold.it/300x200" />
+                </a>
+            </li>
+        </ul>
+    </div>
+    <div class="span8">
+        <h1>{{ image.title }}</h1>
+        <div>
+            {{image.description|raw}}
+        </div>
+    </div>
+</div>

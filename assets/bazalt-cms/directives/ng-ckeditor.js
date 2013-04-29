@@ -12,7 +12,7 @@ bazaltCMS.directive('ckeditor', function() {
 
             var instance = CKEDITOR.replace(el.get(0),
             {
-                toolbar_Full:
+                toolbar_full:
                     [
                         { name: 'document', items : [] },
                         { name: 'clipboard', items : [ 'Cut','Copy','Paste','PasteText','PasteFromWord','-','Undo','Redo' ] },
@@ -26,12 +26,13 @@ bazaltCMS.directive('ckeditor', function() {
                         '/',
                         { name: 'styles', items : [ 'Styles','Format','Font','FontSize' ] },
                         { name: 'colors', items : [] },
-                        { name: 'tools', items : [ 'Maximize' ] }
+                        { name: 'tools', items : [ 'Maximize', 'bazalt-image' ] }
                     ]
                 ,
                 uiColor: '#FAFAFA',
                 height: '400px',
-                width: '100%'
+                width: '100%',
+                extraPlugins: "bazalt-cms"
             });
 
             element.bind('$destroy', function() {

@@ -29,7 +29,7 @@
         &.nav-placeholder {
             background-color: #FFFFEE;
             border: 1px dashed #FFCC00;
-            margin-left: 30px;
+            margin-left: 40px;
             margin-top: 4px;
         }
 
@@ -41,7 +41,10 @@
             & > a {
                 padding: 7px 0px;
                 vertical-align: top;
-                display: table-cell;
+
+                &:first-child {
+                    text-align: left;
+                }
             }
 
             .item-content {

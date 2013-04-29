@@ -4,6 +4,7 @@
 @import "nav-nested.less";
 @import "nav-nested-editable.less";
 @import "bootstrapSwitch.less";
+@import "responsive-style.less";
 
 /* For Angular */
 [ng\:cloak], [ng-cloak], [data-ng-cloak], [x-ng-cloak], .ng-cloak, .x-ng-cloak {
@@ -39,6 +40,10 @@ h2 {
 }
 .btn-toolbar {
     margin-bottom: 10px;
+}
+.popover {
+    max-width: 400px;
+    width: 400px;
 }
 .navbar-toggle {
   z-index: 2;
@@ -116,6 +121,7 @@ h2 {
 }
 .well {
   &.photo-uploader {
+    margin-top: 10px;
     table {
       tr {
         th {
@@ -130,6 +136,39 @@ h2 {
     }
   }
 }
+
+/*Page Edit*/
+.page-settings {
+  .control-group {
+    margin-bottom: 10px;
+  }
+}
+.page-editor {
+  .control-group {
+    margin-bottom: 10px;
+  }
+  .tab-content {
+    .photo-uploader {
+      a {
+        i {
+          &.icon-file, &.icon-upload {
+            margin-right: 5px;
+          }
+        }
+      }
+    }
+    .uploaded-photo {
+      a {
+        display: inline-block;
+        float: none;
+        margin: 0 10px 10px 0;
+        vertical-align: top;
+      }
+    }
+  }
+}
+/*End Page Edit*/
+
 .category-menu {
   position: relative;
   .toggle {
@@ -212,7 +251,7 @@ h2 {
             padding: 15px;
             .btn {
                 &.close-edit {
-                    margin-right:-25px;
+                    margin: 5px -25px 5px 5px;
                 }
             }
         }
@@ -229,6 +268,26 @@ h2 {
         }
     }
 }
+.categories-list {
+  &.edit {
+    .page-header {
+      h2 {
+        a {
+          &.close-edit {
+            margin-right: 10px !important;
+            margin-top: 7px !important;
+          }
+        }
+      }
+    }
+  }
+}
+.page-header {
+  &.min-height {
+    min-height: 50px;
+  }
+}
+
 .m-header {
     padding: 0;
     background-color: #F1F1F1;
@@ -301,6 +360,11 @@ h2 {
             display: block;
             color: #999;
         }
+      &.top-bazalt-cms {
+        top: 70px;
+        right: 0;
+        text-align: right;
+      }
     }
 
     .nav-tabs.nav-stacked > li > a,
@@ -804,3 +868,14 @@ li.nav-form.nav-header {
         padding-left: 170px;
     }
 }
+
+/*Pagination*/
+.pagination {
+  width: 100%;
+  .pagination {
+    float: left;
+    margin: 0 10px 0 0;
+    width: auto;
+  }
+}
+/*End Pagination*/

@@ -14,6 +14,7 @@ class Index extends CMS\AbstractController
             throw new CMS\Exception\PageNotFound();
         }
         $this->view->assign('page', $page);
+        $this->view->assign('images', $page->Images->get());
 
         $this->view->display([
             'pages/page-' . $page->id,

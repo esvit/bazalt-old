@@ -9,6 +9,19 @@
         list-style: none;
         margin: 0px;
 
+        & > div {
+            display: table;
+        }
+        &.active > div > a {
+            color: #fff;
+            background-color: @component-active-bg;
+
+            &:first-child {
+                color: @grayLight;
+                background-color: transparent;
+            }
+        }
+
         & > ol {
             margin: 0 0 0 10px;
             display: none;
@@ -18,15 +31,16 @@
         }
 
         & > div > a {
-            display: block;
-            padding: 2px 0px;
+            display: table-cell;
+            padding: 2px 6px;
             
             &:first-child {
+                padding: 2px;
                 opacity: .5;
                 text-decoration: none;
-                float: left;
+                text-align: right;
                 width: 20px;
-                color: #999;
+                color: @grayLight;
                 
                 &:hover {
                     opacity: 1;

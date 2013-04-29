@@ -34,7 +34,7 @@
                 <span class="glyphicon glyphicon-user"></span> Login
             </div>
 
-            <form ng-show="!$user.id" novalidate server-submit="login" target="/rest.php/app/auth/" method="post" class="form-horizontal" name="loginForm" ng-controller="LoginCtrl">
+            <form ng-show="!$user.id" novalidate server-submit="login" target="/rest.php/app/auth/" method="post" class="form-horizontal login-form" name="loginForm" ng-controller="LoginCtrl">
 
                 <div class="control-group" ng-class="{error: loginForm.$dirty && loginForm.nickname.$invalid}">
                     <label class="control-label" for="nickname">Username</label>

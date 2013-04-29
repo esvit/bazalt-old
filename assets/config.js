@@ -19,18 +19,16 @@ require.config({
             exports: "$",
             deps: ['jquery']
         },
+        "uploader": {
+            deps: ['jquery-ui']
+        },
         "bazalt-cms": {
             deps: ['angular']
         },
-        "jquery.ui.nestedSortable": {
-            deps: [
-                'jquery-ui'
-            ]
-        },
         "ng-editable-tree": {
             deps: [
-                'jquery.ui.touch-punch',
-                'jquery.ui.nestedSortable'
+                'jquery-ui',
+                'jquery.ui.touch-punch'
             ]
         },
         "ng-finder": {

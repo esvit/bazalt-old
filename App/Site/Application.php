@@ -43,7 +43,7 @@ class Application extends CMS\Application
             $this->view->assign('widgets', $widgets);
 
             $this->view->assign('widgetsOn', ($_COOKIE['cms-show-manage-widgets'] == 'true'));
-            $this->view->display('admin/panel');
+           //$this->view->display('admin/panel');
         }
     }
 }
