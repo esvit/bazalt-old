@@ -31,10 +31,10 @@ Technologies (Integrated features)
     - RequireJS (AMD modules)
     - jQuery and AngularJS build-in frontend
 * PHP
-    - REST (Tonic)[http://peej.github.io/tonic/]
-    - (Imagine)[http://imagine.readthedocs.org/en/latest/]
-    - (lessphp)[http://leafo.net/lessphp/]
-    - (Twig)[http://twig.sensiolabs.org/]
+    - REST [Tonic](http://peej.github.io/tonic/)
+    - [Imagine](http://imagine.readthedocs.org/en/latest/)
+    - [lessphp](http://leafo.net/lessphp/)
+    - [Twig](http://twig.sensiolabs.org/)
 
 Development
 -----------
