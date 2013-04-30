@@ -1,9 +1,9 @@
 @import "mixins.less";
 
+@widgetBackground: #5B80B2;
 .bz-widget {
     .bz-overlay {
         display: none;
-        border: 1px solid #5B80B2;
         position: absolute;
         top: 0;
         left: 0;
@@ -13,7 +13,7 @@
         
         .bg
         {
-            background:#5b80b2;
+            background: @widgetBackground;
             opacity:.50;
             -ms-filter:alpha(opacity=50);
             filter:alpha(opacity=50);
@@ -37,19 +37,40 @@
         }
     }
 }
+
 .cms-manage-widgets {
     .bz-widget {
         &:before, &:after { content: " "; display: table; }
         &:after { clear: both; }
 
-        position: relative;
-        min-height: 30px;
+        min-height: 40px;
         margin: 5px 0;
         padding: 5px;
+        -moz-box-sizing: border-box;
+        border: 1px solid @widgetBackground;
+        border-radius: 4px 4px 4px 4px;
+        box-shadow: 0 1px 13px rgba(0, 0, 0, 0.1) inset;
+        position: relative;
 
         .bz-widget_title {
             color: white;
             font-weight: bold;
+        }
+
+        &:before {
+            background-color: @widgetBackground;
+            border: 1px solid @widgetBackground;
+            border-radius: 4px 0 4px 0;
+            color: #FFF;
+            content: attr(data-widget-title);
+            font-size: 12px;
+            font-weight: bold;
+            left: -1px;
+            line-height: 2;
+            padding: 0 7px;
+            position: absolute;
+            top: -1px;
+            z-index: 100;
         }
 
         .bz-overlay, .bz-widget_buttons {
@@ -69,38 +90,41 @@
     border: 1px dashed #666;
     background-color: #F2F2F2;
     min-height: 30px;
+    padding: 4px;
+    margin: 5px 0;
 }
 
 .cms-manage-widgets {
     .cms-widgets-border-around {
-        outline:#80b5f2 solid 3px;
+        /*outline:#80b5f2 solid 3px;
         position:relative;
         overflow:visible;
+        min-width: 100px;*/
         min-height: 40px;
-        min-width: 100px;
+        -moz-box-sizing: border-box;
+        background-color: #F5F5F5;
+        border: 1px solid #DDDDDD;
+        border-radius: 4px 4px 4px 4px;
+        box-shadow: 0 1px 13px rgba(0, 0, 0, 0.1) inset;
+        margin: 15px 0;
+        padding: 25px 14px 0;
+        position: relative;
+
+        &:before {
+            background-color: #F5F5F5;
+            border: 1px solid #DDDDDD;
+            border-radius: 4px 0 4px 0;
+            color: #9DA0A4;
+            content: attr(data-position);
+            font-size: 12px;
+            font-weight: bold;
+            left: -1px;
+            line-height: 2;
+            padding: 0 7px;
+            position: absolute;
+            top: -1px;
+        }
     }
-    .cms-widgets-position-title {
-        background-color: #80b5f2;
-        font-family:Verdana;
-        font-size:10px;
-        line-height: 12px;
-        position:absolute;
-        top: 0px;
-        right: 0px;
-        font-weight: bold;
-        padding: 0 5px 4px;
-        z-index: 2000;
-        color: black;
-        border-top: 0px;
-        border-right: 0px;
-        line-height: 13px;
-    }
-    .cms-widgets-position-title, .bz-widget_title {
-        display: block;
-    }
-}
-.cms-widgets-position-title, .cms-widgets-settings, .bz-widget_title {
-    display: none;
 }
 .cms-widgets-settings {
 /*position: absolute;
@@ -110,23 +134,6 @@ background-color: white;
 z-index: 200;
 padding: 5px;
 border: 1px solid #C6D9E9;*/
-}
-.bz-widget_title {
-    position:absolute;
-    top: 0px;
-    padding: 0 5px;
-    z-index:10000;
-    border-top: 0px;
-    border-left: 0px;
-}
-.cms-widget-title .ui-icon, .cms-widget-title-text {
-    float: left;
-    font-family:Verdana;
-    font-size:10px;
-    line-height: 13px;
-}
-.cms-widgets-add-widget {
-    float: right;
 }
 .cms-widgets-settings .btn-delete {
     padding: 0 ;

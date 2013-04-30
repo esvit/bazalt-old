@@ -13,18 +13,19 @@ define(['jquery-ui', 'angular-cookies'], function() {
             templateUrl:'/Components/AdminPanel/views/admin/panel.html',
             controller: ['$scope', '$cookieStore', 'WidgetsService', function($scope, $cookieStore, WidgetsService) {
                 $scope.$watch('showWidgets', function(value) {
-                    $('body').toggleClass('cms-manage-widgets', value);
+                    var body = $('body');
+                    body.toggleClass('cms-manage-widgets', value);
                     $cookieStore.put('showWidgets', value);
                     if (value) {
-                        $('body').css('marginLeft', '200px');
+                        body.css('marginLeft', '200px');
                     } else {
-                        $('body').css('marginLeft', '0px');
+                        body.css('marginLeft', '0px');
                     }
                 });
                 $scope.showWidgets = !!$cookieStore.get('showWidgets');
                 $scope.manageWidgets = function() {
                     $scope.showWidgets = !$scope.showWidgets;
-                }
+                };
                 $scope.widgets = WidgetsService.query();
             }],
             link: function() {
@@ -54,7 +55,7 @@ define(['jquery-ui', 'angular-cookies'], function() {
                             revert: "invalid"
                         });
                     }
-                }
+                };
 
                 var opts = {
                     revert: 'invalid',
@@ -194,21 +195,20 @@ define(['jquery-ui', 'angular-cookies'], function() {
                 if (widgets) {
                     widgets.addWidget(attrs.widget, element);
                 }
-
                 scope.element = element;
                 scope.widget = {
                     id: attrs.widget
                 };
-                if (!attrs.widgetTitle) {
+                if (widgets && widgets.isBase) {
                     return;
                 }
-                var title = '<div class="bz-widget_title">' + attrs.widgetTitle + '</div>';
                 var buttons = '<div class="bz-widget_buttons"><div> \
                                 <a href="javascript:;" ng-click="showSettings()" class="btn">Settings</a> \
                                 <a href="javascript:;" ng-click="deleteWidget()" class="btn">Delete</a></div> \
                               </div>';
                 var overlay = '<div class="bz-overlay"><div class="bg">' + buttons + '</div></div>';
-                element.append($compile(title + overlay)(scope));
+
+                element.append($compile(overlay)(scope));
             }
         };
     })
