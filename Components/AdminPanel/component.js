@@ -64,7 +64,7 @@ define(['jquery-ui', 'angular-cookies'], function() {
                     handle: '.bz-overlay',
                     placeholder: 'bz-widget_placeholder',
                     connectWith: '.cms-widgets-border-around',
-                    appendTo: $('#cms_widgets_panel'),
+                    //appendTo: $('#cms_widgets_panel'),
                     update: function(event, ui) {
                         var el = $(this);
                         var order = el.sortable('serialize');

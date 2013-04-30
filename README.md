@@ -12,19 +12,29 @@ The structure framework implements the principles of MVC and allows efficient se
 Features
 --------
 
-- simple, fast and easy to use;
+- simple, fast and easy to use (extremely lightweight);
 - easy access to the database because of its lightweight and simple ORM;
-- templates for using Twig;
+- MVC implementation;
+- templates for using Twig and native PHP;
 - multisite on one and the same engine;
 - multi-language interface and content;
 - modularity;
 - RBAC (Role Based Access Control);
-- search engine friendly.
+- search-engine friendly URLs + flexible URI routing;
+- error logging;
+- 100% Object Oriented Programming with autoloading;
 
-Technologies
+Technologies (Integrated features)
 ------------
 
-- jQuery and AngularJS on frontend
+* Javascript
+    - RequireJS (AMD modules)
+    - jQuery and AngularJS build-in frontend
+* PHP
+    - REST (Tonic)[http://peej.github.io/tonic/]
+    - (Imagine)[http://imagine.readthedocs.org/en/latest/]
+    - (lessphp)[http://leafo.net/lessphp/]
+    - (Twig)[http://twig.sensiolabs.org/]
 
 Development
 -----------
