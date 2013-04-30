@@ -1,0 +1,46 @@
+<div ng-controller="MenuSettingsCtrl" loading-container="loading">
+
+    <div>
+        <label>Назва пункту меню</label>
+        <input type="text" focus-me="child.focus" placeholder="Input text"
+               ng-model="child.title[languages.current]"/>
+    </div>
+    <div class="help-block">
+        <a href="javascript:;" ng-hide="child.description[languages.current] != null"
+           ng-click="addDescription(child, languages.current)" class="label">Add
+            description</a>
+        <a href="javascript:;" ng-hide="child.config.css != null"
+           ng-click="child.config.css = '';" class="label">Add CSS Class</a>
+    </div>
+    <div ng-show="child.description[languages.current] != null">
+        <label>Опис пункту меню</label>
+        <input type="text" placeholder="Input text"
+               ng-model="child.description[languages.current]"/>
+    </div>
+
+    <div ng-show="child.config.css != null">
+        <label>CSS Class</label>
+        <input type="text" placeholder="Enter valid css class"
+               ng-model="child.config.css"/>
+    </div>
+
+    <label>Тип пункту меню:</label>
+    <select ng-change="changeMenuType(child)" ng-options="type as type.name group by type.component_title for type in menuTypes" ng-model="child.$type"></select>
+    <legend></legend>
+    <div class="bz-form-row">
+        <label>Сторінка</label>
+        <input type="text" ng-model="child.config.text"/>
+
+        <p>
+            <span class="pull-left">Головна</span>
+            <a class="pull-right btn-link" href="#">Оберіть сторінку...</a>
+        </p>
+    </div>
+    <div class="clearfix"></div>
+    <legend></legend>
+
+    <div class="text-center">
+        <button class="btn btn-primary" ng-click="saveItem(child)">Save</button>
+        <button class="btn btn-link">Cancel</button>
+    </div>
+</div>

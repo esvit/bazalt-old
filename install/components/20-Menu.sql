@@ -19,7 +19,7 @@ CREATE TABLE IF NOT EXISTS `com_menu_elements` (
   KEY `FK_com_menu_elements_com_menu_menus` (`menu_id`),
   KEY `FK_com_menu_elements_cms_components` (`component_id`),
   CONSTRAINT `FK_com_menu_elements_cms_components` FOREIGN KEY (`component_id`) REFERENCES `cms_components` (`id`) ON DELETE CASCADE ON UPDATE NO ACTION,
-  CONSTRAINT `FK_com_menu_elements_com_menu_menus` FOREIGN KEY (`menu_id`) REFERENCES `com_menu_menus` (`id`) ON DELETE CASCADE ON UPDATE NO ACTION
+  CONSTRAINT `FK_com_menu_elements_com_menu_elements` FOREIGN KEY (`menu_id`) REFERENCES `com_menu_elements` (`id`) ON UPDATE NO ACTION ON DELETE CASCADE
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 
 DROP TABLE IF EXISTS `com_menu_elements_locale`;
@@ -36,6 +36,14 @@ CREATE TABLE IF NOT EXISTS `com_menu_elements_locale` (
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 
 INSERT INTO `cms_components` (`name`, `dependencies`, `is_active`) VALUES ('Menu', NULL, 1);
+
+SET @component_id = LAST_INSERT_ID();
+
+INSERT INTO `cms_widgets` (`site_id`, `component_id`, `className`, `default_template`, `is_active`) VALUES (NULL, @component_id, 'Components\\Menu\\Widget\\Menu', 'widgets/menu', 1);
+
+SET @widget_id = LAST_INSERT_ID();
+
+INSERT INTO `cms_widgets_locale` (`id`, `lang_id`, `title`, `description`, `completed`) VALUES (@widget_id, 1, 'Menu', NULL, 1);
 
 /*!40101 SET SQL_MODE=@OLD_SQL_MODE */;
 /*!40014 SET FOREIGN_KEY_CHECKS=@OLD_FOREIGN_KEY_CHECKS */;

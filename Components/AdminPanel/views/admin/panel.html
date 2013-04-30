@@ -1,12 +1,29 @@
 <link rel="stylesheet" type="text/css" href="/less.php/Components/AdminPanel/assets/less/panel.less" />
+<link rel="stylesheet" type="text/css" href="/App/Admin/assets/css/bootstrap.css" />
+
 <div id="bz-admin-bar">
-
-
     <div id="adm-userpanel">
         <div class="bz-adminpanel-container">
             <a class="dashboard" href="/admin.php" onclick="javascript:location.href='/admin.php'"><span></span> Dashboard</a>
 
             <a ng-click="manageWidgets()" href="#">Widgets</a>
+
+            <div class="bz-user-block pull-right">
+                <a class=" dropdown-toggle" data-toggle="dropdown" href="#">
+                    <img src="http://placehold.it/20x25">
+                    Admin
+                    <span class="caret"></span>
+                </a>
+                <a class="" href="#">
+                    <i class="glyphicon glyphicon-bell"></i>
+                </a>
+                <a class="" href="#">
+                    <i class="glyphicon glyphicon-calendar"></i>
+                </a>
+                <a class="" href="#">
+                    <i class="glyphicon glyphicon-envelope"></i>
+                </a>
+            </div>
         </div>
     </div>
 

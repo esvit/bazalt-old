@@ -51,7 +51,7 @@ abstract class Widget
 
     public static function getAllComponentWidgets()
     {
-        $components = CMS\Bazalt::getComponents();
+        $components = Bazalt::getComponents();
 
         $widgets = array();
         foreach ($components as $component) {
@@ -83,7 +83,7 @@ abstract class Widget
                 if ($widget) {
                     $strWidgets .= $widget->fetch();
                 }
-            } catch (Exception $ex) {
+            } catch (\Exception $ex) {
                 if (STAGE == PRODUCTION_STAGE) {
                     $view->assign('exception', $ex);
                     ErrorCatcher::sendToErrorService($ex);
@@ -123,7 +123,7 @@ abstract class Widget
         } catch (Exception $e) {
             if (STAGE == PRODUCTION_STAGE) {
                 $this->view->assign('exception', $e);
-                CMS\ErrorCatcher::sendToErrorService($e);
+                ErrorCatcher::sendToErrorService($e);
                 $content = $this->view->fetch('cms/widgets/exception');
             } else {
                 throw $e; //new Exception('Exception in widget', 0, $e);

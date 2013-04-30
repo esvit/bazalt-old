@@ -1,0 +1,98 @@
+<link rel="stylesheet" type="text/css" href="/less.php/Components/Menu/assets/less/admin.less"/>
+
+<div class="page-header">
+    <div class="row">
+        <div class="col-span-3">
+            <h2>Menus</h2>
+        </div>
+        <div class="col-span-9">
+            <div class="btn-toolbar" ng-show="menu.id">
+                <button class="btn-primary btn" ng-click="addChild(menu)"><i class="glyphicon glyphicon-plus"></i> Add new element</button>
+            </div>
+        </div>
+    </div>
+</div>
+
+<div class="row">
+
+    <div class="col-span-3" loading-container="loading.menus">
+
+        <ul class="nav nav-pills nav-stacked nav-list">
+            <li class="nav-header" ng-show="menus.length">Menu</li>
+            <li ng-repeat="item in menus" class="with-btn" ng-class="{'active': menu.id == item.id}">
+                <a class="pull-right btn-delete" placement="right" title="Видалення" href="javascript:;"
+                   confirm-button="deleteAlbum(item);" message="Ви дійно бажаєте видалити цей альбом?" yes="Так"
+                   no="Ні"><span class="glyphicon glyphicon-trash"></span></a>
+                <a ng-href="#!/menu?id={[item.id]}">
+                    {[item.title|language]}
+
+                    <span class="label">{[item.count]}</span>
+                </a>
+            </li>
+        </ul>
+
+        <div class="add-new-item nav-new-menu">
+            <form name="newMenu" novalidate ng-submit="createMenu(nMenu)">
+                <div class="input-group col-span-12">
+                    <input type="text" ng-model="nMenu.title" maxlength="255" ng-disabled="nMenu.busy" required
+                           placeholder="New menu"/>
+
+                    <div class="input-group-btn">
+                        <button ng-disabled="nMenu.busy || newMenu.$invalid" class="btn btn-primary" type="submit"
+                                ng-disabled="nMenu.busy">
+                            <span class="glyphicon glyphicon-plus"></span>
+                        </button>
+                    </div>
+                </div>
+            </form>
+        </div>
+
+    </div>
+
+    <div class="col-span-9" ng-hide="menu.id">
+        <p>Edit files</p>
+    </div>
+
+    <div class="col-span-9" ng-show="menu.id" loading-container="loading.elements">
+
+        <ol class="nav nav-nested editable" tree-view-sortable="menu" tree-view-move="move($item, $before, $index)">
+            <li tree-view="child in menu.children at ol" ng-class="{expanded:child.$expanded}">
+                <div>
+                    <a href="javascript:;" ng-click="child.$expanded = !child.$expanded" ng-switch="child.$expanded">
+                        <span ng-show="child.children.length" ng-switch-when="true">&#x25BC;</span>
+                        <span ng-show="child.children.length" ng-switch-default>&#x25B6;</span>
+                    </a>
+
+                    <div class="item-content" ng-class="{'expanded':child.$settings}">
+                        <div class="btn-group btn-group-justified with-btn">
+                            <a href="javascript:;" class="btn title-item-menu" ng-class="{'btn-primary':child.is_publish}">
+                                {[child.title|language|default:'&nbsp;']}
+                                <small>{[ child.menuType|default:child.$type.name ]}</small>
+                            </a>
+                            <!--a class="btn" ng-click="child.is_publish = !child.is_publish; updateItem(child)" ng-class="{'btn-primary active':child.is_publish}">
+                                <span class="glyphicon glyphicon-eye-open"></span>
+                            </a-->
+
+                            <a class="btn" ng-click="child.is_publish = !child.is_publish; updateItem(child)"
+                               ng-class="{'btn-primary active':child.is_publish}">
+                                <span class="glyphicon glyphicon-eye-open"></span>
+                            </a>
+
+                            <a class="btn" ng-click="addChild(child)" ng-class="{'btn-primary':child.is_publish}"><span class="glyphicon glyphicon-plus"></span></a>
+                            <a class="btn" ng-class="{'btn-primary':child.is_publish}" placement="left" title="Deleting..." href="javascript:;"
+                               bz-confirm="remove(child)" message="Are you sure want to delete this category?"><span class="glyphicon glyphicon-trash"></span>
+                            </a>
+                            <a class="btn" ng-class="{'btn-primary':child.is_publish, 'active': child.$settings}"
+                               ng-click="child.$settings = !child.$settings; child.focus = child.$settings"><span
+                                    class="glyphicon glyphicon-cog"></span>
+                            </a>
+                        </div>
+                        <div class="details" ng-show="child.$settings" ng-include="'/Components/Menu/views/admin/menu-settings.html'"></div>
+                    </div>
+                </div>
+                <ol></ol>
+            </li>
+        </ol>
+
+    </div>
+</div>

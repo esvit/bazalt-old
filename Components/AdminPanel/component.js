@@ -6,6 +6,14 @@ define(['jquery-ui', 'angular-cookies'], function() {
     .run(['$rootScope', '$compile', function($rootScope, $compile) {
         $('body').append($compile('<admin-panel />')($rootScope));
     }])
+    .factory('WidgetsService', function($resource) {
+        return $resource('/rest.php/adminpanel/widgets/:id', { 'id': '@' }, {
+            create: { method: 'PUT' },
+            changeOrder: { method: 'GET', params: { 'action': 'changeOrder' } },
+            getSettings: { method: 'GET', params: { 'action': 'getSettings' } }
+        });
+    })
+
     .directive('adminPanel', function() {
         return { 
             restrict:'E',
@@ -34,14 +42,6 @@ define(['jquery-ui', 'angular-cookies'], function() {
             }
         }
     })
-    .factory('WidgetsService', function($resource) {
-            return $resource('/rest.php/app/widgets/:id', { 'id': '@' }, {
-                create: { method: 'PUT' },
-                changeOrder: { method: 'GET', params: { 'action': 'changeOrder' } },
-                getSettings: { method: 'GET', params: { 'action': 'getSettings' } }
-            });
-    })
-
     .directive('widgets', function($compile, WidgetsService) {
         return {
             link: function(scope, element,attrs) {

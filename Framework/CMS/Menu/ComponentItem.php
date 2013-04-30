@@ -24,7 +24,7 @@ abstract class ComponentItem extends Item
     public function __construct(CMS\Component $component, $element = null)
     {
         $this->component = $component;
-        $this->view = $component->View;
+        $this->view = $component->view();
         $this->element = $element;
 
         if ($element) {

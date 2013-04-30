@@ -1,5 +1,92 @@
-@media (max-width: 767px) {
+
+@media (max-width: 767px){
   .main-container .locked {
-    margin-top: -55px;
+    top: -2px !important;
+  }
+
+  .m-header .breadcrumb-container {
+    padding-left: 65px !important;
+    border-bottom: 1px solid #E5E5E5;
+  }
+
+  .m-header, .sidebar {
+    .clearfix();
+    overflow: hidden;
+    position: initial !important;
+  }
+  .sidebar{
+    margin: 0px;
+    padding-left: 10px;
+    padding-right: 10px;
+    width: 100%;
+    float: none;
+    border-bottom: 1px solid #e1e1e1;
+
+    li {
+      float: left;
+    }
+  }
+  .m-top{
+    display: none;
+  }
+
+  .m-search{
+    margin-left: 100px;
+  }
+
+  .sidebar .nav-tabs > li.active .arrow{
+    display: none !important;
+  }
+
+  .main-container{
+    margin-left: 0;
+    padding: 10px;
+  }
+
+  .m-login-container{
+    padding: 20px;
+  }
+}
+
+@media (max-width: 979px){
+  .m-top{
+    display: none;
+  }
+
+  .m-header .breadcrumb-container {
+    padding-left: 11%;
+  }
+
+  .sidebar{
+    top: 50px;
+    /*position: initial;*/
+  }
+
+  .navbar .brand {
+    padding-right: 10px;
+    padding-left: 10px;
+    margin: 0px;
+  }
+
+  .navbar-fixed-top{
+    margin-bottom: 0;
+  }
+
+  .m-login-container{
+    padding: 20px;
+  }
+
+  .nav-collapse .nav > li > a:hover,
+  .nav-collapse .dropdown-menu a:hover {
+    background-color: #08c;
+  }
+
+  .nav-collapse .dropdown-menu a > i{
+    margin-right: 5px;
+  }
+
+  .nav-collapse.in{
+    background-color: #F1F1F1;
+    z-index: 9000;
   }
 }

@@ -644,7 +644,6 @@ class ORM_Relation_NestedSet extends ORM_Relation_Abstract implements ORM_Interf
         if (self::END_POSITION === $pos) {
             return $beforeItem->Elements->insertAfter($element);
         }
-
         $q = ORM\ORM::update($this->name)
                 ->set('lft = IF(lft > ' . $left . ', lft + 2, lft)')
                 ->set('rgt = rgt + 2')

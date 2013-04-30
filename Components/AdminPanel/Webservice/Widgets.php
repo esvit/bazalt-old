@@ -6,8 +6,8 @@ use Framework\CMS as CMS;
 use Framework\System\Data as Data;
 
 /**
- * @uri /app/widgets
- * @uri /app/widgets/:id
+ * @uri /adminpanel/widgets
+ * @uri /adminpanel/widgets/:id
  */
 class Widgets extends CMS\Webservice\Rest
 {
@@ -182,7 +182,7 @@ class Widgets extends CMS\Webservice\Rest
         /*if ($user->isGuest()) {
             return new Response(200, null);
         }*/
-        $widget->config = $data['config'];
+        $widget->config = (array)$data['config'];
         $widget->widget_template = $data['widget_template'];
         $widget->publish = $data['publish'];
         $widget->save();

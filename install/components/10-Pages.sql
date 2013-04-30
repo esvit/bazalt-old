@@ -76,5 +76,13 @@ CREATE TABLE IF NOT EXISTS `com_pages_pages_locale` (
 
 INSERT INTO `cms_components` (`name`, `dependencies`, `is_active`) VALUES ('Pages', NULL, 1);
 
+SET @component_id = LAST_INSERT_ID();
+
+INSERT INTO `cms_widgets` (`site_id`, `component_id`, `className`, `default_template`, `is_active`) VALUES (NULL, @component_id, 'Components\\Pages\\Widget\\Page', 'widgets/page', 1);
+
+SET @widget_id = LAST_INSERT_ID();
+
+INSERT INTO `cms_widgets_locale` (`id`, `lang_id`, `title`, `description`, `completed`) VALUES (@widget_id, 1, 'Page', NULL, 1);
+
 /*!40014 SET FOREIGN_KEY_CHECKS=1 */;
 /*!40101 SET CHARACTER_SET_CLIENT=@OLD_CHARACTER_SET_CLIENT */;

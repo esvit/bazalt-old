@@ -10,6 +10,11 @@ class Component
 
     protected $view = null;
 
+    public function config()
+    {
+        return $this->config;
+    }
+
     public function __construct(Model\Component $component, $folder)
     {
         $this->baseDir = $folder;
