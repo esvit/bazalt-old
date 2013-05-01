@@ -3,7 +3,7 @@
 
     {% for menuitem in menu.getItems() %}
     <li class="{{ menuitem.getCss() }} {%if menuitem.isActive() %}active{% endif %}{% if menuitem.hasSubMenu() %} dropdown{% endif %}">
-        <a{% if menuitem.hasSubMenu() %} class="dropdown-toggle"{% endif %} href="{{ menuitem.getUrl() }}">{{ menuitem.title() }}</a>
+        <a{% if menuitem.hasSubMenu() %} class="dropdown-toggle"{% endif %} {% if menuitem.target() %} target="{{ menuitem.target() }}"{% endif %} href="{{ menuitem.getUrl() }}">{{ menuitem.title() }}</a>
 
         {% if menuitem.getItems()|length > 0 %}
         <ul class="dropdown-menu">
@@ -14,6 +14,6 @@
     {% endfor %}
 {% endmacro %}
 
-<ul>
+<ul class="{{ menu.css() }}">
 {{ _self.menuElement(menu) }}
 </ul>

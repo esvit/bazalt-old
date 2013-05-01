@@ -13,15 +13,15 @@ class Link extends \Framework\CMS\Menu\ComponentItem
 
     public function prepare()
     {
-        if ($this->element) {
-            $this->addCss($this->element->config['css']);
+        if (isset($this->element->config['target_blank']) && $this->element->config['target_blank']) {
+            $this->target = '_blank';
         }
     }
 
     public function getSettingsForm()
     {
         $this->view->assign('menuitem', $this->element);
-        return $this->view->fetch('menu/settings');
+        return $this->view->fetch('admin/menu/link');
     }
 
     public function getUrl()

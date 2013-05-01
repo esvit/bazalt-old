@@ -40,7 +40,7 @@ define([
     .factory('MenuElementsService', function(ngNestedResource) {
         var MenuElementsService = ngNestedResource('/rest.php/menu/:id', { 'id': '@' }, {
             update: { method: 'POST' },
-            getSettings: { method: 'GET', params: { 'action': 'getSettings' } }
+            getSettings: { method: 'POST', params: { 'action': 'getSettings' }, isArray: false }
         });
         return MenuElementsService;
     })
@@ -73,6 +73,8 @@ define([
                         $scope.menu = item;
                     }
                 });
+            } else {
+                $scope.menu = null;
             }
             if ($scope.menu) {
                 $scope.loading.elements = true;
@@ -92,6 +94,18 @@ define([
                     },
                     {
                         'title' : $filter('language')($scope.menu.title)
+                    }
+                ];
+            } else {
+            
+                $rootScope.breadcrumbs = [
+                    {
+                        'title' : 'Dashboard',
+                        'url': '#!/'
+                    },
+                    {
+                        'title' : 'Menu',
+                        'url': '#!/menu'
                     }
                 ];
             }
@@ -172,13 +186,23 @@ define([
                 $scope.loading.elements = false;
             });
         };
+        $scope.saveItem = function (item) {
+            var menu = new MenuElementsService(item);
+            menu.children = [];
+
+            $scope.loading.elements = true;
+            menu.$save(function(result) {
+                $scope.loading.elements = false;
+                //item = new MenuElementsService(result);
+            });
+        };
     })
     .controller('MenuSettingsCtrl', function($scope, $rootScope, $filter, $location, $routeParams, $timeout, MenuService, MenuElementsService) {
         $scope.loading = false;
         $scope.saveItem = function (item) {
             console.info(item);
             var menu = new MenuElementsService(item);
-            menu.childern = [];
+            menu.children = [];
 
             $scope.loading = true;
             menu.$save(function(result) {
@@ -195,11 +219,14 @@ define([
         };
 
         $scope.changeMenuType = function(item) {
-            item.component_id  = item.$type.component_id;
-            item.menuType = item.$type.name;
-
-            item.$getSettings({'menuType': item.menuType, 'type_id': item.component_id}, function(settings) {
-                console.info(settings);
+            $scope.loading = true;
+            var menu = new MenuElementsService(item);
+            menu.$getSettings({ 'menuType': item.menuType }, function(result) {
+                $scope.loading = false;
+                item.menuType = result.menuType;
+                item.component_id = result.component_id;
+                item.typeTitle = result.typeTitle;
+                item.settings = result.settings;
             });
         };
     })

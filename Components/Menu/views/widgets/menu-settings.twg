@@ -12,6 +12,11 @@
 </div>
 
 <div class="bz-row">
+    CSS Class:
+    <input type="text" ng-model="widget.config.css" value="{{ options.css }}" />
+</div>
+
+<div class="bz-row">
     <label>
         <input class="checkbox" type="checkbox" name="acl_check"{% if options.acl_check == 'on' %} checked="checked"{% endif %} />
         {% tr %}Check URL access{% endtr %}

@@ -22,6 +22,7 @@ require_once 'Framework/Core/include.inc';
 
 if (!is_file('config.php') || !filesize('config.php')) {
     header('Location: /install.php');
+    exit;
 }
 require_once 'config.php';
 

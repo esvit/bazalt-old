@@ -48,19 +48,20 @@ class Menu extends CMS\Webservice\Rest
         $result = [];
         $types = Element::getMenuTypes();
 
-        foreach ($types as $k => $type) {
-            $component = $type->component()->config();
-            $result[$k] = [
+        foreach ($types as $className => $menuItem) {
+            $component = $menuItem->component()->config();
+            $result []= [
                 'component_id' => $component->id,
                 'component_title' => $component->title,
-                'name' => $type->getItemType()
+                'class' => $className,
+                'title' => $menuItem->getItemType()
             ];
         }
         return new Response(200, $result);
     }
 
     /**
-     * @method GET
+     * @method POST
      * @priority 10
      * @action getSettings
      * @provides application/json
@@ -69,16 +70,34 @@ class Menu extends CMS\Webservice\Rest
      */
     public function getSettings()
     {
-        $result = [];
-        $types = Element::getMenuTypes();
+        $data = new Data\Validator((array)$this->request->data);
 
-        foreach ($types as $type) {
-            $component = $type->component()->config();
-            if ($component->id == $_GET['component_id'] && $type->getItemType() == $_GET['menuType']) {
-                $result = $type->getSettingsForm();
+        $menu = null;
+        // 1. Check menu
+        $data->field('id')->required()->validator('exist_menu', function($value) use (&$menu) {
+            $menu = Element::getById((int)$value);
+            
+            return ($menu != null);
+        }, "Menu dosn't exists");
+
+        // 2. Check menu type
+        $data->field('menuType')->required()->validator('exist_menuType', function($value) use (&$menu) {
+            $types = Element::getMenuTypes();
+
+            if (!isset($types[$value])) {
+                return false;
             }
+            $item = $types[$value];
+            $menu->menuType = $value;
+            $menu->component_id = $item->component()->config()->id;
+
+            return true;
+        }, "Menu type dosn't exists");
+
+        if (!$data->validate()) {
+            return new Response(400, $data->errors());
         }
-        return new Response(200, $result);
+        return new Response(200, $menu);
     }
 
     /**
@@ -124,6 +143,8 @@ class Menu extends CMS\Webservice\Rest
         $descriptions = (array)$data->getData('description');
         $menu->title = $titles['en'];
         $menu->description = $descriptions['en'];
+        $menu->component_id = $data->getData('component_id');
+        $menu->menuType = $data->getData('menuType');
         $menu->config = (array)$data->getData('config');
         $menu->is_publish = $data->getData('is_publish') ? '1' : '0';
         $menu->save();

@@ -41,6 +41,12 @@ class Element extends Base\Element
         if (!$res['config']) {
             $res['config'] = new \stdClass();
         }
+
+        $item = $this->getMenuItem();
+        if ($item) {
+            $res['typeTitle'] = $item->getItemType();
+            $res['settings'] = $item->getSettingsForm();
+        }
         return $res;
     }
 
@@ -53,17 +59,15 @@ class Element extends Base\Element
         return $q->fetchAll();
     }
 
-    public static function getComponentMenuType($componentName, $menuType, Element $element = null)
+    public static function getComponentMenuType(CMS\Component $component, $menuClass, Element $element = null)
     {
-        $component = CMS\Bazalt::getComponent($componentName);
-
         if (!$component || !($component instanceof CMS\Menu\HasItems)) {
             return null;
             //throw new \Exception('Component "' . $componentName . '" must implements Framework\CMS\Menu\HasItems interface');
         }
 
         $menuTypes = $component->getMenuTypes();
-        if (!isset($menuTypes[$menuType]) || !class_exists($menuClass = $menuTypes[$menuType])) {
+        if (!in_array($menuClass, $menuTypes) || !class_exists($menuClass)) {
             return null;
             //throw new \Exception('Menu type not found in component');
         }
@@ -125,11 +129,12 @@ class Element extends Base\Element
 
     public function getMenuItem()
     {
-        if (!$this->menuType || !($component = $this->Component)) {
+        if (!$this->menuType || !($componentModel = $this->Component)) {
             return null;
         }
         if (!$this->menuItem) {
-            $this->menuItem = self::getComponentMenuType($component->name, $this->menuType, $this);
+            $component = CMS\Bazalt::getComponent($componentModel->name);
+            $this->menuItem = self::getComponentMenuType($component, $this->menuType, $this);
         }
         return $this->menuItem;
     }
@@ -202,13 +207,11 @@ class Element extends Base\Element
         $menuTypes = array();
         $components = CMS\Bazalt::getComponents();
 
-        $num = 0;
         foreach ($components as $component) {
             if ($component instanceof CMS\Menu\HasItems) {
-                $compMenus = $component->getMenuTypes();
-                $config = $component->config();
+                $classes = $component->getMenuTypes();
 
-                foreach ($compMenus as $key => $menuClass) {
+                foreach ($classes as $menuClass) {
                     if (!class_exists($menuClass)) {
                         continue;
                     }
@@ -216,7 +219,7 @@ class Element extends Base\Element
                     if (!($menuItem instanceof CMS\Menu\ComponentItem)) {
                         throw new \Exception(sprintf('Menu must "%s" be instance of Framework\CMS\Menu\ComponentItem', $menuClass));
                     }
-                    $menuTypes[$num++] = $menuItem;
+                    $menuTypes[$menuClass] = $menuItem;
                 }
             }
         }

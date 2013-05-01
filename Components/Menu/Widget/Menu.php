@@ -29,6 +29,12 @@ class Menu extends CMS\Widget
         }
         $menu->setCurrentMenuByUrl(urldecode(Url::getRequestUrl(true)));
 
+        // add CSS class
+        if (isset($this->options['css'])) {
+            $menu->css($this->options['css']);
+        }
+
+        // Attach to menu level
         if (isset($this->options['attach']) && $this->options['attach'] == 'on') {
             $level = (int)$this->options['attach_level'];
             for ($i = 0; $i <= $level; $i++) {

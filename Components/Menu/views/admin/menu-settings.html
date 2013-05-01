@@ -25,18 +25,9 @@
     </div>
 
     <label>Тип пункту меню:</label>
-    <select ng-change="changeMenuType(child)" ng-options="type as type.name group by type.component_title for type in menuTypes" ng-model="child.$type"></select>
-    <legend></legend>
-    <div class="bz-form-row">
-        <label>Сторінка</label>
-        <input type="text" ng-model="child.config.text"/>
+    <select ng-change="changeMenuType(child)" ng-options="type.class as type.title group by type.component_title for type in menuTypes" ng-model="child.menuType"></select>
 
-        <p>
-            <span class="pull-left">Головна</span>
-            <a class="pull-right btn-link" href="#">Оберіть сторінку...</a>
-        </p>
-    </div>
-    <div class="clearfix"></div>
+    <div class="menu-settings-external clearfix" data-title="{['Settings'|translate:'Menu']}" ng-show="child.settings" raw="child.settings"></div>
     <legend></legend>
 
     <div class="text-center">

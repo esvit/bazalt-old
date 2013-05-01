@@ -25,7 +25,8 @@ class Component extends CMS\Component implements CMS\Menu\HasItems
     public function getMenuTypes()
     {
         return [
-            'Link' => 'Components\Menu\Menu\Link'
+            'Components\Menu\Menu\Link',
+            'Components\Menu\Menu\MainPage'
         ];
     }
 }
