@@ -6,7 +6,7 @@
         <a{% if menuitem.hasSubMenu() %} class="dropdown-toggle"{% endif %} {% if menuitem.target() %} target="{{ menuitem.target() }}"{% endif %} href="{{ menuitem.getUrl() }}">{{ menuitem.title() }}</a>
 
         {% if menuitem.getItems()|length > 0 %}
-        <ul class="dropdown-menu">
+        <ul class="dropdown-menu" bz-nav>
         {{ _self.menuElement(menuitem, level + 1) }}
         </ul>
         {% endif %}
@@ -14,6 +14,6 @@
     {% endfor %}
 {% endmacro %}
 
-<ul class="{{ menu.css() }}">
+<ul class="{{ menu.css() }}" bz-nav>
 {{ _self.menuElement(menu) }}
 </ul>
