@@ -38,29 +38,7 @@
     </div>
 </div>
 
-<div class="container">
-    <div class="masthead">
-        <div class="b-tel-mail pull-right">
-            <nobr><noskype></noskype>+7(967) 078 46 03</nobr>
-            <a href="mailto:info@makeupidea.ru">info@makeupidea.ru</a>
-        </div>
-        <a href="#home" class="b-logotype muted">&nbsp;</a>
-    </div>
-    <hr />
-    <div class="container-head">
-        <a class="btn pull-right btn-success" href="/catalog">Каталог</a>
-        <ul class="nav nav-pills b-container-menu">
-            <li><a href="/makeupidea/catalog.html">Каталог</a></li>
-            <li><a href="/makeupidea/blog.html">Блог</a></li>
-            <li><a href="/makeupidea/index.html">О нас</a></li>
-            <li><a href="/admin.php">Админка</a></li>
-        </ul>
-
-        {% widgets 'menu' %}
-    </div>
-</div>
-
-<div class="container">
+<div class="container" style="padding-top: 60px">
     <div id="ng-view" data-ng-view ng-animate="{enter: 'view-enter'}">
     {{content|raw}}
     </div>
@@ -68,18 +46,7 @@
     <div class="clearfix"></div>
     <hr />
 </div>
-<div class="footer">
-    <div class="container">
-        <div class="pull-right b-copyright">Makeupidea &copy; 2013. Все права защищены.</div>
-        <ul class="nav nav-pills b-container-menu">
-            <li><a href="/makeupidea/index.html">Главная</a></li>
-            <li><a href="/makeupidea/catalog.html">Каталог</a></li>
-            <li><a href="/makeupidea/blog.html">Блог</a></li>
-            <li><a href="/makeupidea/index.html">О нас</a></li>
-            <li><a href="/makeupidea/index.html">Сотрудничество</a></li>
-        </ul>
-    </div>
-</div>
+
 <style>
 #ng-view {
 position: relative;

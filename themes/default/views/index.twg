@@ -1,4 +1,1 @@
-Index
-
-<a href="/test/test">Test</a>
-{% widgets 'after_content' %}
+{% widgets 'home' %}

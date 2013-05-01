@@ -2,6 +2,6 @@
 
 define([], function() {
 
-    angular.module('Component.AdminPanel.Admin', []);
+    angular.module('Component.Seo.Admin', []);
 
 });
