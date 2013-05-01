@@ -27,9 +27,9 @@ class Session_Test extends Tests\BaseCase
         $this->expectOutputString(
             "ini_set('session.save_handler', files);\n" .
             "ini_set('session.save_path', /tmp);\n" .
-            "ini_set('session.gc_maxlifetime', 2000);\n" .
+            "ini_set('session.gc_maxlifetime', 300);\n" .
             "session_name(BAZALT);\n" .
-            "session_set_cookie_params(2000, /, , false, true);\n" .
+            "session_set_cookie_params(300, /, , false, true);\n" .
             "session_start();\n"
         );
     }
