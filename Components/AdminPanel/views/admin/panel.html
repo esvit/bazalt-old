@@ -1,12 +1,11 @@
 <link rel="stylesheet" type="text/css" href="/less.php/Components/AdminPanel/assets/less/panel.less" />
-<link rel="stylesheet" type="text/css" href="/App/Admin/assets/css/bootstrap.css" />
 
 <div id="bz-admin-bar">
     <div id="adm-userpanel">
         <div class="bz-adminpanel-container">
             <a class="dashboard" href="/admin.php" onclick="javascript:location.href='/admin.php'"><span></span> Dashboard</a>
 
-            <a ng-click="manageWidgets()" href="#">Widgets</a>
+            <a ng-repeat="menuitem in menu" ng-click="menuitem.action()" href="">{[ menuitem.title ]}</a>
 
             <div class="bz-user-block pull-right">
                 <a class=" dropdown-toggle" data-toggle="dropdown" href="#">
@@ -26,7 +25,7 @@
             </div>
         </div>
     </div>
-
+    
     <div id="cms_widgets_panel">
         <div class="cms_widget_panel-container" widgets="base">
             <div widget="{[item.id]}" data-id="{[item.id]}" ng-repeat="item in widgets" class="cms_widget_panel-widget">

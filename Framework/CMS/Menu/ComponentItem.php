@@ -19,7 +19,10 @@ abstract class ComponentItem extends Item
      *
      * @return string Settings template
      */
-    abstract function getSettingsForm();
+    public function getSettingsForm()
+    {
+        return null;
+    }
 
     public function __construct(CMS\Component $component, $element = null)
     {
@@ -30,6 +33,10 @@ abstract class ComponentItem extends Item
         if ($element) {
             $this->title($element->title);
             $this->description($element->description);
+
+            if (isset($element->config['css'])) {
+                $this->css($element->config['css']);
+            }
         }
     }
 

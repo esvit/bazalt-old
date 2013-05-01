@@ -19,7 +19,7 @@ require([].concat(modules), function() {
                 controller: ['$scope', 'content', function($scope, content) {
                     $scope.content = content;
                 }],
-                template: '<div compile="content"></div>',
+                template: '<div raw="content"></div>',
                 resolve: {
                     content: ['$q','$http', '$location', 'appLoading', function($q, $http, $location, appLoading) {
                         var deferred = $q.defer();
@@ -43,35 +43,19 @@ require([].concat(modules), function() {
 
             $locationProvider.html5Mode(true);
             $locationProvider.hashPrefix('!');
-    }]).directive('compile', function($compile) {
-        // directive factory creates a link function
-        return function(scope, element, attrs) {
-            scope.$watch(function(scope) {
-                // watch the 'compile' expression for changes
-                return scope.$eval(attrs.compile);
-            }, function(value) {
-                // when the 'compile' expression changes
-                // assign it into the current DOM
-                element.html(value);
-
-                // compile the new DOM and link it to the current
-                // scope.
-                // NOTE: we only compile .childNodes so that
-                // we don't get into infinite loop compiling ourselves
-                $compile(element.contents())(scope);
-            });
-        }
-    });
+    }]);
 
     app.controller('IndexCtrl', function() {
     
     });
-    app.run(['$rootScope', '$templateCache', function($rootScope, $templateCache) {
+    app.run(['$rootScope', '$templateCache', '$document', '$page', function($rootScope, $templateCache, $document, $page) {
+       $rootScope.$on('$pageChangeTitle', function(e, title) {
+            $document.attr('title', title);
+       });
        $rootScope.$on('$routeChangeStart', function() {
             //console.info('start');
        });
        $rootScope.$on('$routeChangeSuccess', function() {
-            //console.info('success');
        });
        $rootScope.$on('$viewContentLoaded', function() {
          // $templateCache.removeAll();

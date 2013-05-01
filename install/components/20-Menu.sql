@@ -6,7 +6,7 @@
 DROP TABLE IF EXISTS `com_menu_elements`;
 CREATE TABLE IF NOT EXISTS `com_menu_elements` (
   `id` int(10) unsigned NOT NULL AUTO_INCREMENT,
-  `menu_id` int(10) unsigned NOT NULL,
+  `root_id` INT(10) UNSIGNED NULL DEFAULT NULL,
   `site_id` int(10) unsigned NOT NULL,
   `component_id` int(10) unsigned DEFAULT NULL,
   `menuType` varchar(30) DEFAULT NULL,
@@ -16,10 +16,8 @@ CREATE TABLE IF NOT EXISTS `com_menu_elements` (
   `depth` int(10) unsigned NOT NULL DEFAULT '0',
   `is_publish` int(10) unsigned NOT NULL DEFAULT '1',
   PRIMARY KEY (`id`),
-  KEY `FK_com_menu_elements_com_menu_menus` (`menu_id`),
   KEY `FK_com_menu_elements_cms_components` (`component_id`),
-  CONSTRAINT `FK_com_menu_elements_cms_components` FOREIGN KEY (`component_id`) REFERENCES `cms_components` (`id`) ON DELETE CASCADE ON UPDATE NO ACTION,
-  CONSTRAINT `FK_com_menu_elements_com_menu_elements` FOREIGN KEY (`menu_id`) REFERENCES `com_menu_elements` (`id`) ON UPDATE NO ACTION ON DELETE CASCADE
+  CONSTRAINT `FK_com_menu_elements_cms_components` FOREIGN KEY (`component_id`) REFERENCES `cms_components` (`id`) ON DELETE CASCADE ON UPDATE NO ACTION
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 
 DROP TABLE IF EXISTS `com_menu_elements_locale`;
@@ -38,6 +36,8 @@ CREATE TABLE IF NOT EXISTS `com_menu_elements_locale` (
 INSERT INTO `cms_components` (`name`, `dependencies`, `is_active`) VALUES ('Menu', NULL, 1);
 
 SET @component_id = LAST_INSERT_ID();
+
+INSERT INTO `cms_components_locale` (`id`, `lang_id`, `title`, `description`, `completed`) VALUES (@component_id, 1, 'Menu', '', 1);
 
 INSERT INTO `cms_widgets` (`site_id`, `component_id`, `className`, `default_template`, `is_active`) VALUES (NULL, @component_id, 'Components\\Menu\\Widget\\Menu', 'widgets/menu', 1);
 

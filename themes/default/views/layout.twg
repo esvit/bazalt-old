@@ -7,16 +7,16 @@
 <head>
     <meta charset="utf-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
-    <title>MakeupIdea | Main page</title>
+    <title>{{ _meta.title }}</title>
 
-    <meta name="description" content="">
+    <meta name="keywords" content="{{ _meta.keywords }}">
+    <meta name="description" content="{{ _meta.description }}">
     <meta name="viewport" content="width=device-width">
     <link rel='stylesheet' type='text/css' href='http://fonts.googleapis.com/css?family=Open+Sans+Condensed:300&subset=latin,cyrillic-ext,cyrillic' />
 
     <link rel="stylesheet" type="text/css" href="/themes/default/assets/css/theme.css"/>
 </head>
 <body>
-
 
 <div class="navbar navbar-inverse navbar-fixed-top">
     <div class="navbar-inner">
@@ -28,12 +28,7 @@
             </button>
             <!--a class="brand" href="#">Project name</a-->
             <div class="nav-collapse collapse">
-                <ul class="nav">
-                    <li class="active"><a href="/">Главная</a></li>
-                    <li><a href="/gallery/">Галерея</a></li>
-                    <li><a href="/makeupidea/return">Возврат</a></li>
-                    <li><a href="/makeupidea/basket.html">Корзина</a></li>
-                </ul>
+                {% widgets 'main-menu' %}
             </div>
             <!--/.nav-collapse -->
             <div style="margin: 10px 0 -10px" ng-show="status == 'loading'" class="ng-cloak progress progress-success progress-striped active">
@@ -103,7 +98,7 @@ min-height: 500px;
 
 .view-enter-setup {
   opacity:0;
-  left:100px;
+  left:10px;
   width:100%;
   position:absolute;
 }

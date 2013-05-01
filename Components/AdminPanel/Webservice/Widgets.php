@@ -1,6 +1,6 @@
 <?php
 
-namespace App\Rest\Webservice;
+namespace Components\AdminPanel\Webservice;
 
 use Framework\CMS as CMS;
 use Framework\System\Data as Data;

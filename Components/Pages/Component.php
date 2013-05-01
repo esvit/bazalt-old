@@ -3,7 +3,7 @@
 namespace Components\Pages;
 
 use \Framework\CMS as CMS;
-use Framework\System\Routing\Route;
+use \Framework\CMS\Route;
 
 class Component extends CMS\Component implements CMS\Menu\HasItems
 {
@@ -37,7 +37,7 @@ class Component extends CMS\Component implements CMS\Menu\HasItems
             }
             return false;
         };
-        $checkPage = function($url, $name, $pageUrl, &$params) {
+        $checkPage = function($url, $name, $pageUrl, &$params, $route) {
             $page = Model\Page::getByUrl($pageUrl, true);
 
             if ($page) {
@@ -50,6 +50,7 @@ class Component extends CMS\Component implements CMS\Menu\HasItems
         $mapper = Route::root()->connect('Pages.Page', '/[page]', ['component' => self::getName(), 'controller' => 'Components\Pages\Controller\Index', 'action' => 'view'])
                 ->where('page', $checkPage);
 
+        $mapper->noIndex();
         //$categoryMapper = Route::root()->connect('Pages.Category', '/[category]', ['component' => __CLASS__, 'controller' => 'Components\News\Controller\Index', 'action' => 'news', 'fullPath' => true]);
         //$categoryMapper->where('category', $checkCategory);
 
@@ -59,8 +60,8 @@ class Component extends CMS\Component implements CMS\Menu\HasItems
 
     public function getMenuTypes()
     {
-        return array(
-            'page' => 'ComPages_Menu_Page'
-        );
+        return [
+            'Components\Pages\Menu\Page'
+        ];
     }
 }

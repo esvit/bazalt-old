@@ -32,6 +32,17 @@ define([
             icon: 'icon-file-alt'
         });
     })
+    .directive("pagesCollection", function($document, $parse, $timeout, PagesService) {
+        return {
+            restrict: 'A',
+            link: function(scope, element, attrs) {
+                PagesService.get({}, function(result) {
+                    scope.loading.pages = false;
+                    scope.pages = result.data;
+                });
+            }
+        };
+    })
     .factory('PagesService', function($resource) {
         return $resource('/rest.php/pages/', { 'id': '@id' });
     })

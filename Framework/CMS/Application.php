@@ -22,6 +22,8 @@ abstract class Application
 
     protected $request;
 
+    protected $route;
+
     protected $config = array();
 
     /**
@@ -106,7 +108,7 @@ abstract class Application
     public function showPage(&$content = null)
     {
         //Theme::assign('metatags', Metatags::Singleton()->__toString());
-        $this->view->showPage('layout', $content);
+        $this->view->showPage('layout', $content, $this->route);
     }
 
     public function showErrorPage(Exception $e, $message = null)
@@ -153,8 +155,8 @@ abstract class Application
     {
         ob_start();
         try {
-            if ($route = Route::root()->find($url)) {
-                $route->dispatch();
+            if ($this->route = Route::root()->find($url)) {
+                $this->route->dispatch();
             } else {
                 throw new Exception\PageNotFound();
             }

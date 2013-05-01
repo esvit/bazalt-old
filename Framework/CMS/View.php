@@ -157,11 +157,15 @@ class View extends Scope
         return $content;
     }
 
-    public function showPage($template, &$content = null)
+    public function showPage($template, &$content = null, Route $route = null)
     {
+        if ($route && $info = $route->getMetaInfo()) {
+            $meta = $info->toString();
+            $this->assign('_meta', $info->toTemplate());
+        }
         //CMS_Theme::addMetadata();
         if (strpos($_SERVER['HTTP_ACCEPT'], 'application/json') === 0) {
-            Response::output('<div class="ng-view-container">' . $content . '</div>');
+            Response::output($meta . '<div class="ng-view-container">' . $content . '</div>');
             exit;
         }
 

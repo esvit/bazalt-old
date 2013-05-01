@@ -28,6 +28,8 @@ class Item
 
     protected $css = '';
 
+    protected $target = null;
+
     protected $count = 0;
 
     public function __construct($title = null, $url = null, $data = array())
@@ -133,6 +135,15 @@ class Item
         return $this->id;
     }
 
+    public function target($target = null)
+    {
+        if ($target !== null) {
+            $this->target = $target;
+            return $this;
+        }
+        return $this->target;
+    }
+
     public function description($description = null)
     {
         if ($description !== null) {
@@ -160,10 +171,10 @@ class Item
     public function css($value = null)
     {
         if ($value != null) {
-            return parent::css($value);
+            return $this->css = $value;
         }
 
-        $css = explode(' ', parent::css());
+        $css = explode(' ', $this->css);
         if ($this->url == '-') {
             $css []= 'menu-separator';
         } else {
@@ -178,8 +189,6 @@ class Item
         $css = array_unique($css);
         return trim(implode(' ', $css));
     }
-    
-    
 
     public function setCss($value)
     {

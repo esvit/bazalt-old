@@ -2,8 +2,6 @@
 
 namespace Framework\CMS;
 
-use Framework\System\Routing\Route;
-
 class Breadcrumb
 {
     protected $nextCrumb = null;

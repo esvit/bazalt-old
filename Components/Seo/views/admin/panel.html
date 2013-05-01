@@ -1,0 +1,57 @@
+<div ng-show="showSeo" style="z-index: 10000; position: fixed; background: white; padding: 10px; border: 1px solid black; top: 50%; left: 50%; width: 500px; margin-left: -250px; height: 400px; margin-top: -200px">
+    <div>
+    <div class="control-group">
+        <label class="control-label" for="title">{[ 'Page title'|translate:'AdminPanel' ]}</label>
+        <div class="controls">
+            <input type="text" ng-model="pageSeo.title" />
+            <span class="help-block">Site Title to appear at the top in the administration panel</span>
+        </div>
+    </div>
+    <div class="control-group">
+        <label class="control-label" for="title">{[ 'Page keywords'|translate:'AdminPanel' ]}</label>
+        <div class="controls">
+            <input type="text" ng-model="pageSeo.keywords" />
+        </div>
+    </div>
+    <div class="control-group">
+        <label class="control-label" for="title">{[ 'Page description'|translate:'AdminPanel' ]}</label>
+        <div class="controls">
+            <textarea ng-model="pageSeo.description"></textarea>
+        </div>
+    </div>
+    <div class="control-group">
+        <label class="control-label" for="title">{[ 'Variables'|translate:'AdminPanel' ]}</label>
+        <div class="controls">
+            <span ng-repeat="(name, value) in metainfo.seo_vars">
+                {[name]}: {[value]}
+            </span>
+        </div>
+    </div>
+    
+    <button ng-click="savePage()">Save</button>
+    </div>
+    
+    {[route.name]}
+    <div class="control-group">
+        <label class="control-label" for="title">{[ 'Page title'|translate:'AdminPanel' ]}</label>
+        <div class="controls">
+            <input type="text" ng-model="route.title" />
+            <span class="help-block">Site Title to appear at the top in the administration panel</span>
+        </div>
+    </div>
+    <div class="control-group">
+        <label class="control-label" for="title">{[ 'Page keywords'|translate:'AdminPanel' ]}</label>
+        <div class="controls">
+            <input type="text" ng-model="route.keywords" />
+        </div>
+    </div>
+    <div class="control-group">
+        <label class="control-label" for="title">{[ 'Page description'|translate:'AdminPanel' ]}</label>
+        <div class="controls">
+            <textarea ng-model="route.description"></textarea>
+        </div>
+    </div>
+    
+    
+    <button ng-click="saveRoute()">Save</button>
+</div>

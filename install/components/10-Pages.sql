@@ -78,6 +78,8 @@ INSERT INTO `cms_components` (`name`, `dependencies`, `is_active`) VALUES ('Page
 
 SET @component_id = LAST_INSERT_ID();
 
+INSERT INTO `cms_components_locale` (`id`, `lang_id`, `title`, `description`, `completed`) VALUES (@component_id, 1, 'Pages', '', 1);
+
 INSERT INTO `cms_widgets` (`site_id`, `component_id`, `className`, `default_template`, `is_active`) VALUES (NULL, @component_id, 'Components\\Pages\\Widget\\Page', 'widgets/page', 1);
 
 SET @widget_id = LAST_INSERT_ID();

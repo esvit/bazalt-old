@@ -8,15 +8,12 @@ use Framework\CMS as CMS,
 
 class Index extends CMS\AbstractController
 {
-    public function viewAction($page, $_meta)
+    public function viewAction($page)
     {
         if (!$page) {
             throw new CMS\Exception\PageNotFound();
         }
         $this->view->assign('page', $page);
-
-        $_meta->assign('page_title', $page->title);
-
         $this->view->assign('images', $page->Images->get());
 
         $this->view->display([

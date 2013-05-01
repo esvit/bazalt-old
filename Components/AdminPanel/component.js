@@ -19,7 +19,16 @@ define(['jquery-ui', 'angular-cookies'], function() {
             restrict:'E',
             replace:false,
             templateUrl:'/Components/AdminPanel/views/admin/panel.html',
-            controller: ['$scope', '$cookieStore', 'WidgetsService', function($scope, $cookieStore, WidgetsService) {
+            controller: ['$scope', '$cookieStore', 'WidgetsService', '$rootScope', function($scope, $cookieStore, WidgetsService, $rootScope) {
+                $scope.menu = [
+                    {
+                        'title': 'Widgets',
+                        'action': function() {
+                            $scope.showWidgets = !$scope.showWidgets;
+                        }
+                    }
+                ];
+
                 $scope.$watch('showWidgets', function(value) {
                     var body = $('body');
                     body.toggleClass('cms-manage-widgets', value);
@@ -31,10 +40,9 @@ define(['jquery-ui', 'angular-cookies'], function() {
                     }
                 });
                 $scope.showWidgets = !!$cookieStore.get('showWidgets');
-                $scope.manageWidgets = function() {
-                    $scope.showWidgets = !$scope.showWidgets;
-                };
                 $scope.widgets = WidgetsService.query();
+
+                $rootScope.$emit('adminPanelInit', $scope);
             }],
             link: function() {
                 // body and bootstrap nav fixed
