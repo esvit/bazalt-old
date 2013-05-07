@@ -31,9 +31,9 @@
                 {% widgets 'main-menu' %}
             </div>
             <!--/.nav-collapse -->
-            <div style="margin: 10px 0 -10px" ng-show="status == 'loading'" class="ng-cloak progress progress-success progress-striped active">
+            <!--div style="margin: 10px 0 -10px" ng-show="status == 'loading'" class="ng-cloak progress progress-success progress-striped active">
                 <div class="bar" style="width: 100%;">Loading...</div>
-            </div>
+            </div-->
         </div>
     </div>
 </div>

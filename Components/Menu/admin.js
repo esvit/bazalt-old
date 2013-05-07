@@ -16,6 +16,7 @@ define([
         .run(function(dashboard) {
             // add item to admin main menu
             dashboard.mainMenu.push({
+                component: 'Menu',
                 url: '#!/menu',
                 title: 'Menu',
                 icon: 'icon-reorder'
@@ -56,6 +57,8 @@ define([
         return MenuService;
     })
     .controller('MenusCtrl', function($scope, $rootScope, $filter, $location, $routeParams, $timeout, MenuService, MenuElementsService) {
+        $scope.activateMenu('Menu'); // activate admin menu
+
         $scope.loading = {
             menus: false,
             elements: false
@@ -197,7 +200,9 @@ define([
             });
         };
     })
-    .controller('MenuSettingsCtrl', function($scope, $rootScope, $filter, $location, $routeParams, $timeout, MenuService, MenuElementsService) {
+    .controller('MenuSettingsCtrl', function($scope, $rootScope, $filter, $location, $routeParams, $timeout, MenuService, MenuElementsService, menuItem) {
+        $scope.activateMenu('Menu'); // activate admin menu
+
         $scope.loading = false;
         $scope.saveItem = function (item) {
             console.info(item);

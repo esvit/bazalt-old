@@ -27,6 +27,7 @@ define([
     .run(function(dashboard) {
         // add item to admin main menu
         dashboard.mainMenu.push({
+            component: 'Pages',
             url: '#!/pages',
             title: 'Pages',
             icon: 'icon-file-alt'
@@ -56,6 +57,8 @@ define([
         return CategoryService;
     })
     .controller('PagesCtrl', function($scope, $rootScope, $filter, $location, $routeParams, $q, PagesService, CategoryService) {
+        $scope.activateMenu('Pages'); // activate admin menu
+
         // for access from other controller
         $rootScope.toggleEdit = function() {
             $scope.edit_categories = !$scope.edit_categories;
@@ -161,6 +164,8 @@ define([
         ];
     })
     .controller('CategoriesCtrl', function($scope, $rootScope, $filter, $routeParams, CategoryService) {
+        $scope.activateMenu('Pages'); // activate admin menu
+
         $scope.addCategory = function (child) {
             child.$insertItem(function(item) {
                 item.focus = true;
@@ -172,7 +177,9 @@ define([
             item.$moveItem(before, index);
         };
     })
-    .controller('PageCtrl', function($scope, $rootScope, $routeParams, $filter, $location, $timeout, PagesService) {
+    .controller('PageCtrl', function($scope, $rootScope, $routeParams, $filter, $location, $timeout, PagesService, CategoryService) {
+        $scope.activateMenu('Pages'); // activate admin menu
+
         $scope.loading = true;
         var pageTitle = 'New page';
         if ($routeParams.id) {
@@ -208,6 +215,22 @@ define([
                 page.images.push(file);
             });
         }
+
+        $scope.categories = [];
+
+        // get categories
+        CategoryService.getTree(function(res) {
+            var walk = function(items) {
+                for (var i = 0; i < items.length; i++) {
+                    $scope.categories.push({
+                        id:    items[i].id,
+                        title: $filter('language')(items[i].title)
+                    });
+                    walk(items[i].children);
+                }
+            }
+            walk(res.children);
+        });
 
 
         $rootScope.$watch('tr', function() {

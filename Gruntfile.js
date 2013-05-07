@@ -37,7 +37,7 @@ module.exports = function(grunt) {
             },
             'jquery-ui.js': {
                 src: [
-                    'assets/components/jquery-ui/ui/minified/jquery-ui.custom.min.js',
+                    'assets/components/jquery-ui/ui/*.js'
                     //'assets/components/jquery-ui/ui/i18n/*.js'
                 ],
                 dest: 'assets/components/jquery-ui.js'

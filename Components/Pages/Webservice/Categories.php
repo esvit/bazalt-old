@@ -107,10 +107,10 @@ class Categories extends CMS\Webservice\Rest
      * @json
      * @return \Tonic\Response
      */
-    public function savePage()
+    public function saveCategory()
     {
         $data = new Data\Validator((array)$this->request->data);
-        $page = isset($data['id']) ? Page::getById((int)$data['id']) : Page::create();
+        $category = isset($data['id']) ? Category::getById((int)$data['id']) : Page::create();
 
         $data->field('title')->validator('hasDefaultTranslate', function($value) {
             //$user = CMS\Model\User::getUserByEmail($value);
@@ -120,12 +120,12 @@ class Categories extends CMS\Webservice\Rest
         if (!$data->validate()) {
             return new Response(400, $data->errors());
         }
-        $page->title = $data['title']->en;
-        $page->body = $data['body']->en;
-        $page->publish = $data['publish'] == 'true';
-        $page->url = Url::cleanUrl(\Framework\System\Locale\Config::getLocale()->translit($page->title));
-        $page->save();
+        $category->title = $data['title']->en;
+        $category->description = $data['description']->en;
+        $category->is_published = $data['is_published'] == 'true';
+        //$category->url = Url::cleanUrl(\Framework\System\Locale\Config::getLocale()->translit($page->title));
+        $category->save();
 
-        return new Response(200, $page);
+        return new Response(200, $category);
     }
 }

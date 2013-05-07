@@ -1,33 +1,49 @@
+<link rel="stylesheet" type="text/css" href="/less.php/Components/Pages/assets/less/admin.less"/>
+
 <div class="page-header">
     <div class="row">
-        <div class="col-span-3">
+        <div class="col-span-9">
             <h2>{['Pages'|translate:'Pages']}</h2>
         </div>
-        <div class="col-span-9 text-left">
-                <button ng-click="savePage(page)" class="btn btn-primary">Save</button>
-                <button ng-click="cancel()" class="btn btn-link">Cancel</button>
+        <div class="col-span-3 text-left">
+                <button ng-click="savePage(page)" class="btn btn-primary">{['Save'|translate:'Pages']}</button>
+                <button ng-click="cancel()" class="btn btn-link">{['Cancel'|translate:'Pages']}</button>
         </div>
     </div>
 </div>
 
 <div class="row" loading-container="loading">
+    <div class="col-span-9 page-editor">
+        <form>
+            <div ng-repeat="language in languages.all">
+                <div class="control-group">
+                    <label class="control-label" for="title">{['Title'|translate:'Pages']}</label>
+                    <div class="controls">
+                        <input class="input-block input-xlarge" type="text" id="title" placeholder="" required ng-model="page.title[language.alias]"/>
+                    </div>
+                </div>
+                <div class="control-group">
+                    <label class="control-label" for="body">{['Content'|translate:'Pages']}</label>
+                    <div class="controls">
+                        <textarea ckeditor required ng-model="page.body[language.alias]" class="input-block" id="body"></textarea>
+                    </div>
+                </div>
+            </div>
+
+            <div class="form-actions text-center">
+                <button ng-click="savePage(page)" class="btn btn-primary">Save</button>
+                <button ng-click="cancel()" class="btn btn-link">Cancel</button>
+            </div>
+        </form>
+    </div>
+
     <div class="col-span-3 page-settings">
         <div class="control-group">
             <div class="controls">
-                <label>Категорія</label>
+                <label>{['Category'|translate:'Pages']}</label>
                 <div class="bz-form-element">
-                    <select class="bz-form-select">
-                        <option value="-">-</option>
-                        <option value="-">Категорія Парасольки</option>
-                        <option value="-">Категорія Запальнички</option>
-                    </select>
+                    <select ng-model="page.category_id" ng-options="category.id as category.title for category in categories"></select>
                 </div>
-            </div>
-        </div>
-        <div class="control-group">
-            <div class="controls">
-                <label>Шаблон</label>
-                <input type="text" />
             </div>
         </div>
         <div class="control-group">
@@ -37,61 +53,25 @@
                 </label>
             </div>
         </div>
+
+
+        <ul class="nav nav-tabs" id="tab-page-settings">
+            <li class="active"><a href="#photo" data-toggle="tab">{['Images'|translate:'Pages']}</a></li>
+        </ul>
+
+        <div class="tab-content">
+            <div class="tab-pane active" id="photo">
+                <div class="well photo-uploader ng-cloak">
+                    <p>Browse for files to upload or drag and drop them here</p>
+                    <input type="file" multiple bz-uploader="addImage(page, $file)" data-url="/rest.php/pages/images/" data-max-file-size="100mb" ng-model="page.images" accept="*.gif,*.png,*.jpg,*.jpeg" name="file1"/>
+                </div>
+                <div class="clearfix uploaded-photo">
+                    <a ng-repeat="image in page.images" class="col-span-2 thumbnail" href="">
+                        <img ng-src="{[image.url]}" />
+                    </a>
+                </div>
+            </div>
+        </div>
     </div>
 
-    <div class="col-span-9 page-editor">
-        <form>
-            <div ng-repeat="language in languages.all">
-                <div class="control-group">
-                    <label class="control-label" for="title">Заголовок</label>
-                    <div class="controls">
-                        <input class="input-block input-xlarge" type="text" id="title" placeholder="" required ng-model="page.title[language.alias]"/>
-                    </div>
-                </div>
-                <div class="control-group">
-                    <label class="control-label" for="body">Текст</label>
-                    <div class="controls">
-                        <textarea ckeditor required ng-model="page.body[language.alias]" class="input-block" id="body"></textarea>
-                    </div>
-                </div>
-            </div>
-
-            <ul class="nav nav-tabs" id="tab-page-settings">
-                <li class="active"><a href="#photo" data-toggle="tab">General</a></li>
-                <li><a href="#profile" data-toggle="tab">Profile</a></li>
-                <li><a href="#messages" data-toggle="tab">Messages</a></li>
-            </ul>
-
-            <div class="tab-content">
-                <div class="tab-pane active" id="photo">
-                    <div class="well photo-uploader ng-cloak">
-                        <p>Browse for files to upload or drag and drop them here</p>
-                        <input type="file" multiple bz-uploader="addImage(page, $file)" data-url="/rest.php/pages/images/" data-max-file-size="100mb" ng-model="page.images" accept="*.gif,*.png,*.jpg,*.jpeg" name="file1"/>
-                    </div>
-                    <div class="clearfix uploaded-photo">
-                        <a ng-repeat="image in page.images" class="col-span-1 thumbnail" href="">
-                            <img ng-src="{[image.url]}" />
-                        </a>
-                    </div>
-                </div>
-                <div class="tab-pane" id="profile">
-                    profile
-                </div>
-                <div class="tab-pane" id="messages">
-                    messages
-                </div>
-            </div>
-
-            <div class="form-actions">
-                <button ng-click="savePage(page)" class="btn btn-primary">Save</button>
-                <button ng-click="cancel()" class="btn btn-link">Cancel</button>
-            </div>
-        </form>
-    </div>
 </div>
-
-<script>
-    $(function () {
-        $('#tab-page-settings a.active').tab('show');
-    })
-</script>

@@ -37,6 +37,7 @@ class Pages extends CMS\Webservice\Rest
         }
         $page->title = $data['title']->en;
         $page->body = $data['body']->en;
+        $page->category_id = $data['category_id'];
         $page->is_published = $data['is_published'] == true;
         $page->url = Url::cleanUrl(\Framework\System\Locale\Config::getLocale()->translit($page->title));
         $page->save();
@@ -85,7 +86,7 @@ class Pages extends CMS\Webservice\Rest
         }*/
         $category = null;
         if (isset($_GET['category_id'])) {
-            $category = Category::getById($_GET['category_id']);
+            $category = Category::getById((int)$_GET['category_id']);
         }
         $collection = Page::getCollection(null, $category);
 
