@@ -27,20 +27,27 @@ class Pages extends CMS\Webservice\Rest
         $data = new Data\Validator((array)$this->request->data);
         $page = isset($data['id']) ? Page::getById((int)$data['id']) : Page::create();
 
-        $data->field('title')->validator('hasDefaultTranslate', function($value) {
+        $languages = CMS\Language::getLanguages();
+
+        $page->category_id = $data['category_id'];
+        $page->is_published = $data['is_published'] == true;
+        $page->url = Url::cleanUrl(\Framework\System\Locale\Config::getLocale()->translit($page->title));
+        $page->save();
+
+        $data->field('title')->validator('hasDefaultTranslate', function($value) use (&$page, $languages, $data) {
             //$user = CMS\Model\User::getUserByEmail($value);
+            foreach ($languages as $language) {
+                \Framework\CMS\ORM\Localizable::setLanguage($language);
+                $page->title = $value->{$language->id};
+                $page->body = $data['body']->{$language->id};
+                $page->save();
+            }
 
             return true;
         }, 'User with this email does not exists');
         if (!$data->validate()) {
             return new Response(400, $data->errors());
         }
-        $page->title = $data['title']->en;
-        $page->body = $data['body']->en;
-        $page->category_id = $data['category_id'];
-        $page->is_published = $data['is_published'] == true;
-        $page->url = Url::cleanUrl(\Framework\System\Locale\Config::getLocale()->translit($page->title));
-        $page->save();
 
         if (isset($data['images'])) {
             foreach ($data['images'] as $image) {

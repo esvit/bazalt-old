@@ -15,24 +15,33 @@
 <div class="row" loading-container="loading">
     <div class="col-span-9 page-editor">
         <form>
-            <div ng-repeat="language in languages.all">
-                <div class="control-group">
-                    <label class="control-label" for="title">{['Title'|translate:'Pages']}</label>
-                    <div class="controls">
-                        <input class="input-block input-xlarge" type="text" id="title" placeholder="" required ng-model="page.title[language.alias]"/>
-                    </div>
-                </div>
-                <div class="control-group">
-                    <label class="control-label" for="body">{['Content'|translate:'Pages']}</label>
-                    <div class="controls">
-                        <textarea ckeditor required ng-model="page.body[language.alias]" class="input-block" id="body"></textarea>
+            <div class="tabbable">
+                <ul class="nav nav-tabs">
+                    <li ng-repeat="language in languages.all" ng-class="{'active': languages.current == language.id}">
+                        <a href="" ng-click="languages.current = language.id">{[language.title]}</a>
+                    </li>
+                </ul>
+                <div class="tab-content">
+                    <div class="tab-pane" ng-repeat="language in languages.all" ng-class="{'active in': languages.current == language.id}">
+                        <div class="control-group">
+                            <label class="control-label" for="title">{['Title'|translate:'Pages']}</label>
+                            <div class="controls">
+                                <input class="input-block input-xlarge" type="text" id="title" placeholder="" required ng-model="page.title[language.id]"/>
+                            </div>
+                        </div>
+                        <div class="control-group">
+                            <label class="control-label" for="body">{['Content'|translate:'Pages']}</label>
+                            <div class="controls">
+                                <textarea ckeditor required ng-model="page.body[language.id]" class="input-block" id="body"></textarea>
+                            </div>
+                        </div>
                     </div>
                 </div>
             </div>
 
             <div class="form-actions text-center">
-                <button ng-click="savePage(page)" class="btn btn-primary">Save</button>
-                <button ng-click="cancel()" class="btn btn-link">Cancel</button>
+                <button ng-click="savePage(page)" class="btn btn-primary">{['Save'|translate:'Pages']}</button>
+                <button ng-click="cancel()" class="btn btn-link">{['Cancel'|translate:'Pages']}</button>
             </div>
         </form>
     </div>
@@ -49,7 +58,7 @@
         <div class="control-group">
             <div class="controls">
                 <label class="checkbox">
-                    <input type="checkbox" bz-switcher ng-model="page.is_published"> Опублікована новина
+                    <input type="checkbox" bz-switcher ng-model="page.is_published"> {['Is published'|translate:'Pages']}
                 </label>
             </div>
         </div>
@@ -62,7 +71,7 @@
         <div class="tab-content">
             <div class="tab-pane active" id="photo">
                 <div class="well photo-uploader ng-cloak">
-                    <p>Browse for files to upload or drag and drop them here</p>
+                    <p>{['Browse for files to upload or drag and drop them here'|translate:'Pages']}</p>
                     <input type="file" multiple bz-uploader="addImage(page, $file)" data-url="/rest.php/pages/images/" data-max-file-size="100mb" ng-model="page.images" accept="*.gif,*.png,*.jpg,*.jpeg" name="file1"/>
                 </div>
                 <div class="clearfix uploaded-photo">

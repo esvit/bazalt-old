@@ -82,7 +82,7 @@ class Language
         $languages = self::getLanguages();
 
         foreach ($languages as $language) {
-            if ($language->alias == $alias) {
+            if ($language->id == $alias) {
                 return $language;
             }
         }
@@ -133,7 +133,7 @@ class Language
         }
 
         self::$currentLanguage = $lang;
-        Locale_Config::setLocale($lang->alias);
+        Locale_Config::setLocale($lang->id);
         if ($alias != null) {
             Session::Singleton()->{self::SESSION_LANGUAGE_VARNAME} = $lang->id;
         }

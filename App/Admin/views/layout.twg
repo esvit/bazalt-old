@@ -48,14 +48,14 @@
                 <div class="btn-group pull-right" ng-show="languages.all.length">
                     <a class="btn dropdown-toggle" data-toggle="dropdown" href="#">
                                 <span ng-repeat="language in languages.all"
-                                      ng-show="language.alias == languages.current">
+                                      ng-show="language.id == languages.current">
                                     {[language.title]}
                                 <span>
                                 <span class="caret"></span>
                     </a>
                     <ul class="dropdown-menu">
                         <li ng-repeat="language in languages.all">
-                            <a href="javascript:;" ng-click="languages.current = language.alias">
+                            <a href="javascript:;" ng-click="languages.current = language.id">
                                 {[language.title]}
                                 <small class="pull-right">Ctrl+Alt+{[$index+1]}</small>
                             </a>

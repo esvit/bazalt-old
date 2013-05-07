@@ -22,8 +22,6 @@ require(['bazalt-cms', 'bootstrap', 'bz-switcher'].concat(modules), function(baz
         $locationProvider.hashPrefix('!');
     }).
     run(function($rootScope, LanguageService, dashboard) {
-        $rootScope.languages = LanguageService.query();
-
         $rootScope.activateMenu = function(component) {
             for (var i = 0; i < dashboard.mainMenu.length; i++) {
                 dashboard.mainMenu[i].active = (component == dashboard.mainMenu[i].component);
@@ -32,9 +30,7 @@ require(['bazalt-cms', 'bootstrap', 'bz-switcher'].concat(modules), function(baz
     }).
     value('dashboard', {
         mainMenu: []
-    }).factory('LanguageService', function($resource) {
-        return $resource('/rest.php/app/language');
-    });
+    })
 
     app.directive('loadingContainer', function () {
         return {

@@ -261,16 +261,14 @@ class Localizable extends ORM\Plugin\AbstractPlugin
     {
         $tr = self::getTranslations($record);
 
-        $languages = CMS\Language::getLanguages();
-
         foreach ($fields as $field) {
             $itemArray[$field] = [];
             $lastLangAlias = null;
             foreach ($tr as $item) {
-                $lastLangAlias = $languages[$item->lang_id]->alias;
+                $lastLangAlias = $item->lang_id;
                 $itemArray[$field][$lastLangAlias] = $item->{$field};
                 if ($item->completed == Localizable::TRANSLATION_ORIGINAL) {
-                    $itemArray[$field]['orig'] = $lastLangAlias;
+                    $itemArray[$field]['orig'] = $item->lang_id;
                 }
             }
             if (!isset($itemArray[$field]['orig'])) {

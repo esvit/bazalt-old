@@ -28,8 +28,8 @@ abstract class Language extends \Framework\CMS\ORM\Record
 
     protected function initFields()
     {
-        $this->hasColumn('id', 'PUA:int(11)');
-        $this->hasColumn('alias', 'varchar(5)');
+        $this->hasColumn('id', 'PUA:varchar(2)');
+        $this->hasColumn('title', 'varchar(50)');
         $this->hasColumn('ico', 'varchar(5)');
     }
 }

@@ -17,7 +17,6 @@ abstract class LanguageRefSite extends \Framework\CMS\ORM\Record
     {
         $this->hasColumn('language_id', 'PU:int(10)');
         $this->hasColumn('site_id', 'PU:int(10)');
-        $this->hasColumn('is_default', 'U:tinyint(3)|0');
         $this->hasColumn('is_active', 'U:tinyint(3)|0');
     }
 

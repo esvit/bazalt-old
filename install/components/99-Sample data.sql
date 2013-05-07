@@ -7,14 +7,14 @@ INSERT INTO `cms_widgets_instances` (`id`, `site_id`, `widget_id`, `theme_id`, `
 
 INSERT INTO `cms_widgets_instances` (`id`, `site_id`, `widget_id`, `theme_id`, `template`, `widget_template`, `config`, `publish`, `position`, `order`) VALUES (2, 1, 2, NULL, 'layout.twg', NULL, 'a:2:{s:7:"menu_id";s:1:"1";s:3:"css";s:3:"nav";}', 1, 'main-menu', 0);
 
-INSERT INTO `com_pages_pages_locale` (`id`, `lang_id`, `title`, `body`, `completed`) VALUES (1, 1, 'Second page', '<p>Test page</p>\n', 1);
+INSERT INTO `com_pages_pages_locale` (`id`, `lang_id`, `title`, `body`, `completed`) VALUES (1, 'en', 'Second page', '<p>Test page</p>\n', 1);
 
-INSERT INTO `com_pages_pages_locale` (`id`, `lang_id`, `title`, `body`, `completed`) VALUES (2, 1, 'Part of main page', '<p>Welcome, this is a widget, click &quot;Widget&quot; button and you see a magic :)</p>\n', 1);
+INSERT INTO `com_pages_pages_locale` (`id`, `lang_id`, `title`, `body`, `completed`) VALUES (2, 'en', 'Part of main page', '<p>Welcome, this is a widget, click &quot;Widget&quot; button and you see a magic :)</p>\n', 1);
 
 INSERT INTO `com_menu_elements` (`id`, `root_id`, `site_id`, `component_id`, `menuType`, `config`, `lft`, `rgt`, `depth`, `is_publish`) VALUES (1, 1, 1, NULL, NULL, NULL, 1, 6, 0, 0);
 INSERT INTO `com_menu_elements` (`id`, `root_id`, `site_id`, `component_id`, `menuType`, `config`, `lft`, `rgt`, `depth`, `is_publish`) VALUES (2, 1, 1, 2, 'Components\\Pages\\Menu\\Page', 'a:1:{s:7:"page_id";s:1:"1";}', 4, 5, 1, 1);
 INSERT INTO `com_menu_elements` (`id`, `root_id`, `site_id`, `component_id`, `menuType`, `config`, `lft`, `rgt`, `depth`, `is_publish`) VALUES (3, 1, 1, 3, 'Components\\Menu\\Menu\\MainPage', 'a:0:{}', 2, 3, 1, 1);
 
-INSERT INTO `com_menu_elements_locale` (`id`, `lang_id`, `title`, `description`, `completed`) VALUES (1, 1, 'Main menu', NULL, 1);
-INSERT INTO `com_menu_elements_locale` (`id`, `lang_id`, `title`, `description`, `completed`) VALUES (2, 1, 'Second page', NULL, 1);
-INSERT INTO `com_menu_elements_locale` (`id`, `lang_id`, `title`, `description`, `completed`) VALUES (3, 1, 'Home', NULL, 1);
+INSERT INTO `com_menu_elements_locale` (`id`, `lang_id`, `title`, `description`, `completed`) VALUES (1, 'en', 'Main menu', NULL, 1);
+INSERT INTO `com_menu_elements_locale` (`id`, `lang_id`, `title`, `description`, `completed`) VALUES (2, 'en', 'Second page', NULL, 1);
+INSERT INTO `com_menu_elements_locale` (`id`, `lang_id`, `title`, `description`, `completed`) VALUES (3, 'en', 'Home', NULL, 1);

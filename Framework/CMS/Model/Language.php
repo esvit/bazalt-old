@@ -32,11 +32,11 @@ class Language extends Base\Language
      * @param string $ico   Language icon
      * @return Language
      */
-    public static function create($title, $alias, $ico)
+    public static function create($title, $id, $ico)
     {
         $lang = new Language();
         $lang->title = $title;
-        $lang->alias = $alias;
+        $lang->id = $id;
         $lang->ico = $ico;
 
         $lang->save();
@@ -60,10 +60,11 @@ class Language extends Base\Language
         $defaultLanguage = $site->DefaultLanguage;
         if (!$defaultLanguage) {
             //throw new \Exception('Language not found');
-            $defaultLanguage = Language::select()->where('alias = ?', 'en')->fetch();
+            $defaultLanguage = Language::select()->where('id = ?', 'en')->fetch();
             if (!$defaultLanguage) {
                 $defaultLanguage = new Language();
-                $defaultLanguage->alias = 'en';
+                $defaultLanguage->id = 'en';
+                $defaultLanguage->title = 'English';
                 $defaultLanguage->ico = 'gb';
                 $defaultLanguage->save();
 
@@ -112,7 +113,7 @@ class Language extends Base\Language
         $languages = self::getSiteLanguages();
 
         foreach ($languages as $language) {
-            if ($language->alias == $alias) {
+            if ($language->id == $alias) {
                 return $language;
             }
         }
@@ -265,10 +266,10 @@ class Language extends Base\Language
         if ($this->isDefault()) {
             if (CMS_Option::get(CMS_Bazalt::SAVE_USER_LANGUAGE_OPTION, false)) {
                 // if current language saved in cookie
-                return '/' . $this->alias . $url;
+                return '/' . $this->id . $url;
             }
             return $url;
         }
-        return '/' . $this->alias . $url;
+        return '/' . $this->id . $url;
     }
 }
