@@ -54,10 +54,10 @@
                                 <span class="caret"></span>
                     </a>
                     <ul class="dropdown-menu">
-                        <li ng-repeat="language in languages.all">
-                            <a href="javascript:;" ng-click="languages.current = language.id">
-                                {[language.title]}
+                        <li ng-repeat="language in languages.all" ng-class="{'active':languages.current == language.id}">
+                            <a href="javascript:;" class="clearfix" ng-click="languages.current = language.id">
                                 <small class="pull-right">Ctrl+Alt+{[$index+1]}</small>
+                                {[language.title]}
                             </a>
                         </li>
                         <li class="nav-header">in the near future there will be more languages</li>

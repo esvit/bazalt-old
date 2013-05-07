@@ -31,6 +31,8 @@ abstract class Application
      */
     protected $components = array();
 
+    protected $jsComponents = [];
+
     public $eventOnPageComplete = Event::EMPTY_EVENT;
 
     /**
@@ -39,6 +41,11 @@ abstract class Application
     public static function current()
     {
         return Bootstrap::current();
+    }
+
+    public function registerJsComponent($name, $file)
+    {
+        $this->jsComponents[$name] = $file;
     }
 
     public function __construct($config = array())

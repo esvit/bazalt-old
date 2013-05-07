@@ -137,7 +137,10 @@ module.exports = function(grunt) {
         less: {
             "themes/default": {
                 options: {
-                    paths: ["assets/components/bootstrap/less"],
+                    paths: [
+                        "assets/components/bootstrap/less",
+                        "themes/default/assets/less"
+                    ],
                     yuicompress: !isDev
                 },
                 files: {

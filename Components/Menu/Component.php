@@ -14,6 +14,7 @@ class Component extends CMS\Component implements CMS\Menu\HasItems
 
     public function initComponent(CMS\Application $application)
     {
+        $application->registerJsComponent('Component.Menu', relativePath(__DIR__ . '/component.js'));
         /*$controller = 'Components\Gallery\Controller\Index';
         
         Route::root()->connect('Gallery.List', '/gallery',                 ['component' => __CLASS__, 'controller' => $controller, 'action' => 'default'])
