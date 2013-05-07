@@ -21,8 +21,14 @@ require(['bazalt-cms', 'bootstrap', 'bz-switcher'].concat(modules), function(baz
         //$locationProvider.html5Mode(true);
         $locationProvider.hashPrefix('!');
     }).
-    run(function($rootScope, LanguageService) {
+    run(function($rootScope, LanguageService, dashboard) {
         $rootScope.languages = LanguageService.query();
+
+        $rootScope.activateMenu = function(component) {
+            for (var i = 0; i < dashboard.mainMenu.length; i++) {
+                dashboard.mainMenu[i].active = (component == dashboard.mainMenu[i].component);
+            }
+        };
     }).
     value('dashboard', {
         mainMenu: []

@@ -12,13 +12,14 @@
     cursor: move;
 
     .bg {
-      background: @widgetBackground;
-      opacity: .50;
+      background: none repeat scroll 0 0 rgba(91, 128, 178, 0.5);
+      /*opacity: .50;
       -ms-filter: alpha(opacity=50);
       filter: alpha(opacity=50);
       -khtml-opacity: .50;
-      -moz-opacity: .50;
+      -moz-opacity: .50;*/
       height: 100%;
+      position: relative;
     }
   }
 
@@ -26,12 +27,11 @@
     display: none;
     z-index: 1000;
     position: absolute;
-    top: 50%;
+    top: 12%;
     left: 0;
     right: 0;
     cursor: move;
     & > div {
-      margin-top: -15px;
       text-align: center;
     }
   }
@@ -321,7 +321,7 @@
   overflow: hidden;
 
   .bz-adminpanel-container {
-    width: 940px;
+    width: 100%;
     margin: 0 auto;
   }
   a {
@@ -334,6 +334,8 @@
     padding: 4px 12px;
     border-left: 1px solid transparent;
     border-right: 1px solid transparent;
+    text-decoration: none !important;
+    outline: none !important;
 
     &:hover, &.active {
       border-left: 1px solid #e1e1e1;
@@ -353,7 +355,7 @@
       }
       &.dropdown-toggle {
         .caret {
-          vertical-align: super;
+          vertical-align: middle;
         }
       }
     }

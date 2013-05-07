@@ -5,7 +5,7 @@
 </a>
 
 <ul ng-controller="MenuCtrl" class="nav">
-    <li ng-repeat="item in sideMenu" class="">
+    <li ng-repeat="item in sideMenu" ng-class="{'active': item.active}">
         <a href="{[item.url]}">
             <span ng-show="item.notification"
                   class="badge badge-important m-badge-notification">{[item.notification]}</span>
@@ -37,7 +37,7 @@
 
         <div class="m-sidebar-collapsed ng-cloak" ng-show="more.show && more.menu.length">
             <ul class="nav nav-pills">
-                <li ng-repeat="item in more.menu" class="">
+                <li ng-repeat="item in more.menu">
                     <a href="{[item.url]}">
                         <span ng-show="item.notification" class="badge badge-important m-badge-notification">{[item.notification]}</span>
 
