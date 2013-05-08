@@ -17,7 +17,7 @@
     <link rel="stylesheet" type="text/css" href="/App/Admin/assets/css/bootstrap.css" media="all">
     <link rel="stylesheet" type="text/css" href="/App/Admin/assets/css/daterangepicker.css" media="all">
     <link rel="stylesheet" type="text/css" href="/App/Admin/assets/css/bootstrap-fileupload.css" media="all">
-    <link rel="stylesheet" type="text/css" href="/less.php/App/Admin/assets/less/style.less"/>
+    <link rel="stylesheet" type="text/css" href="/less.php/App/Admin/assets/less/general.less"/>
     <link href='http://fonts.googleapis.com/css?family=Open+Sans:400,400italic,700,300&subset=cyrillic-ext,latin'
           rel='stylesheet' type='text/css'>
 
