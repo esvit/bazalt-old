@@ -31,7 +31,6 @@ class Pages extends CMS\Webservice\Rest
 
         $page->category_id = $data['category_id'];
         $page->is_published = $data['is_published'] == true;
-        $page->url = Url::cleanUrl(\Framework\System\Locale\Config::getLocale()->translit($page->title));
         $page->save();
 
         $data->field('title')->validator('hasDefaultTranslate', function($value) use (&$page, $languages, $data) {
@@ -40,6 +39,9 @@ class Pages extends CMS\Webservice\Rest
                 \Framework\CMS\ORM\Localizable::setLanguage($language);
                 $page->title = $value->{$language->id};
                 $page->body = $data['body']->{$language->id};
+                if (!$page->url) {
+                    $page->url = Url::cleanUrl(\Framework\System\Locale\Config::findLocaleByAlias($language->id)->translit($page->title));
+                }
                 $page->save();
             }
 

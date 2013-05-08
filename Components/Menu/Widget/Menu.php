@@ -17,8 +17,8 @@ class Menu extends CMS\Widget
             $menu = Element::getById((int)$menu_id);
         }
 
-        $this->view->assign('menu', null);
-        $this->view->assign('menuitem', $menu);
+        $this->view()->assign('menu', null);
+        $this->view()->assign('menuitem', $menu);
         if (!$menu) {
             return parent::fetch();
         }
@@ -52,7 +52,7 @@ class Menu extends CMS\Widget
         if ($menu && isset($this->options['acl_check']) && $this->options['acl_check'] == 'on') {
             $this->_checkAcl($menu);
         }
-        $this->view->assign('menu', $menu);
+        $this->view()->assign('menu', $menu);
 
         return parent::fetch();
     }
@@ -82,8 +82,8 @@ class Menu extends CMS\Widget
     {
         $menus = Element::getRoots();
 
-        $this->view->assign('menus', $menus);
-        $this->view->assign('options', $this->options);
-        return $this->view->fetch('widgets/menu-settings');
+        $this->view()->assign('menus', $menus);
+        $this->view()->assign('options', $this->options);
+        return $this->view()->fetch('widgets/menu-settings');
     }
 }

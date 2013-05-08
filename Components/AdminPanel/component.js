@@ -46,7 +46,7 @@ define(['jquery-ui', 'angular-cookies'], function() {
             }],
             link: function() {
                 // body and bootstrap nav fixed
-                $('body, .navbar-fixed-top').css('marginTop', 40);
+                $('body, .navbar-fixed-top').css('paddingTop', 40);
             }
         }
     })

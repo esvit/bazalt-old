@@ -8,10 +8,12 @@ define([], function() {
         return {
             link: function(scope, element, attrs) {
                 $rootScope.$on('$routeChangeSuccess', function(e, route) {
-                    var li = $('li', element);
+                    var li = $('li', element), 
+                        url = decodeURIComponent($location.url());
                     li.each(function(i, item) {
                         var a = $('a:first', item);
-                        $(item).toggleClass('active', (a.attr('href') == $location.url()));
+
+                        $(item).toggleClass('active', (a.attr('href') == url));
                     });
                 });
             }

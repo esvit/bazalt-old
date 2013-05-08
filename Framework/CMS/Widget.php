@@ -11,7 +11,8 @@ abstract class Widget
     protected $widgetConfig;
     public $errorMessages;
     protected $options = array();
-    protected $view;
+
+    private $_view;
 
     public function getConfigPage()
     {
@@ -21,11 +22,6 @@ abstract class Widget
     public function getJavascriptFile()
     {
         return null;
-    }
-
-    public function view()
-    {
-        return $this->view;
     }
 
     public function config()
@@ -42,11 +38,22 @@ abstract class Widget
     {
         $this->widgetConfig = $config;
         $this->options = $config->config;
+    }
 
-        $class = get_class($this);
-        $baseDir = dirname(\Framework\Core\Autoload::getFilename($class));
+    public function view()
+    {
+        if ($this->_view === null) {
+            $class = get_class($this);
+            $baseDir = dirname(\Framework\Core\Autoload::getFilename($class));
 
-        $this->view = Application::current()->view()->newScope([$baseDir . '/../views']);
+            $this->_view = Application::current()->view()->newScope();
+            $folders = Application::current()->view()->folders();
+            $theme = array_pop($folders);
+            $folders []= $baseDir . PATH_SEP . '..' . PATH_SEP . 'views';
+            $folders []= $theme;
+            $this->_view->folders($folders);
+        }
+        return $this->_view;
     }
 
     public static function getAllComponentWidgets()
@@ -113,25 +120,25 @@ abstract class Widget
     {
         $template = $this->getTemplate();
         $user = User::get();
-        $this->view->assign('hasPermition', WIDGET_BORDER_AROUND && $user->hasRight(null, Bazalt::ACL_CAN_ADMIN_WIDGETS));
+        $this->view()->assign('hasPermition', WIDGET_BORDER_AROUND && $user->hasRight(null, Bazalt::ACL_CAN_ADMIN_WIDGETS));
 
-        $this->view->assign('widget', $this);
-        $this->view->assign('widgetConfig', $this->widgetConfig);
-        $this->view->assign('template', $template);
+        $this->view()->assign('widget', $this);
+        $this->view()->assign('widgetConfig', $this->widgetConfig);
+        $this->view()->assign('template', $template);
         try {
-            $content = $this->view->fetch($template);
+            $content = $this->view()->fetch($template);
         } catch (Exception $e) {
             if (STAGE == PRODUCTION_STAGE) {
-                $this->view->assign('exception', $e);
+                $this->view()->assign('exception', $e);
                 ErrorCatcher::sendToErrorService($e);
-                $content = $this->view->fetch('cms/widgets/exception');
+                $content = $this->view()->fetch('cms/widgets/exception');
             } else {
                 throw $e; //new Exception('Exception in widget', 0, $e);
             }
         }
 
-        $this->view->assign('content', $content);
-        return $this->view->fetch('cms/widgets/widget');
+        $this->view()->assign('content', $content);
+        return $this->view()->fetch('cms/widgets/widget');
     }
 
     public static function getWidgetInstance(Model\WidgetInstance $config)

@@ -16,8 +16,8 @@ class Page extends CMS\Widget
             return parent::fetch();
         }
 
-        $this->view->assign('page', $page);
-        $this->view->assign('show_title', $this->options['show_title'] == 'on');
+        $this->view()->assign('page', $page);
+        $this->view()->assign('show_title', $this->options['show_title'] == 'on');
 
         return parent::fetch();
     }
