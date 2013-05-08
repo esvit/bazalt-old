@@ -1,0 +1,159 @@
+<!--l ink type="text/x-gettext-translation" href="/Components/Gallery/locale/ru/Gallery.po" id="Gallery"/-->
+
+
+<div class="page-header">
+    <div class="row">
+        <div class="col-span-3">
+            <h2>{['Gallery'|translate:'Gallery']}</h2>
+        </div>
+        <div class="col-span-9">
+            <div ng-show="album.id" style="display: none" class="btn-toolbar">
+                <div class="btn-group fileupload fileupload-new">
+                    <button class="btn btn-success btn-file" ng-click="show_uploads = !!!show_uploads">
+                        <span class="fileupload-new"><span class="glyphicon glyphicon-upload"></span> {['Upload file(s)'|translate:'Gallery']}</span>
+                    </button>
+                </div>
+
+                <div class="btn-group">
+                    <button class="btn" ng-class="{ 'active btn-success': album.is_publish && !album.is_hidden }"
+                            ng-click="album.is_publish = true; album.is_hidden = false; album.$save()">
+                        {['Published'|translate:'Gallery']}
+                    </button>
+                    <button class="btn" ng-class="{ 'active btn-info': album.is_publish && album.is_hidden }"
+                            ng-click="album.is_publish = true; album.is_hidden = true; album.$save()"><span
+                            class="glyphicon glyphicon-eye-close"
+                            ng-class="{ 'icon-white': album.is_publish && album.is_hidden }"></span>
+                        {['Invisible'|translate:'Gallery']}
+                    </button>
+
+                    <button class="btn" ng-class="{ 'active btn-danger': !album.is_publish && !album.is_hidden }"
+                            ng-click="album.is_publish = false; album.is_hidden = false; album.$save()"><span
+                            class="glyphicon glyphicon-remove"
+                            ng-class="{ 'icon-white': !album.is_publish && !album.is_hidden }"></span>
+                        {['Unpublished'|translate:'Gallery']}
+                    </button>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+<div class="row">
+    <div class="col-span-3">
+        <div class="sidebar-nav">
+            <ul class="nav nav-pills nav-stacked nav-list nav-files albums-list">
+                <li class="nav-header">
+                    {['Albums'|translate:'Gallery']}
+                </li>
+                <li ng-repeat="item in albums" class="with-btn" ng-class="{active: item.id == album.id}">
+                    <a class="pull-right btn btn-delete" placement="right" title="Deleting"
+                       href="javascript:;"
+                       confirm-button="deleteAlbum(item);" message="Ви дійно бажаєте видалити цей альбом?" yes="Так"
+                       no="Ні"><span class="glyphicon glyphicon-trash"></span></a>
+                    <a href="javascript:;" ng-click="showAlbum(item)">
+                        <span ng-show="item.images_count > 0" class="pull-right label">{[item.images_count]}</span>
+                        <span ng-show="item.is_hidden && item.is_publish"
+                              title="Цей альбом не відображається в списку альбомів"
+                              class="glyphicon glyphicon-eye-close"></span>
+                        <span ng-show="!item.is_publish" title="Цей альбом не відображається в списку альбомів"
+                              class="glyphicon glyphicon-remove"></span>
+                        <span class="title">{[item.title|language]}</span>
+                    </a>
+                </li>
+            </ul>
+        </div>
+        <div class="add-new-item nav-new-album">
+            <form name="newAlbum" novalidate ng-submit="createAlbum(nAlbum)">
+                <div class="input-group col-span-12">
+                    <input type="text" ng-model="nAlbum.title" maxlength="255" ng-disabled="nAlbum.busy" required
+                           placeholder="Новый альбом"/>
+
+                    <div class="input-group-btn">
+                        <button ng-disabled="nAlbum.busy || newAlbum.$invalid" class="btn btn-primary" type="submit"
+                                ng-disabled="nAlbum.busy">
+                            <span class="glyphicon glyphicon-plus"></span>
+                        </button>
+                    </div>
+                </div>
+            </form>
+        </div>
+        <!--/.well -->
+    </div>
+
+    <div class="col-span-9" ng-hide="album.id">
+        <p>Edit files
+    </div>
+
+    <div class="col-span-9" ng-show="album.id">
+
+        <div class="alert alert-info" ng-show="album.is_publish">
+            Url of this album:&nbsp;<code><a target="_blank" href="{[album.url]}">{[album.url]}</a></code>
+        </div>
+        <div class="alert" ng-show="!album.is_publish">
+            <strong>Warning!</strong>
+            {['Publish album first'|translate:'Gallery']}
+        </div>
+
+        <div class="gallery-container">
+
+            <div class="row-fluid">
+                <div ng-class="{'col-span-6':photo != null}">
+
+                    <div class="well photo-uploader ng-cloak" ng-show="show_uploads">
+                        <p>Browse for files to upload or drag and drop them here</p>
+                        <input type="file" multiple bz-uploader="addImage(album, $file)" data-url="/rest.php/gallery/{[album.id]}/" data-max-file-size="100mb" ng-model="photos" accept="*.gif,*.png,*.jpg,*.jpeg" name="file1"/>
+                    </div>
+
+
+                    <ul infinite-scroll="nextPage()"
+                        infinite-scroll-disabled="album.images_count == 0 || photos.length == album.images_count"
+                        infinite-scroll-distance='0' ng-sortable="{update: update}" ng-model="photos">
+                        <li class="gallery-image" ng-repeat="photo in photos | orderBy:-order">
+                            <div class="thumbnail">
+                                <img ng-src="/thumb.php{[photo.image]}?w=250&h=160"/>
+                                <strong>{[photo.title|language:'ukr']}</strong>
+                            </div>
+                            <div class="actions">
+                                <a title="" href="javascript:;" ng-click="editPhoto(photo)" class="tip-top"
+                                   data-original-title="Edit"><span
+                                        class="glyphicon glyphicon-pencil icon-white"></span></a>
+                                <a title="Видалення" href="javascript:;" confirm-button="deletePhoto(photo);"
+                                   message="Ви дійно бажаєте видалити це фото?" yes="Так" no="Ні"><span
+                                        class="glyphicon glyphicon-trash icon-white"></span></a>
+                            </div>
+                        </li>
+                    </ul>
+                    <a href="javascript:;" class="btn btn-block" ng-disabled="busy"
+                       ng-show="photos.length < album.images_count"
+                       ng-click="nextPage()">More...</a>
+
+                    <div ng-show="busy" class="loading"></div>
+                </div>
+                <div class="col-span-6" ng-show="photo">
+                    <div class="thumbnail img-one-item">
+                        <img ng-show="photo.image" ng-src="/thumb.php{[photo.image]}?h=200"/>
+
+                        <p>
+                            <strong>Title:</strong>
+                            <input type="text" ng-model="photo.title[languages.current]"/>
+                        </p>
+
+                        <p>
+                            <strong>Description:</strong>
+                            <textarea style="height: 400px" ckeditor="" i-tinymce
+                                      ng-model="photo.description[languages.current]" class="input-block" id="body"
+                                      placeholder=""></textarea>
+                        </p>
+
+                        <div class="modal-footer">
+                            <a href="javascript:;" data-dismiss="modal" class="btn">Close</a>
+                            <a href="javascript:;" ng-click="savePhoto(photo)" class="btn btn-primary">Save changes</a>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+        </div>
+        <div class="clearfix"></div>
+    </div>
+</div>

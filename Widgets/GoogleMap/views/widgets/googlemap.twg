@@ -1,0 +1,3 @@
+<iframe width="{{ options.width }}" scrolling="no" height="{{ options.height }}" frameborder="0"
+        src="https://maps.google.com/maps?f=q&amp;source=s_q&amp;geocode=&amp;q={{ address }}&amp;aq=0&amp;oq={{ address }}&amp;t=h&amp;ie=UTF8&amp;hq=&amp;hnear={{ address }}&amp;z=14&amp;iwloc=A&amp;output=embed"
+        marginwidth="0" marginheight="0"></iframe>

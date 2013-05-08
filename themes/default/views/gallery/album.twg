@@ -1,12 +1,9 @@
 <link rel="stylesheet" href="/assets/modules/bootstrap-image-gallery/bootstrap-image-gallery.min.css">
 
 <ul class="breadcrumb">
-    <li><a href="#!/">Dashboard</a> <span class="divider">/</span></li>
-    <li class="active">Themes</li>
-
-    <li class="pull-right">
-        <button class="btn btn-primary btn-mini">Save</button>
-    </li>
+    <li><a href="/">Home</a> <span class="divider">/</span></li>
+    <li><a href="/gallery/">Albums</a> <span class="divider">/</span></li>
+    <li class="active">{{ album.title }}</li>
 </ul>
 
 {% set photosCount = 4 %}
@@ -17,7 +14,7 @@
 {% for image in images %}
     <li class="span{{ spanCount }}">
         <div class="thumbnail">
-            <a data-gallery="gallery" href="{{ image.image }}">
+            <a data-gallery="gallery" href="{{ image.url() }}">
                 <img alt="{{ image.title }}" src="{{ image.image|thumb({ 'width': 300, 'height': 200 }) }}" />
             </a>
             <div class="caption">
@@ -63,9 +60,3 @@
   opacity: 0.8;
 }
 </style>
-
-<script>
-require(['bootstrap-image-gallery/module'], function() {
-    
-});
-</script>
