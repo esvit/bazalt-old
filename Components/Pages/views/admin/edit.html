@@ -13,31 +13,7 @@
 </div>
 
 <div class="row" loading-container="loading">
-    <div class="col-span-9 page-editor">
-        <form>
-            <div ng-repeat="language in languages.all">
-                <div class="control-group">
-                    <label class="control-label" for="title">{['Title'|translate:'Pages']}</label>
-                    <div class="controls">
-                        <input class="input-block input-xlarge" type="text" id="title" placeholder="" required ng-model="page.title[language.alias]"/>
-                    </div>
-                </div>
-                <div class="control-group">
-                    <label class="control-label" for="body">{['Content'|translate:'Pages']}</label>
-                    <div class="controls">
-                        <textarea ckeditor required ng-model="page.body[language.alias]" class="input-block" id="body"></textarea>
-                    </div>
-                </div>
-            </div>
-
-            <div class="form-actions text-center">
-                <button ng-click="savePage(page)" class="btn btn-primary">Save</button>
-                <button ng-click="cancel()" class="btn btn-link">Cancel</button>
-            </div>
-        </form>
-    </div>
-
-    <div class="col-span-3 page-settings">
+    <div class="col-span-3 page-settings page-editor">
         <div class="control-group">
             <div class="controls">
                 <label>{['Category'|translate:'Pages']}</label>
@@ -74,4 +50,27 @@
         </div>
     </div>
 
+    <div class="col-span-9 page-editor">
+        <form>
+            <div ng-repeat="language in languages.all">
+                <div class="control-group">
+                    <label class="control-label" for="title">{['Title'|translate:'Pages']}</label>
+                    <div class="controls">
+                        <input class="input-block input-xlarge" type="text" id="title" placeholder="" required ng-model="page.title[language.alias]"/>
+                    </div>
+                </div>
+                <div class="control-group">
+                    <label class="control-label" for="body">{['Content'|translate:'Pages']}</label>
+                    <div class="controls">
+                        <textarea ckeditor required ng-model="page.body[language.alias]" class="input-block" id="body"></textarea>
+                    </div>
+                </div>
+            </div>
+
+            <div class="form-actions text-center">
+                <button ng-click="savePage(page)" class="btn btn-primary">Save</button>
+                <button ng-click="cancel()" class="btn btn-link">Cancel</button>
+            </div>
+        </form>
+    </div>
 </div>

@@ -46,7 +46,9 @@ abstract class Widget
         $class = get_class($this);
         $baseDir = dirname(\Framework\Core\Autoload::getFilename($class));
 
-        $this->view = Application::current()->view()->newScope([$baseDir . '/../views']);
+        $path = ($config->Widget->component_id) ? $baseDir . '/../views' : $baseDir . '/views';
+
+        $this->view = Application::current()->view()->newScope([$path]);
     }
 
     public static function getAllComponentWidgets()

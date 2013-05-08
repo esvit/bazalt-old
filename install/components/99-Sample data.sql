@@ -18,3 +18,5 @@ INSERT INTO `com_menu_elements` (`id`, `root_id`, `site_id`, `component_id`, `me
 INSERT INTO `com_menu_elements_locale` (`id`, `lang_id`, `title`, `description`, `completed`) VALUES (1, 1, 'Main menu', NULL, 1);
 INSERT INTO `com_menu_elements_locale` (`id`, `lang_id`, `title`, `description`, `completed`) VALUES (2, 1, 'Second page', NULL, 1);
 INSERT INTO `com_menu_elements_locale` (`id`, `lang_id`, `title`, `description`, `completed`) VALUES (3, 1, 'Home', NULL, 1);
+
+INSERT INTO `cms_widgets_instances` (`id`, `site_id`, `widget_id`, `theme_id`, `template`, `widget_template`, `config`, `publish`, `position`, `order`) VALUES (3, 1, 3, NULL, 'index.twg', 'widgets/googlemap', 'a:3:{s:5:"width";i:400;s:6:"height";i:400;s:7:"address";s:53:"Вінниця, ул. Академика Ющенко";}', 1, 'home', 1);
