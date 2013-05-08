@@ -48,6 +48,11 @@ abstract class Application
         $this->jsComponents[$name] = $file;
     }
 
+    public function jsComponents()
+    {
+        return $this->jsComponents;
+    }
+
     public function __construct($config = array())
     {
         $this->config = $config;

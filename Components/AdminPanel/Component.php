@@ -23,5 +23,12 @@ class Component extends CMS\Component
 
     public function initComponent(CMS\Application $application)
     {
+        if ($application instanceof \App\Site\Application) {
+            if (!CMS\User::get()->isGuest()) {
+                $application->registerJsComponent('Component.AdminPanel', relativePath(__DIR__ . '/component.js'));
+            }
+        } else {
+            $application->registerJsComponent('Component.AdminPanel.Admin', relativePath(__DIR__ . '/admin.js'));
+        }
     }
 }

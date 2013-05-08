@@ -124,16 +124,7 @@ class View extends Scope
 
     protected function replaceTags($content)
     {
-        $components = Bazalt::getComponents();
-        $loadedComponents = [];
-        foreach ($components as $component) {
-            $loadedComponents []= $component::getName();
-        }
-        $insert = ' bazalt-cms-components="' . implode(',', $loadedComponents) . '"';
-        $content = preg_replace('#<body([^>]*)>#i',"<body$1{$insert}>", $content);
-
-        return $content;
-        if (!self::$addScripts) {
+        /*if (!self::$addScripts) {
             return $content;
         }
         $head = Assets_CSS::getHtml() . "\n";
@@ -149,7 +140,15 @@ class View extends Scope
         // add favicon
         $theme = CMS_Theme::getCurrentTheme();
         $icon = CMS_Theme::getFaviconTag($theme->getPath(), $theme->getInfo());
-        $head .= $icon;
+        $head .= $icon;*/
+
+        $components = Application::current()->jsComponents();
+        if (!count($components)) {
+            $components = new \stdClass();
+        }
+        $head .= '<script>';
+        $head .= 'var components = ' . json_encode($components);
+        $head .= '</script>';
 
         $content = str_replace('</head>', $head . '</head>', $content);
         $content = str_replace('</body>', $afterBody . '</body>', $content);

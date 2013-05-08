@@ -31,6 +31,12 @@ class Component extends CMS\Component
 
     public function initComponent(CMS\Application $application)
     {
+        if ($application instanceof \App\Site\Application) {
+            //$application->registerJsComponent('Component.Files', relativePath(__DIR__ . '/component.js'));
+        } else {
+            $application->registerJsComponent('Component.Files.Admin', relativePath(__DIR__ . '/admin.js'));
+        }
+
         $controller = 'Components\Files\Controller\Index';
 
         $map = Route::root();

@@ -23,6 +23,12 @@ class Component extends CMS\Component implements CMS\Menu\HasItems
 
     public function initComponent(CMS\Application $application)
     {
+        if ($application instanceof \App\Site\Application) {
+            $application->registerJsComponent('Component.Pages', relativePath(__DIR__ . '/component.js'));
+        } else {
+            $application->registerJsComponent('Component.Pages.Admin', relativePath(__DIR__ . '/admin.js'));
+        }
+
         $checkCategory = function($url, $name, $categoryUrl, &$params) {
             $categories = explode('/', $categoryUrl);
 

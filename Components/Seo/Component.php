@@ -24,6 +24,14 @@ class Component extends CMS\Component
 
     public function initComponent(CMS\Application $application)
     {
+        if ($application instanceof \App\Site\Application) {
+            if (!CMS\User::get()->isGuest()) {
+                $application->registerJsComponent('Component.Seo', relativePath(__DIR__ . '/component.js'));
+            }
+        } else {
+            $application->registerJsComponent('Component.Seo.Admin', relativePath(__DIR__ . '/admin.js'));
+        }
+
         $url = Url::getRequestUrl();
         $page = Model\Page::getByUrl($url);
 

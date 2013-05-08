@@ -1,12 +1,10 @@
-var components = $('body').attr('bazalt-cms-components').split(',');
-
 var angularComponents = [],
     modules = [];
 
-for (var i = 0; i < components.length; i++) {
-    var component = components[i];
-    modules.push('/Components/' + component + '/component.js');
-    angularComponents.push('Component.' + component);
+for (var componentName in components) {
+    var file = components[componentName];
+    modules.push(file);
+    angularComponents.push(componentName);
 }
 
 require([].concat(modules), function() {
