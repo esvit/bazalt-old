@@ -15,16 +15,15 @@ define([
             });
 
     })
-    .value('menuItem', {
-        component: 'Files',
-        url: '#!/files',
-        title: 'Files',
-        icon: 'icon-file'
+    .run(function(dashboard) {
+        dashboard.mainMenu.push({
+            component: 'Files',
+            url: '#!/files',
+            title: 'Files',
+            icon: 'icon-file'
+        });
     })
-    .run(function(dashboard, menuItem) {
-        dashboard.mainMenu.push(menuItem);
-    })
-    .controller('FilesCtrl', function($scope, $rootScope, $filter, menuItem) {
+    .controller('FilesCtrl', function($scope, $rootScope, $filter) {
         $scope.activateMenu('Files'); // activate admin menu
 
         $rootScope.$watch('tr', function() {

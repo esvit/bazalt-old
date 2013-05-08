@@ -30,7 +30,7 @@ CREATE TABLE IF NOT EXISTS `com_gallery_albums_locale` (
   KEY `FK_com_categories_elements_locale_cms_languages_2` (`lang_id`),
   CONSTRAINT `FK_com_gallery_albums_locale_cms_languages` FOREIGN KEY (`lang_id`) REFERENCES `cms_languages` (`id`) ON DELETE CASCADE ON UPDATE NO ACTION,
   CONSTRAINT `FK_com_gallery_albums_locale_com_gallery_albums` FOREIGN KEY (`id`) REFERENCES `com_gallery_albums` (`id`) ON DELETE CASCADE ON UPDATE NO ACTION
-) ENGINE=InnoDB DEFAULT CHARSET=utf8 ROW_FORMAT=COMPACT;
+) ENGINE=InnoDB DEFAULT CHARSET=utf8 ROW_FORMAT=COMPACT COLLATE='utf8_unicode_ci';
 
 DROP TABLE IF EXISTS `com_gallery_photo`;
 CREATE TABLE IF NOT EXISTS `com_gallery_photo` (
@@ -58,9 +58,13 @@ CREATE TABLE IF NOT EXISTS `com_gallery_photo_locale` (
   KEY `FK_com_gallery_photo_locale_cms_languages` (`lang_id`),
   CONSTRAINT `FK_com_gallery_photo_locale_cms_languages` FOREIGN KEY (`lang_id`) REFERENCES `cms_languages` (`id`) ON DELETE CASCADE ON UPDATE NO ACTION,
   CONSTRAINT `FK_com_gallery_photo_locale_com_gallery_photo` FOREIGN KEY (`id`) REFERENCES `com_gallery_photo` (`id`) ON DELETE CASCADE ON UPDATE NO ACTION
-) ENGINE=InnoDB DEFAULT CHARSET=utf8;
+) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE='utf8_unicode_ci';
 
 INSERT INTO `cms_components` (`name`, `dependencies`, `is_active`) VALUES ('Gallery', NULL, 1);
+
+SET @component_id = LAST_INSERT_ID();
+
+INSERT INTO `cms_components_locale` (`id`, `lang_id`, `title`, `description`, `completed`) VALUES (@component_id, 'en', 'Gallery', '', 1);
 
 /*!40101 SET SQL_MODE=@OLD_SQL_MODE */;
 /*!40014 SET FOREIGN_KEY_CHECKS=@OLD_FOREIGN_KEY_CHECKS */;

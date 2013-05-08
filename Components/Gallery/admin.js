@@ -23,6 +23,16 @@ define([
                 icon: 'icon-picture'
             });
         })
+        .directive("albumsCollection", function(AlbumService) {
+            return {
+                restrict: 'A',
+                link: function(scope, element, attrs) {
+                    AlbumService.query({}, function(result) {
+                        scope.albums = result;
+                    });
+                }
+            };
+        })
         .directive('ngSortable', function() {
             return {
                 require: '?ngModel',
@@ -69,6 +79,8 @@ define([
             });
     })
     .controller('GalleryCtrl', function($scope, $rootScope, $location, $routeParams, AlbumService, $http) {
+        $scope.activateMenu('Gallery'); // activate admin menu
+
         $rootScope.breadcrumbs = [
             {
                 'title' : 'Dashboard',

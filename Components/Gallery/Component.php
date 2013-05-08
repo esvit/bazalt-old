@@ -5,7 +5,7 @@ namespace Components\Gallery;
 use \Framework\CMS as CMS,
     \Framework\System\Routing\Route;
 
-class Component extends CMS\Component
+class Component extends CMS\Component implements CMS\Menu\HasItems
 {
     const ACL_HAS_ACCESS = 1;
 
@@ -28,5 +28,12 @@ class Component extends CMS\Component
         Route::root()->connect('Gallery.List', '/gallery',                 ['component' => self::getName(), 'controller' => $controller, 'action' => 'default'])
                      ->connect('Gallery.Album',        '/{album}',         ['component' => self::getName(), 'controller' => $controller, 'action' => 'album'])
                      ->connect('Gallery.Photo',                '/{photo}', ['component' => self::getName(), 'controller' => $controller, 'action' => 'photo']);
+    }
+
+    public function getMenuTypes()
+    {
+        return [
+            'Components\Gallery\Menu\Album'
+        ];
     }
 }

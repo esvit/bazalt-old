@@ -200,7 +200,7 @@ define([
             });
         };
     })
-    .controller('MenuSettingsCtrl', function($scope, $rootScope, $filter, $location, $routeParams, $timeout, MenuService, MenuElementsService, menuItem) {
+    .controller('MenuSettingsCtrl', function($scope, $rootScope, $filter, $location, $routeParams, $timeout, MenuService, MenuElementsService) {
         $scope.activateMenu('Menu'); // activate admin menu
 
         $scope.loading = false;
