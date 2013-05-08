@@ -22,7 +22,7 @@ CREATE TABLE IF NOT EXISTS `com_gallery_albums` (
 DROP TABLE IF EXISTS `com_gallery_albums_locale`;
 CREATE TABLE IF NOT EXISTS `com_gallery_albums_locale` (
   `id` int(10) unsigned NOT NULL,
-  `lang_id` int(10) unsigned NOT NULL,
+  `lang_id` varchar(2) NOT NULL,
   `title` varchar(255) DEFAULT NULL,
   `description` mediumtext,
   `completed` tinyint(3) unsigned NOT NULL DEFAULT '0',
@@ -50,7 +50,7 @@ CREATE TABLE IF NOT EXISTS `com_gallery_photo` (
 DROP TABLE IF EXISTS `com_gallery_photo_locale`;
 CREATE TABLE IF NOT EXISTS `com_gallery_photo_locale` (
   `id` int(10) unsigned NOT NULL,
-  `lang_id` int(10) unsigned NOT NULL,
+  `lang_id` varchar(2) NOT NULL,
   `title` varchar(255) DEFAULT NULL,
   `description` mediumtext,
   `completed` tinyint(3) unsigned NOT NULL DEFAULT '0',

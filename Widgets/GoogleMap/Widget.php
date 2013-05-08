@@ -9,9 +9,9 @@ class Widget extends CMS\Widget
     public function fetch()
     {
         if (isset($this->options['address'])) {
-            $this->view->assign('address', urlencode($this->options['address']));
+            $this->view()->assign('address', urlencode($this->options['address']));
         }
-        $this->view->assign('options', $this->options);
+        $this->view()->assign('options', $this->options);
         return parent::fetch();
     }
 
@@ -23,7 +23,7 @@ class Widget extends CMS\Widget
         if (!isset($this->options['height'])) {
             $this->options['height'] = 200;
         }
-        $this->view->assign('options', $this->options);
-        return $this->view->fetch('settings');
+        $this->view()->assign('options', $this->options);
+        return $this->view()->fetch('settings');
     }
 }

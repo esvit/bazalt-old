@@ -46,10 +46,13 @@ abstract class Widget
             $class = get_class($this);
             $baseDir = dirname(\Framework\Core\Autoload::getFilename($class));
 
-            $this->_view = Application::current()->view()->newScope();
+            $this->_view = View::root()->newScope();
             $folders = Application::current()->view()->folders();
             $theme = array_pop($folders);
-            $folders []= $baseDir . PATH_SEP . '..' . PATH_SEP . 'views';
+
+            $path = ($this->widgetConfig->Widget->component_id) ? $baseDir . '/../views' : $baseDir . '/views';
+
+            $folders []= $path;
             $folders []= $theme;
             $this->_view->folders($folders);
         }

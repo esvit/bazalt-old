@@ -83,7 +83,7 @@ module.exports = function(grunt) {
             },
             'ng-editable-tree.js': {
                 src: [
-                    'assets/components/nestedSortable/jquery.ui.nestedSortable.js',
+                    'assets/modules/nestedSortable/jquery.mjs.nestedSortable.js',
                     'assets/components/ng-editable-tree/ng-editable-tree.js'
                 ],
                 dest: 'assets/components/ng-editable-tree.js'
@@ -100,6 +100,12 @@ module.exports = function(grunt) {
                     'assets/components/jquery-ui-touch-punch/jquery.ui.touch-punch.js'
                 ],
                 dest: 'assets/components/jquery.ui.touch-punch.js'
+            },
+            'jquery.ui.touch-punch.js': {
+                src: [
+                    'assets/components/ngInfiniteScroll/ng-infinite-scroll.js'
+                ],
+                dest: 'assets/components/ng-infinite-scroll.js'
             },
             'uploader.js': {
                 src: [
@@ -166,6 +172,7 @@ module.exports = function(grunt) {
                             'Components/**',
                             'Framework/**',
                             'install/**',
+                            'Widgets/**',
                             'static/empty',
                             'uploads/empty',
                             'tmp/empty',
