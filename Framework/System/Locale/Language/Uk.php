@@ -1,9 +1,11 @@
 <?php
 
+namespace Framework\System\Locale\Language;
+
 /**
  * @codeCoverageIgnoreStart
  */
-class Locale_Language_Uk extends Locale_Language_Ru
+class Uk extends Ru
 {
     public function getLanguageName()
     {

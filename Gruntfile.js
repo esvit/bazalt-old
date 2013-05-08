@@ -37,7 +37,7 @@ module.exports = function(grunt) {
             },
             'jquery-ui.js': {
                 src: [
-                    'assets/components/jquery-ui/ui/*.js'
+                    'assets/components/jquery-ui/ui/jquery-ui.js'
                     //'assets/components/jquery-ui/ui/i18n/*.js'
                 ],
                 dest: 'assets/components/jquery-ui.js'
@@ -137,7 +137,10 @@ module.exports = function(grunt) {
         less: {
             "themes/default": {
                 options: {
-                    paths: ["assets/components/bootstrap/less"],
+                    paths: [
+                        "assets/components/bootstrap/less",
+                        "themes/default/assets/less"
+                    ],
                     yuicompress: !isDev
                 },
                 files: {
