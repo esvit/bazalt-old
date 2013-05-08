@@ -12,12 +12,13 @@
     "requirejs": "~2.1.5",
     "ng-table": "https://github.com/esvit/ng-table.git",
     "ng-finder": "https://github.com/esvit/ng-finder.git",
-    "nestedSortable": "https://github.com/mjsarfatti/nestedSortable.git",
     "ng-editable-tree": "https://github.com/esvit/ng-editable-tree.git",
     "bootstrap": "~2.3.1",
     "ckeditor": "latest",
     "plupload": "https://github.com/gregmolnar/plupload-bower.git",
     "jquery-ui-touch-punch": "latest",
-    "jquery-ui": "~1.10.2"
+    "jquery-ui": "~1.10.2",
+    "nestedSortable": "git://github.com/mjsarfatti/nestedSortable.git",
+    "ngInfiniteScroll": "~1.0.0"
   }
 }

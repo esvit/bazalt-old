@@ -1,6 +1,8 @@
 <ul class="breadcrumb">
-    <li><a href="#!/">Dashboard</a> <span class="divider">/</span></li>
-    <li class="active">Themes</li>
+    <li><a href="/">Home</a> <span class="divider">/</span></li>
+    <li><a href="/gallery/">Albums</a> <span class="divider">/</span></li>
+    <li><a href="{{ album.url() }}">{{ album.title }}</a> <span class="divider">/</span></li>
+    <li class="active">{{ image.title }}</li>
 </ul>
 
 <div class="row-fluid">
@@ -8,7 +10,7 @@
         <ul class="thumbnails">
             <li class="thumbnail">
                 <a href="{{ image.url() }}">
-                    <img alt="{{ image.title }}" src="http://placehold.it/300x200" />
+                    <img alt="{{ image.title }}" src="{{ image.image|thumb({width: 300, height: 200}) }}" />
                 </a>
             </li>
         </ul>

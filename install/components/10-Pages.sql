@@ -21,7 +21,7 @@ CREATE TABLE IF NOT EXISTS `com_pages_categories` (
 DROP TABLE IF EXISTS `com_pages_categories_locale`;
 CREATE TABLE IF NOT EXISTS `com_pages_categories_locale` (
   `id` int(10) unsigned NOT NULL,
-  `lang_id` int(10) unsigned NOT NULL,
+  `lang_id` varchar(2) NOT NULL,
   `title` varchar(255) DEFAULT NULL,
   `description` mediumtext,
   `completed` tinyint(3) unsigned NOT NULL DEFAULT '0',
@@ -29,7 +29,7 @@ CREATE TABLE IF NOT EXISTS `com_pages_categories_locale` (
   KEY `FK_com_pages_categories_locale_cms_languages_2` (`lang_id`),
   CONSTRAINT `FK_com_pages_categories_locale_cms_languages_2` FOREIGN KEY (`lang_id`) REFERENCES `cms_languages` (`id`) ON DELETE CASCADE ON UPDATE NO ACTION,
   CONSTRAINT `FK_com_pages_categories_locale_com_pages_categories` FOREIGN KEY (`id`) REFERENCES `com_pages_categories` (`id`) ON DELETE CASCADE ON UPDATE NO ACTION
-) ENGINE=InnoDB DEFAULT CHARSET=utf8;
+) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE='utf8_unicode_ci';
 
 DROP TABLE IF EXISTS `com_pages_images`;
 CREATE TABLE IF NOT EXISTS `com_pages_images` (
@@ -64,7 +64,7 @@ CREATE TABLE IF NOT EXISTS `com_pages_pages` (
 DROP TABLE IF EXISTS `com_pages_pages_locale`;
 CREATE TABLE IF NOT EXISTS `com_pages_pages_locale` (
   `id` int(10) unsigned NOT NULL DEFAULT '0',
-  `lang_id` int(10) unsigned NOT NULL,
+  `lang_id` varchar(2) NOT NULL,
   `title` varchar(255) DEFAULT NULL,
   `body` mediumtext,
   `completed` tinyint(4) unsigned NOT NULL DEFAULT '0',
@@ -72,19 +72,19 @@ CREATE TABLE IF NOT EXISTS `com_pages_pages_locale` (
   KEY `FK_com_pages_pages_cms_languages` (`lang_id`),
   CONSTRAINT `FK_com_pages_pages_locale_cms_languages` FOREIGN KEY (`lang_id`) REFERENCES `cms_languages` (`id`) ON DELETE CASCADE ON UPDATE NO ACTION,
   CONSTRAINT `FK_com_pages_pages_locale_com_pages_pages` FOREIGN KEY (`id`) REFERENCES `com_pages_pages` (`id`) ON DELETE CASCADE ON UPDATE NO ACTION
-) ENGINE=InnoDB DEFAULT CHARSET=utf8;
+) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE='utf8_unicode_ci';
 
 INSERT INTO `cms_components` (`name`, `dependencies`, `is_active`) VALUES ('Pages', NULL, 1);
 
 SET @component_id = LAST_INSERT_ID();
 
-INSERT INTO `cms_components_locale` (`id`, `lang_id`, `title`, `description`, `completed`) VALUES (@component_id, 1, 'Pages', '', 1);
+INSERT INTO `cms_components_locale` (`id`, `lang_id`, `title`, `description`, `completed`) VALUES (@component_id, 'en', 'Pages', '', 1);
 
 INSERT INTO `cms_widgets` (`site_id`, `component_id`, `className`, `default_template`, `is_active`) VALUES (NULL, @component_id, 'Components\\Pages\\Widget\\Page', 'widgets/page', 1);
 
 SET @widget_id = LAST_INSERT_ID();
 
-INSERT INTO `cms_widgets_locale` (`id`, `lang_id`, `title`, `description`, `completed`) VALUES (@widget_id, 1, 'Page', NULL, 1);
+INSERT INTO `cms_widgets_locale` (`id`, `lang_id`, `title`, `description`, `completed`) VALUES (@widget_id, 'en', 'Page', NULL, 1);
 
 /*!40014 SET FOREIGN_KEY_CHECKS=1 */;
 /*!40101 SET CHARACTER_SET_CLIENT=@OLD_CHARACTER_SET_CLIENT */;

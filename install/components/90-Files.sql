@@ -34,7 +34,7 @@ CREATE TABLE IF NOT EXISTS `com_filestorage_fs` (
 DROP TABLE IF EXISTS `com_filestorage_fs_locale`;
 CREATE TABLE IF NOT EXISTS `com_filestorage_fs_locale` (
   `id` int(10) unsigned NOT NULL DEFAULT '0',
-  `lang_id` int(10) unsigned NOT NULL,
+  `lang_id` varchar(2) NOT NULL,
   `title` varchar(255) DEFAULT NULL,
   `body` text,
   `completed` tinyint(4) unsigned NOT NULL DEFAULT '0',
@@ -42,7 +42,7 @@ CREATE TABLE IF NOT EXISTS `com_filestorage_fs_locale` (
   KEY `FKcom_filestorage_fs_locale_locale_com_i18n_languages` (`lang_id`),
   CONSTRAINT `FKcom_filestorage_fs_locale_com_filestorage_fs` FOREIGN KEY (`id`) REFERENCES `com_filestorage_fs` (`id`) ON DELETE CASCADE ON UPDATE NO ACTION,
   CONSTRAINT `FKcom_filestorage_fs_locale_locale_com_i18n_languages` FOREIGN KEY (`lang_id`) REFERENCES `cms_languages` (`id`) ON DELETE CASCADE ON UPDATE NO ACTION
-) ENGINE=InnoDB DEFAULT CHARSET=utf8;
+) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE='utf8_unicode_ci';
 
 INSERT INTO `cms_components` (`name`, `dependencies`, `is_active`) VALUES ('Files', NULL, 1);
 

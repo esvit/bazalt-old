@@ -2,32 +2,38 @@ bazaltCMS
 .value('languages', {
         all: [
             {
-                title: 'English',
-                alias: 'en'
-            }/*,
-            {
-                title: 'UA',
-                alias: 'ukr'
-            }*/
+                id: 'en',
+                title: 'English'
+            }
         ],
         current: 'en'
     })
-.run(['languages', '$rootScope', function(languages, $rootScope) {
+.run(['languages', '$rootScope', 'LanguageService', function(languages, $rootScope, LanguageService) {
+    $rootScope.languages = languages.all;
+    LanguageService.query(function(result) {
+        angular.forEach(result, function(item) {
+            if (item.is_default) {
+                languages.current = item.id;
+            }
+        });
+        languages.all = result;
+    });
+
     $(document).keydown(function(e) {
         var shiftNums = {
             "1": "!", "2": "@", "3": "#", "4": "$", "5": "%", "6": "^", "7": "&", "8": "*", "9": "(", "0": ")"
         }
     
-      if(e.ctrlKey && e.altKey) {
-        var character = parseInt(String.fromCharCode(e.which).toLowerCase());
-        if (character > 0 && character <= languages.all.length) {
-            e.preventDefault();
-            languages.current = languages.all[character - 1].alias;
-            if (!$rootScope.$$phase) {
-                $rootScope.$apply();
+        if(e.ctrlKey && e.altKey) {
+            var character = parseInt(String.fromCharCode(e.which).toLowerCase());
+            if (character > 0 && character <= languages.all.length) {
+                e.preventDefault();
+                languages.current = languages.all[character - 1].id;
+                if (!$rootScope.$$phase) {
+                    $rootScope.$apply();
+                }
             }
         }
-      }
     });
 }])
 .filter('language', ['languages', function(languages) {
