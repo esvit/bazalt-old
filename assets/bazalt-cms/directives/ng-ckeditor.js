@@ -6,6 +6,7 @@ bazaltCMS.directive('ckeditor', function() {
         link: function(scope, element, attrs, ngModel) {
             var expression = attrs.ngModel;
             var el = $(element);
+
             if (angular.isUndefined(CKEDITOR) || angular.isUndefined(CKEDITOR.instances)) {
                 return;
             }
@@ -36,6 +37,7 @@ bazaltCMS.directive('ckeditor', function() {
             });
 
             element.bind('$destroy', function() {
+            console.info('destroy');
                 instance.destroy(false);
             });
             instance.on('instanceReady', function() {
@@ -43,7 +45,9 @@ bazaltCMS.directive('ckeditor', function() {
             });
             instance.on('pasteState', function() {
                 //scope.$apply(function() {
+                if (!isNaN(ngModel.$viewValue)) {
                     ngModel.$setViewValue(instance.getData());
+                }
                 //});
             });
 
@@ -62,7 +66,9 @@ bazaltCMS.directive('ckeditor', function() {
                 }
                 return instance.getData();
             }, function (val) {
-                ngModel.$setViewValue(instance.getData());
+                if (!isNaN(ngModel.$viewValue)) {
+                    ngModel.$setViewValue(instance.getData());
+                }
             });
             instance.on('blur', function(e) {
                 if (!scope.$$phase) {

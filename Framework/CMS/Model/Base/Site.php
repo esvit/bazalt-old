@@ -6,12 +6,14 @@ namespace Framework\CMS\Model\Base;
  * @property    int     id
  * @property    string  domain
  * @property    string  title
+ * @property    string  secret_key
  * @property    int     theme_id
  * @property    int     language_id
  * @property    int     is_subdomain
  * @property    int     user_id
  * @property    int     is_active
  * @property    int     is_multilingual
+ * @property    int     is_allow_indexing
  * @property    int     site_id
  * @property    int     is_redirect
  * @property    Language       DefaultLanguage
@@ -34,10 +36,12 @@ abstract class Site extends \Framework\CMS\ORM\Record
         $this->hasColumn('domain', 'varchar(255)|localhost');
         $this->hasColumn('path', 'varchar(255)|/');
         $this->hasColumn('title', 'N:varchar(255)');
+        $this->hasColumn('secret_key', 'N:varchar(255)');
         $this->hasColumn('theme_id', 'NU:int(11)');
         $this->hasColumn('language_id', 'NU:int(11)');
         $this->hasColumn('is_subdomain', 'U:tinyint(3)|0');
         $this->hasColumn('is_active', 'U:tinyint(3)|0');
+        $this->hasColumn('is_allow_indexing', 'U:tinyint(3)|0');
         $this->hasColumn('is_multilingual', 'U:tinyint(3)|0');
         $this->hasColumn('user_id', 'NU:int(11)');
         $this->hasColumn('site_id', 'NU:int(11)');

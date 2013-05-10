@@ -26,8 +26,8 @@ class Page extends CMS\Widget
     {
         $all_pages = Model\Page::getAll();
 
-        $this->view->assign('all_pages', $all_pages);
-        $this->view->assign('options', $this->options);
-        return $this->view->fetch('widgets/page-settings');
+        $this->view()->assign('all_pages', $all_pages);
+        $this->view()->assign('options', $this->options);
+        return $this->view()->fetch('widgets/page-settings');
     }
 }

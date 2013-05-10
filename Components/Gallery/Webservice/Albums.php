@@ -13,6 +13,7 @@ use Components\Gallery\Component;
 /**
  * @uri /gallery
  * @uri /gallery/:album_id
+ * @uri /gallery/:album_id/:photo_id
  */
 class Albums extends CMS\Webservice\Rest
 {
@@ -168,13 +169,13 @@ class Albums extends CMS\Webservice\Rest
             $name = $_FILES["file1"]["name"];
             $uploadName = CMS\Bazalt::uploadFilename($name, 'gallery');
             if (move_uploaded_file($tmp_name, $uploadName)) {
-                $result['file1']['file'] = relativePath($uploadName);
-                $result['file1']['size'] = $_FILES["file1"]['size'];
-                $result['file1']['name'] = $_FILES["file1"]['name'];
-
                 $photo = Photo::create();
                 $photo->title = pathinfo($name, PATHINFO_FILENAME);
                 $photo->image = relativePath($uploadName);
+
+                list($width, $height, $type, $attr) = getimagesize($uploadName);
+                $photo->width = $width;
+                $photo->height = $height;
                 $photo->order = $album->getMaxOrder() + 1;
                 $album->Photos->add($photo);
                 

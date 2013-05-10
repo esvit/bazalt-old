@@ -79,6 +79,7 @@ define([
             });
     })
     .controller('GalleryCtrl', function($scope, $rootScope, $location, $routeParams, AlbumService, $http) {
+        $scope.photoId = null;
         $scope.activateMenu('Gallery'); // activate admin menu
 
         $rootScope.breadcrumbs = [
@@ -146,8 +147,10 @@ define([
         }
         // Edit photo
         $scope.editPhoto = function(photo) {
+            photo.thumb = '/thumb.php' + photo.image + '?h=200';
             $scope.photo = photo;
             $location.search({ id: photo.album_id, photo_id: photo.id });
+        $scope.includeFile = '/Components/Gallery/views/admin/photo.html?id=' + photo.id;
         }
         // Edit photo
         $scope.savePhoto = function(photo) {
@@ -249,6 +252,26 @@ define([
                 $scope.busy = false;
             });
         };
+    })
+    .controller('EditPhotoCtrl', function($scope, $rootScope, $location, $routeParams, AlbumService, $http) {
+        $scope.activateMenu('Gallery'); // activate admin menu
+
+        $rootScope.breadcrumbs = [
+            {
+                'title' : 'Dashboard',
+                'url': '#!/'
+            },
+            {
+                'title' : 'Gallery'
+            }
+        ];
+
+        // Edit photo
+        $scope.savePhoto = function(photo) {
+            photo.$savePhoto({ id: photo.album_id, photo_id: photo.id }, function() {
+                $location.url($location.url());
+            });
+        }
     });
 
 });

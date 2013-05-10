@@ -2,107 +2,69 @@
     <h2>Settings</h2>
 </div>
 
-<ul class="nav nav-tabs" id="tab-settings">
-    <li class="active"><a href="#general" data-toggle="tab">General</a></li>
-    <li><a href="#profile" data-toggle="tab">Profile</a></li>
-    <li><a href="#messages" data-toggle="tab">Messages</a></li>
-</ul>
+<form ng-submit="saveSettings(settings)" loading-container="loading.settings">
+<div class="settings-group">
+    <span class="title">Site settings</span>
+    <div class="settings-container">
+        <div class="control-group">
+            <label class="control-label" for="title">Site title:</label>
+            <div class="controls">
+                <input class="input-large" ng-model="settings.title" value="MistInfo" id="title" type="text" required />
+                <span class="help-block">Site Title to appear at the top in the administration panel</span>
+            </div>
+        </div>
 
-<div class="tab-content">
-    <div class="tab-pane active" id="general">
-        <div class="settings-group">
-            <span class="title">Site settings</span>
-            <div class="settings-container">
-                <div class="control-group">
-                    <label class="control-label" for="title">Site title:</label>
-                    <div class="controls">
-                        <input class="input-large" value="MistInfo" id="title" type="text" required />
-                        <span class="help-block">Site Title to appear at the top in the administration panel</span>
-                    </div>
-                </div>
-
-                <div class="control-group">
-                    <label class="control-label">
-                        Secret key:
-                    </label>
-                    <div class="controls">
-                        <div class="input-group">
+        <div class="control-group" loading-container="loading.key">
+            <label class="control-label">
+                Secret key:
+            </label>
+            <div class="controls">
+                <div class="input-group">
                     <span class="input-group-btn">
-                        <button class="btn" type="button" title="Generate new"><span class="glyphicon glyphicon-refresh"></span></button>
+                        <button class="btn" ng-click="generateNewKey()" type="button" title="Generate new"><span class="glyphicon glyphicon-refresh"></span></button>
                     </span>
-                            <input type="text" value="0be5ca0a-6a3d-daa4-5115-f47afa198463" disabled>
-                        </div>
-                        <span class="help-block">Used for basic security settings site. If someone found the key, in the security it needs to change</span>
-                    </div>
+                    <input type="text" ng-model="settings.secret_key" value="0be5ca0a-6a3d-daa4-5115-f47afa198463" disabled>
                 </div>
+                <span class="help-block">Used for basic security settings site. If someone found the key, in the security it needs to change</span>
             </div>
         </div>
-
-
-        <div class="settings-group">
-            <span class="title">Language settings</span>
-            <div class="settings-container">
-
-                <div class="control-group">
-                    <div class="controls checkbox">
-                        <label class="control-label">
-                            <input value="1" class="bz-form-checkbox-input" type="checkbox" checked="checked">
-                            Multilanguage site
-                        </label>
-                        <span class="help-block">Turn on the "Multilanguage" section, where you can add multiple languages</span>
-                    </div>
-                </div>
-
-
-
-                <div class="bz-form-row">
-                    <label for="admin_form_settings_Admin_Form_Element_SettingsGroup_0_multilanguage" class="bz-form-label checkbox">
-                        <input value="1" class=" bz-form-input bz-form-checkbox-input" id="admin_form_settings_Admin_Form_Element_SettingsGroup_0_multilanguage" name="admin_form_settings[Admin_Form_Element_SettingsGroup_0][multilanguage]" type="checkbox" checked="checked">
-                        Multilanguage site            </label>
-                    <span class="bz-form-comment help-block">Turn on the "Multilanguage" section, where you can add multiple languages</span>
-                </div>
-                <div class="bz-form-row">
-                    <label for="admin_form_settings_Admin_Form_Element_SettingsGroup_0_save_language" class="bz-form-label checkbox">
-                        <input value="1" class=" bz-form-input bz-form-checkbox-input" id="admin_form_settings_Admin_Form_Element_SettingsGroup_0_save_language" name="admin_form_settings[Admin_Form_Element_SettingsGroup_0][save_language]" type="checkbox">
-                        Store the selected user language            </label>
-                    <span class="bz-form-comment help-block">The site will automatically save the language chosen by the user and display the main page in this language</span>
-                </div>
-                <div class="bz-form-row bz-form-select-container clearfix">
-                    <label for="admin_form_settings_Admin_Form_Element_SettingsGroup_0_admin_language" class="bz-form-label">
-                        Language admin panel    </label>
-                    <div class="bz-form-element">
-                        <select class=" bz-form-select" id="admin_form_settings_Admin_Form_Element_SettingsGroup_0_admin_language" name="admin_form_settings[Admin_Form_Element_SettingsGroup_0][admin_language]" checkpostvalues="checkpostvalues">
-                            <option value="en">English</option><option value="ru" selected="selected">Русский</option><option value="uk">Українська</option><option value="de">Deutsch</option>    </select>
-                    </div>        <span class="bz-form-comment help-block">Language used in admin panel by default</span>
-                </div>
-            </div>
-        </div>
-
-        <div class="settings-group">
-            <span class="title">Search engines</span>
-            <div class="settings-container">
-                <div class="bz-form-row">
-                    <label for="admin_form_settings_Admin_Form_Element_SettingsGroup_1_allowsearchbot" class="bz-form-label checkbox">
-                        <input value="1" class=" bz-form-input bz-form-checkbox-input" id="admin_form_settings_Admin_Form_Element_SettingsGroup_1_allowsearchbot" name="admin_form_settings[Admin_Form_Element_SettingsGroup_1][allowsearchbot]" type="checkbox" checked="checked">
-                        Allow indexing            </label>
-                    <span class="bz-form-comment help-block">Allow indexing site search bots</span>
-                </div>
-            </div>
-        </div>
-
-        <div class="form-actions text-center">
-            <button class="btn-primary btn">Сохранить настройки</button>
-            <button class="btn" type="reset">Сброс</button>
-        </div>
-        </form>
     </div>
-    <div class="tab-pane" id="profile">Profile</div>
-    <div class="tab-pane" id="messages">Messages</div>
 </div>
 
-<script>
-    $(function () {
-        $('#tab-settings a.active').tab('show');
-    })
-</script>
 
+<div class="settings-group">
+    <span class="title">Language settings</span>
+    <div class="settings-container">
+
+        <div class="control-group">
+            <div class="controls checkbox">
+                <label class="control-label">
+                    <input type="checkbox" ng-model="settings.is_multilingual" checked="checked">
+                    Multilanguage site
+                </label>
+                <span class="help-block">Turn on the "Multilanguage" section, where you can add multiple languages</span>
+            </div>
+        </div>
+    </div>
+</div>
+
+<div class="settings-group">
+    <span class="title">Search engines</span>
+    <div class="settings-container">
+        <div class="control-group">
+            <div class="controls checkbox">
+                <label class="control-label">
+                    <input ng-model="settings.is_allow_indexing" type="checkbox" checked="checked">
+                    Allow indexing
+                </label>
+                <span class="help-block">Allow indexing site search bot</span>
+            </div>
+        </div>
+    </div>
+</div>
+
+<div class="form-actions text-center">
+    <button class="btn-primary btn">Save settings</button>
+    <button class="btn" type="reset">Reset</button>
+</div>
+</form>
