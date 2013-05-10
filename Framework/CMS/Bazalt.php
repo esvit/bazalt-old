@@ -34,16 +34,6 @@ class Bazalt
 
     const ACL_GODMODE = 256; // Developer :)
 
-    const SITENAME_OPTION = 'CMS.SiteName';
-
-    const SECRETKEY_OPTION = 'CMS.Secretkey';
-
-    const ALLOWSEARCHBOT_OPTION = 'CMS.AllowSearchBot';
-
-    const MULTILANGUAGE_OPTION = 'CMS.Multilanguage';
-
-    const SAVE_USER_LANGUAGE_OPTION = 'CMS.SaveUserLanguage';
-
     const ONLINEPERIOD_OPTION = 'CMS.OnlinePeriod'; //in minutes
 
     protected static $components = null;
@@ -138,7 +128,7 @@ class Bazalt
      */
     public static function getSecretKey()
     {
-        return Option::get(self::SECRETKEY_OPTION);
+        return self::getSite()->secret_key;
     }
 
     /**

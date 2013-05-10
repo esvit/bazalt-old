@@ -48,7 +48,7 @@
                 <li ng-repeat="item in albums" class="with-btn" ng-class="{active: item.id == album.id}">
                     <a class="pull-right btn btn-delete" placement="right" title="Deleting"
                        href="javascript:;"
-                       confirm-button="deleteAlbum(item);" message="Ви дійно бажаєте видалити цей альбом?" yes="Так"
+                       bz-confirm="deleteAlbum(item);" message="Ви дійно бажаєте видалити цей альбом?" yes="Так"
                        no="Ні"><span class="glyphicon glyphicon-trash"></span></a>
                     <a href="javascript:;" ng-click="showAlbum(item)">
                         <span ng-show="item.images_count > 0" class="pull-right label">{[item.images_count]}</span>
@@ -94,66 +94,54 @@
             {['Publish album first'|translate:'Gallery']}
         </div>
 
-        <div class="gallery-container">
+        <div class="gallery-container" loading-container="busy">
 
-            <div class="row-fluid">
-                <div ng-class="{'col-span-6':photo != null}">
-
-                    <div class="well photo-uploader ng-cloak" ng-show="show_uploads">
-                        <p>Browse for files to upload or drag and drop them here</p>
-                        <input type="file" multiple bz-uploader="addImage(album, $file)" data-url="/rest.php/gallery/{[album.id]}/" data-max-file-size="100mb" ng-model="photos" accept="*.gif,*.png,*.jpg,*.jpeg" name="file1"/>
-                    </div>
-
-
-                    <ul infinite-scroll="nextPage()"
-                        infinite-scroll-disabled="album.images_count == 0 || photos.length == album.images_count"
-                        infinite-scroll-distance='0' ng-sortable="{update: update}" ng-model="photos">
-                        <li class="gallery-image" ng-repeat="photo in photos | orderBy:-order">
-                            <div class="thumbnail">
-                                <img ng-src="/thumb.php{[photo.image]}?w=250&h=160"/>
-                                <strong>{[photo.title|language:'ukr']}</strong>
-                            </div>
-                            <div class="actions">
-                                <a title="" href="javascript:;" ng-click="editPhoto(photo)" class="tip-top"
-                                   data-original-title="Edit"><span
-                                        class="glyphicon glyphicon-pencil icon-white"></span></a>
-                                <a title="Видалення" href="javascript:;" confirm-button="deletePhoto(photo);"
-                                   message="Ви дійно бажаєте видалити це фото?" yes="Так" no="Ні"><span
-                                        class="glyphicon glyphicon-trash icon-white"></span></a>
-                            </div>
-                        </li>
-                    </ul>
-                    <a href="javascript:;" class="btn btn-block" ng-disabled="busy"
-                       ng-show="photos.length < album.images_count"
-                       ng-click="nextPage()">More...</a>
-
-                    <div ng-show="busy" class="loading"></div>
-                </div>
-                <div class="col-span-6" ng-show="photo">
-                    <div class="thumbnail img-one-item">
-                        <img ng-show="photo.image" ng-src="/thumb.php{[photo.image]}?h=200"/>
-
-                        <p>
-                            <strong>Title:</strong>
-                            <input type="text" ng-model="photo.title[languages.current]"/>
-                        </p>
-
-                        <p>
-                            <strong>Description:</strong>
-                            <textarea style="height: 400px" ckeditor="" i-tinymce
-                                      ng-model="photo.description[languages.current]" class="input-block" id="body"
-                                      placeholder=""></textarea>
-                        </p>
-
-                        <div class="modal-footer">
-                            <a href="javascript:;" data-dismiss="modal" class="btn">Close</a>
-                            <a href="javascript:;" ng-click="savePhoto(photo)" class="btn btn-primary">Save changes</a>
-                        </div>
-                    </div>
-                </div>
+            <div class="well photo-uploader ng-cloak" ng-show="show_uploads">
+                <p>Browse for files to upload or drag and drop them here</p>
+                <input type="file" multiple bz-uploader="addImage(album, $file)" data-url="/rest.php/gallery/{[album.id]}/" data-max-file-size="100mb" ng-model="photos" accept="*.gif,*.png,*.jpg,*.jpeg" name="file1"/>
             </div>
 
+
+            <ul infinite-scroll="nextPage()"
+                infinite-scroll-disabled="album.images_count == 0 || photos.length == album.images_count"
+                infinite-scroll-distance='0' ng-sortable="{update: update}" ng-model="photos">
+                <li class="gallery-image" ng-repeat="photo in photos | orderBy:-order">
+                    <div class="thumbnail">
+                        <img ng-src="/thumb.php{[photo.image]}?w=250&h=160"/>
+                        <strong>{[photo.title|language]}</strong>
+                    </div>
+                    <div class="actions">
+                        <a title="" href="javascript:;" ng-click="editPhoto(photo)" class="tip-top"
+                           data-original-title="Edit"><span
+                                class="glyphicon glyphicon-pencil icon-white"></span></a>
+                        <a title="Видалення" href="javascript:;" bz-confirm="deletePhoto(photo);"
+                           message="Ви дійно бажаєте видалити це фото?" yes="Так" no="Ні"><span
+                                class="glyphicon glyphicon-trash icon-white"></span></a>
+                    </div>
+                </li>
+            </ul>
+            <a href="javascript:;" class="btn btn-block" ng-disabled="busy"
+               ng-show="photos.length < album.images_count"
+               ng-click="nextPage()">More...</a>
         </div>
         <div class="clearfix"></div>
     </div>
+</div>
+
+<div class="locked" ng-show="photo">
+
+    <div class="row">
+        <div class="col-span-3 hidden-phone">
+            <div class="locked-content">
+                <a class="btn btn-primary pull-right close-edit" href="javascript:;" ng-click="photo = null">Close editing</a>
+            </div>
+        </div>
+
+        <div class="col-span-9" loading-container="loading">
+            <div class="modal-content locked-content" ng-include="includeFile"></div>
+        </div>
+    </div>
+
+
+    <div class="backdrop"></div>
 </div>

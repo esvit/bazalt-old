@@ -136,18 +136,30 @@ class Menu extends CMS\Webservice\Rest
             return ($menu != null);
         }, "Menu dosn't exists");
 
+        $languages = CMS\Language::getLanguages();
+        
+        $data->field('title')->validator('hasDefaultTranslate', function($value) use (&$menu, $languages, $data) {
+            //$user = CMS\Model\User::getUserByEmail($value);
+            foreach ($languages as $language) {
+                \Framework\CMS\ORM\Localizable::setLanguage($language);
+                $menu->title = $value->{$language->id};
+                $menu->body = $data['body']->{$language->id};
+
+                $menu->save();
+            }
+
+            return true;
+        }, 'User with this email does not exists');
+
         if (!$data->validate()) {
             return new Response(400, $data->errors());
         }
-        $titles = (array)$data->getData('title');
-        $descriptions = (array)$data->getData('description');
-        $menu->title = $titles['en'];
-        $menu->description = $descriptions['en'];
         $menu->component_id = $data->getData('component_id');
         $menu->menuType = $data->getData('menuType');
         $menu->config = (array)$data->getData('config');
         $menu->is_publish = $data->getData('is_publish') ? '1' : '0';
         $menu->save();
+        
 
         return new Response(200, $menu);
     }

@@ -1,0 +1,37 @@
+<div ng-control-ler="EditPhotoCtrl">
+    <div class="page-header">
+        <h2 class="">
+            {['Photo'|translate:'Gallery']}
+            <a class="btn btn-primary pull-right close-edit visible-phone" ng-show="edit_categories" href="javascript:;" ng-click="toggleEdit()">{['Close editing'|translate:'Gallery']}</a>
+        </h2>
+        <div class="clearfix"></div>
+    </div>
+
+    <div class="row" loading-container="loading">
+
+        <div class="col-span-3">
+            <div class="thumbnail">
+                <img ng-src="{[photo.thumb]}"/>
+            </div>
+            Width: {[photo.width]}
+            Height: {[photo.height]}
+        </div>
+
+        <div class="col-span-9">
+            <p>
+                <strong>Title:</strong>
+                <input type="text" ng-model="photo.title[languages.current]"/>
+            </p>
+
+            <p>
+                <strong>Description:</strong>
+                <textarea ckeditor ng-model="photo.description[languages.current]"></textarea>
+            </p>
+
+            <div class="modal-footer">
+                <a href="javascript:;" data-dismiss="modal" class="btn">Close</a>
+                <a href="javascript:;" ng-click="savePhoto(photo)" class="btn btn-primary">Save changes</a>
+            </div>
+        </div>
+    </div>
+</div>

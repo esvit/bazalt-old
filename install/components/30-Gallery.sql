@@ -44,7 +44,7 @@ CREATE TABLE IF NOT EXISTS `com_gallery_photo` (
   KEY `FK_com_gallery_photo_cms_sites` (`site_id`),
   KEY `FK_com_gallery_photo_com_gallery_albums` (`album_id`),
   CONSTRAINT `FK_com_gallery_photo_cms_sites` FOREIGN KEY (`site_id`) REFERENCES `cms_sites` (`id`) ON DELETE CASCADE ON UPDATE NO ACTION,
-  CONSTRAINT `FK_com_gallery_photo_com_gallery_albums` FOREIGN KEY (`album_id`) REFERENCES `com_gallery_albums` (`id`) ON DELETE SET NULL ON UPDATE NO ACTION
+  CONSTRAINT `FK_com_gallery_photo_com_gallery_albums` FOREIGN KEY (`album_id`) REFERENCES `com_gallery_albums` (`id`) ON UPDATE NO ACTION ON DELETE CASCADE
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 
 DROP TABLE IF EXISTS `com_gallery_photo_locale`;

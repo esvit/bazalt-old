@@ -29,6 +29,11 @@ require(['bazalt-cms', 'bootstrap', 'bz-switcher'].concat(modules), function(baz
     value('dashboard', {
         mainMenu: []
     })
+    .factory('SettingsService', function($resource) {
+        return $resource('/rest.php/app/settings', { 'id': '@' }, {
+            generateNewKey: { method: 'GET', params: { 'action': 'newSecretKey' } }
+        });
+    })
 
     app.directive('loadingContainer', function () {
         return {
@@ -80,7 +85,9 @@ require(['bazalt-cms', 'bootstrap', 'bz-switcher'].concat(modules), function(baz
             }
         ];
     });
-    app.controller('SettingsCtrl', function ($scope, $rootScope) {
+    app.controller('SettingsCtrl', function ($scope, $rootScope, SettingsService) {
+        $scope.loading = {};
+
         $rootScope.breadcrumbs = [
             {
                 'title' : 'Dashboard',
@@ -91,6 +98,24 @@ require(['bazalt-cms', 'bootstrap', 'bz-switcher'].concat(modules), function(baz
                 'url': '#!/settings'
             }
         ];
+        $scope.loading.settings = true;
+        $scope.settings = SettingsService.get(function() {
+            $scope.loading.settings = false;
+        });
+
+        $scope.saveSettings = function(settings) {
+            $scope.loading.settings = true;
+            settings.$save(function() {
+                $scope.loading.settings = false;
+            });
+        }
+        $scope.generateNewKey = function() {
+            $scope.loading.key = true;
+            SettingsService.generateNewKey(function(result) {
+                $scope.loading.key = false;
+                $scope.settings.secret_key = result.key;
+            });
+        }
     });
 
     app.controller('MenuCtrl', function ($scope, $location, $session, $window, dashboard) {

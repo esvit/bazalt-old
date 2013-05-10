@@ -26,7 +26,7 @@ class Album extends \Framework\CMS\Menu\ComponentItem
     public function getUrl()
     {
         if (!($album = $this->getAlbum())) {
-            return '#';
+            return CMS\Route::urlFor('Gallery.List');
         }
         if(!$album->is_published) {
             $this->visible(false);
