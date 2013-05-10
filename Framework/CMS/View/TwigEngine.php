@@ -32,7 +32,7 @@ class TwigEngine extends View\Engine
         foreach (self::$extensions as $ext) {
             $twig->addExtension($ext);
         }
-        $vars['bazalt_cms_locale_domain'] = $this->localeDomain;
+        //$vars['bazalt_cms_locale_domain'] = $this->localeDomain;
 
         return $twig->render($string, $vars);
     }
