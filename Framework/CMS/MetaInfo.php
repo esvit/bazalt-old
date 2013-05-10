@@ -69,10 +69,14 @@ class MetaInfo
         $title = trim(self::title());
         $title = empty($title) ? Bazalt::getSite()->title : $title;
 
-        return [
+        $meta = [
             'title' => $title,
             'keywords' => self::keywords(),
             'description' => self::description()
         ];
+        foreach ($meta as $name => $value) {
+            $meta[$name] = View\TwigEngine::fetchString($value, $this->vars);
+        }
+        return $meta;
     }
 }
