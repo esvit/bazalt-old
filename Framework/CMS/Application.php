@@ -63,6 +63,11 @@ abstract class Application
         return $this->view;
     }
 
+    public function route()
+    {
+        return $this->route;
+    }
+
     public function config()
     {
         return $this->config;
