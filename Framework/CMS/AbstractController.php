@@ -9,6 +9,11 @@ abstract class AbstractController
      */
     protected $view = null;
 
+    public function view()
+    {
+        return $this->view;
+    }
+
     public function preAction($action, &$args)
     {
         $base = View::root();

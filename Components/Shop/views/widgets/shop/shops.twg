@@ -1,0 +1,7 @@
+<div class="nav">
+    <ul class="navbar brands">
+        {% for shop in shops %}
+        <li><a href="/shop/{{shop.id}}">{{shop.title}}</a>{#<span class="new">1</span>#}</li>
+        {% endfor %}
+    </ul>
+</div>

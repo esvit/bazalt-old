@@ -3,7 +3,6 @@
 namespace Framework\CMS;
 
 use Framework\Core\Event,
-    Framework\System\Routing\Route,
     Framework\CMS\Pagination\ApplicationTrait,
     Framework\Core\Logger;
 

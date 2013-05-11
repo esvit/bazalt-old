@@ -1,0 +1,6 @@
+<bz:header>
+    {% if edit_obj %}{% tr %}Edit brand{% endtr %}{% else %}{% tr %}New brand{% endtr %}{% endif %}
+    <bz:headerbutton url="{% url 'ComEcommerce.BrandsList' %}" icon="ui-icon-carat-1-w">{% tr %}Back to the list{% endtr %}</bz:headerbutton>
+</bz:header>
+
+{{ form|raw }}

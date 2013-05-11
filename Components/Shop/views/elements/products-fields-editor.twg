@@ -1,0 +1,81 @@
+<div id="{{ element.id() }}">
+
+<!-- type fields -->
+<table id="{{ element.id() }}-fields">
+{% for field in fields %}
+
+    <tr class="bz-form-row{% if product and not field.value %} field-not-active{% endif %}">
+    {% if field.isSeparator() %}
+    <td colspan="2"><h4>{{ field.title }}</h4></td>
+    {% else %}
+    <td class="product-field-title"><label class="bz-form-label" for="f_{{ field.id }}"><input id="f_{{ field.id }}" class="field-active-chk" type="checkbox"{% if product and not field.value %} checked="checked"{% endif %} name="{{ element.name() }}[active][{{ field.id }}]" style="float: right" value="{{ field.id }}" />{{ field.title }}</label></td>
+    <td>
+        <div class="field-values">
+    {% if field.type == 1 %}
+        <label><input type="radio"{% if field.value == 0 %} checked="checked"{% endif %} name="{{ element.name() }}[{{ field.id }}]" value="0"/> {% tr %}No{% endtr %}</label>
+        <label><input type="radio"{% if field.value == 1 %} checked="checked"{% endif %} name="{{ element.name() }}[{{ field.id }}]" value="1"/> {% tr %}Yes{% endtr %}</label>
+    {% elseif field.type == 2 %}
+        <input type="text" value="{{ field.value }}" name="{{ element.name() }}[{{ field.id }}]"/>
+    {% elseif field.type == 3 %}
+        <input type="text" value="{{ field.value }}" name="{{ element.name() }}[{{ field.id }}]"/>
+    {% elseif field.type == 4 %}
+        <select name="{{ element.name() }}[{{ field.id }}]">
+            <option value=""> - </option>
+            {% for item in field.data %}
+            <option {% if field.value == loop.index %}selected="selected"{% endif %} value="{{ loop.index }}">{{ item[language.alias] }}</option>
+            {% endfor %}
+        </select>
+    {% elseif field.type == 5 %}
+        {% for n, item in field.data %}
+        <label>
+            <input type="checkbox" name="{{ element.name() }}[{{ field.id }}-{{ n }}]" {% if n in field.value %}checked="checked"{% endif %} value="{{ n }}" />
+            {{ item[language.alias] }}
+        </label>
+        {% endfor %}
+    {% endif %}
+        </div>
+        <div class="field-nd ui-state-disabled">{% tr %}not available{% endtr %}</div>
+    </td>
+    {% endif %}
+    </tr>
+{% else %}
+<tr><td>{% tr %}No fields{% endtr %}</td></tr>
+{% endfor %}
+</table>
+
+</div>
+
+{% if not partial %}
+<style>
+.product-field-title {
+    width: 250px;
+}
+.field-not-active .field-values, .field-nd {
+    display: none;
+}
+.field-not-active .field-nd {
+    display: block;
+}
+</style>
+
+<script type="text/javascript">
+function loadFields() {
+    var el = $('#{{ element.id() }}').data('bzData');
+
+    el.GetFields($('#product_tab1_type_id').val(), {{ product.id|default('0') }}, function(res){
+        $('#{{ element.id() }}-fields').replaceWith(res);
+        $('.field-active-chk').change(function() {
+            $(this).parents('.bz-form-row').toggleClass('field-not-active');
+        });
+    });
+}
+
+$(function() {
+    $('#product_tab1_type_id').change(loadFields);
+
+    $('.field-active-chk').change(function() {
+        $(this).parents('.bz-form-row').toggleClass('field-not-active');
+    });
+});
+</script>
+{% endif %}

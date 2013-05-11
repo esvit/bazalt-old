@@ -1,0 +1,24 @@
+<ul class="breadcrumb">
+    <li><a href="/">Home</a> <span class="divider">/</span></li>
+    <li><a href="/gallery/">Albums</a> <span class="divider">/</span></li>
+    <li><a href="{{ album.url() }}">{{ album.title }}</a> <span class="divider">/</span></li>
+    <li class="active">{{ image.title }}</li>
+</ul>
+
+<div class="row-fluid">
+    <div class="span4">
+        <ul class="thumbnails">
+            <li class="thumbnail">
+                <a href="{{ image.url() }}">
+                    <img alt="{{ image.title }}" src="{{ image.image|thumb({width: 300, height: 200}) }}" />
+                </a>
+            </li>
+        </ul>
+    </div>
+    <div class="span8">
+        <h1>{{ image.title }}</h1>
+        <div>
+            {{image.description|raw}}
+        </div>
+    </div>
+</div>

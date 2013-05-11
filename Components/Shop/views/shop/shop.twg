@@ -1,0 +1,11 @@
+<div class="brand-panel">
+    <div class="row-fluid">
+        <div class="span4 logo"><img src="{{themeUrl}}/assets/img/brand-logo.png" alt="brand_title" /></div>
+        <div class="span8 desc">ТЦ “Sky Park”.  TPK “Мега Молл”, TPK “</div>
+    </div>
+</div>
+<div class="main-part">
+    <div class="sidebar sidebar-blur">
+        {% widgets 'categories' %}
+    </div>
+</div>

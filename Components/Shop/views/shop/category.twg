@@ -1,0 +1,16 @@
+<h1>{% if category %}{{ category.title }}{% else %}{% tr %}Products{% endtr %}{% endif %}</h1>
+
+
+
+<div class="span12 main-part-full">
+    {% for product in products %}
+        <div class="product">
+            <a href="{{product.url()}}">
+                {% if images|length > 0 %}
+                    <img src="{{ images.0.image|thumb({ 'width': 225, 'height': 218 }) }}" />
+                {% endif %}
+                <div class="desc">{{ product.title }}</div>
+            </a>
+        </div>
+    {% endfor %}
+</div>

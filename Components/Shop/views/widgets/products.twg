@@ -1,0 +1,21 @@
+{% for product in products %}
+<div class="food_block">
+    {% set images = product.Images.get() %}
+    {% if images|length > 0 %}
+        <img alt="{{ product.title }}" src="{{ images.0.getThumb('225x218') }}" />
+    {% endif %}
+    <h2>{{ product.title }}</h2>
+    {{ product.description|raw }}
+    <div class="order half first">
+        {% set fields = product.Fields.get() %}
+        <div class="data">
+            {% for field in fields %}
+            <div class="{{ field.name }}">{{ field.value }}</div>
+            {% endfor %}
+        </div>
+
+        {% set prices = product.Prices.get() %}
+        <div class="price">{{ prices.0.price|number }}<br>грн</div>
+    </div>
+</div>
+{% endfor %}

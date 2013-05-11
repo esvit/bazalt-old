@@ -1,0 +1,79 @@
+<div ng-controller="ShopCategoriesCtrl" class="categories-list edit">
+    <div class="page-header">
+        <h2 class="">
+            {['Categories'|translate:'Shop']}
+            <button ng-click="addCategory(category)" class="btn btn-success">
+                <i class="glyphicon glyphicon-plus"></i>
+                {['Add new category'|translate:'Shop']}
+            </button>
+            <a class="btn btn-primary pull-right close-edit visible-phone" ng-show="edit_categories" href="javascript:;" ng-click="toggleEdit()">{['Close editing'|translate:'Shop']}</a>
+        </h2>
+        <div class="clearfix"></div>
+    </div>
+
+    <div class="col-span-9" loading-container="loading">
+        <div class="live edit-main-menu edit-category">
+            <ol class="nav nav-nested editable" tree-view-sortable="category" tree-view-move="move($item, $before, $index)">
+                <li tree-view="child in category.children at ol" ng-class="{expanded:child.$expanded}">
+                    <div>
+                        <a href="javascript:;" ng-click="child.$expanded = !child.$expanded" ng-switch="child.$expanded">
+                            <span ng-show="child.children.length" ng-switch-when="true">&#x25BC;</span>
+                            <span ng-show="child.children.length" ng-switch-default>&#x25B6;</span>
+                        </a>
+
+                        <div class="item-content" ng-class="{'expanded':child.$settings}">
+                            <div class="btn-group btn-group-justified with-btn">
+                                <a href="javascript:;" class="btn title-item-menu" ng-class="{'btn-primary':child.is_publish}">
+                                    {[child.title|language|default:'&nbsp;']}
+                                </a>
+                                <!--a class="btn" ng-click="child.is_publish = !child.is_publish; updateItem(child)" ng-class="{'btn-primary active':child.is_publish}">
+                                    <span class="glyphicon glyphicon-eye-open"></span>
+                                </a-->
+                                <a class="btn" ng-click="addCategory(child)" ng-class="{'btn-primary':child.is_publish}"><span class="glyphicon glyphicon-plus"></span></a>
+                                <a class="btn" ng-class="{'btn-primary':child.is_publish}" placement="right" title="Deleting..." href="javascript:;"
+                                   bz-confirm="remove(child)" message="Are you sure want to delete this category?"><span class="glyphicon glyphicon-trash"></span>
+                                </a>
+                                <a class="btn" ng-class="{'btn-primary':child.is_publish, 'active': child.$settings}"
+                                   ng-click="child.$settings = !child.$settings; child.focus = child.$settings"><span
+                                        class="glyphicon glyphicon-cog"></span>
+                                </a>
+                            </div>
+                            <div class="details" ng-show="child.$settings">
+                                <div>
+                                    <label>{['Category title'|translate:'Shop']}</label>
+                                    <input type="text" focus-me="child.focus"
+                                           ng-model="child.title[languages.current]"/>
+                                </div>
+                                <div class="help-block">
+                                    <a href="javascript:;" ng-hide="child.config.css != null"
+                                       ng-click="child.config.css = '';" class="label">{['Add CSS class'|translate:'Shop']}</a>
+                                </div>
+
+                                <div class="bz-form-row" ng-show="child.config.css != null">
+                                    <label>{['CSS Class'|translate:'Shop']}</label>
+                                    <input type="text" placeholder="{['Enter valid css class'|translate:'Shop']}"
+                                           ng-model="child.config.css"/>
+                                </div>
+
+                                <div class="bz-form-row">
+                                    <label>{['Category description'|translate:'Shop']}</label>
+                                    <textarea style="height: 200px" class="input-block" id="body" placeholder=""></textarea>
+                                </div>
+
+                                <div class="clearfix"></div>
+                                <legend></legend>
+
+                                <div class="text-center">
+                                    <button class="btn btn-primary" ng-click="child.$save()">{['Save'|translate:'Shop']}</button>
+                                    <button class="btn btn-link">{['Cancel'|translate:'Shop']}</button>
+                                </div>
+                                <div class="clearfix"></div>
+                            </div>
+                        </div>
+                    </div>
+                    <ol></ol>
+                </li>
+            </ol>
+        </div>
+    </div>
+</div>

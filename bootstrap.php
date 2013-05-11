@@ -14,6 +14,7 @@ if ($_SERVER['REQUEST_METHOD'] == 'OPTIONS') {
 define('SITE_DIR', __DIR__);
 define('ERROR_LOG_FILE', SITE_DIR . '/fixme.log');
 define('GENERATOR_EXPOSE', false);
+define('ENABLE_MULTISITING', true);
 
 define('TEMP_DIR', SITE_DIR . '/tmp');
 

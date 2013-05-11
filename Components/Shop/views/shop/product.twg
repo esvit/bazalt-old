@@ -1,0 +1,17 @@
+<div class="span12 main-part">
+    <div class="product">
+        <a href="#">
+            <div class="desc">{{ product.title }}</div>
+            {% set images = product.Images.get() %}
+            {% if images|length > 0 %}
+                <img src="{{ images.0.image|thumb({ 'width': 225, 'height': 218 }) }}" />
+            {% endif %}
+            <div class="price">цена: <span>{{ product.price }}грн.</span></div>
+        </a>
+    </div>
+    <div class="sidebar">
+        <div class="sidebar">
+            <div>{{ product.description|raw }}</div>
+        </div>
+    </div>
+</div>

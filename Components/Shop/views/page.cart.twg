@@ -1,0 +1,45 @@
+<h1>Оформление заказа</h1>
+
+{% if products|length > 0 %}
+<table width="100%" class="cart">
+<tr>
+    <th>{% tr %}Title{% endtr %}</th>
+    <th>{% tr %}Quantity{% endtr %}</th>
+    <th>{% tr %}Price{% endtr %}</th>
+</tr>
+    {% for product in products %}
+    <tr>
+        <td><a href="{{ product.getUrl() }}">
+        {% set images = product.Images.get() %}
+        {% if images|length > 0 %}
+            <img width="100" height="100" alt="{{ product.title }}" src="{{ images.0.getThumb('100x100') }}">
+        {% endif %}
+        {{ product.title }}</a></td>
+        <td><input type="text" value="{{ product.count }}" data-product-id="{{ product.id }}"  data-product-price="{{ product.price }}" /></td>
+        <td id="productSum{{ product.id }}">{{ product.price * product.count }}</td>
+    </tr>
+    {% endfor %}
+<tr>
+    <th>&nbsp;</th>
+    <th>{% tr %}Total{% endtr %}</th>
+    <th><span class="totalSum">{{ cart.getSum() }}</span></th>
+</tr>
+</table>
+{% endif %}
+
+<a title="Check out" class="button_small" id="button_order_cart" href="{% url 'ComEcommerce.Order' %}">Check out</a>
+
+<script>
+$(function() {
+    
+
+    $('.cart input').bind('change keyup', function(){
+        var input = $(this),
+            productId = input.data('productId');
+        ComEcommerce_Webservice_Cart.updateCount(productId, input.val(), function(res) {
+            $('#productSum' + productId).text(res.count * input.data('productPrice'));
+            $('.totalSum').text(res.sum);
+        });
+    });
+});
+</script>

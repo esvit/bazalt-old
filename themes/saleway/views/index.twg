@@ -1,0 +1,6 @@
+<div class="span12 main-part">
+    <a class="logo" href="/"><img src="{{themeUrl}}/assets/img/logo.png" title="logo" alt="logo" /></a>
+    <div class="sidebar">
+        {% widgets 'shops' %}
+    </div>
+</div>
