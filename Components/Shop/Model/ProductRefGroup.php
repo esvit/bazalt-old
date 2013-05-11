@@ -2,6 +2,6 @@
 
 namespace Components\Shop\Model;
 
-class ProductRefCategory extends Base\ProductRefCategory
+class ProductRefGroup extends Base\ProductRefGroup
 {
 }

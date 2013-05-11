@@ -1,7 +1,9 @@
-<div class="nav">
-    <ul class="navbar brands">
+<div class="clearfix">
+    <div style="float: right; width: 50%;">
+        <ul class="list-group">
         {% for shop in shops %}
-        <li><a href="/shop/{{shop.id}}">{{shop.title}}</a>{#<span class="new">1</span>#}</li>
+            <li class="list-group-item"><a href="/shop/{{shop.id}}">{{shop.title}}</a>{#<span class="new">1</span>#}</li>
         {% endfor %}
-    </ul>
+        </ul>
+    </div>
 </div>

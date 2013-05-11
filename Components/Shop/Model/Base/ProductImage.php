@@ -21,7 +21,7 @@ abstract class ProductImage extends \Framework\CMS\ORM\Record
     {
         $this->hasColumn('id', 'PUA:int(10)');
         $this->hasColumn('product_id', 'U:int(10)');
-        $this->hasColumn('image', 'varchar(255)');
+        $this->hasColumn('url', 'varchar(255)');
         $this->hasColumn('order', 'U:int(10)');
     }
 

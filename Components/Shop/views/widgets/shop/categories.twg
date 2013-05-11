@@ -1,16 +1,14 @@
-<div class="nav">
-    <ul class="navbar products-categories">
-        {% for category in categories %}
-        <li><a href="{{ category.getUrl() }}">{{ category.title }}</a>
-        {% set subcategories = category.PublicElements.get() %}
-        {% if subcategories|length > 0 %}
-        <ul class="dropdown-submenu">
-            {% for subcategory in subcategories %}
-                <li><a href="{{ subcategory.getUrl() }}">{{ subcategory.title }}</a></li>
-            {% endfor %}
-        </ul>
-        {% endif %}
-        </li>
+<ul class="list-group">
+    {% for category in categories %}
+    <li class="list-group-item"><a ng-click="category = (category == '{{ category.id }}') || '{{ category.id }}'" href="">{{ category.title }}</a>
+    {% set subcategories = category.PublicElements.get() %}
+    {% if subcategories|length > 0 %}
+    <ul class="dropdown-submenu unstyled ng-cloak" ng-show="category == '{{ category.id }}'">
+        {% for subcategory in subcategories %}
+            <li><a href="{{ subcategory.getUrl() }}">{{ subcategory.title }}</a></li>
         {% endfor %}
     </ul>
-</div>
+    {% endif %}
+    </li>
+    {% endfor %}
+</ul>

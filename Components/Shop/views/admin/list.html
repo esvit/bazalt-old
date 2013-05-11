@@ -7,7 +7,7 @@
         <div class="col-span-9">
             <div class="btn-toolbar" ng-hide="edit_categories">
                 <div class="btn-group">
-                    <a href="#!/shop/create/" class="btn btn-success"><i class="glyphicon glyphicon-plus"></i> {['Add new page'|translate:'Shop']}</a>
+                    <a ng-href="#!/shop/create/?category_id={[params.category_id]}" class="btn btn-success"><i class="glyphicon glyphicon-plus"></i> {['Add new product'|translate:'Shop']}</a>
                 </div>
                 <div class="btn-group" ng-show="selected().length">
                     <button class="btn btn-danger" ng-disabled="!selected().length" title="Deleting..."

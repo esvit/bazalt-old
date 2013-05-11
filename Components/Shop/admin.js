@@ -181,16 +181,18 @@ define([
         $scope.activateMenu('Shop'); // activate admin menu
 
         $scope.loading = true;
-        var pageTitle = 'New page';
+        var pageTitle = 'New product';
         if ($routeParams.id) {
-            var pageTitle = 'Edit page';
+            var pageTitle = 'Edit product';
             $scope.page = ProductsService.get({ id: $routeParams.id }, function() {
                 $scope.loading = false;
             });
         } else {
             $scope.page = new ProductsService({
                 title: {},
-                body: {}
+                description: {},
+                images: [],
+                category_id: $routeParams.category_id
             });
             $scope.loading = false;
         }
@@ -199,12 +201,12 @@ define([
             $scope.loading = true;
             page.$save(function() {
                 $scope.loading = false;
-                $location.url('/shop');
+                $location.url('/shop?category_id=' + $scope.page.category_id);
             });
         }
 
         $scope.cancel = function(page) {
-            $location.url('/shop');
+            $location.url('/shop?category_id=' + $scope.page.category_id);
         }
 
         $scope.addImage = function(page, file) {
@@ -236,29 +238,29 @@ define([
         $rootScope.$watch('tr', function() {
             $rootScope.breadcrumbs = [
                 {
-                    'title' : $filter('translate')('Dashboard', 'Pages'),
+                    'title' : $filter('translate')('Dashboard', 'Shop'),
                     'url': '#!/'
                 },
                 {
-                    'title' : $filter('translate')('Pages', 'Pages'),
+                    'title' : $filter('translate')('Shop', 'Shop'),
                     'url': '#!/shop'
                 },
                 {
-                    'title' : $filter('translate')(pageTitle, 'Pages')
+                    'title' : $filter('translate')(pageTitle, 'Shop')
                 }
             ];
         });
         $rootScope.breadcrumbs = [
             {
-                'title' : $filter('translate')('Dashboard', 'Pages'),
+                'title' : $filter('translate')('Dashboard', 'Shop'),
                 'url': '#!/'
             },
             {
-                'title' : $filter('translate')('Pages', 'Pages'),
+                'title' : $filter('translate')('Shop', 'Shop'),
                 'url': '#!/pages'
             },
             {
-                'title' : $filter('translate')(pageTitle, 'Pages')
+                'title' : $filter('translate')(pageTitle, 'Shop')
             }
         ];
     })

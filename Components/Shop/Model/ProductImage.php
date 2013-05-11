@@ -2,6 +2,8 @@
 
 namespace Components\Shop\Model;
 
+use Framework\System\ORM\ORM;
+
 class ProductImage extends Base\ProductImage
 {
     public static function create()

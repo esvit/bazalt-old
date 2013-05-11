@@ -20,13 +20,17 @@ class Product extends Base\Product
         return $product;
     }
 
-    public function cut()
+    public function toArray()
     {
-        $mPos = strpos($this->description, '<!-- pagebreak -->');
-        if($mPos!== false) {
-            return substr($this->description, 0, $mPos);
+        $res = parent::toArray();
+        $res['is_published'] = $res['is_published'] == '1';
+
+        $res['images'] = [];
+        $images = $this->Images->get();
+        foreach ($images as $image) {
+            $res['images'][] = $image->toArray();
         }
-        return $this->description;
+        return $res;
     }
 
     public function tagsSave($tags)
@@ -127,51 +131,9 @@ class Product extends Base\Product
         return $q->fetch();
     }
 
-    public static function getCompanyCollection($companyId, $onlyPublished = false, $filter = array())
-    {
-        $currentLanguage = CMS\Language::getCurrentLanguage();
-        $defaultLanguage = CMS\Language::getDefaultLanguage();
-
-        $q = ORM::select('Components\Shop\Model\Product p', 'p.*, pl.title AS title, im.image as image, c.id as company_id')
-            ->leftJoin('Components\Shop\Model\ProductImage im', array('product_id', 'p.id'))
-            ->leftJoin('Components\Shop\Model\ProductLocale pl', array('id', 'p.id'))
-            ->leftJoin('Components\Shop\Model\ProductField f', array('product_id', 'p.id'))
-            ->innerJoin('Components\Enterprise\Model\Company c', array('site_id', 'p.site_id'))
-            ->andWhere('p.site_id = ?', $companyId)
-            ->andWhere('pl.lang_id = ?', $currentLanguage->id)
-            ->groupBy('p.id')
-            ->orderBy('IF(p.price = 0, 999999999, p.price)');
-
-        if ($onlyPublished) {
-            $q->andWhere('p.publish = ?', 1);
-        }
-        $filter = new ComShop_Filter($filter);
-        $q = $filter->addToQuery($q);
-        ComShop::currentFilter($filter);
-        return new CMS\ORM\Collection($q);
-    }
-
-    public function onOffices()
-    {
-        $q = ORM::select('Components\Enterprise\Model\Office o')
-            ->innerJoin('Components\Enterprise\Model\CompanyProductRefOffices ro', array('office_id', 'o.id'))
-            ->andWhere('ro.product_id = ?', $this->id);
-
-        $offices = $q->fetchAll();
-        foreach ($offices as $office) {
-            $office->region = Components\Geo\Model\State::getById($office->city_id);
-            $office->regionUrl = $office->region->getUrl($office->region->Elements->getParent());
-            $office->link = $office->regionUrl . 'office-' . $office->id . '/';
-        }
-        return $offices;
-    }
-
-
     public static function getCollection($category = null, $onlyPublished = false)
     {
-        $q = ORM::select('Components\Shop\Model\Product p', 'p.*, im.image as image')
-            ->leftJoin('Components\Shop\Model\ProductImage im', array('product_id', 'p.id'))
-            ->leftJoin('Components\Shop\Model\ProductField f', array('product_id', 'p.id'))
+        $q = ORM::select('Components\Shop\Model\Product p')
             ->andWhere('p.shop_id = ?', \Components\Shop\Component::currentShop()->id)
             ->groupBy('p.id')
             ->orderBy('p.price');
@@ -179,17 +141,13 @@ class Product extends Base\Product
         if ($category && $category->depth > 0) {
             $childsQuery = ORM::select('Components\Shop\Model\Category c', 'id')
                 ->where('c.lft BETWEEN ? AND ?', array($category->lft, $category->rgt))
-                ->andWhere('c.company_id = ?', $category->company_id);
+                ->andWhere('c.shop_id = ?', $category->shop_id);
 
-            $q->innerJoin('Components\Shop\Model\ProductsCategories pc', array('product_id', 'p.id'))
-              ->andWhereIn('pc.category_id', $childsQuery);
+            $q->andWhereIn('p.category_id', $childsQuery);
         }
         if ($onlyPublished) {
             $q->andWhere('p.is_published = ?', 1);
         }
-        /*$filter = new ComShop_Filter($filter);
-        $q = $filter->addToQuery($q);
-        ComShop::currentFilter($filter);*/
         return new CMS\ORM\Collection($q);
     }
 

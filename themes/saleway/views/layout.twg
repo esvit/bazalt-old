@@ -23,16 +23,17 @@
     }
 </style>
 <![endif]-->
-    <div class="row-fluid">
-        <div class="span12 header">
-            <div class="row-fluid">
-                <div class="span4 city">Vinnytcya</div>
-                <div class="span4 my-checks">Мої відмітки</div>
-                <div class="span4 date">07.04.2013</div>
-            </div>
+    <div class="bg-img"></div>
+    <div class="navbar navbar-fixed-top">
+        <div class="btn-group pull-left">
+            <a href="javascript: history.back(1);" class="btn btn-transparent"><span class="glyphicon glyphicon-chevron-left"></span></a>
+        </div>
+        <div class="btn-group pull-right">
+            <a href="" class="btn btn-warning"><span class="glyphicon glyphicon-star"></span></a>
+            <a href="" class="btn btn-black"><span class="glyphicon glyphicon-wrench"></span></a>
         </div>
     </div>
-    <div class="row-fluid" ng-view>
+    <div class="row wrapper" ng-view>
         {{content|raw}}
     </div>
 

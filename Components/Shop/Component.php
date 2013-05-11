@@ -79,7 +79,7 @@ class Component extends CMS\Component implements CMS\Menu\HasItems
             }
             return false;
         };
-        $categoryMapper = $shopRoute->connect('Shop.Category', '/[category]', ['component' => self::getName(), 'controller' => 'Components\Shop\Controller\Index', 'action' => 'category']);
+        $categoryMapper = $shopRoute->connect('Shop.Category', '/[category]', ['component' => self::getName(), 'controller' => 'Components\Shop\Controller\Index', 'action' => 'category', '_fullPath' => true]);
         $categoryMapper->where('shopId', $checkShop);
         $categoryMapper->where('category', $checkCategory);
     }

@@ -47,7 +47,15 @@ class Category extends Base\Category implements Routing\Sluggable
 
     public function toUrl(Routing\Route $route)
     {
-        return $this->alias;
+        $url = urlencode($this->alias);
+        if ($route->param('_fullPath')) {
+            foreach ($this->Elements->getPath() as $elem) {
+                if ($elem->depth > 0) {
+                    $url = urlencode($elem->alias) . '/' . $url;
+                }
+            }
+        }
+        return $url;
     }
 
     /**
@@ -93,7 +101,6 @@ class Category extends Base\Category implements Routing\Sluggable
     {
         $q = ORM::select('Components\Ecommerce\Model\Brands b', 'b.*, COUNT(DISTINCT p.id) AS `count`')
                 ->leftJoin('Components\Ecommerce\Model\Product p', array('brand_id', 'b.id'))
-                ->leftJoin('Components\Ecommerce\Model\ProductRefCategory pc', array('product_id', 'p.id'))
                 ->leftJoin('Components\Ecommerce\Model\ProductsFields f', array('product_id', 'p.id'))
                 ->leftJoin('Components\Ecommerce\Model\Category c', array('id', 'pc.category_id'))
                 ->where('c.lft >= ? AND c.rgt <= ?', array($this->lft, $this->rgt))
@@ -104,8 +111,6 @@ class Category extends Base\Category implements Routing\Sluggable
         if ($onlyPublished) {
             $q->andWhere('p.is_published = ?', 1);
         }
-        $filter = ComEcommerce::currentFilter();
-        $q = $filter->addToQuery($q, array('brand'));
         return $q->fetchAll();
     }
 
@@ -113,7 +118,6 @@ class Category extends Base\Category implements Routing\Sluggable
     {
         $q = ORM::select('Components\Ecommerce\Model\ProductTypes pt', 'pt.*, COUNT(*) AS `count`')
                 ->leftJoin('Components\Ecommerce\Model\Product p', array('type_id', 'pt.id'))
-                ->leftJoin('Components\Ecommerce\Model\ProductRefCategory pc', array('product_id', 'p.id'))
                 ->leftJoin('Components\Ecommerce\Model\Category c', array('id', 'pc.category_id'))
                 ->where('c.lft >= ? AND c.rgt <= ?', array($this->lft, $this->rgt))
                 ->andWhere('c.site_id = ?', CMS\Bazalt::getSiteId())
@@ -128,8 +132,7 @@ class Category extends Base\Category implements Routing\Sluggable
     public function getMinMaxPrice($onlyPublished = false)
     {
         $q = ORM::select('Components\Ecommerce\Model\Product p', 'MIN(p.price) AS min, MAX(p.price) AS max')
-                ->leftJoin('Components\Ecommerce\Model\ProductRefCategory pc', array('product_id', 'p.id'))
-                ->leftJoin('Components\Ecommerce\Model\Category c', array('id', 'pc.category_id'))
+                ->leftJoin('Components\Ecommerce\Model\Category c', array('id', 'p.category_id'))
                 ->where('c.lft >= ? AND c.rgt <= ?', array($this->lft, $this->rgt))
                 ->andWhere('c.site_id = ?', CMS\Bazalt::getSiteId());
 
@@ -138,7 +141,7 @@ class Category extends Base\Category implements Routing\Sluggable
         }
         $res = $q->fetch('stdClass');
         if (!$res) {
-            $res = new stdClass();
+            $res = new \stdClass();
             $res->min = 1;
             $res->max = 1;
         }
@@ -153,8 +156,7 @@ class Category extends Base\Category implements Routing\Sluggable
     public function getProducts($onlyPublished = true)
     {
         $q = ORM::select('Components\Shop\Model\Product p','p.*')
-            ->leftJoin('Components\Shop\Model\ProductRefCategory pc', array('product_id', 'p.id'))
-            ->leftJoin('Components\Shop\Model\Category c', array('id', 'pc.category_id'))
+            ->leftJoin('Components\Shop\Model\Category c', array('id', 'p.category_id'))
             ->where('c.lft >= ? AND c.rgt <= ?', array($this->lft, $this->rgt))
             ->andWhere('c.shop_id = ?', (int)$this->shop_id);
 
@@ -210,7 +212,7 @@ class Category extends Base\Category implements Routing\Sluggable
     /**
      * Return category by path parts
      */
-    public static function getByPath(array $parts, Category $root = null)
+   /* public static function getByPath(array $parts, Category $root = null)
     {
         if (!is_array($parts) || count($parts) == 0) {
             return null;
@@ -230,6 +232,34 @@ class Category extends Base\Category implements Routing\Sluggable
                 $qByAlias->andWhere('c.depth = ?', $nextElement->depth + 1)
                          ->andWhere('c.lft >= ? AND c.rgt <= ?', array($nextElement->lft, $nextElement->rgt))
                          ->andWhere('c.shop_id = ?', $nextElement->shop_id);
+            }
+
+            $nextElement = $qByAlias->fetch();
+            if (!$nextElement) {
+                return null;
+            }
+        }
+        return $nextElement;
+    }
+*/
+    public static function getByPath(array $parts, Category $root = null)
+    {
+        if (!is_array($parts) || count($parts) == 0) {
+            return null;
+        }
+
+        $langId = CMS\Language::getCurrentLanguage()->id;
+
+        $nextElement = $root;
+        foreach ($parts as $i => $part) {
+            $qByAlias = Category::select()
+                ->andWhere('alias = ?', $part)
+                ->andWhere('is_published = ?', 1);
+
+            if ($nextElement) {
+                $qByAlias->andWhere('depth = ?', $nextElement->depth + 1)
+                    ->andWhere('lft >= ? AND rgt <= ?', array($nextElement->lft, $nextElement->rgt))
+                    ->andWhere('shop_id = ?', $nextElement->shop_id);
             }
 
             $nextElement = $qByAlias->fetch();

@@ -6,6 +6,7 @@ use Framework\CMS\Webservice\Response,
     Framework\System\Session\Session,
     Framework\System\Data as Data,
     Framework\CMS as CMS;
+use Components\Shop\Model\ProductImage;
 use Framework\Core\Helper\Url;
 use Components\Shop\Model\Product,
     Components\Shop\Model\Category,
@@ -30,6 +31,8 @@ class Products extends CMS\Webservice\Rest
         $languages = CMS\Language::getLanguages();
 
         $product->category_id = $data['category_id'];
+        $product->price = $data['price'];
+        $product->code = $data['code'];
         $product->is_published = $data['is_published'] == true;
         $product->save();
 
@@ -53,7 +56,7 @@ class Products extends CMS\Webservice\Rest
 
         if (isset($data['images'])) {
             foreach ($data['images'] as $image) {
-                $image = Image::getById($image->id);
+                $image = ProductImage::getById($image->id);
                 if ($image) {
                     $product->Images->add($image);
                 }

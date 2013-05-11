@@ -6,8 +6,9 @@ use Framework\CMS\Webservice\Response,
     Framework\System\Session\Session,
     Framework\System\Data as Data,
     Framework\CMS as CMS;
+use Components\Shop\Model\Product;
 use Components\Shop\Model\Page;
-use Components\Shop\Model\Image;
+use Components\Shop\Model\ProductImage;
 
 /**
  * @uri /shop/images
@@ -34,9 +35,9 @@ class Albums extends CMS\Webservice\Rest
         if ($_FILES["file1"]["error"] == UPLOAD_ERR_OK) {
             $tmp_name = $_FILES["file1"]["tmp_name"];
             $name = $_FILES["file1"]["name"];
-            $uploadName = CMS\Bazalt::uploadFilename($name, 'gallery');
+            $uploadName = CMS\Bazalt::uploadFilename($name, 'shop');
             if (move_uploaded_file($tmp_name, $uploadName)) {
-                $image = Image::create();
+                $image = ProductImage::create();
                 $image->url = relativePath($uploadName);
                 $image->save();
 
@@ -110,12 +111,12 @@ class Albums extends CMS\Webservice\Rest
     public function deletePhoto($album_id, $photo_id)
     {
         $user = CMS\User::get();
-        $album = Album::getById($album_id);
-        $photo = Photo::getById($photo_id);
+        $album = Product::getById($album_id);
+        $photo = ProductImage::getById($photo_id);
         /*if ($user->isGuest()) {
             return new Response(200, null);
         }*/
-        $album->images_count--;
+        $album->count_img--;
         $album->save();
         $photo->delete();
         return new Response(200, true);

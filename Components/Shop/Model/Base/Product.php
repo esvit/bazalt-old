@@ -19,6 +19,7 @@ abstract class Product extends \Framework\CMS\ORM\Record
         $this->hasColumn('shop_id', 'UN:int(10)');
         $this->hasColumn('type_id', 'U:int(10)');
         $this->hasColumn('brand_id', 'U:int(10)');
+        $this->hasColumn('category_id', 'U:int(10)');
         $this->hasColumn('count_img', 'U:int(10)');
         $this->hasColumn('user_id', 'U:int(10)'); 
         $this->hasColumn('code', 'varchar(255)');
@@ -42,8 +43,7 @@ abstract class Product extends \Framework\CMS\ORM\Record
         $this->hasRelation('Variants', new \ORM_Relation_One2Many('Components\Shop\Model\ProductsVariants', 'id', 'product_id'));
         $this->hasRelation('Images', new \ORM_Relation_One2Many('Components\Shop\Model\ProductImage', 'id', 'product_id'));
 
-        $this->hasRelation('Categories', new \ORM_Relation_Many2Many('Components\Shop\Model\Category', 'product_id', 'Components\Shop\Model\ProductsCategories', 'category_id'));
-        $this->hasRelation('PublicCategories', new \ORM_Relation_Many2Many('Components\Shop\Model\Category', 'product_id', 'Components\Shop\Model\ProductsCategories', 'category_id', array('is_publish' => 1)));
+        $this->hasRelation('Category', new \ORM_Relation_One2One('Components\Shop\Model\Category', 'category_id', 'id'));
 
         $this->hasRelation('Fields', new \ORM_Relation_Many2Many('Components\Shop\Model\Field', 'product_id', 'Components\Shop\Model\ProductsFields', 'field_id'));
     }
