@@ -2,7 +2,7 @@
 
 namespace Components\Shop\Model\Base;
 
-abstract class ProductRefCategory extends \Framework\CMS\ORM\Record
+abstract class ProductRefGroup extends \Framework\CMS\ORM\Record
 {
     const TABLE_NAME = 'com_shop_products_categories';
 
