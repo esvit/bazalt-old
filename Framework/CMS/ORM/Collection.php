@@ -41,7 +41,7 @@ class Collection extends \ORM_Collection
         $page = ($page === null) ? CMS\Application::getPage() : $page;
         $page = (empty($page) || !is_numeric($page)) ? 1 : $page;
 
-        $countPerPage = (isset($_GET['count']) && $_GET['count'] >= 1 && $_GET['count'] <= 500) ? (int)$_GET['count'] : 10;
+        $countPerPage = (isset($_GET['count']) && $_GET['count'] >= 1 && $_GET['count'] <= 500) ? (int)$_GET['count'] : $countPerPage;
 
         try {
             $data = $this->page($page)

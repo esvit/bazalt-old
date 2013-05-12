@@ -69,7 +69,7 @@ class Album extends Base\Album
             ->leftJoin('Components\Gallery\Model\Photo p', array('album_id', 'a.id'))
             //->where('a.lft BETWEEN ? AND ? AND a.depth = ?', array($album->lft + 1, $album->rgt - 1, $album->depth + 1))
             ->andWhere('a.site_id = ?', CMS\Bazalt::getSiteId())
-            ->orderBy('a.id')
+            ->orderBy('a.created_at DESC')
             ->groupBy('a.id');
 
         if ($onlyPublished) {
