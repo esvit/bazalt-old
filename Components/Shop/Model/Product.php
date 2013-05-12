@@ -24,6 +24,7 @@ class Product extends Base\Product
     {
         $res = parent::toArray();
         $res['is_published'] = $res['is_published'] == '1';
+        $res['url'] = $this->url();
 
         $res['images'] = [];
         $images = $this->Images->get();
