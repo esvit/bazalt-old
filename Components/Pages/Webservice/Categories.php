@@ -5,6 +5,7 @@ namespace Components\Pages\Webservice;
 use Framework\CMS\Webservice\Response,
     Framework\System\Session\Session,
     Framework\System\Data as Data,
+    Framework\Core\Helper\Url,
     Framework\CMS as CMS;
 use Components\Pages\Model\Category;
 
@@ -110,20 +111,28 @@ class Categories extends CMS\Webservice\Rest
     public function saveCategory()
     {
         $data = new Data\Validator((array)$this->request->data);
-        $category = isset($data['id']) ? Category::getById((int)$data['id']) : Page::create();
+        $category = isset($data['id']) ? Category::getById((int)$data['id']) : Category::create();
 
-        $data->field('title')->validator('hasDefaultTranslate', function($value) {
+        $languages = CMS\Language::getLanguages();
+        $data->field('title')->validator('hasDefaultTranslate', function($value) use (&$category, $languages, $data) {
             //$user = CMS\Model\User::getUserByEmail($value);
+            foreach ($languages as $language) {
+                \Framework\CMS\ORM\Localizable::setLanguage($language);
+                $category->title = $value->{$language->id};
+                $category->description = $data['description']->{$language->id};
+                if (!$category->url) {
+                    $category->url = Url::cleanUrl(\Framework\System\Locale\Config::findLocaleByAlias($language->id)->translit($category->title));
+                }
+                $category->save();
+            }
 
             return true;
         }, 'User with this email does not exists');
+
         if (!$data->validate()) {
             return new Response(400, $data->errors());
         }
-        $category->title = $data['title']->en;
-        $category->description = $data['description']->en;
         $category->is_published = $data['is_published'] == 'true';
-        //$category->url = Url::cleanUrl(\Framework\System\Locale\Config::getLocale()->translit($page->title));
         $category->save();
 
         return new Response(200, $category);

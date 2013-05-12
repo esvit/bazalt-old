@@ -27,12 +27,12 @@ class Pages extends CMS\Webservice\Rest
         $data = new Data\Validator((array)$this->request->data);
         $page = isset($data['id']) ? Page::getById((int)$data['id']) : Page::create();
 
-        $languages = CMS\Language::getLanguages();
 
         $page->category_id = $data['category_id'];
         $page->is_published = $data['is_published'] == true;
         $page->save();
 
+        $languages = CMS\Language::getLanguages();
         $data->field('title')->validator('hasDefaultTranslate', function($value) use (&$page, $languages, $data) {
             //$user = CMS\Model\User::getUserByEmail($value);
             foreach ($languages as $language) {

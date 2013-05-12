@@ -38,7 +38,7 @@
                                         class="glyphicon glyphicon-cog"></span>
                                 </a>
                             </div>
-                            <div class="details" ng-show="child.$settings">
+                            <div class="details" ng-show="child.$settings" loading-container="child.$loading">
                                 <div>
                                     <label>{['Category title'|translate:'Pages']}</label>
                                     <input type="text" focus-me="child.focus"
@@ -64,7 +64,7 @@
                                 <legend></legend>
 
                                 <div class="text-center">
-                                    <button class="btn btn-primary" ng-click="child.$save()">{['Save'|translate:'Pages']}</button>
+                                    <button class="btn btn-primary" ng-click="saveCategory(child)">{['Save'|translate:'Pages']}</button>
                                     <button class="btn btn-link">{['Cancel'|translate:'Pages']}</button>
                                 </div>
                                 <div class="clearfix"></div>

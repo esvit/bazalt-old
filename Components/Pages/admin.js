@@ -176,6 +176,14 @@ define([
         $scope.move = function(item, before, index) {
             item.$moveItem(before, index);
         };
+
+        $scope.saveCategory = function(item) {
+            var category = new CategoryService(item);
+            item.$loading = true;
+            category.$save(function() {
+                item.$loading = false;
+            });
+        };
     })
     .controller('PageCtrl', function($scope, $rootScope, $routeParams, $filter, $location, $timeout, PagesService, CategoryService) {
         $scope.activateMenu('Pages'); // activate admin menu

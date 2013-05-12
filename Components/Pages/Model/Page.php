@@ -57,10 +57,9 @@ class Page extends Base\Page implements Routing\Sluggable
 
     public static function getCollection($is_publisheded = null, $category)
     {
-        $q = ORM::select('Components\Pages\Model\Page f')
-                //->innerJoin('ComPages_Model_PageLocale ref', array('id', 'f.id'))
-                //->innerJoin('ComPages_Model_PageLocale ref', array('id', 'f.id'))
-                //->where('ref.lang_id = ?', CMS_Language::getCurrentLanguage()->id)
+        $q = ORM::select('Components\Pages\Model\Page f', 'f.*, ref.*')
+                ->innerJoin('Components\Pages\Model\PageLocale ref', array('id', 'f.id'))
+                ->where('ref.lang_id = ?', CMS\Language::getCurrentLanguage()->id)
                 ->andWhere('f.site_id = ?', CMS\Bazalt::getSiteId());
 
         if ($is_publisheded) {

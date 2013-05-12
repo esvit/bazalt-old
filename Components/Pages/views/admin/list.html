@@ -57,20 +57,20 @@
                 <td width="20">
                     <input type="checkbox" ng-model="page.$selected" />
                 </td>
-                <td sortable="title" filter="{ 'title': 'text' }" title="Заголовок">
+                <td sortable="title" filter="{ 'title': 'text' }" title="Title">
                     <a href="#!/pages/edit{[page.id]}">{[page.title|language]}</a>
                 </td>
-                <td filter="{ 'user_id': 'select' }" sortable="user_id" width="140" title="Автор">
+                <td filter="{ 'user_id': 'select' }" sortable="user_id" width="140" title="Author">
                     {[page.user]}
                 </td>
-                <td filter="{ 'created_at': 'date' }" sortable="created_at" width="140" title="Дата створення" class="text-center">
+                <td filter="{ 'created_at': 'date' }" sortable="created_at" width="140" title="Date of creation" class="text-center">
                     {[page.created_at|date:'yyyy-MM-dd']}<br/>
                     {[page.created_at|date:'HH:mm:ss']}
                 </td>
-                <td sortable="publish" width="130" title="Опубликовано">
+                <td sortable="publish" width="130" title="Is published">
                     <input bz-switcher="togglePublished(page)" type="checkbox" ng-model="page.is_published">
                 </td>
-                <td filter="{ 'action': 'button' }" width="95" title="Дії" class="text-center">
+                <td filter="{ 'action': 'button' }" width="95" title="Actions" class="text-center">
                     <div class="btn-group">
                         <a target="_blank" ng-disabled="!page.is_published" ng-href="{[page.url]}" class="btn"><span class="glyphicon glyphicon-link glyphicon"></span></a>
                         <button title="Deleting..."
