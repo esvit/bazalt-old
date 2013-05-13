@@ -1,37 +1,46 @@
-<div class="bz-row">
-    {% tr %}Select menu:{% endtr %}
-    <select autocomplete="off" ng-model="widget.config.menu_id" name="menu_id">
-    <option value="-" {% if options.menu_id == '-' %} selected="selected"{% endif %}>-</option>
-    {% if menus|length > 0 %}
-    {% for menu in menus %}
-    <option value="{{ menu.id }}" {% if options.menu_id == menu.id %} selected="selected"{% endif %}>{{ menu.title }}</option>
-    {% endfor %}
-    {% endif %}
-</select>
+<link rel="stylesheet" type="text/css" href="/less.php/Components/Menu/assets/less/admin.less" />
 
-</div>
+<div class="widget-menu-settings">
+    <div class="bz-row">
+        <label>{% tr %}Select menu:{% endtr %}</label>
+        <div class="bz-content">
+            <select autocomplete="off" ng-model="widget.config.menu_id" name="menu_id">
+            <option value="-" {% if options.menu_id == '-' %} selected="selected"{% endif %}>-</option>
+            {% if menus|length > 0 %}
+            {% for menu in menus %}
+            <option value="{{ menu.id }}" {% if options.menu_id == menu.id %} selected="selected"{% endif %}>{{ menu.title }}</option>
+            {% endfor %}
+            {% endif %}
+            </select>
+        </div>
+    </div>
 
-<div class="bz-row">
-    CSS Class:
-    <input type="text" ng-model="widget.config.css" value="{{ options.css }}" />
-</div>
+    <div class="bz-row">
+        <label>CSS Class:</label>
+        <div class="bz-content">
+            <input type="text" ng-model="widget.config.css" value="{{ options.css }}" />
+        </div>
+    </div>
 
-<div class="bz-row">
-    <label>
-        <input class="checkbox" type="checkbox" name="acl_check"{% if options.acl_check == 'on' %} checked="checked"{% endif %} />
-        {% tr %}Check URL access{% endtr %}
-    </label>
-</div>
+    <div class="bz-row">
+        <label>
+            <input class="checkbox" type="checkbox" name="acl_check"{% if options.acl_check == 'on' %} checked="checked"{% endif %} />
+            {% tr %}Check URL access{% endtr %}
+        </label>
+    </div>
 
-<div class="bz-row">
-    <label>
-        <input class="checkbox" type="checkbox" name="attach"{% if options.attach == 'on' %} checked="checked"{% endif %} />
-        {% tr %}Attach to active menu{% endtr %}
-    </label>
-    <div class="hint">{% tr %}Show selected menu when active menu level is XXX{% endtr %}</div>
-</div>
+    <div class="bz-row">
+        <label>
+            <input class="checkbox" type="checkbox" name="attach"{% if options.attach == 'on' %} checked="checked"{% endif %} />
+            {% tr %}Attach to active menu{% endtr %}
+            <span class="help-block">{% tr %}Show selected menu when active menu level is XXX{% endtr %}</span>
+        </label>
+    </div>
 
-<div class="bz-row">
-    Level:
-    <input name="attach_level" type="text" value="{{ options.attach_level|default(0) }}" />
+    <div class="bz-row">
+        <label>Level:</label>
+        <div class="bz-content">
+            <input name="attach_level" type="text" value="{{ options.attach_level|default(0) }}" />
+        </div>
+    </div>
 </div>
