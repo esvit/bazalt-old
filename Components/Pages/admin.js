@@ -227,7 +227,7 @@ define([
         $scope.categories = [];
 
         // get categories
-        CategoryService.getTree(function(res) {
+        PagesCategoryService.getTree(function(res) {
             var walk = function(items, level) {
                 level = level || 1;
                 for (var i = 0; i < items.length; i++) {
