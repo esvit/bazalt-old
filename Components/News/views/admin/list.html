@@ -1,0 +1,167 @@
+<link rel="stylesheet" type="text/css" href="/assets/modules/bootstrap-tree/css/bootstrap-tree.css" media="all">
+<link rel="stylesheet" type="text/css" href="/less.php/Components/Menu/assets/less/admin.less" />
+<link rel="stylesheet" type="text/css" href="/less.php/Components/News/assets/less/admin.less" />
+
+<link type="text/x-gettext-translation" href="/Components/News/locale/ru/News.po" id="News"/>
+
+<div class="page-header">
+    <div class="row">
+        <div class="col-span-3">
+            <h2 translate="News">News</h2>
+        </div>
+        <div class="col-span-9" ng-class="{hide:edit.category}">
+            <div class="btn-toolbar">
+                <div class="btn-group">
+                    <a href="#!/news/create/" class="btn btn-success"><i class="glyphicon glyphicon-plus"></i> {['Add new article'|translate:'News']}</a>
+                </div>
+                <div class="btn-group" ng-show="checked().length">
+                    <button class="btn btn-danger" ng-disabled="!checked().length"><span class="glyphicon glyphicon-trash glyphicon glyphicon-white"></span> {['Delete'|translate:'News']} <span ng-show="checked().length" class="badge">{[checked().length]}</span></button>
+                </div>
+
+                <div class="btn-filter btn-group pull-right">
+                    <button class="btn" ng-class="{ 'active': filter.active }" ng-click="filter.active = !filter.active"><i class="glyphicon glyphicon-filter"></i></button>
+                </div>
+            </div>
+        </div>
+        <div class="col-span-9" ng-class="{show:edit.categoryedit.category}" style="display: none">
+            <div class="btn-toolbar">
+                <div class="btn-group">
+                    <a href="#" class="btn btn-success" translate="News"><i class="glyphicon glyphicon-plus"></i> {['Add new category'|translate:'News']}</a>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+<div class="row">
+    <div class="col-span-3" ng-disabled="edit.category">
+        <button class="btn btn-mini pull-right" ng-click="edit.category = !edit.category" ng-switch on="!edit.category">Edit</button>
+        <div class="nav-header" translate="News">Categories</div>
+        <ol class="nav nav-nested">
+            <li ya-tree="child in category.children at ol" ng-class="{expanded:child.expanded}">
+                <div>
+                    <a href="javascript:;" ng-click="child.expanded = !child.expanded" ng-switch on="child.expanded">
+                        <span ng-show="child.children.length"  ng-switch-when="true">&#x25BC;</span>
+                        <span ng-show="child.children.length" ng-switch-default>&#x25B6;</span>
+                    </a>
+
+                    <a href="javascript:;" ng-click="filterByCategory(child)" ng-class="{'active':child.id == activeCategory.id}">
+                        {[child.title|language|default:'&nbsp;']}
+                    </a>
+                </div>
+                <ol class="nav nav-nested"></ol>
+            </li>
+        </ol>
+    </div>
+
+    <div ng-class="{hide:edit.category}" class="col-span-9" loading-container="loading">
+        <table grid="update" pager="news.pager" class="table-striped table-condensed table-hover">
+            <tr ng-repeat="article in news.data">
+                <td width="20">
+                    <input type="checkbox" ng-model="article.checked" />
+                </td>
+                <td sortable="title" filter="{ 'title': 'text' }" title="Заголовок">
+                    <a href="#!/news/edit{[article.id]}">{[article.title|language]}</a>
+                </td>
+                <td filter="{ 'user_id': 'select' }" filter-data="users" sortable="user_id" width="140" title="Автор">
+                    {[article.user]}
+                </td>
+                <td filter="{ 'created_at': 'date' }" sortable="created_at" width="140" title="Дата створення" class="text-center">
+                    {[article.created_at|date:'yyyy-MM-dd']}<br/>
+                    {[article.created_at|date:'HH:mm:ss']}
+                </td>
+                <td sortable="publish" width="130" title="Опубликовано">
+                    <div class="s-witch">
+                        <input type="checkbox" ng-model="article.publish">
+                    </div>
+                </td>
+                <td filter="{ 'action': 'button' }" width="95" title="Дії" class="text-center">
+                    <div class="btn-group">
+                        <button ng-click="delete(column)" class="btn btn-danger"><span class="glyphicon glyphicon-trash glyphicon glyphicon-white"></span></button>
+                    </div>
+                </td>
+            </tr>
+        </table>
+    </div>
+    <div ng-class="{show:edit.category}" class="col-span-9" loading-container="loading" style="display: none">
+        <div class="live add-menu edit-category">
+            <ol class="nav nav-pills nav-stacked nav-list menu unstyled" ui-nested-sortable="{
+            listType: 'ol',
+            items: 'li',
+            doNotClear: true,
+            handle: '.title-item-menu',
+            placeholder: 'ui-state-highlight',
+            forcePlaceholderSize: true,
+            maxLevels: 5,
+            toleranceElement: '> div'
+            }" ui-nested-sortable-stop="updateCategory($event, $ui)">
+                <li ya-tree="child in category.children at ol" ng-class="{minimized:child.minimized}">
+                    <div class="one-menu-item">
+                        <button class="toggle" ng-click="child.minimized = !child.minimized" ng-switch on="child.minimized">
+                            <span ng-show="child.children.length"  ng-switch-when="true">&#x25B6;</span>
+                            <span ng-show="child.children.length" ng-switch-default>&#x25BC;</span>
+                        </button>
+
+                        <div class="one-menu-item-content row level-{[$depth]}" ng-class="{'showsettings':child.showsettings}">
+                            <div class="btn-group col-span-12 btn-group-justified with-btn">
+                                <a href="javascript:;" class="btn title-item-menu" ng-class="{'btn-primary':child.is_publish}">
+                                    {[child.title|language|default:'&nbsp;']}
+                                </a>
+                                <!--a class="btn" ng-click="child.is_publish = !child.is_publish; updateItem(child)" ng-class="{'btn-primary active':child.is_publish}">
+                                    <span class="glyphicon glyphicon-eye-open"></span>
+                                </a-->
+                                <a class="btn" ng-click="addChild(child)" ng-class="{'btn-primary':child.is_publish}"><span class="glyphicon glyphicon-plus"></span></a>
+                                <a class="btn" ng-class="{'btn-primary':child.is_publish}" placement="right" title="Видалення" href="javascript:;"
+                                   confirm-button="remove(child)" message="Ви дійно бажаєте видалити елемент меню?" yes="Так"
+                                   no="Ні"><span class="glyphicon glyphicon-trash"></span>
+                                </a>
+                                <a class="btn" ng-class="{'btn-primary':child.is_publish, 'active': child.showsettings}"
+                                   ng-click="child.showsettings = !child.showsettings; child.focus = child.showsettings"><span
+                                        class="glyphicon glyphicon-cog"></span>
+                                </a>
+                            </div>
+                            <div class="col-span-12">
+
+                                <div ng-animate="'slide'" ng-show="child.showsettings" style="display: none"
+                                     class="one-menu-item-settings">
+                                    <div>
+                                        <label>Назва категорії</label>
+                                        <input type="text" focus-me="child.focus" placeholder="Input text"
+                                               ng-model="child.title[languages.current]"/>
+                                    </div>
+                                    <div class="help-block">
+                                        <a href="javascript:;" ng-hide="child.config.css != null"
+                                           ng-click="child.config.css = '';" class="label">Add CSS Class</a>
+                                    </div>
+
+                                    <div class="bz-form-row" ng-show="child.config.css != null">
+                                        <label>CSS Class</label>
+                                        <input type="text" placeholder="Enter valid css class"
+                                               ng-model="child.config.css"/>
+                                    </div>
+
+                                    <div class="bz-form-row">
+                                        <label>Опис категорії</label>
+                                        <textarea style="height: 200px" class="input-block" id="body" placeholder=""></textarea>
+                                    </div>
+
+                                    <div class="clearfix"></div>
+                                    <legend></legend>
+
+                                    <div class="text-center">
+                                        <button class="btn btn-primary" ng-click="child.$save()">Save</button>
+                                        <button class="btn btn-link">Cancel</button>
+                                    </div>
+                                    <div class="clearfix"></div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <ol ng-class="{pregnant:child.children.length}"></ol>
+                </li>
+            </ol>
+        </div>
+    </div>
+</div>
+
+

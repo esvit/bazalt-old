@@ -1,0 +1,6 @@
+{% tr %}Set Comments component:{% endtr %}<br>
+<select name="reffererId">
+{% for key,refferer in refferers %}
+<option value="{{ key }}" {% if options.reffererId == key  %} selected="selected" {% endif %}>{{ refferer }}</option>
+{% endfor %}
+</select>

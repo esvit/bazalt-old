@@ -1,0 +1,17 @@
+<div class="b-widget">
+    <h2>{% tr %}Last comments{% endtr %}</h2>
+
+    <div class="b-lastcomments">
+        {% for article in news %}
+        <div class="b-comment">
+            <header><a href="{{ article.getUrl() }}">{{ article.title }}</a></header>
+            {% for comment in article.comments %}
+            <blockquote>
+                <p>{{ comment.body|truncate(300)|raw }} -
+                <time class="timeago" itemprop="datePublished" datetime="{{ comment.created_at|format_date('atom') }}">{{ comment.created_at|format_date('%e %B %Y %H:%M') }}</time></p>
+            </blockquote>
+            {% endfor %}
+        </div>
+        {% endfor %}
+    </div>
+</div>

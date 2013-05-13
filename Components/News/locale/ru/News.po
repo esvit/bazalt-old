@@ -1,0 +1,215 @@
+msgid ""
+msgstr "Project-Id-Version: BAZALT CMS\n"
+"Report-Msgid-Bugs-To: support@equalteam.net\n"
+"POT-Creation-Date: 2012-07-31 15:27+0300\n"
+"PO-Revision-Date: 2012-07-31 15:27+0300\n"
+"Last-Translator: BAZALT CMS <support@equalteam.net>\n"
+"Language-Team: Russian\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+"Plural-Forms: nplurals=3; plural=((n%10==1) && (n%100!=11)) ? 0 : (( (n%10>=2) && (n%10<=4) && (n%100<10 || n%100>=20)) ? 1 : 2 );"
+
+#: /components/ComNews/Form/Table/List.php:48
+msgid "#"
+msgstr "№"
+
+#: /components/comnews/Form/Table/List.php:27
+msgid "Actions"
+msgstr "Действия"
+
+#: /components/comnews/templates/admin/main.tpl:3
+msgid "Add new article"
+msgstr "Добавить новость"
+
+#: /components/comnews/templates/page.one_news.twg:6
+msgid "Categories"
+msgstr "Категории"
+
+#: /components/comnews/templates/admin/edit.tpl:2
+msgid "Adding news"
+msgstr "Добавление новости"
+
+#: /components/comnews/templates/widgets/news.twg:14
+msgid "News"
+msgstr "Новости"
+
+#: /components/ComNews/Form/Edit.php:66
+msgid "An article should be published before it will be visible on the site"
+msgstr "Статьи должны быть опубликованы, прежде чем они будет видны на сайте"
+
+#: /components/ComNews/Form/Table/List.php:23
+msgid "Are you realy want to delete selected records ?"
+msgstr "Вы действительно хотите удалить выбранные записи?"
+
+#: /components/comnews/templates/table/list.twg:7
+msgid "Are you realy want to delete this news?"
+msgstr "Вы действительно хотите удалить эту новость?"
+
+#: /components/ComNews/Form/Edit.php:64
+msgid "Article successfully saved."
+msgstr "Статья успешно сохранена."
+
+#: /components/ComNews/templates/admin/edit.twg:12
+msgid "Back to the list of news"
+msgstr "Вернуться к списку новостей"
+
+#: /components/comnews/forms/NewsForm.php:42
+msgid "Cancel"
+msgstr "Отмена"
+
+#: /components/ComNews/templates/elements/category-select.twg:32
+msgid "Collapse all"
+msgstr ""
+
+#: /components/ComNews/templates/elements/category-select.twg:29
+msgid "Create category"
+msgstr ""
+
+#: /components/comnews/Form/Table/List.php:21
+msgid "Date of creation"
+msgstr "Дата создания"
+
+#: /components/comnews/Form/Table/List.php:22
+msgid "Date of last edit"
+msgstr "Дата последнего редактирования"
+
+#: /components/comnews/forms/Table/NewsList.php:53
+msgid "Delete"
+msgstr "Удалить"
+
+#: /components/comnews/templates/table/list.twg:4
+msgid "Deleting news..."
+msgstr "Удаление новости..."
+
+#: /components/comnews/comnews.class.inc:63
+msgid "Edit"
+msgstr "Редактировать"
+
+#: /components/comnews/templates/table/column/title.twg:2
+msgid "Edit news"
+msgstr "Редактировать новость"
+
+#: /components/comnews/templates/admin/edit.tpl:2
+msgid "Editing news"
+msgstr "Редактирование новости"
+
+#: /components/ComNews/templates/elements/category-select.twg:31
+msgid "Expand all"
+msgstr ""
+
+#: /components/ComNews/templates/page.news.twg:4
+msgid "Home"
+msgstr ""
+
+#: /components/comnews/Form/Edit.php:32
+msgid "Images"
+msgstr "Изображения"
+
+#: /components/comnews/templates/widgets/news.twg:4
+msgid "Latest news"
+msgstr "Последние новости"
+
+#: /components/ComNews/templates/admin/main.twg:3
+msgid "List of news"
+msgstr "Список новостей"
+
+#: /components/comnews/controllers/maincontroller.class.inc:34
+msgid "News"
+msgstr "Новости"
+
+#: /components/ComNews/Menu/NewsCategory.php:7
+msgid "News category"
+msgstr ""
+
+#: /components/ComNews/templates/menu/newscategory_settings.twg:1
+msgid "News category:"
+msgstr ""
+
+#: /components/comnews/templates/admin/main.tpl:1
+msgid "News list"
+msgstr "Список новостей"
+
+#: /components/comnews/templates/table/list.twg:10
+msgid "No"
+msgstr "Нет"
+
+#: /components/ComNews/Form/Edit.php:69
+msgid "Not now"
+msgstr "Не сейчас"
+
+#: /components/comnews/Form/Table/List.php:20
+msgid "Order"
+msgstr "Порядок"
+
+#: /components/comnews/Form/Table/List.php:24
+msgid "Publish"
+msgstr "Опубликовать"
+
+#: /components/ComNews/Form/Edit.php:68
+msgid "Publish the article"
+msgstr "Опубликовать статью"
+
+#: /components/ComNews/templates/widgets/news-setting.twg:1
+msgid "Quantity of news:"
+msgstr ""
+
+#: /components/comnews/forms/NewsForm.php:37
+msgid "Save"
+msgstr "Сохранить"
+
+#: /components/ComNews/templates/elements/category-select.twg:11
+msgid "Selected categories:"
+msgstr ""
+
+#: /components/ComNews/templates/menu/newscategory_settings.twg:19
+msgid "Show with subcategories"
+msgstr ""
+
+#: /components/comnews/Form/Edit.php:26
+msgid "Text"
+msgstr "Текст"
+
+#: /components/comnews/forms/Table/NewsList.php:13
+msgid "Title"
+msgstr "Название"
+
+#: /components/ComNews/templates/page.news.twg:30
+msgid "Today"
+msgstr ""
+
+#: /components/ComNews/ComNewsChannel.php:21
+msgid "User can manage news section"
+msgstr "Пользователь может управлять разделами новостей"
+
+#: /components/comnews/ComNewsChannel.php:18
+msgid "User can view unpublished news on the site"
+msgstr "Пользователь может просматривать неопубликованные новости на сайте"
+
+#: /components/comnews/ComNewsChannel.php:25
+msgid "User {user_login} changed news {title}"
+msgstr "Пользователь {user_login} изменил новость {title}"
+
+#: /components/ComNews/Form/Edit.php:71
+msgid "View the article"
+msgstr "Просмотр статьи"
+
+#: /components/ComNews/templates/elements/category-select.twg:24
+msgid "Without categories"
+msgstr ""
+
+#: /components/comnews/templates/table/list.twg:11
+msgid "Yes"
+msgstr "Да"
+
+#: /components/comnews/templates/page.one_news.twg:21
+msgid "back to the news list"
+msgstr "вернуться к списку новостей"
+
+#: /components/comnews/templates/page.news.twg:16
+msgid "details"
+msgstr "подробнее"
+
+#: /components/comnews/templates/page.news.twg:29
+msgid "no news"
+msgstr "нет новостей"

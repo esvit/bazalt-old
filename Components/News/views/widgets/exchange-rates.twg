@@ -1,0 +1,47 @@
+{% if rates|length > 0 %}
+<div class="b-widget-exchange-rates">
+<table cellspacing="0" border="0">
+<tr>
+    <th colspan="3">{% tr %}Exchange rates{% endtr %}</th>
+    <th style="text-align: right" colspan="2">{{ date|format_date('%e.%m.%Y') }}</th>
+</tr>
+<tbody>
+{% for rate in rates %}
+<tr>
+    <td>
+    </td>
+    <td align="right">{{ rate.size }}</td>
+    <td>{{ rate.name }}</td>
+    <td style="text-align: right">{{ rate.rate }}</td>
+    <td style="text-align: right"><span class="change_{% if rate.change >= 0 %}positive{% else %}negative{% endif %}">{{ rate.change }}</span></td>
+</tr>
+{% endfor %}
+</tbody>
+</table>
+</div>
+{% endif %}
+
+<style>
+.b-widget-exchange-rates table {
+    width: 200px;
+    margin: 5px;
+}
+.b-widget-exchange-rates table td, .b-widget-exchange-rates table th {
+    color: #555555;
+    font-family: Tahoma,Arial;
+    font-size: 11px;
+}
+.b-widget-exchange-rates table th {
+    font-weight: bold;
+}
+.b-widget-exchange-rates table span.change_negative {
+    color: red;
+    font-size: 90%;
+    font-weight: normal;
+}
+.b-widget-exchange-rates table span.change_positive {
+    color: green;
+    font-size: 90%;
+    font-weight: normal;
+}
+</style>

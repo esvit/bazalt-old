@@ -1,0 +1,31 @@
+<form>
+    <div ng-repeat="language in languages">
+        {[language.title]}
+        <div class="control-group">
+            <label class="control-label" for="title">Заголовок</label>
+            <div class="controls">
+                <input class="input-block" type="text" id="title" placeholder="" ng-model="article.title[language.alias]"/>
+            </div>
+        </div>
+        <div class="control-group">
+            <label class="control-label" for="body">Текст</label>
+            <div class="controls">
+                <textarea style="height: 800px" ckeditor="article.body[language.alias]" i-tinymce ng-model="article.body[language.alias]" class="input-block" id="body" placeholder=""></textarea>
+            </div>
+        </div>
+    </div>
+    <div class="control-group">
+        <div class="controls">
+            <label class="checkbox">
+                <input type="checkbox" ng-checked="article.publish == '1'" ng-model="article.publish"> Опублікована новина
+            </label>
+        </div>
+    </div>
+</form>
+
+<style>
+.wysihtml5-sandbox {
+    height: auto !important;
+    min-height: 400px;
+}
+</style>

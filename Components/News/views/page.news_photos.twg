@@ -1,0 +1,77 @@
+<div class="news-list">
+    <nav>
+        <ul itemprop="breadcrumb" class="breadcrumb">
+            <li itemscope itemtype="http://data-vocabulary.org/Breadcrumb"><a itemprop="url" href="{% url 'home' %}"><span itemprop="title">{% tr %}Home{% endtr %}</span></a> <span class="divider">/</span></li>
+
+            <li itemscope itemtype="http://data-vocabulary.org/Breadcrumb"><a itemprop="url" href="{% url 'ComNewsChannel.AllNews' %}"><span itemprop="title">{% tr %}All news{% endtr %}</span></a> <span class="divider">/</span></li>
+            <li itemscope itemtype="http://data-vocabulary.org/Breadcrumb"><span itemprop="title">{% tr %}Photo reports{% endtr %}</span></li>
+        </ul>
+    </nav>
+
+    <header class="page-header">
+        <h1>{% tr %}News - Photo reports{% endtr %}</h1>
+    </header>
+
+    <div class="content">
+        {% set currentDate = '' %}
+        {% for newsitem in news %}
+        {% if currentDate != newsitem.created_at|date('dmY') %}
+            <div class="date-title">
+                <span class="weekday">{% spaceless %}
+                {% if newsitem.created_at|date('dmY') == 'now'|date('dmY') %}
+                    {% tr %}Today{% endtr %}
+                {% else %}
+                    {{ newsitem.created_at|format_date('%A')|capitalize }}
+                {% endif %}
+                {% endspaceless %}</span>,
+                {{ newsitem.created_at|format_date('%d %B %Y') }}
+            </div>
+            {% set currentDate = newsitem.created_at|date('dmY') %}
+        {% endif %}
+        <article id="post-{{ newsitem.id }}" class="news-article-listitem row post-{{ newsitem.id }}" role="article" itemscope itemtype="http://schema.org/NewsArticle">
+            {% if newsitem.Images.count() > 0%}
+                <div class="news-article-image span2">
+                    <a class="thumbnail" href="{{ newsitem.getUrl() }}">
+                        <img itemprop="thumbnailUrl" title="{{ newsitem.title }}" alt="{{ newsitem.title }}" src="{{ newsitem.Images.get()[0].getThumb('140x0') }}" />
+                    </a>
+                </div>
+            {% endif %}
+            <div class="{% if newsitem.Images.count() > 0%}span10{% else %}span12{% endif %}">
+                <span class="date pull-right"><i class="icon-time"></i> <time pubdate itemprop="datePublished" datetime="{{ newsitem.created_at|format_date('%FT%R%z') }}">{{ newsitem.created_at|format_date('%H:%M') }}</time></span>
+                <header>
+                    <h2 class="title"><a rel="bookmark" itemprop="name" href="{{ newsitem.getUrl() }}">{{ newsitem.title }}</a></h2>
+                </header>
+
+                <div class="info">
+                    {% for item in newsitem.getCategories() %}
+                        {% if not category or category.depth < item.depth %}
+                            <span class="badge badge-success">
+                        {% for parentItem in item.Elements.getPath() %}
+                            {% if parentItem.depth > 0 and parentItem.depth > category.depth %}
+                                <a href="{% url 'ComNewsChannel.ShowCategory', { 'category': parentItem.Elements } %}">{{ parentItem.title }}</a> /
+                            {% endif %}
+                        {% endfor %}
+                                <a href="{% url 'ComNewsChannel.ShowCategory', { 'category': item.Elements } %}">{{ item.title }}</a>
+                        </span>
+                        {% endif %}
+                    {% endfor %}
+                </div>
+                <div class="content">{{ newsitem.body|truncate(350)|raw }}</div>
+                <footer>
+                    <div class="read_more pull-right">
+                        <a itemprop="url" class="btn" href="{{ newsitem.getUrl() }}">{% tr %}details{% endtr %} <i class="icon-chevron-right"></i></a>
+                    </div>
+                </footer>
+            </div>
+            <div class="clearfix"></div>
+        </article>
+        <hr />
+        {% else %}
+        {% tr %}no news{% endtr %}
+        {% endfor %}
+        <div class="clearfix"></div>
+
+        {% include 'block.pagination', { 'pager': pager } %}
+    </div>
+
+</div>
