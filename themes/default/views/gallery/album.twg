@@ -22,27 +22,3 @@
         $('#gallery-fotorama').fotorama();
     });
 </script>
-
-<!--
-{% set photosCount = 6 %}
-{% set spanCount = (12 / photosCount)|number %}
-<div class="container">
-<div class="row" data-toggle="modal-gallery" data-target="#modal-gallery">
-    <ul class="thumbnails">
-{% for image in images %}
-    <li class="span{{ spanCount }}">
-        <div class="thumbnail">
-            <span data-href="{{ image.image }}">
-                <img alt="{{ image.title }}" src="{{ image.image|thumb({ 'width': 300, 'height': 200 }) }}" />
-            </span>
-        </div>
-    </li>
-    {% if loop.index % photosCount == 0 %}
-    </ul>
-    <ul class="thumbnails">
-    {% endif %}
-{% endfor %}
-</ul>
-</div>
-
-</div-->
