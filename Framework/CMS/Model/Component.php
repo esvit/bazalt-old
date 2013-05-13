@@ -39,7 +39,7 @@ class Component extends CMS\Model\Base\Component
                           ->where('is_active = ?', 1);
 
         if (ENABLE_MULTISITING) {
-            $q->innerJoin('\Framework\CMS\Model\ComponentRefSite ref', array('component_id', 'id'))
+            $q->innerJoin('Framework\CMS\Model\ComponentRefSite ref', array('component_id', 'id'))
               ->andWhere('ref.site_id = ?', intval($siteId));
         }
         return $q->fetchAll();

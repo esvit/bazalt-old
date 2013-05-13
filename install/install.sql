@@ -146,32 +146,36 @@ CREATE TABLE IF NOT EXISTS `cms_roles_ref_users` (
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 
 DROP TABLE IF EXISTS `cms_sites`;
-CREATE TABLE IF NOT EXISTS `cms_sites` (
-  `id` int(10) unsigned NOT NULL AUTO_INCREMENT,
-  `domain` varchar(255) DEFAULT NULL,
-  `path` varchar(255) NOT NULL DEFAULT '/',
-  `title` varchar(255) DEFAULT NULL,
-  `theme_id` int(10) unsigned DEFAULT NULL,
-  `language_id` varchar(2) DEFAULT NULL,
-  `is_subdomain` tinyint(3) unsigned NOT NULL DEFAULT '0',
-  `is_active` tinyint(3) unsigned NOT NULL DEFAULT '0',
-  `is_multilingual` tinyint(3) unsigned NOT NULL DEFAULT '0',
-  `user_id` int(10) unsigned DEFAULT NULL,
-  `created_at` datetime NOT NULL,
-  `updated_at` timestamp NOT NULL DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP,
-  `site_id` int(10) unsigned DEFAULT NULL,
-  `is_redirect` tinyint(3) unsigned NOT NULL DEFAULT '0',
-  PRIMARY KEY (`id`),
-  UNIQUE KEY `domain` (`domain`),
-  KEY `FK_cms_sites_cms_sites` (`site_id`),
-  KEY `FK_cms_sites_cms_users` (`user_id`),
-  KEY `FK_cms_sites_cms_themes` (`theme_id`),
-  KEY `FK_cms_sites_cms_languages` (`language_id`),
-  CONSTRAINT `FK_cms_sites_cms_languages` FOREIGN KEY (`language_id`) REFERENCES `cms_languages` (`id`) ON DELETE SET NULL ON UPDATE NO ACTION,
-  CONSTRAINT `FK_cms_sites_cms_sites` FOREIGN KEY (`site_id`) REFERENCES `cms_sites` (`id`) ON DELETE SET NULL ON UPDATE NO ACTION,
-  CONSTRAINT `FK_cms_sites_cms_themes` FOREIGN KEY (`theme_id`) REFERENCES `cms_themes` (`id`) ON DELETE SET NULL ON UPDATE NO ACTION,
-  CONSTRAINT `FK_cms_sites_cms_users` FOREIGN KEY (`user_id`) REFERENCES `cms_users` (`id`) ON DELETE SET NULL ON UPDATE NO ACTION
-) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE='utf8_unicode_ci';
+CREATE TABLE `cms_sites` (
+`id` INT(10) UNSIGNED NOT NULL AUTO_INCREMENT,
+`domain` VARCHAR(255) NULL DEFAULT NULL,
+`path` VARCHAR(255) NOT NULL DEFAULT '/',
+`title` VARCHAR(255) NULL DEFAULT NULL,
+`secret_key` VARCHAR(255) NULL DEFAULT NULL,
+`theme_id` VARCHAR(50) NULL,
+`language_id` VARCHAR(2) NULL DEFAULT NULL,
+`is_subdomain` TINYINT(3) UNSIGNED NOT NULL DEFAULT '0',
+`is_active` TINYINT(3) UNSIGNED NOT NULL DEFAULT '0',
+`is_multilingual` TINYINT(3) UNSIGNED NOT NULL DEFAULT '0',
+`is_allow_indexing` TINYINT(3) UNSIGNED NOT NULL DEFAULT '0',
+`user_id` INT(10) UNSIGNED NULL DEFAULT NULL,
+`created_at` DATETIME NOT NULL,
+`updated_at` TIMESTAMP NOT NULL DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP,
+`site_id` INT(10) UNSIGNED NULL DEFAULT NULL,
+`is_redirect` TINYINT(3) UNSIGNED NOT NULL DEFAULT '0',
+PRIMARY KEY (`id`),
+UNIQUE INDEX `domain` (`domain`),
+INDEX `FK_cms_sites_cms_sites` (`site_id`),
+INDEX `FK_cms_sites_cms_users` (`user_id`),
+INDEX `FK_cms_sites_cms_languages` (`language_id`),
+INDEX `FK_cms_sites_cms_themes` (`theme_id`),
+CONSTRAINT `FK_cms_sites_cms_themes` FOREIGN KEY (`theme_id`) REFERENCES `cms_themes` (`id`) ON UPDATE NO ACTION ON DELETE SET NULL,
+CONSTRAINT `FK_cms_sites_cms_languages` FOREIGN KEY (`language_id`) REFERENCES `cms_languages` (`id`) ON UPDATE NO ACTION ON DELETE SET NULL,
+CONSTRAINT `FK_cms_sites_cms_sites` FOREIGN KEY (`site_id`) REFERENCES `cms_sites` (`id`) ON UPDATE NO ACTION ON DELETE SET NULL,
+CONSTRAINT `FK_cms_sites_cms_users` FOREIGN KEY (`user_id`) REFERENCES `cms_users` (`id`) ON UPDATE NO ACTION ON DELETE SET NULL
+)
+COLLATE='utf8_unicode_ci'
+ENGINE=InnoDB;
 
 DROP TABLE IF EXISTS `cms_sites_ref_users`;
 CREATE TABLE IF NOT EXISTS `cms_sites_ref_users` (
@@ -186,14 +190,14 @@ CREATE TABLE IF NOT EXISTS `cms_sites_ref_users` (
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 
 DROP TABLE IF EXISTS `cms_themes`;
-CREATE TABLE IF NOT EXISTS `cms_themes` (
-  `id` int(10) unsigned NOT NULL AUTO_INCREMENT,
-  `alias` varchar(50) NOT NULL,
-  `is_active` tinyint(1) unsigned NOT NULL DEFAULT '0',
-  `is_hidden` tinyint(1) unsigned NOT NULL DEFAULT '0',
-  PRIMARY KEY (`id`),
-  UNIQUE KEY `alias` (`alias`)
-) ENGINE=InnoDB DEFAULT CHARSET=utf8;
+CREATE TABLE `cms_themes` (
+`id` VARCHAR(50) NOT NULL DEFAULT 'default' COLLATE 'utf8_unicode_ci',
+`is_active` TINYINT(1) UNSIGNED NOT NULL DEFAULT '0',
+`is_hidden` TINYINT(1) UNSIGNED NOT NULL DEFAULT '0',
+PRIMARY KEY (`id`)
+)
+COLLATE='utf8_unicode_ci'
+ENGINE=InnoDB;
 
 DROP TABLE IF EXISTS `cms_users`;
 CREATE TABLE IF NOT EXISTS `cms_users` (
@@ -241,25 +245,27 @@ CREATE TABLE IF NOT EXISTS `cms_widgets` (
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 
 DROP TABLE IF EXISTS `cms_widgets_instances`;
-CREATE TABLE IF NOT EXISTS `cms_widgets_instances` (
-  `id` int(10) unsigned NOT NULL AUTO_INCREMENT,
-  `site_id` int(10) unsigned NOT NULL,
-  `widget_id` int(10) unsigned NOT NULL,
-  `theme_id` int(10) unsigned DEFAULT NULL,
-  `template` varchar(255) DEFAULT NULL,
-  `widget_template` varchar(255) DEFAULT NULL,
-  `config` mediumtext,
-  `publish` tinyint(1) unsigned NOT NULL DEFAULT '0',
-  `position` varchar(60) DEFAULT NULL,
-  `order` int(10) unsigned DEFAULT NULL,
-  PRIMARY KEY (`id`),
-  KEY `widget_id` (`widget_id`),
-  KEY `FK_cms_widgets_config_cms_themes` (`theme_id`),
-  KEY `FK_cms_widgets_config_cms_sites` (`site_id`),
-  CONSTRAINT `config_ref_widget` FOREIGN KEY (`widget_id`) REFERENCES `cms_widgets` (`id`) ON DELETE CASCADE ON UPDATE NO ACTION,
-  CONSTRAINT `FK_cms_widgets_config_cms_sites` FOREIGN KEY (`site_id`) REFERENCES `cms_sites` (`id`) ON DELETE CASCADE ON UPDATE NO ACTION,
-  CONSTRAINT `FK_cms_widgets_config_cms_themes` FOREIGN KEY (`theme_id`) REFERENCES `cms_themes` (`id`) ON DELETE CASCADE ON UPDATE NO ACTION
-) ENGINE=InnoDB DEFAULT CHARSET=utf8;
+CREATE TABLE `cms_widgets_instances` (
+`id` INT(10) UNSIGNED NOT NULL AUTO_INCREMENT,
+`site_id` INT(10) UNSIGNED NOT NULL,
+`widget_id` INT(10) UNSIGNED NOT NULL,
+`theme_id` VARCHAR(50) NULL DEFAULT NULL,
+`template` VARCHAR(255) NULL DEFAULT NULL,
+`widget_template` VARCHAR(255) NULL DEFAULT NULL,
+`config` MEDIUMTEXT NULL,
+`publish` TINYINT(1) UNSIGNED NOT NULL DEFAULT '0',
+`position` VARCHAR(60) NULL DEFAULT NULL,
+`order` INT(10) UNSIGNED NULL DEFAULT NULL,
+PRIMARY KEY (`id`),
+INDEX `widget_id` (`widget_id`),
+INDEX `FK_cms_widgets_config_cms_themes` (`theme_id`),
+INDEX `FK_cms_widgets_config_cms_sites` (`site_id`),
+CONSTRAINT `FK_cms_widgets_instances_cms_themes` FOREIGN KEY (`theme_id`) REFERENCES `cms_themes` (`id`) ON UPDATE NO ACTION ON DELETE CASCADE,
+CONSTRAINT `config_ref_widget` FOREIGN KEY (`widget_id`) REFERENCES `cms_widgets` (`id`) ON UPDATE NO ACTION ON DELETE CASCADE,
+CONSTRAINT `FK_cms_widgets_config_cms_sites` FOREIGN KEY (`site_id`) REFERENCES `cms_sites` (`id`) ON UPDATE NO ACTION ON DELETE CASCADE
+)
+COLLATE='utf8_unicode_ci'
+ENGINE=InnoDB;
 
 DROP TABLE IF EXISTS `cms_widgets_locale`;
 CREATE TABLE IF NOT EXISTS `cms_widgets_locale` (

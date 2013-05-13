@@ -19,13 +19,6 @@ class Component extends CMS\Component implements CMS\Menu\HasItems
         } else {
             $application->registerJsComponent('Component.Menu.Admin', relativePath(__DIR__ . '/admin.js'));
         }
-
-        /*$controller = 'Components\Gallery\Controller\Index';
-        
-        Route::root()->connect('Gallery.List', '/gallery',                 ['component' => __CLASS__, 'controller' => $controller, 'action' => 'default'])
-                     ->connect('Gallery.Album',        '/{album}',         ['component' => __CLASS__, 'controller' => $controller, 'action' => 'album'])
-                     ->connect('Gallery.Photo',                '/{photo}', ['component' => __CLASS__, 'controller' => $controller, 'action' => 'photo']);
-        */
     }
 
     public function getMenuTypes()
