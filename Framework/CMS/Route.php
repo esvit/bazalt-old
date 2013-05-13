@@ -23,6 +23,5 @@ class Route extends \Framework\System\Routing\Route
 
     public function noIndex()
     {
-        $meta = $this->param('_meta');
     }
 }
