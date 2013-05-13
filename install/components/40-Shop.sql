@@ -178,35 +178,37 @@ CREATE TABLE IF NOT EXISTS `com_shop_order_ref_product` (
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 
 
-
-
--- Dumping structure for table bazalt_cms.com_shop_products
-DROP TABLE IF EXISTS `com_shop_products`;
-CREATE TABLE IF NOT EXISTS `com_shop_products` (
-  `id` int(10) unsigned NOT NULL AUTO_INCREMENT,
-  `shop_id` int(10) unsigned NOT NULL,
-  `type_id` int(10) unsigned DEFAULT NULL,
-  `brand_id` int(10) unsigned DEFAULT NULL,
-  `code` varchar(255) DEFAULT NULL,
-  `price` decimal(20,4) NOT NULL,
-  `count` int(10) unsigned NOT NULL DEFAULT '0',
-  `hit` tinyint(1) unsigned NOT NULL DEFAULT '0',
-  `is_latest` tinyint(1) unsigned NOT NULL DEFAULT '0',
-  `is_discount` tinyint(1) unsigned NOT NULL DEFAULT '0',
-  `in_stock` tinyint(1) unsigned NOT NULL DEFAULT '0',
-  `can_order` tinyint(1) unsigned NOT NULL DEFAULT '0',
-  `count_img` tinyint(1) unsigned NOT NULL DEFAULT '0',
-  `is_published` tinyint(1) unsigned NOT NULL DEFAULT '0',
-  `created_at` timestamp NULL DEFAULT NULL,
-  `updated_at` timestamp NOT NULL DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP,
-  PRIMARY KEY (`id`),
-  KEY `FK_com_shop_products_ref_products_types` (`type_id`),
-  KEY `FK_com_shop_products_ref_brands` (`brand_id`),
-  KEY `FK_com_shop_products_com_enterprise_company` (`shop_id`),
-  CONSTRAINT `FK_com_shop_products_com_shop_shops` FOREIGN KEY (`shop_id`) REFERENCES `com_shop_shops` (`id`) ON DELETE CASCADE ON UPDATE NO ACTION,
-  CONSTRAINT `FK_com_shop_products_ref_brands` FOREIGN KEY (`brand_id`) REFERENCES `com_shop_brands` (`id`) ON DELETE SET NULL ON UPDATE NO ACTION,
-  CONSTRAINT `FK_com_shop_products_ref_products_types` FOREIGN KEY (`type_id`) REFERENCES `com_shop_product_types` (`id`) ON DELETE SET NULL ON UPDATE NO ACTION
-) ENGINE=InnoDB DEFAULT CHARSET=utf8;
+CREATE TABLE `com_shop_products` (
+    `id` INT(10) UNSIGNED NOT NULL AUTO_INCREMENT,
+    `shop_id` INT(10) UNSIGNED NOT NULL,
+    `type_id` INT(10) UNSIGNED NULL DEFAULT NULL,
+    `brand_id` INT(10) UNSIGNED NULL DEFAULT NULL,
+    `category_id` INT(10) UNSIGNED NULL DEFAULT NULL,
+    `code` VARCHAR(255) NULL DEFAULT NULL,
+    `price` DECIMAL(20,4) NOT NULL,
+    `count` INT(10) UNSIGNED NOT NULL DEFAULT '0',
+    `hit` TINYINT(1) UNSIGNED NOT NULL DEFAULT '0',
+    `is_latest` TINYINT(1) UNSIGNED NOT NULL DEFAULT '0',
+    `is_discount` TINYINT(1) UNSIGNED NOT NULL DEFAULT '0',
+    `in_stock` TINYINT(1) UNSIGNED NOT NULL DEFAULT '0',
+    `can_order` TINYINT(1) UNSIGNED NOT NULL DEFAULT '0',
+    `count_img` TINYINT(1) UNSIGNED NOT NULL DEFAULT '0',
+    `is_published` TINYINT(1) UNSIGNED NOT NULL DEFAULT '0',
+    `created_at` TIMESTAMP NULL DEFAULT NULL,
+    `updated_at` TIMESTAMP NOT NULL DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP,
+    PRIMARY KEY (`id`),
+    INDEX `FK_com_shop_products_ref_products_types` (`type_id`),
+    INDEX `FK_com_shop_products_ref_brands` (`brand_id`),
+    INDEX `FK_com_shop_products_com_enterprise_company` (`shop_id`),
+    INDEX `FK_com_shop_products_com_shop_categories` (`category_id`),
+    CONSTRAINT `FK_com_shop_products_com_shop_categories` FOREIGN KEY (`category_id`) REFERENCES `com_shop_categories` (`id`) ON UPDATE NO ACTION ON DELETE SET NULL,
+    CONSTRAINT `FK_com_shop_products_com_shop_shops` FOREIGN KEY (`shop_id`) REFERENCES `com_shop_shops` (`id`) ON UPDATE NO ACTION ON DELETE CASCADE,
+    CONSTRAINT `FK_com_shop_products_ref_brands` FOREIGN KEY (`brand_id`) REFERENCES `com_shop_brands` (`id`) ON UPDATE NO ACTION ON DELETE SET NULL,
+    CONSTRAINT `FK_com_shop_products_ref_products_types` FOREIGN KEY (`type_id`) REFERENCES `com_shop_product_types` (`id`) ON UPDATE NO ACTION ON DELETE SET NULL
+)
+COLLATE='utf8_general_ci'
+ENGINE=InnoDB
+AUTO_INCREMENT=235;
 
 
 
