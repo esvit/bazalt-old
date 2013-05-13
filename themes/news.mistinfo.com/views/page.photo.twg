@@ -1,0 +1,58 @@
+<div class="news-article">
+
+    {% widgets 'before_breadcrumb' %}
+
+    <nav>
+        {% include 'block.charity' %}
+        <ul itemprop="breadcrumb" class="breadcrumb">
+            <li itemscope itemtype="http://data-vocabulary.org/Breadcrumb"><a itemprop="url" href="{% url 'home' %}"><span>{% tr %}Home{% endtr %}</span></a> <span class="divider">/</span></li>
+            {% if category %}
+                {% if not category.is_hidden %}
+                    <li itemscope itemtype="http://data-vocabulary.org/Breadcrumb"><a itemprop="url" href="{% url 'ComGallery.Galleries' %}"><span>{% tr %}Galleries{% endtr %}</span></a> <span class="divider">/</span></li>
+                    {% for item in category.Elements.getPath() %}
+                        {% if item.depth > 0 %}
+                            <li class="gallery{{ item.id }}" itemscope itemtype="http://data-vocabulary.org/Breadcrumb"><a itemprop="url" href="{% url 'ComGallery.ShowGallery', { 'category': item.Elements } %}"><span>{{ item.title }}</span></a> <span class="divider">/</span></li>
+                        {% endif %}
+                    {% endfor %}
+                {% endif %}
+                <li class="gallery{{ category.id }}" itemscope itemtype="http://data-vocabulary.org/Breadcrumb"><a itemprop="url" href="{% url 'ComGallery.ShowGallery', { 'category': category.Elements } %}"><span>{{ category.title }}</span></a> <span class="divider">/</span></li>
+            {% endif %}
+            <li class="active">{{ photo.title }}</li>
+        </ul>
+    </nav>
+
+    {% widgets 'before_content' %}
+
+    <div class="news-article-item news-article-container" itemscope itemtype="http://schema.org/NewsArticle" itemid="{{ newsitem.getUrl() }}">
+        <header class="page-header">
+            <h1 itemprop="name">{{ photo.title }}</h1>
+        </header>
+
+        <div class="content">
+            <div class="news-article-detail">
+                <div class="news-article-content">
+                    <div itemprop="articleBody" class="news-article-body" style="text-align: center;">
+
+                        <img src="{{ photo.getThumb('900x600') }}" />
+
+                        {% if photo.description %}<p>{{ photo.description }}</p>{% endif %}
+                        <div class="clearfix"></div>
+                    </div>
+                </div>
+            </div>
+
+            <div class="clearfix"></div>
+        </div>
+    </div>
+
+    <style>
+        .news-article-item .content {
+            padding-top: 0px;
+        }
+        .news-article .news-article-detail .news-article-content .news-article-body {
+            padding: 0;
+            background-color: black;
+        }
+    </style>
+    {% widgets 'after_content' %}
+</div>

@@ -1,0 +1,177 @@
+
+    <script src="/assets/aloha/lib/require.js"></script>
+    <script src="/assets/aloha/aloha-config.js"></script>
+    <script src="/assets/aloha/lib/aloha-bare.js"
+            data-aloha-plugins="common/ui,
+                                common/format,
+                                common/table,
+                                common/list,
+                                common/link,
+                                common/highlighteditables,
+                                common/undo,
+                                common/contenthandler,
+                                common/paste,
+                                common/characterpicker,
+                                common/commands,
+                                common/block,
+                                common/image,
+                                common/abbr,
+                                common/horizontalruler,
+                                common/align,
+                                extra/formatlesspaste,
+                                extra/headerids,
+                                extra/listenforcer,
+                                extra/metaview,
+                                extra/flag-icons,
+                                extra/linkbrowser,
+                                extra/imagebrowser,
+                                extra/cite"></script>
+    {% css '../assets/aloha/css/aloha.css' %}
+{% jslib 'FileUploader' %}
+
+<div class="news-article">
+
+    {% widgets 'before_breadcrumb' %}
+
+    <nav>
+        {% include 'block.charity' %}
+        <ul itemprop="breadcrumb" class="breadcrumb">
+            <li itemscope itemtype="http://data-vocabulary.org/Breadcrumb"><a itemprop="url" href="{% url 'home' %}"><span>{% tr %}Home{% endtr %}</span></a> <span class="divider">/</span></li>
+            <li itemscope itemtype="http://data-vocabulary.org/Breadcrumb"><a itemprop="url" href="{% url 'ComNewsChannel.AllNews' %}"><span>{% tr %}All news{% endtr %}</span></a> <span class="divider">/</span></li>
+            <li class="active">{% if newsitem %}{% tr %}Editing news{% endtr %}{% else %}{% tr %}Submit your news{% endtr %}{% endif %}</li>
+        </ul>
+    </nav>
+
+    {% widgets 'before_content' %}
+    {{ form.begin()|raw }}
+    <div class="news-article-item news-article-container">
+        {% widgets 'before_title' %}
+
+        {{ form['errors']|raw }}
+
+        <header class="page-header" style="border-top:1px solid #EEE">
+            <h1 id="title">{% if newsitem %}{{ newsitem.title }}{% else %}{% if form['languages_tabs']['uk']['title'].value() %}{{ form['languages_tabs']['uk']['title'].value() }}{% else %}<span class="aloha-placeholder">{% tr %}Enter news title{% endtr %}</span>{% endif %}{% endif %}</h1>
+        </header>
+
+        <div class="content">
+            <div class="news-article-detail">
+                <div class="news-article-content">
+                    <div id="articleBody" class="news-article-body">
+                        {% set images = newsitem.Images.get() %}
+                        <div class="image-container" id="news-image">
+                            <a href="#">
+                                {% if images|length > 0 %}
+                                <img src="{{ images[0].getThumb('290x0') }}"  />
+                                {% else %}
+                                <img src="{% if img %}{{ img }}{% else %}http://placehold.it/290x150{% endif %}"  />
+                                {% endif %}
+                            </a>
+                        </div>
+
+                        <div id="content">{% if newsitem %}{{ newsitem.body|raw }}{% else %}{{ form['languages_tabs']['uk']['body'].value()|raw }}{% endif %}</div>
+
+                        <div class="clearfix"></div>
+                    </div>
+                </div>
+                <div class="tags" style="border-top:1px solid #EEE; padding: 10px 20px">
+                    {{ form['tags']|raw }}
+                </div>
+
+                <div class="images" style="border-top:1px solid #EEE; padding: 10px 20px">
+                    {{ form['news_images']|raw }}
+                </div>
+                <div class="categories" style="border-top:1px solid #EEE; padding: 10px 20px">
+                    <div class="row">
+                        {% for category in categories %}
+                            <div class="span3">
+                                <h3 style="text-indent: 0">{{ category.title }}</h3>
+                                {% for subcategory in category.Elements.get() %}
+                                    <label class="radio">
+                                        <input {% if (not newsitem and loop.first and loop.parent.loop.first) or (newsitem and newsitem.Categories.has(subcategory)) or (category == subcategory.id) %} checked="checked" {% endif %} type="radio" name="{{ form['category'].name() }}" value="{{ subcategory.id }}" />
+                                        {{ subcategory.title }}
+                                    </label>
+                                {% endfor %}
+                            </div>
+                        {% endfor %}
+                    </div>
+                </div>
+            </div>
+            <div style="display: none">
+            <input id="input-title" type="input" name="{{ form.name() }}[uk][title]" value="" />
+            {{ form['mainimage']|raw }}
+            <textarea id="textarea-content" name="{{ form.name() }}[uk][body]">{{ form['languages_tabs']['uk']['body'].value() }}</textarea>
+            </div>
+
+            <div style="margin-left: 0;" class=" bz-form-group form-actions">
+                <button id="submit" type="submit" class=" bz-form-button btn btn-primary btn-large">{% tr %}Submit news{% endtr %}</button>
+                <button type="button" class=" bz-form-button btn btn-large">{% tr %}Preview{% endtr %}</button>
+            </div>
+            <div class="clearfix"></div>
+        </div>
+    </div>
+    {{ form.end()|raw }}
+
+    {% widgets 'after_content' %}
+</div>
+<script type="text/javascript">
+Aloha.ready( function() {
+    content = Aloha.jQuery('#content').aloha();
+});
+$(function() {
+    var placeholder = $('#title').html();
+    var title = $('#title');
+    title.focus(function(){
+        if (title.find('.aloha-placeholder').size() > 0) {
+            title.html('<br class="clearme" />');
+        }
+    }).blur(function() {
+        var text = $.trim(title.text());
+        if (text == '') {
+            title.empty().append(placeholder);
+        }
+        title.find('br.clearme').remove();
+    }).attr('contenteditable', true);
+
+    var img = $('#news-image');
+    var image = $('a', img).html();
+    var thumbnailuploader = new qq.FileUploader({
+        element: img.get(0),
+        action:'/upload/',
+        autoUpload: false,
+        multiple:false,
+        params: { 'size': '290x0' },
+        allowedExtensions:['jpeg', 'jpg', 'gif', 'png'],
+        sizeLimit:512000,
+
+
+        template:'<div class="qq-uploader">' +
+                '<pre class="qq-upload-drop-area"><span>Drop your picture here!</span></pre>' +
+                '<a style="display: block;" href="#" class="qq-upload-button">' + image + '</a>' +
+                '<ul class="qq-upload-list" style="display: none"><li class="loading"></li></ul>' +
+                '</div>',
+        onProgress: function() {
+            $('.qq-upload-list').show();
+        },
+        onComplete:function (id, fileName, responseJSON) {
+            $('.qq-upload-list').hide().html('<li class="loading"></li>');
+
+            if (responseJSON.success) {
+                $('.qq-upload-button img', img).attr('src', responseJSON.thumb);
+                $('#news_mainimage').val(responseJSON.url);
+            }
+        }
+
+    });
+
+    $('#submit').click(function(){
+        if (title.find('.aloha-placeholder').size() == 0) {
+            $('#input-title').val($('#title').html());
+        }
+        if ($('#content').find('.aloha-placeholder').size() == 0) {
+            $('#textarea-content').val($('#content').html());
+        }
+        $('#{{ form.id() }}').submit();
+        return false;
+    });
+});
+</script>

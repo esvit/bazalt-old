@@ -1,0 +1,62 @@
+<div class="row b-mainpage">
+    <section class="span9" style="padding-left: 10px; width: 690px;">
+            <header class="news-widget-header">
+                <h1><a href="/vinnytsia/">Новини Вінниці</a></h1>
+{#
+                <h2><a href="/news/vinnitsa/vlada/">Влада <span>Вінниці</span></a></h2>
+                <h2><a href="/news/vinnitsa/">Суспільство <span>Вінниці</span></a></h2>
+                <h2><a href="/news/vinnitsa/">Події <span>Вінниці</span></a></h2>
+                <h2><a href="/news/vinnitsa/">Культура <span>Вінниці</span></a></h2>
+                <h2><a href="/news/vinnitsa/">Спорт <span>Вінниці</span></a></h2>
+                <h2><a href="/news/vinnitsa/">Культура <span>Вінниці</span></a></h2>
+#}
+                <div class="clearfix"></div>
+            </header>
+
+            <div class="row">
+                <div class="span4">
+                    {% widgets 'vinnitsa-left' %}
+                </div>
+                <div class="span4">
+                    {% widgets 'vinnitsa-right' %}
+                </div>
+                <div class="clearfix"></div>
+            </div>
+
+        {% widgets 'center' %}
+    </section>
+    <aside class="span3">
+        {% include 'block.charity' %}
+        <div class="clearfix"></div>
+        <a target="_blank" href="https://chrome.google.com/webstore/detail/kidnalmckfmlkdjggepflgocdpgofeeg" rel="nofollow" class="alert chrome-extension">
+            <strong>Свіжі новини у Вашому браузері Google Chrome</strong>
+        </a>
+        <div class="clearfix"></div>
+
+        {#
+                    <div class="b-widget">
+                        <h2>Проект MistInfo</h2>
+
+                        <article>
+                            <header>Шо за?</header>
+
+                            <div class="progress">
+                                <div class="bar bar-success" style="width: 50%;"></div>
+                                <div class="bar bar-danger" style="width: 50%;"></div>
+                            </div>
+
+                            <footer>
+                                <a href="#" class="btn btn-success">За</a>
+                                <a href="#" class="btn btn-danger">Проти</a>
+                            </footer>
+                        </article>
+                    </div>
+        #}
+        {% widgets 'sidebar' %}
+    </aside>
+</div>
+
+<div class="clearfix"></div>
+<div class="page-description">
+    {% widgets 'outside' %}
+</div>

@@ -1,0 +1,42 @@
+{% if news|length > 0 %}
+    {% for newsitem in news %}
+        {% if loop.index < 3 %}
+        {% set category = newsitem.Category %}
+
+        <article class="b-news-article b-news-category-{{ category.id }}">
+            <div class="b-news-article_preview">
+                <div class="b-news-article_info">
+                    <a class="b-news-article_category" href="{{ category.getUrl() }}">{{ category.title }}</a>
+                    {% if newsitem.is_top %}
+                    <div class="b-news-article_icon">
+                        {% if newsitem.is_top %}<i class="icon-fire icon-white"></i>{% endif %}
+                    </div>
+                    {% endif %}
+                </div>
+                <div class="b-news-article_image">
+                    <a title="{{ newsitem.title }}" href="{{ newsitem.getUrl() }}">
+                        <img src="{{ newsitem.Images.get()[0].getThumb('[370x200]') }}" alt="{{ newsitem.title }}">
+                    </a>
+                </div>
+                <div class="b-news-article_title">
+                    <div class="b-news-article_text">
+                        <h1><a title="{{ newsitem.title }}" href="{{ newsitem.getUrl() }}">{{ newsitem.title }}</a></h1>
+                        <a class="b-news-article_teaser" title="{{ newsitem.title }}" href="{{ newsitem.getUrl() }}">{{ newsitem.body|truncate(300)|raw }}</a>
+                    </div>
+
+                    <div class="additional-info">
+                        <time class="date timeago" itemprop="datePublished" datetime="{{ newsitem.created_at|format_date('atom') }}">{% spaceless %}
+                            {% if newsitem.created_at|date('dmY') == 'now'|date('dmY') %}
+                                {% tr %}Today{% endtr %}
+                            {% else %}
+                                {{ newsitem.created_at|format_date('%A')|capitalize }}
+                            {% endif %}
+                            {% endspaceless %}, {{ newsitem.created_at|format_date('%d %B %H:%M') }}</time>&nbsp;
+                        {% if newsitem.comments_number > 0 %}<i class="icon-comment icon-white"></i> {{ newsitem.comments_number }}{% endif %}
+                    </div>
+                </div>
+            </div>
+        </article>
+        {% endif %}
+    {% endfor %}
+{% endif %}

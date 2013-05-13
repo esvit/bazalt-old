@@ -1,0 +1,37 @@
+{% extends 'master.page.twg' %}
+
+{% block breadcrumbs %}
+<ul itemprop="breadcrumb" class="breadcrumb">
+    <li itemscope itemtype="http://data-vocabulary.org/Breadcrumb"><a itemprop="url" href="{% url 'home' %}"><span>{% tr %}Home{% endtr %}</span></a> <span class="divider">/</span></li>
+    <li class="active">{{ page.title }}</li>
+</ul>
+{% endblock breadcrumbs %}
+
+{% block header %}
+<header class="page-header">
+    <h1 itemprop="name">{{ page.title }}</h1>
+</header>
+{% endblock %}
+
+{% block content %}
+<div class="content">
+    {{ page.body|raw }}
+
+    {% set images = page.Images.get() %}
+    {% if images|length > 0 %}
+        <div class="clearfix"></div>
+        <ul class="thumbnails">
+            {% for image in images %}
+            <li class="span3">
+                <a class="thumbnail" data-fancybox-group="preview" href="{{ image.getThumb('original') }}">
+                    <img itemprop="thumbnailUrl" src="{{ image.getThumb('[210x120]') }}" alt="" />
+                </a>
+            </li>
+            {% endfor %}
+        </ul>
+    {% endif %}
+
+    {% widgets 'page-' ~ page.id %}
+    <div class="clearfix"></div>
+</div>
+{% endblock content %}

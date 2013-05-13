@@ -1,0 +1,21 @@
+{% macro menuItem(menu, level) %}
+    {% set level = level|default(0) %}
+
+    {% for menuitem in menu.getItems() %}
+    <li class="{{ menuitem.getCss() }} {%if menuitem.isActive() %}active{% endif %}{% if menuitem.getItems()|length > 0 %} dropdown{% endif %}">
+        <a {% if menuitem.getItems()|length > 0 %} data-toggle="dropdown" class="dropdown-toggle"{% endif %} title="{{ menuitem.description }}" href="{{ menuitem.getUrl() }}">
+            {{ menuitem.getTitle }}
+            {% if menuitem.getItems()|length > 0 %}<b class="caret"></b>{% endif %}
+        </a>
+        {% if menuitem.getItems()|length > 0 %}
+            <ul class="dropdown-menu">
+            {{ _self.menuItem(menuitem, level + 1) }}
+            </ul>
+        {% endif %}
+    </li>
+    {% endfor %}
+{% endmacro %}
+
+<ul class="nav nav-pills">
+    {{ _self.menuItem(menu) }}
+</ul>

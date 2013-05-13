@@ -1,0 +1,67 @@
+<section class="page-registration">
+    <div class="page-header">
+        <h1>{% tr %}New user registration{% endtr %}</h1>
+    </div>
+
+    <div class="row-fluid">
+        <div class="span6">
+        {{ form|raw }}
+        </div>
+        <div class="span6">
+        {% widgets 'terms' %}
+        </div>
+    </div>
+
+    <div class="clearfix"></div>
+</section>
+
+<script>
+$(function() {
+
+    $('#registration_login').typing({
+        stop: function (e, elem) {
+            elem.addClass('bz-icon-loading');
+            var login = $.trim(elem.val());
+            ComUsers_Webservice_User.isValidUserLogin(login, function(res) {
+                elem.removeClass('bz-icon-loading');
+
+                var row = elem.parent();
+                row.removeClass('error success')
+                   .find('.help-inline')
+                   .remove();
+                if (res == true) {
+                    row.append('<span class="help-inline">' + '{% tr %}This login is free{% endtr %}' + '</span>')
+                       .addClass('success');
+                } else {
+                    row.append('<span class="help-inline">' + res + '</span>')
+                       .addClass('error');
+                }
+            });
+        },
+        delay: 400
+    });
+
+    $('#registration_email').typing({
+        stop: function (e, elem) {
+            elem.addClass('bz-icon-loading');
+            ComUsers_Webservice_User.isValidEmail(elem.val(), function(res) {
+                elem.removeClass('bz-icon-loading');
+
+                var row = elem.parent();
+                row.removeClass('error success')
+                   .find('.help-inline')
+                   .remove();
+                if (res == true) {
+                    row//.append('<span class="help-inline">' + 'This login is free' + '</span>')
+                       .addClass('success');
+                } else {
+                    row.append('<span class="help-inline">' + res + '</span>')
+                       .addClass('error');
+                }
+            });
+        },
+        delay: 400
+    });
+
+});
+</script>

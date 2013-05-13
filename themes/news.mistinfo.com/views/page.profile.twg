@@ -1,0 +1,49 @@
+{% extends 'master.profile.twg' %}
+
+{% block content %}
+    <div class="page-header">
+        <h1>
+            {{ profile_user.getName() }}
+            <a href="{% url 'ComUsers.EditProfile' %}" class="btn btn-small"><i class="icon-pencil"></i> {% tr %}Edit profile{% endtr %}</a>
+        </h1>
+    </div>
+
+    <table id="yw6" class="detail-view table table-striped table-condensed">
+    <tbody>
+        <tr class="even">
+            <th>{% tr %}Roles{% endtr %}</th>
+            <td>
+                {% for role in profile_user.getRoles() %}
+                    {{ role.name }}{% if not loop.last %},{% endif %}
+                {% endfor %}
+            </td>
+        </tr>
+        <tr class="odd">
+            <th>{% tr %}E-mail{% endtr %}</th>
+            <td>{{ profile_user.email }}</td>
+        </tr>
+        <tr class="even">
+            <th>{% tr %}Birth date{% endtr %}</th>
+            <td>{{ profile_user.birth_date }}</td>
+        </tr>
+    </tbody>
+    </table>
+
+    {% if user.hasRight(null, 128) %}
+    <a href="#" class="btn" data-toggle="collapse" data-target="#demo">{% tr %}Permissions{% endtr %}</a>
+    <div id="demo" class="collapse">
+
+    {% for component, permition in permitions %}
+        {% if permition.roles()|length > 0 %}
+            <h3>{% tr %}Component{% endtr %} "{{ component }}"</h3>
+            {% for val, role in permition.roles() %}
+            <p>
+                <span class="label {% if profile_user.hasRight(component, val) %}label-success{% else %}label-error{% endif %}">{% if profile_user.hasRight(component, val) %}{% tr %}Yes{% endtr %}{% else %}{% tr %}No{% endtr %}{% endif %}</span>
+                - {{ role }}
+            </p>
+            {% endfor %}
+        {% endif %}
+    {% endfor %}
+    </div>
+    {% endif %}
+{% endblock %}

@@ -1,0 +1,31 @@
+{% extends 'master.page.twg' %}
+
+{% block breadcrumbs %}
+    <ul itemprop="breadcrumb" class="breadcrumb">
+        <li itemscope itemtype="http://data-vocabulary.org/Breadcrumb"><a itemprop="url" title="Новости Украины и мира"
+                                                                          href="{% url 'home' %}"><span
+                itemprop="title">Новини України та світу</span></a></li>
+    </ul>
+{% endblock breadcrumbs %}
+
+
+{% block header %}
+<div class="b-news-list">
+    <header class="page-header">
+        <h1 class="pull-left">Дякуємо за підписку</h1>
+
+        <div class="clearfix"></div>
+    </header>
+</div>
+{% endblock %}
+
+{% block content %}
+<div class="b-news-list">
+    <div class="page-description">
+    {{ msg }}
+
+        {{ form|raw }}
+
+    </div>
+</div>
+{% endblock content %}

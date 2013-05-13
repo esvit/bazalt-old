@@ -1,0 +1,80 @@
+<div class="news-list">
+    <nav>
+        {% include 'block.charity' %}
+        <ul itemprop="breadcrumb" class="breadcrumb">
+            <li itemscope itemtype="http://data-vocabulary.org/Breadcrumb"><a itemprop="url" href="{% url 'home' %}"><span itemprop="title">{% tr %}Home{% endtr %}</span></a> <span class="divider">/</span></li>
+            {% if category.depth > 0 %}
+                {% if not category.is_hidden %}
+                    <li itemscope itemtype="http://data-vocabulary.org/Breadcrumb"><a itemprop="url" href="{% url 'ComGallery.Galleries' %}"><span itemprop="title">{% tr %}Galleries{% endtr %}</span></a> <span class="divider">/</span></li>
+                    {% for item in category.Elements.getPath() %}
+                    {% if item.depth > 0 %}
+                        <li class="category{{ item.id }}" itemscope itemtype="http://data-vocabulary.org/Breadcrumb"><a itemprop="url" href="{% url 'ComGallery.ShowGallery', { 'category': item.Elements } %}"><span itemprop="title">{{ item.title }}</span></a> <span class="divider">/</span></li>
+                    {% endif %}
+                    {% endfor %}
+                {% endif %}
+                <li class="category{{ category.id }}" itemscope itemtype="http://data-vocabulary.org/Breadcrumb"><span itemprop="title">{{ category.title }}</span></li>
+            {% else %}
+                <li itemscope itemtype="http://data-vocabulary.org/Breadcrumb"><span itemprop="title">{% tr %}Galleries{% endtr %}</span></li>
+            {% endif %}
+        </ul>
+    </nav>
+
+    <div class="content">
+        <header class="page-header">
+            <h1 class="pull-left">{% if category.depth > 0 %}{{ category.title }}{% else %}{% tr %}Galleries{% endtr %}{% endif %}</h1>
+            <div class="clearfix"></div>
+        </header>
+
+        <div class="news-list" style="padding: 10px">
+
+            <div>
+                {% if category.depth == 2 %}
+                    {% set subcategories = category.Elements.getParent().getSubcategories() %}
+                    {% if subcategories|length > 0 %}
+                        <ul class="nav nav-pills">
+                            {% for subcategory in subcategories %}
+                                <li{% if subcategory.id ==category.id %} class="active"{% endif %}><a itemprop="url" href="{% url 'ComGallery.ShowGallery', { 'category': subcategory.Elements } %}"><span>{{ subcategory.title }}</span></a></li>
+                            {% endfor %}
+                        </ul>
+                    {% endif %}
+                    {% elseif category %}
+                    {% set subcategories = category.getSubcategories() %}
+                    {% if subcategories|length > 0 %}
+                        <ul class="nav nav-pills">
+                            {% for subcategory in subcategories %}
+                                <li><a itemprop="url" href="{% url 'ComGallery.ShowGallery', { 'category': subcategory.Elements } %}"><span>{{ subcategory.title }}</span></a></li>
+                            {% endfor %}
+                        </ul>
+                    {% endif %}
+                {% else %}
+                    {% set subcategories = rootCategory.getSubcategories() %}
+                    {% if subcategories|length > 0 %}
+                        <ul class="nav nav-pills">
+                            {% for subcategory in subcategories %}
+                                <li><a itemprop="url" href="{% url 'ComGallery.ShowGallery', { 'category': subcategory.Elements } %}"><span>{{ subcategory.title }}</span></a></li>
+                            {% endfor %}
+                        </ul>
+                    {% endif %}
+                {% endif %}
+            </div>
+
+
+            {% for photo in photos %}
+                <a class="thumbnail pull-left" href="{{ photo.getUrl(category) }}" style="margin-right: 10px;">
+                    <img alt="" src="{{ photo.getThumb('150x150') }}" style="margin-bottom: 10px; background-color: black;">
+                    <strong style="text-align: center; display: block; margin-bottom: 5px;">{{ photo.title }}</strong>
+                </a>
+            {% endfor %}
+            <div class="clearfix"></div>
+        </div>
+        <div class="clearfix"></div>
+        <div class="page-description">
+        {% widgets 'outside' ~ category.id %}
+        </div>
+
+        <footer>
+        {% include 'block.pagination', { 'pager': pager } %}
+        </footer>
+    </div>
+
+</div>

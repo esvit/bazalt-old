@@ -1,0 +1,4 @@
+User-Agent: *
+Disallow: /admin/
+Host: news.mistinfo.com
+Sitemap: http://news.mistinfo.com/sitemap.xml.gz

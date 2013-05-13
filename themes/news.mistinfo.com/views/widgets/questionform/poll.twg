@@ -1,0 +1,24 @@
+<div class="com-poll_widget_questionform b-widget">
+	<h2>Голосування</h2>
+	<strong>{{question.title}}</strong>
+	<div{% if hasVotes %} style="display: none"{% endif %}>
+    {{ form | raw }}
+	</div>
+	<div{% if not hasVotes %} style="display: none"{% endif %}>
+    {% for i, answer in answers %}
+        {{ answer.title }} (<strong><span class="answers">{{ answer.answers }}</span>/{{ answer.percent }}%</strong>)
+        <div class="progress progress-striped {{ cycle(['', 'progress-success', 'progress-warning', 'progress-danger', 'progress-info'], i) }}">
+            <div class="bar" data-vote="{% if hasVotes and answer.id in userVotes %}1{% else %}0{% endif %}" data-title="{{ answer.title }}" style="width: {{ answer.percent }}%;"></div>
+        </div>
+    {% endfor %}
+	</div>
+</div>
+
+<script>
+    $(function() {
+        $('.com-poll_widget_questionform .btn-primary').click(function(){
+            var el = $(this);
+            el.button('loading').text('Відправка...').addClass('disabled');
+        });
+    });
+</script>

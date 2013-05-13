@@ -1,0 +1,5 @@
+<div class="page-description">
+    <h2>Партнери</h2>
+
+    {{ page.body|raw }}
+</div>

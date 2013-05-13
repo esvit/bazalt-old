@@ -1,0 +1,22 @@
+{% if news|length > 0 %}
+<div id="myCarousel" class="carousel slide">
+  <!-- Carousel items -->
+  <div class="carousel-inner">
+    {% for newsitem in news %}
+    <div class="item {% if loop.first %}active{% endif %}">
+        <a class="news-item" title="{{ newsitem.title }}" href="{{ newsitem.getUrl() }}">
+            <img src="{{ newsitem.Images.get()[0].getThumb('[940x300]') }}">
+        </a>
+        <div class="carousel-caption">
+            <span class="title">{{ newsitem.title }}</span>
+            <span class="date">{{ newsitem.created_at|format_date('%d %B %Y') }}</span>
+            <span class="teaser">{{ newsitem.body|truncate(150)|raw }}</span>
+        </div>
+    </div>
+    {% endfor %}
+  </div>
+  <!-- Carousel nav -->
+  <a class="carousel-control left" href="#myCarousel" data-slide="prev">&lsaquo;</a>
+  <a class="carousel-control right" href="#myCarousel" data-slide="next">&rsaquo;</a>
+</div>
+{% endif %}

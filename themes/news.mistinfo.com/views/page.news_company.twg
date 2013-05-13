@@ -1,0 +1,89 @@
+{% extends 'page.news.twg' %}
+
+{% block breadcrumbs %}
+    {% set homeTitle %}{% tr %}Новини України та світу{% endtr %}{% endset %}
+    <div class="breadcrumb">{% include 'block.breadcrumbs', { 'homeTitle': homeTitle } %}</div>
+{% endblock breadcrumbs %}
+
+
+{% block header %}
+<div class="b-news-list">
+    <header class="page-header b-menuitem-news-category{{ category.id }}">
+        <h1>"{{ company.title }}"</h1>
+
+        <div class="page-description">
+            <a href="{{ company.getUrl() }}" target="_blank">Компанія "{{ company.title }}" в каталозі MistInfo</a>
+        </div>
+        <div class="clearfix"></div>
+    </header>
+</div>
+{% endblock %}
+
+        {% block content %}
+            <div class="b-news-list">
+                {% set currentDate = '' %}
+                {% for newsitem in news %}
+                    {% if currentDate != newsitem.created_at|date('dmY') %}
+                        <div class="date-title">
+                <span class="weekday">{% spaceless %}
+                {% if newsitem.created_at|date('dmY') == 'now'|date('dmY') %}
+                    {% tr %}Today{% endtr %}
+                {% else %}
+                    {{ newsitem.created_at|format_date('%A')|capitalize }}
+                {% endif %}
+                {% endspaceless %}</span>,
+                            {{ newsitem.created_at|format_date('%e %B %Y') }}
+                        </div>
+                        {% set currentDate = newsitem.created_at|date('dmY') %}
+                    {% endif %}
+                    {% if newsitem.item_type == 0 %}
+                        {% include 'news/block.newsitem.twg' %}
+                    {% else %}
+                        {% include 'news/block.newsitem_photo.twg' %}
+                    {% endif %}
+                {% else %}
+                    {% tr %}no news{% endtr %}
+                {% endfor %}
+                <div class="clearfix"></div>
+            </div>
+
+            <div class="clearfix"></div>
+            <div class="page-description">
+                {% widgets 'outside' ~ category.id %}
+            </div>
+            <div class="clearfix"></div>
+
+            <footer>
+                {% include 'block.pagination', { 'pager': pager } %}
+            </footer>
+
+            <style>
+                .news-category-content .news-preview {
+                    margin-bottom: 0;
+                    width: 940px;
+                }
+
+                .news-category-content .news-preview li {
+                    box-shadow: none;
+                    margin-bottom: 0;
+                    margin-left: 0;
+                    border: none;
+                    width: 200px;
+                    border-right: 1px solid #DDDDDD;
+                }
+
+                .news-category-content .news-preview li .news-item {
+                    width: 200px;
+                }
+
+                .news-category-content .news-preview li .news-item img {
+                    width: 200px;
+                    height: 200px;
+                }
+
+                .news-category-content .news-preview li:first-child {
+                    margin-left: 20px;
+                }
+            </style>
+
+        {% endblock content %}

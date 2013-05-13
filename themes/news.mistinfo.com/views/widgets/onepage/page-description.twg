@@ -1,0 +1,6 @@
+<div class="page-description">
+    <div class="article">
+        {{ page.body|raw }}
+		<a target="_blank" rel="author" href="https://plus.google.com/107103153633249947850/about">Редактор: Каріна Юдіна</a>
+    </div>
+</div>

@@ -1,0 +1,55 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<rss xmlns:yandex="http://news.yandex.ru" xmlns:atom="http://www.w3.org/2005/Atom" xmlns:media="http://search.yahoo.com/mrss/" version="2.0">
+<channel>
+    {% if category %}
+    <title>{{ site.title }}: {{ category.title }}</title>
+    {% else %}
+    <title>{{ site.title }}</title>
+    {% endif %}
+    <atom:link href="{% url 'home', { 'host': true } %}{{ url|trim('/') }}" rel="self" type="application/rss+xml" />
+    <link>{% url 'home', { 'host': true } %}</link>
+    <description>
+        Культурні події та заходи, скандали та смішні казуси, кримінал та нещасні випадки - кожен знайде для себе інформацію по душі.
+        Не проґавте свою можливість знайти необхідну для себе інформацію. Читайте нас, будьте проінформованими та «озброєними» знаннями про навколишній світ. Адже, знання – це сила!
+    </description>
+    <image>
+        <url>{% url 'home', { 'host': true } %}assets/images/rss_logo.png</url>
+        <title>{{ site.title }}</title>
+        <link>{% url 'home', { 'host': true } %}</link>
+    </image>
+    <language>uk-ua</language>
+    <managingEditor>news@mistinfo.com</managingEditor>
+    <webMaster>webmaster@mistinfo.com</webMaster>
+    {% for newsitem in news %}
+    <item>
+        <title>{{ newsitem.title }}</title>
+        <link>{{ newsitem.getUrl(true) }}</link>
+        <guid>{{ newsitem.getUrl(true) }}</guid>
+        {% set images = newsitem.Images.get() %}
+        <description>
+        {% if images|length > 0%}
+        &lt;img itemprop="thumbnailUrl" align="left" src="{{ images.0.getThumb('140x0') }}" alt="{{ newsitem.title }}" title="{{ newsitem.title }}" /&gt;
+        {% endif %}
+        {{ newsitem.body|truncate(500) }}</description>
+        <pubDate>{{ newsitem.created_at|date('D, d M Y H:i:s T') }}</pubDate>
+        {% if images|length > 0%}
+        {% for image in images %}
+            <enclosure url="{% url 'home', { 'host': true } %}{{ image.getThumb('[300x300]')|trim('/') }}" type="image/png" />
+        {% endfor %}
+        {% endif %}
+        <yandex:full-text><![CDATA[
+        {{ newsitem.body|striptags|raw }}
+        ]]></yandex:full-text>
+        <yandex:genre>article</yandex:genre>
+        {% set user = newsitem.User %}
+        {% set showAuthor = true %}
+
+        {% if newsitem.category_id %}
+            {% set category = newsitem.Category %}
+            <category>{{- category.title -}}</category>
+        {% endif %}
+        {% if user and showAuthor and category.id != 1590 %}<author>{{ user.email }} ({{ user.getName() }})</author>{% endif %}
+    </item>
+    {% endfor %}  
+</channel>
+</rss>

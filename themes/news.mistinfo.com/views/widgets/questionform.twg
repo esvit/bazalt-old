@@ -1,0 +1,8 @@
+<div class="com-poll_widget_questionform" style="display: none">
+    {{ form | raw }}
+    {% for i, answer in answers %}
+    <div class="progress progress-striped {{ cycle(['', 'progress-success', 'progress-warning', 'progress-danger', 'progress-info'], i) }}">
+        <div class="bar" data-vote="{% if hasVotes and answer.id in userVotes %}1{% else %}0{% endif %}" data-title="{{ answer.title }}" style="width: {{ answer.percent }}%;"><span class="answers">{{ answer.answers }}</span> / {{ answer.percent }}%</div>
+    </div>
+    {% endfor %}
+</div>

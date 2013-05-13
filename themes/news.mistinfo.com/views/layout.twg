@@ -1,0 +1,70 @@
+<!DOCTYPE html>
+<html dir="ltr" lang="uk-UA">
+<head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <!--[if IE]><script src="http://html5shiv.googlecode.com/svn/trunk/html5.js"></script><![endif]-->
+    <script type="text/javascript" src="http://userapi.com/js/api/openapi.js?52"></script>
+
+    <link rel="alternate" type="application/rss+xml" title="{{ site.title }}" href="{% url 'News.RSS' %}" />
+    <meta name="google-translate-customization" content="d336bde6d6e45d17-e5e0fd368dd8988d-g1691944ee7f9f83a-11" />
+    <script type="text/javascript" src="http://vk.com/js/api/share.js?11" charset="windows-1251"></script>
+    <script type="text/javascript" src="https://apis.google.com/js/plusone.js">{lang: 'uk'}</script>
+    <!--[IF IE]>
+    <script type="text/javascript" src="/assets/js/ierange.js"></script>
+    <![ENDIF]-->
+    <link rel="stylesheet" type="text/css" href="http://fonts.googleapis.com/css?family=PT+Sans:400,700,400italic&amp;subset=latin,cyrillic"/>
+    <link rel="stylesheet" type="text/css" href="/less.php/themes/news.mistinfo.com/assets/less/general.less"/>
+    <link rel="stylesheet" type="text/css" href="/less.php/themes/news.mistinfo.com/assets/less/google-buttons/less/google-bootstrap.less"/>
+    <link rel="stylesheet" type="text/css" href="/less.php/themes/news.mistinfo.com/assets/css/social-likes.css"/>
+    <link rel="stylesheet" type="text/css" href="/less.php/themes/news.mistinfo.com/assets/css/masha.css"/>
+    <script data-main="/App/Site/assets/js/app.js" src="/assets/require-jquery.js"></script>
+</head>
+<body class="promo" data-spy="scroll" data-target=".b-navbar-primary">
+
+<script type="text/javascript">
+VK.init({apiId: 3071390});
+</script>
+<div id="fb-root"></div>
+<script>(function(d, s, id) {
+  var js, fjs = d.getElementsByTagName(s)[0];
+  if (d.getElementById(id)) return;
+  js = d.createElement(s); js.id = id;
+  js.src = "//connect.facebook.net/ru_RU/all.js#xfbml=1&appId=472963722747627";
+  fjs.parentNode.insertBefore(js, fjs);
+}(document, 'script', 'facebook-jssdk'));</script>
+
+
+<div class="promo-top"></div>
+
+{% include 'header.twg' %}
+<div class="clearfix"></div>
+
+<div class="container b-main-container" style="position: relative;">
+    <div class="promo-left"></div>
+    <div class="promo-right"></div>
+
+    <div id="ng-view" ng-view ng-animate="{enter: 'view-enter'}">
+    {{ content|raw }}
+    </div>
+    <div class="clearfix"></div>
+</div>
+
+<div class="clearfix"></div>
+{% include 'footer' %}
+<div id="upmsg-selectable">
+    <div class="upmsg-selectable-inner">
+        <img src="/assets/images/textselect/upmsg_arrow.png" alt="" />
+        <p>Ви можете відмітити цікаві вам фрагменти тексту, які будуть доступні по унікальній ссилці в адресному рядку браузера.</p>
+        <a href="#" class="upmsg_closebtn"></a>
+    </div>
+</div>
+<a id="marker-bar" href="#" class="masha-marker-bar">
+    <span class="masha-marker" title="mark">Помітити</span>
+    <span class="vk masha-social" data-pattern="http://vk.com/share.php?url={url}" title="Поділитись посиланням у Вконтакті"></span>
+    <span class="facebook masha-social" data-pattern="http://www.facebook.com/share.php?u={url}" title="Поділитись посиланням на Facebook"></span>
+    <span class="twitter masha-social" data-pattern="http://twitter.com/share?url={url}" title="Поділитись посиланням в Твіттері"></span>
+    <span class="gplus masha-social" data-pattern="https://plus.google.com/share?url={url}" title="Поділитись посиланням в Google+"></span>
+</a>
+</body>
+</html>

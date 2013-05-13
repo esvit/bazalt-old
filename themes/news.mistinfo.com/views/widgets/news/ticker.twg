@@ -1,0 +1,19 @@
+{% if news|length > 0 %}
+<ul id="ticker_01" class="ticker">
+{% for newsitem in news %}
+<li>
+    <a href="{{ newsitem.getUrl() }}">
+        <img alt="{{ newsitem.title }}" src="{{ newsitem.Images.get()[0].getThumb('32x32') }}">
+        {{ newsitem.body|truncate(200)|raw }}
+    </a>
+</li>
+{% endfor %}
+</ul>
+{% endif %}
+
+<script>
+function tick(){
+    $('#ticker_01 li:first').slideUp( function () { $(this).appendTo($('#ticker_01')).slideDown(); });
+}
+setInterval(function(){ tick() }, 5000);
+</script>

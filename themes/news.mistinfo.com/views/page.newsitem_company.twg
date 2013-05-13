@@ -1,0 +1,10 @@
+{% extends 'page.newsitem.twg' %}
+
+{% block breadcrumbs %}
+    {% set homeTitle %}{% tr %}Новини України та світу{% endtr %}{% endset %}
+    <div class="breadcrumb">{% include 'block.breadcrumbs', { 'homeTitle': homeTitle } %}</div>
+{% endblock breadcrumbs %}
+
+{% block authorInfo %}
+    {% tr %}Company:{% endtr %} <a class="company{{ company.id }}" rel="author" href="{{ company.getUrl() }}">{{ company.title }}</a>
+{% endblock authorInfo %}

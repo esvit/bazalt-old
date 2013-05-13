@@ -1,0 +1,170 @@
+msgid ""
+msgstr "Project-Id-Version: BAZALT CMS\n"
+"Report-Msgid-Bugs-To: support@equalteam.net\n"
+"POT-Creation-Date: 2012-12-12 10:51+0000\n"
+"PO-Revision-Date: 2012-12-12 10:53+0000\n"
+"Last-Translator: BAZALT CMS <support@equalteam.net>\n"
+"Language-Team: Ukrainian\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+"Plural-Forms: nplurals=3; plural=((n%10==1) && (n%100!=11)) ? 0 : (( (n%10>=2) && (n%10<=4) && (n%100<10 || n%100>=20)) ? 1 : 2 );"
+
+#: /themes/news.mistinfo.com/templates/page.newsitem.twg:9
+msgid "All news"
+msgstr "Усі новини"
+
+#: /themes/news.mistinfo.com/templates/page.newsitem.twg:27
+msgid "Author:"
+msgstr "Автор:"
+
+#: /themes/news.mistinfo.com/templates/page.profile.twg:26
+msgid "Birth date"
+msgstr "Дата народження"
+
+#: /themes/news.mistinfo.com/templates/page.profile.twg:38
+msgid "Component"
+msgstr "Компонент"
+
+#: /themes/news.mistinfo.com/templates/page.contacts.twg:8
+#: /themes/news.mistinfo.com/templates/page.contacts.twg:16
+msgid "Contact information"
+msgstr "Контактна інформація"
+
+#: /themes/news.mistinfo.com/templates/page.profile.twg:22
+msgid "E-mail"
+msgstr "E-mail"
+
+#: /themes/news.mistinfo.com/templates/page.profile.twg:7
+msgid "Edit profile"
+msgstr "Редагувати профіль"
+
+#: /themes/news.mistinfo.com/templates/page.news_edit.twg:41
+msgid "Editing news"
+msgstr "Редагування новин"
+
+#: /themes/news.mistinfo.com/templates/page.news_edit.twg:53
+msgid "Enter news title"
+msgstr "Введіть назву новини"
+
+#: /themes/news.mistinfo.com/templates/page.login.twg:1
+msgid "Forgot password"
+msgstr "Нагадати пароль"
+
+#: /themes/news.mistinfo.com/templates/page.photo.twg:10
+msgid "Galleries"
+msgstr "Галерея"
+
+#: /themes/news.mistinfo.com/templates/page.newsitem.twg:7
+msgid "Home"
+msgstr "Головна"
+
+#: /themes/news.mistinfo.com/templates/error404.twg:21
+msgid "It looks like this was the result of either:"
+msgstr "Схоже, що це сталось через:"
+
+#: /themes/news.mistinfo.com/templates/page.login.twg:1
+msgid "Login"
+msgstr "Логін"
+
+#: /themes/news.mistinfo.com/templates/page.registration.twg:3
+msgid "New user registration"
+msgstr "Реєстрація нового користувача"
+
+#: /themes/news.mistinfo.com/templates/page.news.twg:21
+msgid "News"
+msgstr "Новини"
+
+#: /themes/news.mistinfo.com/templates/page.news_tag.twg:13
+msgid "News with tag:"
+msgstr "Новини з тегом"
+
+#: /themes/news.mistinfo.com/templates/footer.twg:1
+msgid "News.MistInfo.com - це портал, на якому відвідувач може ознайомитись з актуальними новинами України та світу. Залишити свої відгуки."
+msgstr ""
+
+#: /themes/news.mistinfo.com/templates/page.profile.twg:41
+msgid "No"
+msgstr "Ні"
+
+#: /themes/news.mistinfo.com/templates/page.contacts.twg:21
+msgid "Our contacts"
+msgstr "Наші контакти"
+
+#: /themes/news.mistinfo.com/templates/page.profile.twg:33
+msgid "Permissions"
+msgstr "Дозволи"
+
+#: /themes/news.mistinfo.com/templates/page.news_photos.twg:6
+#: /themes/news.mistinfo.com/templates/page.news_photos.twg:12
+msgid "Photo reports"
+msgstr "Фото звіти"
+
+#: /themes/news.mistinfo.com/templates/page.news_edit.twg:107
+msgid "Preview"
+msgstr "Попередня"
+
+#: /themes/news.mistinfo.com/templates/page.profile.twg:14
+msgid "Roles"
+msgstr "Ролі"
+
+#: /themes/news.mistinfo.com/templates/error404.twg:20
+msgid "Sorry, but the page you were trying to view does not exist."
+msgstr "Вибачте, але сторінка, яку ви намагаєтеся переглянути, не існує."
+
+#: /themes/news.mistinfo.com/templates/error404.twg:8
+#: /themes/news.mistinfo.com/templates/error404.twg:16
+msgid "Sorry, page can not found"
+msgstr "Сторінка не існує (404 помилка)"
+
+#: /themes/news.mistinfo.com/templates/page.news_edit.twg:106
+msgid "Submit news"
+msgstr "Додати новину"
+
+#: /themes/news.mistinfo.com/templates/page.news_edit.twg:41
+msgid "Submit your news"
+msgstr "Додати Вашу новину"
+
+#: /themes/news.mistinfo.com/templates/page.registration.twg:33
+msgid "This login is free"
+msgstr "Цей логін вільний"
+
+#: /themes/news.mistinfo.com/templates/page.news.twg:31
+msgid "Today"
+msgstr "Сьогодні"
+
+#: /themes/news.mistinfo.com/templates/master.profile.twg:5
+msgid "User profile"
+msgstr "Профіль користувача"
+
+#: /themes/news.mistinfo.com/templates/page.profile.twg:41
+msgid "Yes"
+msgstr "Так"
+
+#: /themes/news.mistinfo.com/templates/error404.twg:23
+msgid "a mistyped address"
+msgstr "невірно введену адресу;"
+
+#: /themes/news.mistinfo.com/templates/error404.twg:24
+msgid "an out-of-date link"
+msgstr "застаріле посилання."
+
+#: /themes/news.mistinfo.com/templates/page.news.twg:71
+msgid "details"
+msgstr "детальніше"
+
+#: /themes/news.mistinfo.com/templates/page.news.twg:80
+msgid "no news"
+msgstr "Немає новин"
+
+#: /themes/news.mistinfo.com/templates/footer.twg:1
+msgid "Використання матеріалів News.MistInfo.com дозволено лише з попереднього дозволу правовласників."
+msgstr ""
+
+#: /themes/news.mistinfo.com/templates/footer.twg:1
+msgid "Всі права на фотоматеріали та тексти належать їх авторам."
+msgstr ""
+
+#: /themes/news.mistinfo.com/templates/footer.twg:1
+msgid "Новини України, Новини Вінниці"
+msgstr ""

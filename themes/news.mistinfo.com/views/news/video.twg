@@ -1,0 +1,49 @@
+{% extends 'master.page.twg' %}
+
+{% block breadcrumbs %}
+    {% include 'block.breadcrumbs_ul' %}
+{% endblock breadcrumbs %}
+
+{% block header %}
+<div class="b-news-list">
+        <header class="page-header b-menuitem-news-categoryphoto">
+            <h1 class="pull-left">{% tr %}Video{% endtr %}</h1>
+            <div class="clearfix"></div>
+        </header>
+</div>
+{% endblock header %}
+
+{% block content %}
+<div class="b-news-list b-video-news">
+    {% set currentDate = '' %}
+    {% for newsitem in news %}
+        {% if currentDate != newsitem.created_at|date('dmY') %}
+            <div class="date-title">
+                <span class="weekday">{% spaceless %}
+                {% if newsitem.created_at|date('dmY') == 'now'|date('dmY') %}
+                    {% tr %}Today{% endtr %}
+                {% else %}
+                    {{ newsitem.created_at|format_date('%A')|capitalize }}
+                {% endif %}
+                {% endspaceless %}</span>,
+                {{ newsitem.created_at|format_date('%e %B %Y') }}
+            </div>
+            {% set currentDate = newsitem.created_at|date('dmY') %}
+        {% endif %}
+        {% include 'news/block.newsitem_video.twg' %}
+    {% else %}
+        {% tr %}no news{% endtr %}
+    {% endfor %}
+    <div class="clearfix"></div>
+
+    <div class="clearfix"></div>
+    <div class="page-description">
+        {% widgets 'outside' ~ category.id %}
+    </div>
+
+    <footer>
+        {% include 'block.pagination', { 'pager': pager } %}
+    </footer>
+</div>
+
+{% endblock content %}

@@ -1,0 +1,62 @@
+//
+// Responsive: Landscape phone to desktop/tablet
+// --------------------------------------------------
+
+
+@media (max-width: 767px) {
+
+    // не показувати кнопку створення новини, бо там цей функціонал не працює :)
+    .b-menuitem-new-article {
+        display: none
+    }
+
+    .navbar.navbar-inverse.b-navbar-secondary.b-navbar-first {
+
+        .b-menuitem-scrolltotop {
+            display: none;
+        }
+        .navbar-inner {
+            .lifted;
+            padding: 0;
+            background-color: white;
+            border-top: 0 none;
+        }
+        
+        .b-menuitem-login {
+            background-color: #1D2A32;
+        }
+        
+        .b-logo-container {
+            display: block;
+            height: 79px;
+            .b-slogan {
+                display: none;
+            }
+            
+            .b-logo {
+                background-color: transparent;
+                box-shadow: none;
+            }
+        }
+    }
+    .navbar.navbar-inverse.b-navbar-secondary {
+
+        &.affix {
+            position: static;
+            top: 0;
+            width: auto;
+        }
+        &.b-navbar-second {
+            .nav {
+                margin-top: 15px;
+            }
+            .navbar-inner {
+                min-height: 36px;
+            }
+        }
+        .b-menuitem-scrolltotop {
+            display: none;
+        }
+    }
+
+}

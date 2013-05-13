@@ -1,0 +1,53 @@
+<div style="margin: 10px 20px 20px 0;">
+{% for photo in photos %}
+    <div class="thumbnail" style="vertical-align: top; margin: 0 10px 10px 0; display: inline-block; width: 140px; text-align: center;">
+        <a class="fancybox" href="{{ photo.getThumb('original') }}">
+            <img alt="{{ photo.title }}" src="{{ photo.getThumb('140x140') }}" style="margin-bottom: 10px; background-color: black;">
+            {% set inlen = photos|length - loop.index + 1 %}
+            <strong style="text-align: center; display: block; margin-bottom: 5px;">{{ inlen }}. {{ photo.title }}</strong>
+        </a>
+        <strong class="votes{{ photo.id }}" style="text-align: center; display: block; margin-bottom: 5px;">Голосів: <span></span></strong>
+        {#<a href="#" id="photo{{ photo.id }}" data-id="{{ photo.id }}" data-loading-text="Завантаження..." class="btn btn-contest"><i class="icon-thumbs-up"></i> Подобається</a>#}
+    </div>
+{% endfor %}
+</div>
+
+<script>
+$(function() {
+    var updateStat = function() {
+        var els = $('.bar');
+        els.each(function() {
+            var id = $(this).data('title'),
+                isVotes = $(this).data('vote'),
+                answers = $(this).find('.answers').text();
+            $('.votes' + id + ' span').text(answers);
+
+            if (isVotes == '1') {
+                $('#photo' + id).addClass('btn-primary')
+                        .find('i').addClass('icon-white');
+            } else {
+                $('#photo' + id).removeClass('btn-primary')
+                        .find('i').removeClass('icon-white');
+            }
+        });
+    };
+    $('.btn-contest').click(function(){
+        var el = $(this),
+            id = el.data('id');
+        if ($('.bz-form-label:contains("' + id + '") input').attr('checked')) {
+            $('.bz-form-label:contains("' + id + '") input').removeAttr('checked');
+        } else {
+            $('.bz-form-label:contains("' + id + '") input').attr('checked', true);
+        }
+
+        $.bz.forms.poll966.onUpdate = function() {
+            el.button('reset');
+            updateStat();
+        };
+        el.button('loading');
+        $.bz.forms.poll966.elements.submit.$el.click();
+        return false;
+    });
+    updateStat();
+});
+</script>

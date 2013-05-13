@@ -1,0 +1,170 @@
+// Shadow
+.lifted {
+        position:relative;
+        background:#fff;
+    -webkit-box-shadow:0 1px 4px rgba(0, 0, 0, 0.3), 0 0 20px rgba(0, 0, 0, 0.1) inset;
+       -moz-box-shadow:0 1px 4px rgba(0, 0, 0, 0.3), 0 0 40px rgba(0, 0, 0, 0.1) inset;
+            box-shadow:0 1px 4px rgba(0, 0, 0, 0.3), 0 0 20px rgba(0, 0, 0, 0.1) inset;
+        -moz-border-radius:4px;
+}
+
+@import "bootstrap/bootstrap.less";
+@import "colors.less";
+
+h1.b-news-category {
+    font-size: 34px;
+    text-transform: capitalize;
+
+    &:before {
+        content: "";
+        width: 7px; 
+        height: 25px;
+        background: gray;
+        display: inline-block;
+        margin-right: 6px;
+    }
+    & > span {
+        margin-left: 8px;
+        display: inline-block;
+        border-top: 25px solid transparent;
+        border-left: 25px solid gray;
+        height: 0;
+        width: 0;
+        position: relative;
+        &:after, &:before  {
+            content: "";
+            width: 10px; 
+            height: 25px;
+            background: gray;
+            position: absolute;
+            top: -25px;
+            display: inline-block;
+            /* Skew */
+            -webkit-transform: skew(45deg); 
+            -moz-transform: skew(45deg); 
+            -o-transform: skew(45deg);
+            transform: skew(45deg);
+        }
+        &:after  {
+            left: -3px;
+        }
+        &:before {
+            left: 16px;
+        }
+    }
+
+    &.b-color-red {
+        &:before {
+            background-color: @societyColor;
+        }
+        & > span {
+            border-left-color: @societyColor;
+            &:after, &:before  {
+                background: @societyColor;
+            }
+        }
+    }
+
+    &.b-color-blue {
+        &:before {
+            background-color: @polyticColor;
+        }
+        & > span {
+            border-left-color: @polyticColor;
+            &:after, &:before  {
+                background: @polyticColor;
+            }
+        }
+    }
+}
+.b-main-container {
+    padding-top: 25px;
+}
+
+.b-weather {
+    background-image: url('img/weather.png');
+    height: 64px;
+    width: 64px;
+    display: block;
+}
+
+
+.b-news-article {
+    display: block;
+
+    .b-news-article_preview {
+        border: 1px solid #DDDDDD;
+        border-bottom: 0 none;
+        position: relative;
+        overflow: hidden;
+        background-color: darken(@scienseColor, 5%);
+
+        .b-news-article_info {
+            position: absolute;
+            top: 0;
+            right: 10px;
+            
+            .b-news-article_category, .b-news-article_icon {
+                background-color: @scienseColor;
+                color: #fff;
+                display: block;
+                float: left;
+                font-family: Verdana;
+                font-size: 7px;
+                line-height: 12px;
+                font-weight: bold;
+                padding: 1px 4px;
+                text-transform: uppercase;
+            }
+            .b-news-article_icon {
+                margin-right: 1px;
+                padding: 0 1px;
+                i {
+                    margin-top: -2px;
+                }
+            }
+        }
+
+        .b-news-article_image {
+            float: left;
+        }
+        .b-news-article_title {
+            display: block;
+            float: left;
+            font-family: LiberationSerifRegular;
+            color: white;
+            font-size: 16px;
+            font-weight: bold;
+            line-height: 18px;
+            margin: 0;
+            padding: 10px 10px 5px;
+            width: 313px;
+        }
+    }
+    &.b-news-category-sport {
+        .b-news-article_preview {
+            background-color: darken(@sportColor, 5%);
+
+            .b-news-article_category {
+                background-color: @sportColor;
+            }
+        }
+    }
+
+    &.b-news-category-economy {
+        .b-news-article_preview {
+            background-color: darken(@economyColor, 5%);
+
+            .b-news-article_category {
+                background-color: @economyColor;
+            }
+        }
+    }
+
+    .b-news-article_additional {
+        height: 50px;
+        background-color: white;
+        border: 1px solid #DDDDDD;
+        border-top: 0 none;
+    }
+}

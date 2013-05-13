@@ -1,0 +1,22 @@
+{% if news|length > 0 %}
+<section class="b-video-news">
+    <header class="news-widget-header">
+        <h1><a href="{% url 'ComNewsChannel.Video' %}">{% tr %}Video news{% endtr %}</a></h1>
+    </header>
+    <div class="b-video-newsitems">
+        {% for newsitem in news %}
+        {% if loop.index < 5 %}
+        <div class="b-video-newsitem">
+            <a class="play" href="{{ newsitem.getUrl() }}"></a>
+            <div class="video-tooltip-bg"></div>
+            <div class="video-tooltip"><span>{{ newsitem.title }}</span></div>
+            {% set images = newsitem.Images.get() %}
+            <img src="{{ images.0.getThumb('[150x150]') }}" />
+        </div>
+        {% endif %}
+        {% endfor %}
+        {#<div class="block_link"><a href="{% url 'ComNewsChannel.AllNews' %}">{% tr %}All news{% endtr %}</a></div>#}
+    </div>
+    <div class="clearfix"></div>
+</section>
+{% endif %}

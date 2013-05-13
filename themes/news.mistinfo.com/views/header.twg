@@ -1,0 +1,91 @@
+<div class="navbar navbar-inverse b-navbar-first b-navbar-secondary navbar-static-top">
+    <div class="navbar-inner">
+        <div class="container">
+            <div class="b-logo-container">
+                <a href="{% url 'home' %}" class="b-logo"></a>
+                <a href="/contacts/" class="b-slogan"><i class="icon-thumbs-up icon-white"></i> Ми найкращі</a>
+            </div>
+
+            <ul class="nav pull-right">
+                <li class="social-buttons">
+                    <noindex>
+                        <div class="fb-like" data-href="http://www.facebook.com/news.mistinfo" data-send="false" data-layout="button_count" data-width="150" data-show-faces="false"></div>
+
+                        <div id="vk_like" class="pull-left"></div>
+                        <script type="text/javascript">
+                            VK.Widgets.Like("vk_like", {type: "button", pageUrl: 'http://news.mistinfo.com/', pageTitle: 'Інформаційний портал MistInfo', pageDescription: 'Найсвіжіші новини', text: 'Друзі завітайте на цей сайт, дуже цікаво!'});
+                        </script>
+
+                        <div class="g-plusone pull-left" data-size="medium" data-href="http://news.mistinfo.com/"></div>
+                        <script type="text/javascript">
+                            window.___gcfg = {lang: 'uk'};
+
+                            (function() {
+                                var po = document.createElement('script'); po.type = 'text/javascript'; po.async = true;
+                                po.src = 'https://apis.google.com/js/plusone.js';
+                                var s = document.getElementsByTagName('script')[0]; s.parentNode.insertBefore(po, s);
+                            })();
+                        </script>
+                    </noindex>
+                </li>
+                {#<li class="dropdown">
+                    <a href="#" class="dropdown-toggle b-weather-menu"><span class="b-weather"></span> Вінниця -24&deg;C <b class="caret"></b></a>
+                    <div class="dropdown-menu">
+                        <div class="row">
+                            <div class="span2">
+                                Вдень
+                                <span class="b-weather"></span>
+                            </div>
+                            <div class="span2">
+                                Ввечері
+                                <span class="b-weather"></span>
+                            </div>
+                            <div class="span2">
+                                Вночі
+                                <span class="b-weather"></span>
+                            </div>
+                            <div class="span2">
+                                Вранці
+                                <span class="b-weather"></span>
+                            </div>
+                        </div>
+
+                        <a href="#"><img alt="Gismeteo" title="Gismeteo" src="http://www.gismeteo.ru/static/images/informer2/logo-mini2.png" align="absmiddle" border="0" /> Gismeteo</a>
+                    </div>
+                </li>
+                <li class="dropdown b-menuitem-login">
+                    <a href="#" class="dropdown-toggle">Увійти <b class="caret"></b></a>
+                    <div class="dropdown-menu">
+                        <div class="row">
+                            <div class="span2">
+                                Вдень
+                            </div>
+                            <div class="span2">
+                                Ввечері
+                            </div>
+                        </div>
+                    </div>
+                </li>
+                <li class="b-menuitem-new-article"><a class="b-new-article" href="#">Додати статтю</a></li>#}
+            </ul>
+        </div>
+    </div>
+</div>
+
+
+
+
+<div class="navbar navbar-inverse b-navbar-second navbar-static-top b-navbar-secondary" data-spy="affix" data-offset-top="31">
+    <div class="navbar-inner">
+        <div class="container">
+            <button data-target=".nav-collapse" data-toggle="collapse" class="btn btn-navbar collapsed" type="button">
+                <span class="icon-bar"></span>
+                <span class="icon-bar"></span>
+                <span class="icon-bar"></span>
+            </button>
+            <div class="nav-collapse collapse">
+                {% widgets 'horizontal_menu' %}
+            </div>
+        </div>
+    </div>
+</div>

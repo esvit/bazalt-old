@@ -1,0 +1,32 @@
+{% widgets 'before_breadcrumb' %}
+
+<nav>
+    {% include 'block.charity' %}
+
+    {% block breadcrumbs %}
+        {% include 'block.breadcrumbs_ul' %}
+    {% endblock breadcrumbs %}
+</nav>
+
+{% widgets 'before_content' %}
+
+<section class="b-main-content"{% if newsitem %} itemscope itemtype="{% if newsitem.category_id == 1705 %}http://schema.org/Recipe{% else %}http://schema.org/NewsArticle{% endif %}" itemid="{{ newsitem.getUrl(true) }}"{% endif %}>
+    {% block header %}
+
+    {% endblock %}
+    <div class="row">
+        <section class="span9">
+        {% block content %}
+
+        {% endblock %}
+        </section>
+        <aside class="span3">
+            <a target="_blank" href="https://chrome.google.com/webstore/detail/kidnalmckfmlkdjggepflgocdpgofeeg" rel="nofollow" class="alert chrome-extension">
+                <strong>Свіжі новини у Вашому браузері Google Chrome</strong>
+            </a>
+            <div class="clearfix"></div>
+
+            {% widgets 'sidebar' %}
+        </aside>
+    </div>
+</section>

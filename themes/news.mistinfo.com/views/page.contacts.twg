@@ -1,0 +1,70 @@
+{% widgets 'before_breadcrumb' %}
+
+<nav>
+    <ul itemprop="breadcrumb" class="breadcrumb">
+        <li itemscope itemtype="http://data-vocabulary.org/Breadcrumb"><a itemprop="url" href="{% url 'home' %}"><span>{% tr %}Home{% endtr %}</span></a> <span class="divider">/</span></li>
+        <li class="active">{% tr %}Contact information{% endtr %}</li>
+    </ul>
+</nav>
+
+{% widgets 'before_content' %}
+
+<section class="b-main-content">
+    <div class="page-contacts" itemscope itemtype="http://schema.org/Organization" itemid="http://news.mistinfo.com/">
+        <header class="page-header">
+            <h1 itemprop="name">{% tr %}Contact information{% endtr %}</h1>
+        </header>
+
+        <div class="content" style="padding: 20px;">
+        {% widgets 'before_map' %}
+        </div>
+
+        <div class="map-container">
+            <div class="contact-info" itemprop="address" itemscope itemtype="http://schema.org/PostalAddress">
+                <h2>{% tr %}Our contacts{% endtr %}</h2>
+
+                <p>&nbsp;</p>
+                <p>Адреса: <span itemprop="addressLocality">Україна, м. Вінниця</span>, <span itemprop="streetAddress">вул. Івана Богуна, 2</span></p>
+                <p>Телефон: ☎ <span itemprop="telephone">+38(0432) 60 <a class="phone" target="_blank" href="http://uk.wikipedia.org/wiki/%D0%9B%D1%8E%D1%82%D0%BD%D0%B5%D0%B2%D0%B0_%D1%80%D0%B5%D0%B2%D0%BE%D0%BB%D1%8E%D1%86%D1%96%D1%8F" rel="nofollow">1917</a></span>, <span itemprop="telephone">+38(067) 217 04 40</span></p>
+                <p>Email: <a itemprop="email" href="mailto:news@mistinfo.com">news@mistinfo.com</a></p>
+            </div>
+            <div class="contact-info-bg"></div>
+            <div class="google-map"></div>
+        </div>
+
+        <div class="content">
+            {{ form|raw }}
+            <div class="clearfix"></div>
+        </div>
+    </div>
+
+    {% widgets 'after_content' %}
+</section>
+
+<script>
+$(function() {
+    var map = new google.maps.Map($('.google-map').get(0), {
+        zoom: 16,
+        center: new google.maps.LatLng(49.23905, 28.469),
+        disableDefaultUI: true,
+        zoomControl: true,
+        zoomControlOptions: {
+            style: google.maps.ZoomControlStyle.SMALL
+        },
+        mapTypeId: google.maps.MapTypeId.HYBRID
+    });
+    var marker = new google.maps.Marker({
+      map:map,
+      draggable:true,
+      animation: google.maps.Animation.DROP,
+      position: new google.maps.LatLng(49.2391, 28.46479)
+    });
+    setInterval(function() {
+        if (marker.getAnimation() != null) {
+            marker.setAnimation(null);
+        } else {
+            marker.setAnimation(google.maps.Animation.BOUNCE);
+        }
+    }, 5000);
+});
+</script>

@@ -1,0 +1,1 @@
+{% if category.id != 1603 %}<a class="charity" href="/charity/"><span>Благодійність</span> не будь байдужим</a>{% endif %}

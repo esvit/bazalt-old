@@ -1,0 +1,27 @@
+<section class="page-profile">
+    {% block breadcrumb %}
+    <ul class="breadcrumb">
+    <li><a href="{% url 'home' %}">{% tr %}Home{% endtr %}</a> <span class="divider">/</span></li>
+    <li class="active">{% tr %}User profile{% endtr %}</li>
+    </ul>
+    {% endblock %}
+
+    <div class="profile-wrapper">
+        <section class="profile-content">
+            {% block content %}
+            {% endblock %}
+        </section>
+    </div>
+    <aside class="profile-sidebar">
+        {% set avatar = profile_user.getAvatar('215x0') %}
+        <div style="padding: 8px 0;" class="well">
+            {% if avatar %}
+                <img src="{{ avatar }}" style="display: block; margin: -6px 2px 10px;" />
+            {% endif %}
+            
+            {% widgets 'sidebar' %}
+            {% block sidebar %}
+            {% endblock %}
+        </div>
+    </aside>
+</section>

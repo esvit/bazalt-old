@@ -1,0 +1,147 @@
+{% extends 'master.page.twg' %}
+
+{% set categoryRoute = 'News.Category' %}
+{% if region %}
+    {% set categoryRoute = 'News.Region.Category' %}
+{% endif %}
+
+{% block header %}
+    {% if category %}
+        {% metadata %}
+        <link rel="alternate" type="application/rss+xml" title="{{ site.title }}: {{ category.title }}" href="{% url 'News.Category', { 'category': category } %}"/>
+        {% endmetadata %}
+    {% endif %}
+    <div class="b-news-list">
+    <header class="page-header b-menuitem-news-category{{ category.id }}">
+    <h1 class="pull-left">{% if category %}{{ category.title }}{% else %}{% tr %}News{% endtr %}{% endif %}{% if region %} {{ region.toCase(5)|default(region.title) }}{% endif %}</h1>
+    <div class="pull-right">
+    {% if category.depth == 2 %}
+        {% set subcategories = category.Elements.getParent().getSubcategories() %}
+        {% if subcategories|length > 0 %}
+            <ul class="nav nav-pills">
+                {% for subcategory in subcategories %}
+                    {% if subcategory.hasArticles(region) %}
+                    <li{% if subcategory.id ==category.id %} class="active"{% endif %}>
+                        <a itemprop="url" href="{% url categoryRoute, { 'region': region, 'category': subcategory } %}">
+                            <span>{{ subcategory.title }}</span>
+                        </a>
+                    </li>
+                    {% endif %}
+                {% endfor %}
+            </ul>
+        {% endif %}
+    {% elseif category %}
+        {% set subcategories = category.getSubcategories() %}
+        {% if subcategories|length > 0 %}
+            <ul class="nav nav-pills">
+                {% for subcategory in subcategories %}
+                    {% if subcategory.hasArticles(region) %}
+                    <li>
+                        <a itemprop="url" href="{% url categoryRoute, { 'region': region.alias, 'category': subcategory } %}">
+                            <span>{{ subcategory.title }}</span>
+                        </a>
+                    </li>
+                    {% endif %}
+                {% endfor %}
+            </ul>
+        {% endif %}
+    {% else %}
+        {% set subcategories = rootCategory.getSubcategories() %}
+        {% if subcategories|length > 0 %}
+            <ul class="nav nav-pills">
+                {% for subcategory in subcategories %}
+                    {% if subcategory.hasArticles(region) %}
+                    <li>
+                        <a itemprop="url" href="{% url categoryRoute, { 'region': region.alias, 'category': subcategory } %}">
+                            <span>{{ subcategory.title }}</span>
+                        </a>
+                    </li>
+                    {% endif %}
+                {% endfor %}
+            </ul>
+        {% endif %}
+    {% endif %}
+    </div>
+    <div class="clearfix"></div>
+    <div class="page-description">
+        {% widgets 'outside-top' ~ category.id %}
+    </div>
+    <div class="clearfix"></div>
+</header>
+</div>
+{% endblock %}
+
+        {% block content %}
+            <div class="b-news-list">
+                {% set currentDate = '' %}
+                {% for newsitem in news %}
+                    {% if currentDate != newsitem.created_at|date('dmY') %}
+                        <div class="date-title">
+                <span class="weekday">{% spaceless %}
+                {% if newsitem.created_at|date('dmY') == 'now'|date('dmY') %}
+                    {% tr %}Today{% endtr %}
+                {% else %}
+                    {{ newsitem.created_at|format_date('%A')|capitalize }}
+                {% endif %}
+                {% endspaceless %}</span>,
+                            {{ newsitem.created_at|format_date('%e %B %Y') }}
+                        </div>
+                        {% set currentDate = newsitem.created_at|date('dmY') %}
+                    {% endif %}
+                    {% if newsitem.item_type == 0 %}
+                        {% include 'news/block.newsitem.twg' %}
+                    {% else %}
+                        {% include 'news/block.newsitem_photo.twg' %}
+                    {% endif %}
+                {% else %}
+                    {% tr %}no news{% endtr %}
+                {% endfor %}
+                <div class="clearfix"></div>
+            </div>
+
+            <div class="clearfix"></div>
+
+            <footer>
+                {% include 'block.pagination', { 'pager': pager } %}
+            </footer>
+            <div class="clearfix"></div>
+            <div class="page-description">
+                {% if not region %}
+                    {% widgets 'outside' ~ category.id ~ 'page' ~ pageCurrent %}
+                {% elseif not category %}
+                    {% widgets 'outside' ~ region.id ~ 'page' ~ pageCurrent %}
+                {% else %}
+                    {% widgets 'outside' ~ region.id ~ '-' ~ category.id  ~ 'page' ~ pageCurrent %}
+                {% endif %}
+            </div>
+
+            <style>
+                .news-category-content .news-preview {
+                    margin-bottom: 0;
+                    width: 940px;
+                }
+
+                .news-category-content .news-preview li {
+                    box-shadow: none;
+                    margin-bottom: 0;
+                    margin-left: 0;
+                    border: none;
+                    width: 200px;
+                    border-right: 1px solid #DDDDDD;
+                }
+
+                .news-category-content .news-preview li .news-item {
+                    width: 200px;
+                }
+
+                .news-category-content .news-preview li .news-item img {
+                    width: 200px;
+                    height: 200px;
+                }
+
+                .news-category-content .news-preview li:first-child {
+                    margin-left: 20px;
+                }
+            </style>
+
+        {% endblock content %}

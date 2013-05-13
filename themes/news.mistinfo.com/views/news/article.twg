@@ -1,0 +1,179 @@
+{% extends 'master.page.twg' %}
+
+{% block header %}
+{% metadata %}
+<meta property="og:title" content="{{ newsitem.title }}" />
+<meta property="og:description" content="{{ newsitem.body|truncate(200) }}" />
+<meta property="og:url" content="{{ newsitem.getUrl(true) }}" />
+<meta property="og:type" content="article" />
+
+{% if category %}
+    {% metadata %}
+    <link rel="canonical" href="{{ newsitem.getUrl(true) }}"/>
+    <link rel="alternate" type="application/rss+xml" title="{{ site.title }}: {{ category.title }}" href="{% url 'News.RSS.Category', { 'category': category } %}" />
+    {% endmetadata %}
+{% endif %}
+{% endmetadata %}
+
+<header class="page-header b-menuitem-news-category{{ newsitem.Category.id }}">
+<h1 itemprop="name">{{ newsitem.title }} {% if hasRight(128, constant('ComNewsChannel::ACL_CAN_MANAGE_NEWS')) %}<a href="/admin/ComNewsChannel/edit/{{ newsitem.id }}"><i class="icon-pencil"></i></a>{% endif %}</h1>
+<div class="clearfix"></div>
+</header>
+{% endblock %}
+
+{% block content %}
+<div class="news-article">
+
+    <div class="news-article-item news-article-container">
+
+        <div class="content">
+            <div class="news-article-detail">
+                <div class="news-article-content">
+                    <div id="articleBody"{% if newsitem.category_id != 1705 %} itemprop="articleBody"{% endif %} class="news-article-body">
+                        {% set images = newsitem.Images.get() %}
+                    
+                        {% if images|length > 0 %}
+                            {% for image in images %}
+                                {% if loop.first %}
+                                <div class="b-main-image">
+                                    {% set mainImage = image.image|thumb({'width': 250}) %}
+                                    {% if newsitem.id < 7290 %}
+                                    <a data-fancybox-group="preview" href="{{ image.image }}">
+                                    {% endif %}
+                                        <img itemprop="image" src="{{ mainImage }}" alt="{{ newsitem.title }}" title="{{ newsitem.title }}" />
+                                    {% if newsitem.id < 7290 %}
+                                    </a>
+                                    {% endif %}
+                                    {% metadata %}
+                                    <link rel="image_src" href="{% url 'home', { 'host': true } %}{{ mainImage|trim('/') }}" />
+                                    <meta property="og:image" content="{% url 'home', { 'host': true } %}{{ mainImage|trim('/') }}" />
+                                    {% endmetadata %}
+                                </div>
+                                {% endif %}
+                            {% endfor %}
+                        {% endif %}
+
+                        <div id="content">
+                            <span class="author-info">
+                                {% block authorInfo %}
+                                    {% set user = newsitem.User %}
+                                    {% if user and category.id != 1590 %}
+                                    {% tr %}Author:{% endtr %} <a class="user{{ user.id }}" rel="author" itemprop="author" href="{% if user.id == 650 %}https://plus.google.com/107103153633249947850/about{% elseif user.id == 692 %}https://plus.google.com/112527124226081610152/about{% else %}https://plus.google.com/u/0/117019329059929359310/about{% endif %}">{{ user.getName() }}</a>
+                                    {% endif %}
+									{% if newsitem.category_id == 1705 %}
+									<div itemprop="nutrition" itemscope itemtype="http://schema.org/NutritionInformation">
+										<meta itemprop="calories" content="смакота за 15 хв">
+									</div>
+									{% endif %}
+                                {% endblock authorInfo %}
+                                <time class="timeago" itemprop="datePublished" datetime="{{ newsitem.created_at|format_date('atom') }}">{{ newsitem.created_at|format_date('%e %B %Y %H:%M') }}</time>
+                                <i class="icon-eye-open"></i> {{ newsitem.hits }}
+                            </span>
+                            <meta itemprop="interactionCount" content="UserComments:{{ newsitem.comments_number }}"/>
+                            <meta itemprop="interactionCount" content="UserPageVisits:{{ newsitem.hits }}"/>
+							<div  itemprop="{% if newsitem.category_id == 1705 %}recipeInstructions{% else %}text{% endif %}">
+                            {{ newsitem.body|nofollow|raw }}
+							</div>
+                        </div>
+                        {% if newsitem.source %}
+                            <noindex><div class="b-newsitem-source pull-right">Джерело: {{ newsitem.source }}</div></noindex>
+                        {% endif %}
+                        <div class="clearfix"></div>
+                        {% if images|length > 1 and newsitem.item_type == 0 %}
+                            <div id="am-container" class="am-container">
+                            {% for image in images %}
+                            {% if not loop.first %}
+                                <a data-fancybox-group="preview" itemprop="image" class="am-wrapper" href="{{ image.image }}">
+                                    <img itemprop="thumbnailUrl" class="montage" src="{{ image.image|thumb({'height': 100}) }}" alt="" />
+                                </a>
+                            {% endif %}
+                            {% endfor %}
+                                <div class="clearfix"></div>
+                            </div>
+                        {% elseif newsitem.item_type == 1 %}
+                        <div id="myCarousel" class="carousel slide">
+                            <!-- Carousel items -->
+                            <div class="carousel-inner">
+                                {% for image in images %}
+                                <div class="{% if loop.first %}active {% endif %}item"><img itemprop="thumbnailUrl" class="image" src="{{ image.image|thumb({'width': 680, 'height': 510}) }}" alt="{{ newsitem.title }}" title="{{ newsitem.title }}" /></div>
+                                {% endfor %}
+                            </div>
+                            <!-- Carousel nav -->
+                            <a class="carousel-control left" href="#myCarousel" data-slide="prev">&lsaquo;</a>
+                            <a class="carousel-control right" href="#myCarousel" data-slide="next">&rsaquo;</a>
+                        </div>
+                        {% endif %}
+                        <div class="clearfix"></div>
+                    </div>
+                </div>
+            </div>
+
+            <div class="clearfix"></div>
+            <footer>
+                {# % set tags = newsitem.Tags.get() %}
+                {% if tags|length > 0 %}
+                <ul itemprop="keywords" class="tags">
+                    {% for tag in tags %}
+                    <li class="tag"><a href="{% url 'ComNewsChannel.Tag', { 'tag': tag.getAlias() } %}">{{ tag.title }}</a></li>
+                    {% endfor %}
+                    <li class="clearfix"></li>
+                </ul>
+                <div class="pull-right">{{ newsitem.created_at|format_date('%d.%m.%Y %H:%M') }}</div>
+                <div class="clearfix"></div>
+                {% endif % #}
+                <div class="back_links">
+                    <div class="share_links pull-right">
+                        <ul class="social-likes" data-url="{{ newsitem.getUrl(true) }}" data-title="{{ newsitem.title }}">
+                            <li class="facebook" title="Поділитись посиланням на Facebook">Facebook</li>
+                            <li class="twitter" data-via="NewsMistinfo" title="Поділитись посиланням в Твіттері">Twitter</li>
+                            <li class="vkontakte" title="Поділитись посиланням у Вконтакті">Вконтакте</li>
+                            <li class="plusone" title="Поділитись посиланням в Google+">Google+</li>
+                            <li class="code" title="Отримати код для публікації на іншому сайті" data-prompt="Скопіюйте код у буфер обміну:">Код</li>
+                        </ul>
+                    </div>
+                    <div class="btn-group pull-left">
+                        <a class="btn" href="{{ backLink }}"><i class="icon-chevron-left"></i> <span{% if newsitem.category_id != 1705 %} itemprop="articleSection"{% endif %}>{{ category.title }}</span></a>
+                        {% for item in category.Elements.getPath() %}
+                        {% if item.depth > 0 %}
+                            <a class="btn" href="{% url 'News.Category', { 'category': item } %}"><span{% if newsitem.category_id != 1705 %} itemprop="articleSection"{% endif %}>{{ item.title }}</span></a>
+                        {% endif %}
+                        {% endfor %}
+                    </div>
+                    <div class="clearfix"></div>
+                </div>
+
+                <div class="row b-neighboring-news">
+                    {% if nextArticle %}
+                    <div class="span4">
+                        <a href="{{ nextArticle.getUrl() }}">
+                            <span class="arrow">&lsaquo;</span>
+                            {{ nextArticle.title }}
+                            <span><time class="timeago" datetime="{{ nextArticle.created_at|format_date('atom') }}">{{ nextArticle.created_at|format_date('%e %B %Y %H:%M') }}</time></span></span>
+                        </a>
+                    </div>
+                    {% endif %}
+                    {% if prevArticle %}
+                    <div class="span4 pull-right">
+                        <a href="{{ prevArticle.getUrl() }}">
+                            <span class="arrow">&rsaquo;</span>
+                            {{ prevArticle.title }}
+                            <span><time class="timeago" datetime="{{ prevArticle.created_at|format_date('atom') }}">{{ prevArticle.created_at|format_date('%e %B %Y %H:%M') }}</time></span></span>
+                        </a>
+                    </div>
+                    {% endif %}
+                </div>
+
+                {% widgets 'comments' %}
+                {% if category.id != 1586 and category.id != 1603 %}
+                    {% widgets 'news-tips' %}
+                {% endif %}
+                <div class="clearfix"></div>
+            </footer>
+        </div>
+    </div>
+
+    {% widgets 'after_content' %}
+</div>
+
+
+{% endblock content %}

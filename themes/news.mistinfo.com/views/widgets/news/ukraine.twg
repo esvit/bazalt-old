@@ -1,0 +1,16 @@
+<div class="clearfix"></div>
+{% if news|length > 0 %}
+<header class="news-widget-header">
+    <h2>
+        <a href="{% url 'ComNewsChannel.ShowCategory', { 'category': category.Elements } %}">Новини України</a>
+    </h2>
+    {% for element in category.getSubcategories() %}
+    <h3>
+        <a href="{% url 'ComNewsChannel.ShowCategory', { 'category': element.Elements } %}">{{ element.title }}</a>
+    </h3>
+    {% endfor %}
+    <div class="clearfix"></div>
+</header>
+
+{% include 'widgets/news/mainpage' %}
+{% endif %}

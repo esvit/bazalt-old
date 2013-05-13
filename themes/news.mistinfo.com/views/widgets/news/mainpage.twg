@@ -1,0 +1,34 @@
+{% if news|length > 0 %}
+<ul class="thumbnails news-preview" style="float: left">
+    {% for newsitem in news %}
+    {% if loop.index < 3 %}
+    <li>
+        <article class="news-article-item{% if newsitem.is_top %} news-article-top{% endif %}" itemscope itemtype="http://schema.org/NewsArticle" itemid="{{ newsitem.getUrl() }}">
+        {% metadata %}<link rel="prefetch" href="{{ newsitem.getUrl() }}">{% endmetadata %}
+        <a class="news-item" title="{{ newsitem.title }}" href="{{ newsitem.getUrl() }}">
+            <img itemprop="thumbnailUrl" alt="{{ newsitem.title }}" src="{{ newsitem.Images.get()[0].getThumb('[240x240]') }}">
+            <span class="title" itemprop="name">{% if newsitem.item_type %}<i class="icon-camera"></i>&nbsp;{% endif %}{{ newsitem.title }}</span>
+            <time class="date timeago" itemprop="datePublished" datetime="{{ newsitem.created_at|format_date('atom') }}">{% spaceless %}
+            {% if newsitem.created_at|date('dmY') == 'now'|date('dmY') %}
+                {% tr %}Today{% endtr %}
+            {% else %}
+                {{ newsitem.created_at|format_date('%A')|capitalize }}
+            {% endif %}
+        {% endspaceless %}, {{ newsitem.created_at|format_date('%d %B %H:%M') }}</time>
+            <span class="teaser">{{ newsitem.body|truncate(150)|raw }}</span>
+        </a>
+        <div class="info">
+            <div class="additional-info">
+                {% if newsitem.comments_number > 0 %}
+                <i class="icon-comment"></i> {{ newsitem.comments_number }}
+                <meta itemprop="interactionCount" content="UserComments:{{ newsitem.comments_number }}"/>
+                {% endif %}
+            </div>
+            <a href="{{ newsitem.getUrl() }}">читати</a>
+        </div>
+        </article>
+    </li>
+    {% endif %}
+    {% endfor %}
+</ul>
+{% endif %}

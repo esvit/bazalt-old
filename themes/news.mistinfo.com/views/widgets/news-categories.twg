@@ -1,0 +1,22 @@
+<ul class="nav">
+    <li class="b-menuitem-scrolltotop"><a href="#"><i class="icon-chevron-up"></i> повернутись наверх</a></li>
+
+    {% for category in categories %}
+    <li class="{{ menuitem.getCss() }} {%if category.isActive() %}active{% endif %}dropdown b-menuitem-news-category b-menuitem-news-category{{ category.id }}">
+        <a class="dropdown-toggle" title="{{ category.description }}" href="{{ category.getUrl() }}">
+            {{ category.title }}
+        </a>
+        {% set subcategories = category.Elements.get() %}
+        {% if subcategories|length > 0 %}
+        <ul class="dropdown-menu">
+            {% for cat in subcategories %}
+            <li class="b-menuitem-news-category{{ cat.id }}"><a title="{{ cat.description }}" href="{{ cat.getUrl() }}">{{ cat.title }}</a></li>
+            {% endfor %}
+        </ul>
+        {% endif %}
+    </li>
+    {% endfor %}
+    <li class="{%if url == '/news/photos/' %}active{% endif %}dropdown b-menuitem-news-category b-menuitem-news-categoryphoto">
+        <a class="dropdown-toggle" href="/news/photos/">Фотозвіти</a>
+    </li>
+</ul>

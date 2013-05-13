@@ -1,0 +1,78 @@
+<header class="news-widget-header">
+<h1><a href="{% url 'ComNewsChannel.ShowCategory', { 'category': category.Elements } %}">{{ category.title }}</a></h1>
+</header>
+
+{% if news|length > 0 %}
+<ul class="news-by-category">
+    {% set currentDate = '' %}
+    {% for newsitem in news %}
+    {% if loop.index < 6 %}
+        {% if currentDate != newsitem.created_at|date('dmY') %}
+            <li class="info"><span class="date"><span class="weekday">{% spaceless %}
+        {% if newsitem.created_at|date('dmY') == 'now'|date('dmY') %}
+            {% tr %}Today{% endtr %}
+        {% else %}
+            {{ newsitem.created_at|format_date('%A')|capitalize }}
+        {% endif %}
+    {% endspaceless %}</span>, {{ newsitem.created_at|format_date('%e %B') }}</span>
+            </li>
+            {% set currentDate = newsitem.created_at|date('dmY') %}
+        {% endif %}
+    {% endif %}
+    <li>
+        <article class="news-article-item{% if newsitem.is_top %} news-article-top{% endif %}" itemscope itemtype="http://schema.org/NewsArticle" itemid="{{ newsitem.getUrl() }}">
+        <a class="news-item" title="{{ newsitem.title }}" href="{{ newsitem.getUrl() }}">
+            <img src="{{ newsitem.Images.get()[0].getThumb('[65x65]') }}">
+            <span class="info">
+                <span class="additional-info">
+                <i class="icon-eye-open"></i> {{ newsitem.hits }}<br />
+                    {% if newsitem.comments_number > 0 %}<i class="icon-comment"></i> {{ newsitem.comments_number }}{% endif %}
+                </span>
+                <span class="title">{% if newsitem.item_type %}<i class="icon-camera"></i>&nbsp;{% endif %}{{ newsitem.title }}</span>
+                <span class="date"><time{% if newsitem.created_at|date('dmY') == 'now'|date('dmY') %} class="timeago"{% endif %} datetime="{{ newsitem.created_at|format_date('atom') }}">{{ newsitem.created_at|format_date('%H:%M') }}</time></span>
+            </span>
+        </a>
+        <div class="clearfix"></div>
+        </article>
+    </li>
+    {% endfor %}
+</ul>
+{% endif %}
+
+{% if news2|length > 0 %}
+    <ul class="news-by-category" style="margin-right: 0">
+        {% set currentDate = '' %}
+        {% for newsitem in news2 %}
+            {% if loop.index < 6 %}
+                {% if currentDate != newsitem.created_at|date('dmY') %}
+                    <li class="info"><span class="date"><span class="weekday">{% spaceless %}
+        {% if newsitem.created_at|date('dmY') == 'now'|date('dmY') %}
+            {% tr %}Today{% endtr %}
+        {% else %}
+            {{ newsitem.created_at|format_date('%A')|capitalize }}
+        {% endif %}
+    {% endspaceless %}</span>, {{ newsitem.created_at|format_date('%e %B') }}</span>
+                    </li>
+                    {% set currentDate = newsitem.created_at|date('dmY') %}
+                {% endif %}
+            {% endif %}
+            <li>
+                <article class="news-article-item{% if newsitem.is_top %} news-article-top{% endif %}" itemscope itemtype="http://schema.org/NewsArticle" itemid="{{ newsitem.getUrl() }}">
+                    <a class="news-item" title="{{ newsitem.title }}" href="{{ newsitem.getUrl() }}">
+                        <img src="{{ newsitem.Images.get()[0].getThumb('[65x65]') }}">
+                        <span class="info">
+                            <span class="additional-info">
+                            <i class="icon-eye-open"></i> {{ newsitem.hits }}<br />
+                                {% if newsitem.comments_number > 0 %}<i class="icon-comment"></i> {{ newsitem.comments_number }}{% endif %}
+                            </span>
+                            <span class="title">{% if newsitem.item_type %}<i class="icon-camera"></i>&nbsp;{% endif %}{{ newsitem.title }}</span>
+                            <span class="date"><time{% if newsitem.created_at|date('dmY') == 'now'|date('dmY') %} class="timeago"{% endif %} datetime="{{ newsitem.created_at|format_date('atom') }}">{{ newsitem.created_at|format_date('%H:%M') }}</time></span>
+                        </span>
+                    </a>
+                    <div class="clearfix"></div>
+                </article>
+            </li>
+        {% endfor %}
+    </ul>
+{% endif %}
+<div class="clearfix"></div>

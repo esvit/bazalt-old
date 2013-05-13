@@ -1,0 +1,56 @@
+{% extends 'master.page.twg' %}
+
+{% block breadcrumbs %}
+<ul itemprop="breadcrumb" class="breadcrumb">
+    <li itemscope itemtype="http://data-vocabulary.org/Breadcrumb"><a itemprop="url" href="{% url 'home' %}"><span itemprop="title">{% tr %}Home{% endtr %}</span></a> <span class="divider">/</span></li>
+    <li itemscope itemtype="http://data-vocabulary.org/Breadcrumb"><a itemprop="url" href="{% url 'ComNewsChannel.AllNews' %}"><span itemprop="title">{% tr %}All news{% endtr %}</span></a> <span class="divider">/</span></li>
+    <li class="category{{ category.id }}" itemscope itemtype="http://data-vocabulary.org/Breadcrumb"><span class="tag" itemprop="title">{{ tag.title }}</span></li>
+</ul>
+{% endblock breadcrumbs %}
+
+{% block header %}
+<div class="b-news-list">
+    <header class="page-header">
+        <h1 class="pull-left">{% tr %}News with tag:{% endtr %} {{ tag.title }}</h1>
+
+        <div class="page-description">
+            {% widgets 'outside' ~ category.id %}
+        </div>
+        <div class="clearfix"></div>
+    </header>
+</div>
+{% endblock %}
+
+{% block content %}
+<div class="b-news-list">
+    {% set currentDate = '' %}
+    {% for newsitem in news %}
+    {% if currentDate != newsitem.created_at|date('dmY') %}
+        <div class="date-title">
+            <span class="weekday">{% spaceless %}
+            {% if newsitem.created_at|date('dmY') == 'now'|date('dmY') %}
+                {% tr %}Today{% endtr %}
+            {% else %}
+                {{ newsitem.created_at|format_date('%A')|capitalize }}
+            {% endif %}
+            {% endspaceless %}</span>,
+            {{ newsitem.created_at|format_date('%e %B %Y') }}
+        </div>
+        {% set currentDate = newsitem.created_at|date('dmY') %}
+    {% endif %}
+    {% if newsitem.item_type == 0 %}
+        {% include 'news/block.newsitem.twg' %}
+    {% else %}
+        {% include 'news/block.newsitem_photo.twg' %}
+    {% endif %}
+    {% else %}
+        {% tr %}no news{% endtr %}
+    {% endfor %}
+    <div class="clearfix"></div>
+</div>
+<div class="clearfix"></div>
+
+<footer>
+{% include 'block.pagination', { 'pager': pager } %}
+</footer>
+{% endblock content %}

@@ -1,0 +1,149 @@
+.comments-container {
+
+    .comments {
+        list-style: none;
+        margin: 10px 0;
+        padding: 10px;
+        .comments {
+            padding: 0px;
+        }
+        .reply-form, .comment-form {
+            margin: 10px 0;
+
+            label, .bz-required-field {
+                font-size: 12px;
+                margin: 0;
+            }
+            .notice {
+                color: #999;
+                font-size: 14px;
+                margin-top: -5px;
+                margin-bottom: 5px;
+            }
+            .body-container, .name-container {
+                background-color: #DEDCC9;
+                padding: 5px 16px 5px 5px;
+            
+                .body, .name {
+                    margin: 0;
+                    width: 100%;
+                    padding: 5px 4px 5px 5px;
+                    resize: none;
+                }
+            }
+            .add {
+                margin-top: 10px;
+            }
+        }
+        .comment-form {
+            border-top: 1px solid #EEEEEE;
+            padding-top: 10px;
+        }
+        li:first-child {
+            border-top: 0 none;
+            padding-top: 0px;
+        }
+
+        .avatar, .message, .reply-form .form, .comment-form .form {
+            .border-radius(3px);
+            box-shadow: 0 0 3px #C7C7C7;
+            background-color: white;
+            display: block;
+            border: 1px solid #e3e3e3;
+        }
+        .reply-form .form, .comment-form .form {
+            background-color: #FCF8E3
+        }
+        .avatar {
+            width: 48px;
+            height: 48px;
+            overflow: hidden;
+
+            img {
+                width: 48px;
+                height: 48px;
+                display: block;
+            }
+        }
+        .form-container {
+            float: right;
+            margin-left: -52px;
+            width: 100%;
+
+            .form {
+                padding: 10px;
+                margin-left: 60px;
+                min-height: 28px;
+            }
+        }
+        .comment {
+            //font-family: "Trebuchet MS",Helvetica,Jamrul,sans-serif;
+            font-size: 14px;
+            line-height: 18px;
+
+            .bullet {
+                color: #CCCCCC;
+                padding: 0;
+            }
+            .message-container {
+                float: right;
+                margin-left: -52px;
+                width: 100%;
+
+                .message {
+                    padding: 10px;
+                    margin-left: 60px;
+                    min-height: 28px;
+
+                    .name {
+                        font-style: italic;
+                        span {
+                            font-style: normal;
+                            font-weight: bold;
+                        }
+                    }
+                    .text {
+                        margin-top: 5px;
+                        white-space: pre-wrap;
+                    }
+                    .actions {
+                        color: #999999;
+                        font-size: 11px;
+                        margin-top: 5px;
+                        a {
+                            color: #999999;
+                            font-size: 11px;
+                        }
+                        .delete {
+                            color: #B94A48;
+                        }
+                        .restore {
+                            display: none;
+                            color: #3A87AD;
+                        }
+                    }
+                    &.deleted {
+                        background-color: #F2DEDE;
+                        .delete {
+                            display: none;
+                        }
+                        .restore {
+                            display: inline;
+                        }
+                    }
+                }
+            }
+            .reply-form {
+                padding-left: 60px;
+            }
+            .comment {
+                padding-left: 28px;
+                background-image: url(../images/reply.png);
+                background-repeat: no-repeat;
+                background-position: 0 17px;
+            }
+        }
+    }
+
+
+}
