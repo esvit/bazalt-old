@@ -1,12 +1,10 @@
-<ul class="breadcrumb">
-    <li><a href="/">Home</a> <span class="divider">/</span></li>
-    <li class="active">Albums</li>
-</ul>
+{% widgets 'before' %}
+<div class="container">
+
 <ul class="thumbnails">
 {% for album in albums %}
     <li>
         <div class="thumbnail">
-            <a href="{{ album.url() }}" class="pull-left"><img alt="300x200" data-src="holder.js/300x200" style="width: 300px; height: 200px; display: block" /></a>
             <div class="caption">
                 <h3><a href="{{ album.url() }}">{{ album.title }}</a></h3>
                 <div>
@@ -20,3 +18,5 @@
 </ul>
 
 {% include 'block.pagination', { 'pager': pager } %}
+
+</div>

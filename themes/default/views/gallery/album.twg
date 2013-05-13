@@ -1,32 +1,25 @@
-<link rel="stylesheet" href="/assets/modules/bootstrap-image-gallery/bootstrap-image-gallery.min.css">
 
-<ul class="breadcrumb">
-    <li><a href="/">Home</a> <span class="divider">/</span></li>
-    <li><a href="/gallery/">Albums</a> <span class="divider">/</span></li>
-    <li class="active">{{ album.title }}</li>
-</ul>
+<div class="content-heading">
+    <div class="container">
+        <div class="row">
+            <div class="span12">
+                <h1>{{album.title}}</h1>
+            </div>
+        </div>
+    </div>
+</div>
 
-{% set photosCount = 4 %}
+{% set photosCount = 6 %}
 {% set spanCount = (12 / photosCount)|number %}
-
-<div class="row-fluid" data-toggle="modal-gallery" data-target="#modal-gallery">
+<div class="container">
+<div class="row" data-toggle="modal-gallery" data-target="#modal-gallery">
     <ul class="thumbnails">
 {% for image in images %}
     <li class="span{{ spanCount }}">
         <div class="thumbnail">
-            <a data-gallery="gallery" href="{{ image.url() }}">
+            <span data-href="{{ image.image }}">
                 <img alt="{{ image.title }}" src="{{ image.image|thumb({ 'width': 300, 'height': 200 }) }}" />
-            </a>
-            <div class="caption">
-                <h4><strong><a href="{{ image.url() }}">{{ image.title }}</a></strong></h4>
-                <div>
-                    {{image.description|truncate(200)|raw}}
-                </div>
-                <p>
-                    <a class="btn btn-primary" href="{{ image.url() }}">Детальніше</a>
-                    <a class="btn" href="{{ image.url() }}#comments"><i class="icon-comment"></i> Коментувати <span class="label">1</span></a>
-                </p>
-            </div>
+            </span>
         </div>
     </li>
     {% if loop.index % photosCount == 0 %}
@@ -37,26 +30,4 @@
 </ul>
 </div>
 
-<!-- modal-gallery is the modal dialog used for the image gallery -->
-<div id="modal-gallery" class="modal modal-gallery modal-fullscreen hide fade" tabindex="-1">
-    <div class="modal-header">
-        <a class="close" data-dismiss="modal">&times;</a>
-        <h3 class="modal-title"></h3>
-    </div>
-    <div class="modal-body"><div class="modal-image"></div></div>
-    <div class="modal-footer">
-        <a class="btn modal-prev"><i class="icon-arrow-left"></i> Previous</a>
-        <a class="btn modal-next">Next <i class="icon-arrow-right"></i></a>
-        <a class="btn btn-success modal-play modal-slideshow" data-slideshow="5000"><i class="icon-play icon-white"></i> Slideshow</a>
-        <!--a class="btn modal-download" target="_blank"><i class="icon-download"></i> Download</a-->
-    </div>
 </div>
-
-<style>
-.thumbnail img {
-  transition: all 0.25s linear 0s;
-}
-.thumbnail img:hover {
-  opacity: 0.8;
-}
-</style>
