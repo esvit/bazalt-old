@@ -1,4 +1,0 @@
-<td>
-    <strong><a href="{% url 'ComEcommerce.OrderView', { 'id' : item.id } %}">{{ item.id }}. {{ item.name }}</a></strong>
-    <br />{{ item.getStatus() }}
-</td>

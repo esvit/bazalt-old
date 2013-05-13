@@ -1,5 +1,0 @@
-<bz:header>
-    {% tr %}Orders{% endtr %}
-</bz:header>
-
-{{ form | raw }}

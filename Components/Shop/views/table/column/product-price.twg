@@ -1,3 +1,0 @@
-<td style="vertical-align: middle;">
-    {{ item.getMainPrice() }}
-</td>

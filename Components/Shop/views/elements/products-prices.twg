@@ -1,6 +1,0 @@
-{% for accountType in accountTypes %}
-    <div class="bz-form-row">
-        <label class="bz-form-label" for="p_{{ accountType.id }}">{{ accountType.title }}</label>
-        <input type="text" id="p_{{ accountType.id }}" value="{{ accountType.price }}" name="{{ element.name() }}[{{ accountType.id }}]"/> {{ accountType.currency }}
-    </div>
-{% endfor %}

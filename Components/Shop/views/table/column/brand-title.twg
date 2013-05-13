@@ -1,6 +1,0 @@
-<td>
-    <a href="{% url 'ComEcommerce.BrandEdit', { 'id' : item.id } %}">
-        <img src="{{ item.getThumb('ComEcommerce.AdminBrandThumbnail') }}"/>
-    </a>
-    <strong><a href="{% url 'ComEcommerce.BrandEdit', { 'id' : item.id } %}">{{ item.title }}</a></strong>
-</td>

@@ -1,3 +1,0 @@
-<td>
-    <strong><a href="{% url 'ComEcommerce.ProductsTypeEdit', { 'id' : item.id } %}">{{ item.title }}</a></strong>
-</td>

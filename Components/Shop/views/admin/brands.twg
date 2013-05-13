@@ -1,6 +1,0 @@
-<bz:header>
-    {% tr %}Brands{% endtr %}
-    <bz:headerbutton url="{% url 'ComEcommerce.BrandNew' %}" icon="ui-icon-circle-plus">{% tr %}Add new{% endtr %}</bz:headerbutton>
-</bz:header>
-
-{{ form | raw }}
