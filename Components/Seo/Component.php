@@ -28,17 +28,29 @@ class Component extends CMS\Component
             if (!CMS\User::get()->isGuest()) {
                 $application->registerJsComponent('Component.Seo', relativePath(__DIR__ . '/component.js'));
             }
+            CMS\MetaInfo::registerMetaGenerator('SEO', function(&$metainfo, $_meta) use ($application) {
+                $_meta->assign('site_title', CMS\Bazalt::getSite()->title);
+
+                $page = Model\Page::getByUrl($application->url());
+
+                if ($page) {
+                    $metainfo['title'] = $page->title;
+                    $metainfo['keywords'] = $page->keywords;
+                    $metainfo['description'] = $page->description;
+                }
+
+                if (!$page || ($page && (empty($page->title) || empty($page->keywords) || empty($page->description)))) {
+                    $route = Model\Route::getByName($application->route()->name());
+
+                    if ($route) {
+                        $metainfo['title'] = $route->title;
+                        $metainfo['keywords'] = $route->keywords;
+                        $metainfo['description'] = $route->description;
+                    }
+                }
+            });
         } else {
             $application->registerJsComponent('Component.Seo.Admin', relativePath(__DIR__ . '/admin.js'));
-        }
-
-        $url = Url::getRequestUrl();
-        $page = Model\Page::getByUrl($url);
-
-        if ($page) {
-            CMS\MetaInfo::title($page->title);
-            CMS\MetaInfo::keywords($page->keywords);
-            CMS\MetaInfo::description($page->description);
         }
     }
 }

@@ -12,9 +12,16 @@ class MetaInfo
 
     protected $vars = [];
 
+    protected static $generators = [];
+
     public function __construct(Route $route)
     {
         $this->route = $route;
+    }
+
+    public static function registerMetaGenerator($name, $func)
+    {
+        self::$generators[$name] = $func;
     }
 
     public static function title($title = null)
@@ -74,6 +81,9 @@ class MetaInfo
             'keywords' => self::keywords(),
             'description' => self::description()
         ];
+        foreach (self::$generators as $func) {
+            $func($meta, $this);
+        }
         foreach ($meta as $name => $value) {
             $meta[$name] = View\TwigEngine::fetchString($value, $this->vars);
         }
