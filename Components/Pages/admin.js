@@ -228,13 +228,14 @@ define([
 
         // get categories
         CategoryService.getTree(function(res) {
-            var walk = function(items) {
+            var walk = function(items, level) {
+                level = level || 1;
                 for (var i = 0; i < items.length; i++) {
                     $scope.categories.push({
                         id:    items[i].id,
-                        title: $filter('language')(items[i].title)
+                        title: (new Array(level).join('- ')) + $filter('language')(items[i].title)
                     });
-                    walk(items[i].children);
+                    walk(items[i].children, level + 1);
                 }
             }
             walk(res.children);
