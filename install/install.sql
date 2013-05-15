@@ -279,7 +279,7 @@ INSERT INTO `cms_languages` (`id`, `title`, `ico`) VALUES ('en', 'English', 'gb'
 INSERT INTO `cms_languages` (`id`, `title`, `ico`) VALUES ('uk', 'Українська (Ukrainian)', 'uk');
 INSERT INTO `cms_languages` (`id`, `title`, `ico`) VALUES ('ru', 'Русский (Russian)', 'ru');
 
-INSERT INTO `cms_themes` (`id`, `alias`, `is_active`) VALUES (1, 'default', 1);
+INSERT INTO `cms_themes` (`id`, `is_active`) VALUES ('default', 1);
 
 INSERT INTO `cms_users` (`id`, `login`, `password`, `firstname`, `secondname`, `patronymic`, `gender`, `birth_date`, `email`, `created_at`, `is_active`, `last_activity`, `session_id`, `is_god`) VALUES (1, 'admin', 'b109f3bbbc244eb82441917ed06d618b9008dd09b3befd1b5e07394c706a8bb980b1d7785e5976ec049b46df5f1326af5a2ea6d103fd07c95385ffab0cacbc86', 'Administrator', NULL, NULL, 'unknown', NULL, NULL, '2013-04-23 11:13:01', 1, NULL, NULL, 1);
 
