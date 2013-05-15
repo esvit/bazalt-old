@@ -44,7 +44,8 @@ class Component extends CMS\Component
         $downloads = $map->connect('Files.Downloads', '/download',              ['component' => self::getName(), 'controller' => $controller, 'action' => 'viewFiles']);
         $downloads       ->connect('Files.File',               '/file{id:\d+}', ['component' => self::getName(), 'controller' => $controller, 'action' => 'downloadFile']);
 
-        Route::root()->connect('Files.elFinder', '/elfinder/', ['component' => self::getName(), 'controller' => $controller, 'action' => 'elFinder']);
+        Route::root()->connect('Files.elFinder', '/elfinder/', ['component' => self::getName(), 'controller' => $controller, 'action' => 'elFinder'])
+                     ->noIndex();
     }
 
     public function getMenuTypes()

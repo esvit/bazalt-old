@@ -8,8 +8,7 @@
     <meta charset="utf-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
     <title>{{ _meta.title }}</title>
-    
-    <meta name="google-site-verification" content="XURpklkJK2kG7f8QNIz9zeiMfjXgSGooPUq6ReKC2t8" />
+
     <meta name="keywords" content="{{ _meta.keywords }}">
     <meta name="description" content="{{ _meta.description }}">
     <meta name="viewport" content="width=device-width">

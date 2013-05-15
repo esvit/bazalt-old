@@ -3,7 +3,6 @@
 namespace App\Site;
 
 use Framework\CMS as CMS;
-use Framework\System\Routing\Route;
 use Framework\System\Session\Session;
 
 define('THEMES_DIR', SITE_DIR . '/themes');
@@ -16,12 +15,17 @@ class Application extends CMS\Application
 
         $folders = $this->view->folders();
 
+        $themePath = THEMES_DIR . PATH_SEP . CMS\Bazalt::getSite()->theme_id;
+        $this->view->assign('themeUrl', relativePath($themePath));
+
+        $this->view->assign('user', CMS\User::get());
+
         $folders []= __DIR__ . PATH_SEP . 'views';
-        $folders []= THEMES_DIR . PATH_SEP . 'default/views';
+        $folders []= $themePath . PATH_SEP . 'views';
 
         $this->view->folders($folders);
 
-        Route::root()->param('controller', 'App\Site\Controller\Index');
+        CMS\Route::root()->param('controller', 'App\Site\Controller\Index');
 
         if (!CLI_MODE) {
             $content = $this->dispatch($this->url);

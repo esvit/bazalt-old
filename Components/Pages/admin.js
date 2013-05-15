@@ -51,12 +51,12 @@ define([
     .factory('AuthorsService', function($resource) {
             return $resource('/rest.php/news/authors/');
     })*/
-    .factory('CategoryService', function(ngNestedResource) {
-        var CategoryService = ngNestedResource('/rest.php/pages/categories/');
+    .factory('PagesCategoryService', function(ngNestedResource) {
+        var PagesCategoryService = ngNestedResource('/rest.php/pages/categories/');
 
-        return CategoryService;
+        return PagesCategoryService;
     })
-    .controller('PagesCtrl', function($scope, $rootScope, $filter, $location, $routeParams, $q, PagesService, CategoryService) {
+    .controller('PagesCtrl', function($scope, $rootScope, $filter, $location, $routeParams, $q, PagesService, PagesCategoryService) {
         $scope.activateMenu('Pages'); // activate admin menu
 
         // for access from other controller
@@ -70,12 +70,12 @@ define([
         };
 
         // get categories
-        $scope.category = CategoryService.getTree(function(res) {
+        $scope.category = PagesCategoryService.getTree(function(res) {
             var parents = [];
             $scope.loading.category = false;
 
             // select active category
-            $scope.activeCategory = CategoryService.find(res, function(item) { return item.id == $routeParams.category_id; }, parents);
+            $scope.activeCategory = PagesCategoryService.find(res, function(item) { return item.id == $routeParams.category_id; }, parents);
 
             // open all nodes to active category
             if ($scope.activeCategory) {
@@ -163,7 +163,7 @@ define([
             }
         ];
     })
-    .controller('CategoriesCtrl', function($scope, $rootScope, $filter, $routeParams, CategoryService) {
+    .controller('CategoriesCtrl', function($scope, $rootScope, $filter, $routeParams, PagesCategoryService) {
         $scope.activateMenu('Pages'); // activate admin menu
 
         $scope.addCategory = function (child) {
@@ -185,7 +185,7 @@ define([
             });
         };
     })
-    .controller('PageCtrl', function($scope, $rootScope, $routeParams, $filter, $location, $timeout, PagesService, CategoryService) {
+    .controller('PageCtrl', function($scope, $rootScope, $routeParams, $filter, $location, $timeout, PagesService, PagesCategoryService) {
         $scope.activateMenu('Pages'); // activate admin menu
 
         $scope.loading = true;
@@ -227,14 +227,15 @@ define([
         $scope.categories = [];
 
         // get categories
-        CategoryService.getTree(function(res) {
-            var walk = function(items) {
+        PagesCategoryService.getTree(function(res) {
+            var walk = function(items, level) {
+                level = level || 1;
                 for (var i = 0; i < items.length; i++) {
                     $scope.categories.push({
                         id:    items[i].id,
-                        title: $filter('language')(items[i].title)
+                        title: (new Array(level).join('- ')) + $filter('language')(items[i].title)
                     });
-                    walk(items[i].children);
+                    walk(items[i].children, level + 1);
                 }
             }
             walk(res.children);
