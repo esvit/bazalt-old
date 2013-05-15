@@ -37,7 +37,6 @@ bazaltCMS.directive('ckeditor', function() {
             });
 
             element.bind('$destroy', function() {
-            console.info('destroy');
                 instance.destroy(false);
             });
             instance.on('instanceReady', function() {
@@ -45,9 +44,7 @@ bazaltCMS.directive('ckeditor', function() {
             });
             instance.on('pasteState', function() {
                 //scope.$apply(function() {
-                if (!isNaN(ngModel.$viewValue)) {
-                    ngModel.$setViewValue(instance.getData());
-                }
+                ngModel.$setViewValue(instance.getData());
                 //});
             });
 
@@ -66,9 +63,7 @@ bazaltCMS.directive('ckeditor', function() {
                 }
                 return instance.getData();
             }, function (val) {
-                if (!isNaN(ngModel.$viewValue)) {
-                    ngModel.$setViewValue(instance.getData());
-                }
+                ngModel.$setViewValue(instance.getData());
             });
             instance.on('blur', function(e) {
                 if (!scope.$$phase) {
