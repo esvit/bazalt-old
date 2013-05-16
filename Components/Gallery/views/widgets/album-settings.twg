@@ -1,8 +1,8 @@
 <div class="bz-form-row">
     <label>{% tr %}Select album:{% endtr %}</label>
-    <select name="pageId" ng-model="widget.config.gallery_id">
+    <select name="gallery_id" ng-model="widget.config.gallery_id">
         {% for gallery in galleries %}
-            <option value="{{ gallery.id }}"{% if options.pageId == gallery.id %} selected="selected"{% endif %}>{{ gallery.title }}</option>
+            <option value="{{ gallery.id }}"{% if options.gallery_id == gallery.id %} selected="selected"{% endif %}>{{ gallery.title }}</option>
         {% endfor %}
     </select>
 </div>

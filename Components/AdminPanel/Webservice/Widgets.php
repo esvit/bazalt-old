@@ -129,6 +129,9 @@ class Widgets extends CMS\Webservice\Rest
         // @todo remove
         $w = $widgetInstance->toArray();
 
+        if (!count($w['config'])) {
+            $w['config'] = new \stdClass();
+        }
         $w['publish'] = $w['publish'] == '1';
         return new CMS\Webservice\Response(200, [
             'widget' => $w,

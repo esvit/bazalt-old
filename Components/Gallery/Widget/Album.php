@@ -12,7 +12,7 @@ class Album extends CMS\Widget
     {
         $gallery = $this->getGallery();
         if ($gallery) {
-            $photos = Model\Photo::getByCategory($gallery);
+            $photos = Model\Photo::getCollection($gallery, true);
             $this->view()->assign('photos', $photos->fetchAll());
             $this->view()->assign('category', $gallery);
         }
