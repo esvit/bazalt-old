@@ -152,18 +152,6 @@ module.exports = function(grunt) {
                 files: {
                     "themes/default/assets/css/theme.css": "themes/default/assets/less/theme.less"
                 }
-            },
-            "themes/saleway": {
-                options: {
-                    paths: [
-                        "App/Admin/assets/less/bootstrap",
-                        "themes/saleway/assets/less"
-                    ],
-                    yuicompress: !isDev
-                },
-                files: {
-                    "themes/saleway/assets/css/theme.css": "themes/saleway/assets/less/theme.less"
-                }
             }
         },
         compress: {
