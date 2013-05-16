@@ -54,13 +54,11 @@
                                 <span>
                                 <span class="caret"></span>
                     </a>
-                    <ul class="dropdown-menu">
+                    <ul class="dropdown-menu dropdown-languages">
                         <li ng-repeat="language in languages.all" ng-class="{'active':languages.current == language.id}">
                             <a href="javascript:;" class="clearfix" ng-click="languages.current = language.id">
-                                <small class="pull-right">
-                                    <span class="ico-flags" ng-class="language.ico"></span><br />
-                                    Ctrl+Alt+{[$index+1]}
-                                </small>
+                                <small class="pull-right">Ctrl+Alt+{[$index+1]}</small>
+                                <span class="ico-flags" ng-class="language.ico"></span>
                                 {[language.title]}
                             </a>
                         </li>
