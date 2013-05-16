@@ -150,7 +150,7 @@ class View extends Scope
         $head .= 'var components = ' . json_encode($components);
         $head .= '</script>';
 
-        $content = str_replace('</head>', $head . '</head>', $content);
+        $content = str_replace('<head>',  '<head>' . $head, $content);
         $content = str_replace('</body>', $afterBody . '</body>', $content);
 
         return $content;

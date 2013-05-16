@@ -289,7 +289,7 @@ INSERT INTO `cms_themes` (`id`, `is_active`) VALUES ('default', 1);
 
 INSERT INTO `cms_users` (`id`, `login`, `password`, `firstname`, `secondname`, `patronymic`, `gender`, `birth_date`, `email`, `created_at`, `is_active`, `last_activity`, `session_id`, `is_god`) VALUES (1, 'admin', 'b109f3bbbc244eb82441917ed06d618b9008dd09b3befd1b5e07394c706a8bb980b1d7785e5976ec049b46df5f1326af5a2ea6d103fd07c95385ffab0cacbc86', 'Administrator', NULL, NULL, 'unknown', NULL, NULL, '2013-04-23 11:13:01', 1, NULL, NULL, 1);
 
-INSERT INTO `cms_sites` (`id`, `domain`, `path`, `title`, `theme_id`, `language_id`, `is_subdomain`, `is_active`, `is_multilingual`, `user_id`, `created_at`, `updated_at`, `site_id`, `is_redirect`) VALUES (1, 'localhost', '/', NULL, 1, 1, 0, 1, 0, 1, NOW(), NOW(), NULL, 0);
+INSERT INTO `cms_sites` (`id`, `domain`, `path`, `title`, `theme_id`, `language_id`, `is_subdomain`, `is_active`, `is_multilingual`, `user_id`, `created_at`, `updated_at`, `site_id`, `is_redirect`) VALUES (1, 'localhost', '/', NULL, 'default', 1, 0, 1, 0, 1, NOW(), NOW(), NULL, 0);
 
 /*!40014 SET FOREIGN_KEY_CHECKS=1 */;
 /*!40101 SET CHARACTER_SET_CLIENT=@OLD_CHARACTER_SET_CLIENT */;
