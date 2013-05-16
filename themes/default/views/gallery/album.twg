@@ -10,33 +10,16 @@
 </div>
 
 <div class="container">
-    <div class="fotorama" data-width="499" data-height="333">
+    <div id="gallery-fotorama" class="fotorama" data-width="940" data-height="640">
         {% for image in images %}
-        <a href="{{ image.url|thumb({ 'width': 300, 'height': 200 }) }}"><img alt="{{ image.title }}" src="{{ image.image|thumb({ 'width': 72, 'height': 48 }) }}"></a>
+            <a href="{{ image.url|thumb({ 'width': 940, 'height': 540 }) }}"><img alt="{{ image.title }}" src="{{ image.image|thumb({ 'width': 72, 'height': 48 }) }}"></a>
         {% endfor %}
     </div>
 </div>
 
-<!--
-{% set photosCount = 6 %}
-{% set spanCount = (12 / photosCount)|number %}
-<div class="container">
-<div class="row" data-toggle="modal-gallery" data-target="#modal-gallery">
-    <ul class="thumbnails">
-{% for image in images %}
-    <li class="span{{ spanCount }}">
-        <div class="thumbnail">
-            <span data-href="{{ image.image }}">
-                <img alt="{{ image.title }}" src="{{ image.image|thumb({ 'width': 300, 'height': 200 }) }}" />
-            </span>
-        </div>
-    </li>
-    {% if loop.index % photosCount == 0 %}
-    </ul>
-    <ul class="thumbnails">
-    {% endif %}
-{% endfor %}
-</ul>
-</div-->
-
-</div>
+<script>
+    $(function() {
+        $('#gallery-fotorama').fotorama();
+    });
+</script>
+>>>>>>> layout

@@ -15,9 +15,10 @@
 
     <link rel="stylesheet" type="text/css" href="/App/Admin/assets/css/font-awesome.min.css" media="all">
     <link rel="stylesheet" type="text/css" href="/App/Admin/assets/css/bootstrap.css" media="all">
+    <link rel="stylesheet" type="text/css" href="/App/Admin/assets/css/flags.css" media="all">
     <link rel="stylesheet" type="text/css" href="/App/Admin/assets/css/daterangepicker.css" media="all">
     <link rel="stylesheet" type="text/css" href="/App/Admin/assets/css/bootstrap-fileupload.css" media="all">
-    <link rel="stylesheet" type="text/css" href="/less.php/App/Admin/assets/less/style.less"/>
+    <link rel="stylesheet" type="text/css" href="/less.php/App/Admin/assets/less/general.less"/>
     <link href='http://fonts.googleapis.com/css?family=Open+Sans:400,400italic,700,300&subset=cyrillic-ext,latin'
           rel='stylesheet' type='text/css'>
 
@@ -49,14 +50,17 @@
                     <a class="btn dropdown-toggle" data-toggle="dropdown" href="#">
                                 <span ng-repeat="language in languages.all"
                                       ng-show="language.id == languages.current">
-                                    {[language.title]}
+                                      <span class="ico-flags" ng-class="language.ico"></span>{[language.id]}
                                 <span>
                                 <span class="caret"></span>
                     </a>
                     <ul class="dropdown-menu">
                         <li ng-repeat="language in languages.all" ng-class="{'active':languages.current == language.id}">
                             <a href="javascript:;" class="clearfix" ng-click="languages.current = language.id">
-                                <small class="pull-right">Ctrl+Alt+{[$index+1]}</small>
+                                <small class="pull-right">
+                                    <span class="ico-flags" ng-class="language.ico"></span><br />
+                                    Ctrl+Alt+{[$index+1]}
+                                </small>
                                 {[language.title]}
                             </a>
                         </li>

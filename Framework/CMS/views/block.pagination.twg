@@ -1,4 +1,4 @@
-<div class="pagination" ng-controller="BazaltCMSPagination">
+<div class="pagination">
 <ul>
 {% for page in pager.pages %}
 {% if page.role == 'pager-item' %}
@@ -17,25 +17,3 @@
 {% endfor %}
 </ul>
 </div>
-
-<script>
-$(function() {
-    console.info(bazaltCMS);
-    // Ctrl + arrow event handle
-    $(document).keydown(function(event) {
-        var linkNext = $('.pagination li.prev a').attr('href');
-        var linkPrev = $('.pagination li.next a').attr('href');
-
-        var href = null;  
-        if (event.ctrlKey && event.keyCode == 37) {
-            href = linkPrev;
-        }
-        if (event.ctrlKey && event.keyCode == 39) {
-            href = linkNext;
-        }
-        if (href) {
-            $location.url(href);
-        }
-    });
-});
-</script>

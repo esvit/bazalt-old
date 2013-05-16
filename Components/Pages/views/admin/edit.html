@@ -5,16 +5,15 @@
         <div class="col-span-3">
             <h2>{['Pages'|translate:'Pages']}</h2>
         </div>
-        <div class="col-span-9 text-left">
-                <button ng-click="savePage(page)" class="btn btn-primary">{['Save'|translate:'Pages']}</button>
-                <button ng-click="cancel()" class="btn btn-link">{['Cancel'|translate:'Pages']}</button>
+        <div class="col-span-3 text-left">
+            <button ng-click="savePage(page)" class="btn btn-primary">{['Save'|translate:'Pages']}</button>
+            <button ng-click="cancel()" class="btn btn-link">{['Cancel'|translate:'Pages']}</button>
         </div>
     </div>
 </div>
 
 <div class="row" loading-container="loading">
-
-    <div class="col-span-3 page-settings">
+    <div class="col-span-3 page-settings page-editor">
         <div class="control-group">
             <div class="controls">
                 <label>{['Category'|translate:'Pages']}</label>
@@ -69,7 +68,7 @@
                         <div class="control-group">
                             <label class="control-label" for="body">{['Content'|translate:'Pages']}</label>
                             <div class="controls">
-                                <textarea ckeditor required ng-model="page.body[language.id]" id="body"></textarea>
+                                <textarea ckeditor required ng-model="page.body[language.id]" class="input-block" id="body"></textarea>
                             </div>
                         </div>
                     </div>

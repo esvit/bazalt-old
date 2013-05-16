@@ -195,3 +195,40 @@
         }
     }
 }
+
+@media (max-width: 767px){
+  .sidebar {
+    border-bottom: 1px solid #B2B2B2;
+    border-right: none;
+    overflow: visible;
+    .nav {
+      min-height: 70px;
+      & > li {
+        &.active {
+          &:before, &:after {
+            width: 0;
+            height: 0;
+            content: " ";
+            border-left: 10px solid #F1F1F1;
+            border-right: 10px solid #F1F1F1;
+            border-bottom: 10px solid #b2b2b2;
+            position: absolute;
+            bottom: 0px;
+            left: 38%;
+            top: 50px;
+          }
+          &:after {
+            width: 0;
+            height: 0;
+            content: " ";
+            border-left: 10px solid transparent;
+            border-right: 10px solid transparent;
+            border-bottom: 10px solid #ffffff;
+            position: absolute;
+            top: 51px;
+          }
+        }
+      }
+    }
+  }
+}
