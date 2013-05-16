@@ -22,4 +22,3 @@
         $('#gallery-fotorama').fotorama();
     });
 </script>
->>>>>>> layout

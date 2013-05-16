@@ -1,0 +1,20 @@
+<div class="container">
+    {% widgets 'main-page' %}
+    <div class="slider-wrapper">
+        <div id="slider" class="nivoSlider">
+            {% for photo in photos %}
+                <img alt="{{ photo.title }}" src="{{ photo.image|thumb({ 'width': 940, 'height': 374 }) }}">
+            {% endfor %}
+            <!--img src="/themes/default/assets/img/nivo/toystory.jpg" width="940" height="374"/>
+            <img src="/themes/default/assets/img/nivo/nivo/up.jpg" width="940" height="374" />
+            <img src="/themes/default/assets/img/nivo/walle.jpg" width="940" height="374" />
+            <img src="/themes/default/assets/img/nivo/nemo.jpg" width="940" height="374" /-->
+        </div>
+    </div>
+</div>
+
+<script>
+    $(function() {
+        $('#slider').nivoSlider();
+    });
+</script>
