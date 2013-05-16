@@ -17,7 +17,7 @@ class Album extends Base\Album
     {
         $result = parent::toArray();
         $result['is_hidden'] = ($this->is_hidden == '1') ? true : false;
-        $result['is_publish'] = ($this->is_publish == '1') ? true : false;
+        $result['is_published'] = ($this->is_published == '1') ? true : false;
         $result['url'] = $this->url();
         return $result;
     }
@@ -74,7 +74,7 @@ class Album extends Base\Album
 
         if ($onlyPublished) {
             $q->andWhere('a.is_hidden = ?', 0)
-              ->andWhere('a.is_publish = ?', 1);
+              ->andWhere('a.is_published = ?', 1);
         }
         return new CMS\ORM\Collection($q);
     }
@@ -127,7 +127,7 @@ class Album extends Base\Album
     /**
      * Return category by path parts
      */
-    public static function getByPath(array $parts, ComGallery_Model_Album $root = null)
+    public static function getByPath(array $parts, Album $root = null)
     {
         if (!is_array($parts) || count($parts) == 0) {
             return null;
@@ -137,7 +137,7 @@ class Album extends Base\Album
         foreach ($parts as $i => $part) {
             $qByAlias = ORM::select('ComGallery_Model_Album a', 'a.*')
                 ->andWhere('a.alias = ?', $part)
-                ->andWhere('a.is_publish = ?', 1)
+                ->andWhere('a.is_published = ?', 1)
                 ->andWhere('a.depth > 0');
 
             if ($nextElement) {

@@ -21,7 +21,7 @@ class Index extends CMS\AbstractController
     public function albumAction($album)
     {
         $album = Album::getByAlias($album);
-        if (!$album || !$album->is_publish) {
+        if (!$album || !$album->is_published) {
             throw new CMS\Exception\PageNotFound();
         }
         $images = Photo::getCollection($album, true);
@@ -37,7 +37,7 @@ class Index extends CMS\AbstractController
     {
         $album = Album::getByAlias($album);
         $photo = Photo::getById($photo);
-        if (!$album || !$photo || !$album->is_publish || $photo->album_id != $album->id) {
+        if (!$album || !$photo || !$album->is_published || $photo->album_id != $album->id) {
             throw new CMS\Exception\PageNotFound();
         }
         $images = Photo::getCollection($album, true);

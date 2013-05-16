@@ -22,7 +22,7 @@ abstract class Album extends \Framework\CMS\ORM\Record
         $this->hasColumn('alias', 'varchar(255)');
         $this->hasColumn('images_count', 'N:int(1)');
         $this->hasColumn('is_hidden', 'N:int(1)');
-        $this->hasColumn('is_publish', 'N:int(1)');
+        $this->hasColumn('is_published', 'N:int(1)');
     }
 
     public function initRelations()
@@ -35,5 +35,7 @@ abstract class Album extends \Framework\CMS\ORM\Record
     public function initPlugins()
     {
         $this->hasPlugin('Framework\CMS\ORM\Localizable', ['title', 'description']);
+
+        $this->hasPlugin('Framework\System\ORM\Plugin\Timestampable', ['created' => 'created_at']);
     }
 }

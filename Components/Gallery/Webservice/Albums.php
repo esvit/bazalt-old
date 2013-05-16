@@ -47,7 +47,7 @@ class Albums extends CMS\Webservice\Rest
     {
         $user = CMS\User::get();
         $album = Album::getById($album_id);
-        if (!$album->is_publish && !($user->hasRight(Component::getName(), Component::ACL_HAS_ACCESS))) {
+        if (!$album->is_published && !($user->hasRight(Component::getName(), Component::ACL_HAS_ACCESS))) {
             return new Response(403, null);
         }
         $collection = Photo::getCollection($album);
@@ -98,7 +98,7 @@ class Albums extends CMS\Webservice\Rest
             return new Response(400, $data->errors());
         }
         $album->is_hidden = $data->getData('is_hidden') ? '1' : '0';
-        $album->is_publish = $data->getData('is_publish') ? '1' : '0';
+        $album->is_published = $data->getData('is_published') ? '1' : '0';
         $album->save();
 
         return new Response(200, $album);

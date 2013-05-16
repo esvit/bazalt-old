@@ -78,7 +78,7 @@ define([
                 updateOrder: { method: 'PUT', data: { 'orders': '@' }, isArray: false }
             });
     })
-    .controller('GalleryCtrl', function($scope, $rootScope, $location, $routeParams, AlbumService, $http) {
+    .controller('GalleryCtrl', function($scope, $rootScope, $location, $routeParams, AlbumService, $http, $filter) {
         $scope.photoId = null;
         $scope.activateMenu('Gallery'); // activate admin menu
 
@@ -183,7 +183,7 @@ define([
                         'url': '#!/gallery'
                     },
                     {
-                        'title' : $scope.album.title.ukr
+                        'title' : $filter('language')($scope.album.title)
                     }
                 ];
             }

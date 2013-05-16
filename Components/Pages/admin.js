@@ -178,7 +178,7 @@ define([
         };
 
         $scope.saveCategory = function(item) {
-            var category = new CategoryService(item);
+            var category = new PagesCategoryService(item);
             item.$loading = true;
             category.$save(function() {
                 item.$loading = false;

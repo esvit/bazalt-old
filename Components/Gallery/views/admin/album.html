@@ -15,21 +15,21 @@
                 </div>
 
                 <div class="btn-group">
-                    <button class="btn" ng-class="{ 'active btn-success': album.is_publish && !album.is_hidden }"
-                            ng-click="album.is_publish = true; album.is_hidden = false; album.$save()">
+                    <button class="btn" ng-class="{ 'active btn-success': album.is_published && !album.is_hidden }"
+                            ng-click="album.is_published = true; album.is_hidden = false; album.$save()">
                         {['Published'|translate:'Gallery']}
                     </button>
-                    <button class="btn" ng-class="{ 'active btn-info': album.is_publish && album.is_hidden }"
-                            ng-click="album.is_publish = true; album.is_hidden = true; album.$save()"><span
+                    <button class="btn" ng-class="{ 'active btn-info': album.is_published && album.is_hidden }"
+                            ng-click="album.is_published = true; album.is_hidden = true; album.$save()"><span
                             class="glyphicon glyphicon-eye-close"
-                            ng-class="{ 'icon-white': album.is_publish && album.is_hidden }"></span>
+                            ng-class="{ 'icon-white': album.is_published && album.is_hidden }"></span>
                         {['Invisible'|translate:'Gallery']}
                     </button>
 
-                    <button class="btn" ng-class="{ 'active btn-danger': !album.is_publish && !album.is_hidden }"
-                            ng-click="album.is_publish = false; album.is_hidden = false; album.$save()"><span
+                    <button class="btn" ng-class="{ 'active btn-danger': !album.is_published && !album.is_hidden }"
+                            ng-click="album.is_published = false; album.is_hidden = false; album.$save()"><span
                             class="glyphicon glyphicon-remove"
-                            ng-class="{ 'icon-white': !album.is_publish && !album.is_hidden }"></span>
+                            ng-class="{ 'icon-white': !album.is_published && !album.is_hidden }"></span>
                         {['Unpublished'|translate:'Gallery']}
                     </button>
                 </div>
@@ -52,10 +52,10 @@
                        no="Ні"><span class="glyphicon glyphicon-trash"></span></a>
                     <a href="javascript:;" ng-click="showAlbum(item)">
                         <span ng-show="item.images_count > 0" class="pull-right label">{[item.images_count]}</span>
-                        <span ng-show="item.is_hidden && item.is_publish"
+                        <span ng-show="item.is_hidden && item.is_published"
                               title="Цей альбом не відображається в списку альбомів"
                               class="glyphicon glyphicon-eye-close"></span>
-                        <span ng-show="!item.is_publish" title="Цей альбом не відображається в списку альбомів"
+                        <span ng-show="!item.is_published" title="Цей альбом не відображається в списку альбомів"
                               class="glyphicon glyphicon-remove"></span>
                         <span class="title">{[item.title|language]}</span>
                     </a>
@@ -86,10 +86,10 @@
 
     <div class="col-span-9" ng-show="album.id">
 
-        <div class="alert alert-info" ng-show="album.is_publish">
+        <div class="alert alert-info" ng-show="album.is_published">
             Url of this album:&nbsp;<code><a target="_blank" href="{[album.url]}">{[album.url]}</a></code>
         </div>
-        <div class="alert" ng-show="!album.is_publish">
+        <div class="alert" ng-show="!album.is_published">
             <strong>Warning!</strong>
             {['Publish album first'|translate:'Gallery']}
         </div>
