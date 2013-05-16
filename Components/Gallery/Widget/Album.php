@@ -25,8 +25,8 @@ class Album extends CMS\Widget
         $this->view()->assign('config', $this->options);
         $this->view()->assign('gallery', $this->getGallery());
 
-        $root = Model\Album::getRoot();
-        $this->view()->assign('tree', $root);
+        $coll = Model\Album::getCollection(true);
+        $this->view()->assign('galleries', $coll->fetchAll());
         return $this->view()->fetch('widgets/album-settings');
     }
 
