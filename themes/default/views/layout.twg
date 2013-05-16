@@ -15,6 +15,14 @@
     <link rel='stylesheet' type='text/css' href='http://fonts.googleapis.com/css?family=Open+Sans+Condensed:300&subset=latin,cyrillic-ext,cyrillic' />
 
     <link rel="stylesheet" type="text/css" href="/themes/default/assets/css/theme.css"/>
+    
+    <link rel="stylesheet" type="text/css" href="/themes/default/assets/css/fotorama.css"/>
+    <link rel="stylesheet" type="text/css" href="/themes/default/assets/css/nivo-slider.css"/>
+
+
+    <script data-main="site" src="/assets/require.js"></script>
+    <script src="/themes/default/assets/js/fotorama.js"></script>
+    <script src="/themes/default/assets/js/jquery.nivo.slider.js"></script>
 </head>
 <body>
 
@@ -54,7 +62,5 @@
             </div>
         </div>
     </div>
-
-    <script data-main="site" src="/assets/require.js"></script>
 </body>
 </html>
