@@ -1,3 +1,2 @@
-<div>
-{% widgets 'home' %}
-</div>
+
+{% widgets 'main-page' %}
