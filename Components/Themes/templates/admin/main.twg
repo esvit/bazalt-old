@@ -1,0 +1,35 @@
+<div class="page-header">
+<h1>
+    {% tr %}List of news{% endtr %}
+    {% if canCreate %}
+    <a class="btn btn-primary" href="{% url 'ComNewsChannel.New' %}">
+        <i class="icon-plus icon-white"></i>
+
+        {% tr %}Add new{% endtr %}
+    </a>
+    {% endif %}
+</h1>
+</div>
+
+{{ form.begin()|raw }}
+
+<div style="width: 100%; margin-left: -300px; float: right">
+    <div style="padding-left: 300px;">
+        {{ form['table'].toString()|raw }}
+    </div>
+</div>
+<div style="width: 300px">
+    {{ form['categories'].toString()|raw }}
+</div>
+{{ form.end()|raw }}
+
+<style>
+#tree-container {
+    width: 300px;
+    overflow: auto;
+    float: left;
+}
+#tree-container ul {
+    margin: 0;
+}
+</style>

@@ -1,0 +1,4 @@
+<p><label>
+<input class="checkbox" name="only_category" type="checkbox" value="1"{% if options.only_category %} checked="checked"{% endif %}/>
+{% tr %}Only for current category{% endtr %}
+</label>

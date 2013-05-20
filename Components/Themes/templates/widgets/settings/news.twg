@@ -1,0 +1,53 @@
+{% macro buildtree(category, level, selectedId) %}
+    <option value="{{ category.id }}"{% if selectedId == category.id %} selected="selected"{% endif %}>{% for n in 1..level %}{% if not loop.first %}&nbsp;&nbsp;&nbsp;{% endif %}{% endfor %}{{ category.title }}</option>
+    {% for categoryItem in category.Childrens %}
+        {{ _self.buildtree(categoryItem, level + 1, selectedId) }}
+    {% endfor %}
+{% endmacro %}
+
+<div class="bz-row">
+    {% tr %}Quantity of news:{% endtr %}
+    <input name="quantity" type="text" value="{{ options.quantity|default(5) }}" />
+</div>
+
+<div class="bz-row">
+    {% tr %}Skip news:{% endtr %}
+    <input name="skip" type="text" value="{{ options.skip|default(0) }}" />
+</div>
+
+<div class="bz-row">
+    <label>
+        <input class="checkbox" name="top_first" type="checkbox" value="1"{% if options.top_first %} checked="checked"{% endif %}/>
+        {% tr %}Top news first{% endtr %}
+    </label>
+    <div class="hint">{% tr %}Show selected menu when active menu level is XXX{% endtr %}</div>
+</div>
+
+<div class="bz-row">
+    {% tr %}Category:{% endtr %}
+    <select name="category_id">
+        <option value=""{% if not category %} selected="selected"{% endif %}>-</option>
+        {% for categoryItem in tree.Elements.get() %}
+            {{ _self.buildtree(categoryItem, 1, category.id) }}
+        {% endfor %}
+    </select>
+</div>
+
+<div class="bz-row">
+    {% tr %}Region:{% endtr %}
+    {{ options.region_id }}
+    <select name="region_id">
+        <option value="none"{% if options.region_id == 'none' %} selected="selected"{% endif %}>-</option>
+        {% for id, region in regions %}
+            <option value="{{ id }}"{% if options.region_id == id %} selected="selected"{% endif %}>{{ region }}</option>
+        {% endfor %}
+    </select>
+</div>
+
+<div class="bz-row">
+    <label>
+        <input class="checkbox" name="by_region" type="checkbox" value="1"{% if options.by_region %} checked="checked"{% endif %}/>
+        {% tr %}By region{% endtr %}
+    </label>
+    <div class="hint">{% tr %}Exclude main region{% endtr %}</div>
+</div>

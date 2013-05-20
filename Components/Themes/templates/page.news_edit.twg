@@ -1,0 +1,122 @@
+<div class="news-article">
+
+    {% widgets 'before_breadcrumb' %}
+
+    <nav>
+        {% include 'block.charity' %}
+        <ul itemprop="breadcrumb" class="breadcrumb">
+            <li itemscope itemtype="http://data-vocabulary.org/Breadcrumb"><a itemprop="url" href="{% url 'home' %}"><span>{% tr %}Home{% endtr %}</span></a> <span class="divider">/</span></li>
+            <li itemscope itemtype="http://data-vocabulary.org/Breadcrumb"><a itemprop="url" href="{% url 'ComNewsChannel.AllNews' %}"><span>{% tr %}All news{% endtr %}</span></a> <span class="divider">/</span></li>
+            <li class="active">{% tr %}Submit your news{% endtr %}</li>
+        </ul>
+    </nav>
+
+    {% widgets 'before_content' %}
+
+    <div class="news-article-item news-article-container">
+        <header class="page-header">
+            <h1 id="title" itemprop="name" contenteditable="true">{% tr %}Enter news title{% endtr %}</h1>
+        </header>
+
+        <div class="content">
+            <div class="news-article-detail">
+                <div class="news-article-content">
+                    <div id="articleBody" itemprop="articleBody" class="news-article-body">
+                        {% set images = newsitem.Images.get() %}
+
+                        {% if images|length > 0 %}
+                            {% for image in images %}
+                                {% if loop.first %}
+                                    <div class="image-container">
+                                        {% set mainImage = image.getThumb('290x0') %}
+                                        <a data-fancybox-group="preview" href="{{ image.getThumb('original') }}">
+                                            <img itemprop="thumbnailUrl" class="image" src="{{ mainImage }}" alt="{{ newsitem.title }}" title="{{ newsitem.title }}" />
+                                        </a>
+                                        {% metadata %}
+                                        <link rel="image_src" href="{% url 'home', { 'host': true } %}{{ mainImage|trim('/') }}" />
+                                        <meta property="og:image" content="{% url 'home', { 'host': true } %}{{ mainImage|trim('/') }}" />
+                                        {% endmetadata %}
+                                    </div>
+                                {% endif %}
+                            {% endfor %}
+                        {% endif %}
+
+                        {{ newsitem.body|nofollow|raw }}
+                        <div class="clearfix"></div>
+                        {% if images|length > 1 and newsitem.item_type == 0 %}
+                        <div id="am-container" class="am-container">
+                            {% for image in images %}
+                                {% if not loop.first %}
+                                    <a data-fancybox-group="preview" itemprop="image" class="am-wrapper" href="{{ image.getThumb('original') }}">
+                                        <img itemprop="thumbnailUrl" class="montage" src="{{ image.getThumb('140x0') }}" alt="" />
+                                    </a>
+                                {% endif %}
+                            {% endfor %}
+                        </div>
+                        <script type="text/javascript">
+                            $(function(){
+                                var $container 	= $('#am-container'),
+                                        $imgs		= $container.find('img').hide(),
+                                        totalImgs	= $imgs.length,
+                                        cnt			= 0;
+
+                                $imgs.each(function(i) {
+                                    var $img	= $(this);
+                                    $('<img/>').load(function() {
+                                        ++cnt;
+                                        if( cnt === totalImgs ) {
+                                            $imgs.show();
+                                            $container.montage({
+                                                fillLastRow				: false,
+                                                alternateHeight			: true,
+                                                alternateHeightRange	: {
+                                                    min	: 92,
+                                                    max	: 92
+                                                }
+                                            });
+                                        }
+                                    }).attr('src',$img.attr('src'));
+                                });
+                            });
+                        </script>
+                        {% elseif newsitem.item_type == 1 %}
+                            <div id="myCarousel" class="carousel slide">
+                                <!-- Carousel items -->
+                                <div class="carousel-inner">
+                                    {% for image in images %}
+                                        <div class="{% if loop.first %}active {% endif %}item"><img itemprop="thumbnailUrl" class="image" src="{{ image.getThumb('original') }}" alt="{{ newsitem.title }}" title="{{ newsitem.title }}" /></div>
+                                    {% endfor %}
+                                </div>
+                                <!-- Carousel nav -->
+                                <a class="carousel-control left" href="#myCarousel" data-slide="prev">&lsaquo;</a>
+                                <a class="carousel-control right" href="#myCarousel" data-slide="next">&rsaquo;</a>
+                            </div>
+                        {% endif %}
+                        <div class="clearfix"></div>
+                    </div>
+                </div>
+            </div>
+
+            <div class="clearfix"></div>
+            <footer>
+                {% set tags = newsitem.Tags.get() %}
+                {% if tags|length > 0 %}
+                    <ul itemprop="keywords" class="tags">
+                        {% for tag in tags %}
+                            <li class="tag"><a href="{% url 'ComNewsChannel.Tag', { 'tag': tag.getAlias() } %}">{{ tag.title }}</a></li>
+                        {% endfor %}
+                        <li class="clearfix"></li>
+                    </ul>
+                    <div class="clearfix"></div>
+                {% endif %}
+                <div class="clearfix"></div>
+            </footer>
+        </div>
+    </div>
+
+    {% widgets 'after_content' %}
+</div>
+<script>
+$(function() {
+});
+</script>

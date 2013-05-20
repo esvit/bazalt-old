@@ -1,0 +1,31 @@
+<strong>Banded</strong>
+
+<div class="row">
+    <div class="col-span-3">
+        <span style="height: 12px;"></span>
+    </div>
+    <div class="col-span-4 col-offset-5">
+        <span style="height: 12px;"></span>
+    </div>
+</div>
+<div class="row">
+    <div class="col-span-12">
+        <span style="height: 65px;"></span>
+    </div>
+</div>
+<div class="row">
+    <div class="col-span-4">
+        <span style="height: 50px;"></span>
+    </div>
+    <div class="col-span-8">
+        <span style="height: 50px;"></span>
+    </div>
+</div>
+<div class="row">
+    <div class="col-span-8">
+        <span style="height: 50px;"></span>
+    </div>
+    <div class="col-span-4">
+        <span style="height: 50px;"></span>
+    </div>
+</div>

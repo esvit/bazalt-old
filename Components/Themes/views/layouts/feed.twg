@@ -1,0 +1,89 @@
+<strong>Feed</strong>
+
+<div class="row">
+    <div class="col-span-12">
+        <span style="height: 20px;"></span>
+    </div>
+</div>
+<div class="row">
+    <div class="col-span-2">
+        <span style="height: 120px;"></span>
+    </div>
+
+    <div class="col-span-8">
+        <div class="row">
+            <div class="col-span-2">
+                <span style="height: 15px;"></span>
+            </div>
+            <div class="col-span-10">
+                <span style="height: 15px;"></span>
+            </div>
+        </div>
+        <div class="row">
+            <div class="col-span-2">
+                <span style="height: 15px;"></span>
+            </div>
+            <div class="col-span-10">
+                <span style="height: 15px;"></span>
+            </div>
+        </div>
+        <div class="row">
+            <div class="col-span-2">
+                <span style="height: 15px;"></span>
+            </div>
+            <div class="col-span-10">
+                <span style="height: 15px;"></span>
+            </div>
+        </div>
+        <div class="row">
+            <div class="col-span-2">
+                <span style="height: 15px;"></span>
+            </div>
+            <div class="col-span-10">
+                <span style="height: 15px;"></span>
+            </div>
+        </div>
+        <div class="row">
+            <div class="col-span-2">
+                <span style="height: 15px;"></span>
+            </div>
+            <div class="col-span-10">
+                <span style="height: 15px;"></span>
+            </div>
+        </div>
+        <div class="row">
+            <div class="col-span-2">
+                <span style="height: 15px;"></span>
+            </div>
+            <div class="col-span-10">
+                <span style="height: 15px;"></span>
+            </div>
+        </div>
+        <div class="row">
+            <div class="col-span-2">
+                <span style="height: 15px;"></span>
+            </div>
+            <div class="col-span-10">
+                <span style="height: 15px;"></span>
+            </div>
+        </div>
+        <div class="row">
+            <div class="col-span-2">
+                <span style="height: 15px;"></span>
+            </div>
+            <div class="col-span-10">
+                <span style="height: 15px;"></span>
+            </div>
+        </div>
+    </div>
+
+    <div class="col-span-2">
+        <span style="height: 40px;"></span>
+        <span style="height: 60px;"></span>
+    </div>
+</div>
+<div class="row">
+    <div class="col-span-12">
+        <span style="height: 15px;"></span>
+    </div>
+</div>

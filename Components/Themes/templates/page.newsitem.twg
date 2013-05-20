@@ -1,0 +1,134 @@
+<div class="news-article">
+
+    {% widgets 'before_breadcrumb' %}
+
+    <nav>
+        <ul itemprop="breadcrumb" class="breadcrumb">
+            <li itemscope itemtype="http://data-vocabulary.org/Breadcrumb"><a itemprop="url" href="{% url 'home' %}"><span>{% tr %}Home{% endtr %}</span></a> <span class="divider">/</span></li>
+            {% if category %}
+                {% metadata %}
+                <link rel="alternate" type="application/rss+xml" title="{{ site.title }}: {{ category.title }}" href="{% url 'ComNewsChannel.CategoryRss', { 'category': category.Elements } %}" />
+                {% endmetadata %}
+                <li itemscope itemtype="http://data-vocabulary.org/Breadcrumb"><a itemprop="url" href="{% url 'ComNewsChannel.AllNews' %}"><span>{% tr %}All news{% endtr %}</span></a> <span class="divider">/</span></li>
+                {% for item in category.Elements.getPath() %}
+                {% if item.depth > 0 %}
+                    <li class="category{{ item.id }}" itemscope itemtype="http://data-vocabulary.org/Breadcrumb"><a itemprop="url" href="{% url 'ComNewsChannel.ShowCategory', { 'category': item.Elements } %}"><span>{{ item.title }}</span></a> <span class="divider">/</span></li>
+                {% endif %}
+                {% endfor %}
+                <li class="category{{ category.id }}" itemscope itemtype="http://data-vocabulary.org/Breadcrumb"><a itemprop="url" href="{% url 'ComNewsChannel.ShowCategory', { 'category': category.Elements } %}"><span>{{ category.title }}</span></a> <span class="divider">/</span></li>
+            {% endif %}
+            <li class="active">{{ newsitem.title }}</li>
+        </ul>
+    </nav>
+
+    {% widgets 'before_content' %}
+
+    <div class="news-article-item news-article-container" itemscope itemtype="http://schema.org/NewsArticle" itemid="{{ newsitem.getUrl() }}">
+        <header class="page-header">
+            <h1 itemprop="name">{{ newsitem.title }}</h1>
+
+            <span class="author-info">
+            {% set user = newsitem.User %}
+            {% if user and category.id != 1590 %}
+            {% tr %}Author:{% endtr %} <a class="user{{ user.id }}" rel="author" href="{% if user.id == 650 %}https://plus.google.com/107103153633249947850/about{% else %}#{% endif %}">{{ user.getName() }}</a>,
+            {% endif %}
+            <time class="timeago" itemprop="datePublished" datetime="{{ newsitem.created_at|format_date('atom') }}">{{ newsitem.created_at|format_date('%e %B %Y %H:%M') }}</time></span>
+            <meta itemprop="interactionCount" content="UserComments:{{ newsitem.comments_number }}"/>
+            <meta itemprop="interactionCount" content="UserPageVisits:{{ newsitem.hits }}"/>
+            {% metadata %}
+            <meta property="og:title" content="{{ newsitem.title }}" />
+            <meta property="og:url" content="{{ newsitem.getUrl(true) }}" />
+            <meta property="og:type" content="article" />
+            {% endmetadata %}
+        </header>
+
+        <div class="content">
+            <div class="news-article-detail">
+                <div class="news-article-content">
+                    <div itemprop="articleBody" class="news-article-body">
+                        {% set images = newsitem.Images.get() %}
+                        {% if images|length > 0 %}
+                            {% for image in images %}
+                                {% if loop.first %}
+                                <div class="image-container">
+                                    {% set mainImage = image.getThumb('290x0') %}
+                                    <a data-fancybox-group="preview" href="{{ image.getThumb('original') }}">
+                                        <img itemprop="thumbnailUrl" class="image" src="{{ mainImage }}" alt="{{ newsitem.title }}" title="{{ newsitem.title }}" />
+                                    </a>
+                                    {% metadata %}
+                                    <link rel="image_src" href="{% url 'home', { 'host': true } %}{{ mainImage|trim('/') }}" />
+                                    <meta property="og:image" content="{% url 'home', { 'host': true } %}{{ mainImage|trim('/') }}" />
+                                    {% endmetadata %}
+                                </div>
+                                {% endif %}
+                            {% endfor %}
+                        {% endif %}
+                        {{ newsitem.body|nofollow|raw }}
+                        <div class="clearfix"></div>
+                        {% if images|length > 1 %}
+                            <ul class="thumbnails">
+                            {% for image in images %}
+                            {% if not loop.first %}
+                            <li class="span2">
+                                <a data-fancybox-group="preview" class="thumbnail" itemprop="image" href="{{ image.getThumb('original') }}" title="{{ newsitem.title }}">
+                                    <img itemprop="thumbnailUrl" class="mini-image" src="{{ image.getThumb('140x0') }}" alt="{{ newsitem.title }}" />
+                                </a>
+                            </li>
+                            {% endif %}
+                            {% endfor %}
+                            </ul>
+                        {% endif %}
+                        <div class="clearfix"></div>
+                    </div>
+                </div>
+            </div>
+            {% widgets 'comments' %}
+            <div class="clearfix"></div>
+            <footer>
+                <div class="back_links">
+                    <div class="share_links">
+                        <!-- Place this tag in your head or just before your close body tag. -->
+                        <script type="text/javascript" src="https://apis.google.com/js/plusone.js">{lang: 'uk'}</script>
+
+                        <!-- Place this tag where you want the +1 button to render. -->
+                        <div class="g-plusone" data-size="small" data-annotation="none" data-href="{{ newsitem.getUrl(true) }}"></div>
+
+                        <!-- AddThis Button BEGIN -->
+                        <div class="addthis_toolbox addthis_default_style pull-right">
+                        <a class="addthis_button_vk"></a>
+                        <a class="addthis_button_facebook"></a>
+                        <a class="addthis_button_google_plusone_share"></a>
+                        <a class="addthis_button_email"></a>
+                        <a class="addthis_button_compact"></a>
+                        <a class="addthis_counter addthis_bubble_style"></a>
+                        </div>
+                        <script type="text/javascript">var addthis_config = {"data_ga_property":'UA-24897436-2'};</script>
+                        <script type="text/javascript" src="http://s7.addthis.com/js/250/addthis_widget.js#pubid=ra-5023845211c9af2d"></script>
+                        <!-- AddThis Button END -->
+                    </div>
+                    <div class="btn-group pull-left">
+                        <a class="btn" href="{{ backLink }}"><i class="icon-chevron-left"></i> Перейти у розділ: <span itemprop="articleSection">{{ category.title }}</span></a>
+                        {% for item in category.Elements.getPath() %}
+                        {% if item.depth > 0 %}
+                            <a class="btn" href="{% url 'ComNewsChannel.ShowCategory', { 'category': item.Elements } %}"><span itemprop="articleSection">{{ item.title }}</span></a>
+                        {% endif %}
+                        {% endfor %}
+                    </div>
+                    <div class="clearfix"></div>
+                </div>
+                <div id="vk_comments"></div>
+                <script type="text/javascript">
+                VK.Widgets.Comments("vk_comments", {limit: 50, width: "938", attach: "*", pageUrl: '{{ newsitem.getUrl(true) }}'}, 'newsitem{{ newsitem.id }}');
+                VK.Observer.subscribe('widgets.comments.new_comment', function(num, last_comment, date, sign) {
+                    ComNewsChannel_Webservice_News.addComment({{ newsitem.id }}, num, last_comment, date, sign);
+                });
+                VK.Observer.subscribe('widgets.comments.delete_comment', function(num, last_comment, date, sign) {
+                    ComNewsChannel_Webservice_News.removeComment({{ newsitem.id }}, num, last_comment, date, sign);
+                });
+                </script>
+            </footer>
+        </div>
+    </div>
+
+    {% widgets 'after_content' %}
+</div>

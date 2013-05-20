@@ -3,7 +3,10 @@ angular.module('ace', []).directive('ace', function() {
 
   function loadAceEditor(element, mode) {
     var editor = ace.edit($(element).find('.' + ACE_EDITOR_CLASS)[0]);
+    editor.setShowInvisibles(true); // show hidden symbols
+    editor.setFadeFoldWidgets(true);
     editor.session.setMode("ace/mode/" + mode);
+    editor.session.setUseSoftTabs(true) 
     editor.renderer.setShowPrintMargin(false);
 
     return editor;

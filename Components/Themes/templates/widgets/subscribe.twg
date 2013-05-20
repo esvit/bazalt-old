@@ -1,0 +1,13 @@
+<div class="b-widget-subscribe">
+
+    <div class="b-widget-subscribe_content">
+        <h3>{% tr %}Subscribe to the mailing list{% endtr %}</h3>
+        <div class="bz-errors alert"></div>
+
+        <div class="b-subscribe-form">
+            <input name="email" class="bz-input-mail"{% if not user.isGuest() and user.email %} value="{{ user.email }}"{% endif %} />
+            <input type="button" class="bz-input-submit btn btn-primary btn-small" disabled="disabled" name="submit" value="{% tr %}Subscribe{% endtr %}" />
+        </div>
+
+    </div>
+</div>

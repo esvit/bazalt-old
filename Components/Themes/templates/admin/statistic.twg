@@ -1,0 +1,116 @@
+<div id="news_statistic" style="margin: 4px 0;">{% tr %}Loading...{% endtr %}</div>
+
+<div id="news_statistic_tooltip" style="padding: 4px; text-align: right">
+    <strong style="padding: 4px;">{% tr %}Date:{% endtr %} <span class="date">{{ last.label }}</span></strong>
+    <div style="padding: 4px;">{% tr %}Count:{% endtr %} <span class="count">{{ last.cnt }}</span></div>
+    <div id="legend"></div>
+</div>
+
+<style>
+.yAxis .tickLabel {
+    margin-right: -5px;
+    font-family: Tahoma;
+    font-size: 10px;
+    color: #999;
+}
+.xAxis .tickLabel {
+    margin-top: -20px;
+    font-family: Tahoma;
+    font-size: 10px;
+}
+</style>
+
+<script>
+$(function() {
+
+    function parseDate(input) {
+      var parts = input.match(/(\d{4})-(\d{2})-(\d{2}) (.*)/);
+
+      return new Date(parts[1], parts[2]-1, parts[3]);
+    }
+
+    $('#news_statistic').css({
+        height: '150px',
+        width: '100%'
+    });
+    var visits = [];
+    var result = [
+        {% for item in statistic %}
+            { date: '{{ item.created_at }}', cnt: {{ item.cnt }}, label: '{{ item.label }}', user: '{{ item.user_id }}', user: '{{ item.user_id }}', user_name: '{{ item.user_name }}' }
+            {% if not loop.last %},{% endif %}
+        {% endfor %}
+    ];
+    for (var i in result) {
+        var day = parseDate(result[i].date),
+            data = [ day, result[i].cnt, result[i].label ],
+            inserted = false;
+
+        for (var j = 0, max = visits.length; j < max; j++) {
+            if (visits[j].label == result[i].user_name) {
+                visits[j].data.push(data);
+                inserted = true;
+                break;
+            }
+        }
+        if (!inserted) {
+            visits.push({
+                label: result[i].user_name,
+                data: [data]
+            });
+        }
+    }
+    $.plot($('#news_statistic'), visits,
+    {
+        shadowSize: 0,
+       // colors: ["#25A510", '#0077CC'],
+        legend: { show: false },
+        xaxes: [ { mode: 'time', color: '#25A510', timeFormat: "%d-%m-%y", minTickSize: [1, 'day'] } ],
+        lines: { show: true, fill: true, lineWidth: 4, colors: ['rgba(37, 165, 16, 0.2)', 'rgba(230, 242, 250, 0.5)'] },
+        points: {
+            show: true,
+            fillColor: "#FFFFFF",
+            fill: false,
+            radius: 4,
+            lineWidth: 1,
+            //colors: ["#25A510", '#0077CC'],
+            symbol: function(ctx, x, y, radius, shadow) {
+                ctx.beginPath();
+                ctx.lineWidth = 1;
+                ctx.arc(x, y, 3, 0, shadow ? Math.PI : Math.PI * 2, false);
+                ctx.closePath();
+
+                ctx.fillStyle = '#0077CC';
+                ctx.fill();
+
+                ctx.stroke();
+
+                ctx.beginPath();
+                ctx.strokeStyle = '#FFFFFF';
+                ctx.lineWidth = 1;
+                ctx.arc(x, y, 4, 0, shadow ? Math.PI : Math.PI * 2, false);
+                ctx.closePath();
+            }
+        },
+        legend: {
+            container: $("#legend")
+        },
+        grid: { hoverable: true, backgroundColor: '#FFF', borderWidth: 0, tickColor: '#E7E7E7' }
+    });
+    $('#news_statistic').bind("plothover", function (event, e, pos, item) {
+        if (item && item.datapoint) {
+            var date = item.datapoint[0],
+                count = item.datapoint[1];
+
+            for (var i = 0; i < result.length; i++) {
+                var day = parseDate(result[i].date).getTime();
+                if (date == day) {
+                    $('#news_statistic_tooltip .date').html(result[i].label);
+                    $('#news_statistic_tooltip .count').html(count);
+                    break;
+                }
+            }
+        }
+    });
+
+});
+</script>

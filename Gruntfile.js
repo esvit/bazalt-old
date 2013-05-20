@@ -95,13 +95,19 @@ module.exports = function(grunt) {
                 ],
                 dest: 'assets/components/bz-switcher.js'
             },
+            'ng-ace.js': {
+                src: [
+                    'assets/modules/angular-ace/angular-ace.js'
+                ],
+                dest: 'assets/components/ng-ace.js'
+            },
             'jquery.ui.touch-punch.js': {
                 src: [
                     'assets/components/jquery-ui-touch-punch/jquery.ui.touch-punch.js'
                 ],
                 dest: 'assets/components/jquery.ui.touch-punch.js'
             },
-            'jquery.ui.touch-punch.js': {
+            'ng-infinite-scroll.js': {
                 src: [
                     'assets/components/ngInfiniteScroll/ng-infinite-scroll.js'
                 ],
@@ -132,6 +138,16 @@ module.exports = function(grunt) {
             "ckeditor/bazalt-cms": {
                 files: [
                     { flatten: true, expand: true, src: ["assets/bazalt-cms/ckeditor/bazalt-cms/*"], dest: "assets/components/ckeditor/plugins/bazalt-cms/", filter: 'isFile'}
+                ]
+            },
+            "components/ace": {
+                files: [
+                    { flatten: true, expand: true, src: ["assets/components/ace-builds/src-min-noconflict/*"], dest: "assets/components/ace/", filter: 'isFile'}
+                ]
+            },
+            "modules/angular-ace/mode-less": {
+                files: [
+                    { flatten: true, expand: true, src: ["assets/modules/angular-ace/mode-less.js"], dest: "assets/components/ace/", filter: 'isFile'}
                 ]
             },
             "themes/default": {
