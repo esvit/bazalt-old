@@ -95,6 +95,12 @@ module.exports = function(grunt) {
                 ],
                 dest: 'assets/components/bz-switcher.js'
             },
+            'colorpicker.js': {
+                src: [
+                    'assets/components/bootstrap-colorpicker/js/bootstrap-colorpicker.js'
+                ],
+                dest: 'assets/components/colorpicker.js'
+            },
             'ng-ace.js': {
                 src: [
                     'assets/modules/angular-ace/angular-ace.js'
@@ -145,9 +151,9 @@ module.exports = function(grunt) {
                     { flatten: true, expand: true, src: ["assets/components/ace-builds/src-min-noconflict/*"], dest: "assets/components/ace/", filter: 'isFile'}
                 ]
             },
-            "modules/angular-ace/mode-less": {
+            "modules/angular-ace/mode-twig": {
                 files: [
-                    { flatten: true, expand: true, src: ["assets/modules/angular-ace/mode-less.js"], dest: "assets/components/ace/", filter: 'isFile'}
+                    { flatten: true, expand: true, src: ["assets/modules/angular-ace/mode-twig.js"], dest: "assets/components/ace/", filter: 'isFile'}
                 ]
             },
             "themes/default": {
@@ -183,6 +189,7 @@ module.exports = function(grunt) {
                             'App/**',
                             'assets/components/*.js',
                             'assets/components/ckeditor/**',
+                            'assets/components/bootstrap/less/*',
                             'assets/modules/**',
                             'assets/*.js',
                             'Components/**',

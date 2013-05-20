@@ -192,6 +192,7 @@ CREATE TABLE IF NOT EXISTS `cms_sites_ref_users` (
 DROP TABLE IF EXISTS `cms_themes`;
 CREATE TABLE `cms_themes` (
 `id` VARCHAR(50) NOT NULL DEFAULT 'default' COLLATE 'utf8_unicode_ci',
+`settings` TEXT NULL DEFAULT NULL,
 `is_active` TINYINT(1) UNSIGNED NOT NULL DEFAULT '0',
 `is_hidden` TINYINT(1) UNSIGNED NOT NULL DEFAULT '0',
 PRIMARY KEY (`id`)

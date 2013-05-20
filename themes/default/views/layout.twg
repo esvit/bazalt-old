@@ -9,7 +9,7 @@
     <meta name="viewport" content="width=device-width">
     <link rel='stylesheet' type='text/css' href='http://fonts.googleapis.com/css?family=Open+Sans+Condensed:300&subset=latin,cyrillic-ext,cyrillic' />
 
-    <link rel="stylesheet" type="text/css" href="/themes/default/assets/css/theme.css"/>
+    <link rel="stylesheet" type="text/css" href="/themes/default/assets/less/theme.less.css"/>
     
     <link rel="stylesheet" type="text/css" href="/themes/default/assets/css/fotorama.css"/>
     <link rel="stylesheet" type="text/css" href="/themes/default/assets/css/nivo-slider.css"/>

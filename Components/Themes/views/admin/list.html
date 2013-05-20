@@ -1,81 +1,13 @@
 <div class="row">
-    <div class="col-span-3">
-        <ul class="nav nav-pills nav-stacked nav-list">
-            <li ng-repeat="file in files"
-                ng-class="{'active': file.name == selectedFile.name, 'nav-header': file.type=='category'}">
-                <a href="javascript:;" ng-show="file.type=='file'" ng-click="openFile(file)">
-                    {[file.title|default:file.name]}
-                </a>
-                <span ng-show="file.type=='category'">{[file.title]}
-                    <help>
-                        Test
-                    </help>
-                </span>
+    <!--div class="col-span-3">
+    </div-->
+    <div class="col-span-12">
+        <div class="page-header"><h2>Themes</h2></div>
+        
+        <ul>
+            <li ng-repeat="theme in themes">
+                <a ng-href="#!/themes/{[ theme.id ]}">{[ theme.title ]}</a>
             </li>
         </ul>
     </div>
-    <div class="col-span-9">
-        <div ng-show="file.id">
-            <div ng-show="file.canUseLayout">
-                <div class="page-header">
-                    <h2>Available Templates
-                    <button class="btn btn-success">Edit raw file</button>
-                    </h2>
-                </div>
-                <div class="templates row">
-                    <div class="col-span-3" ng-repeat="layout in layouts">
-                        <a href="javascript:;" class="thumbnail">
-                            <div class="template" ng-bind-html-unsafe="layout"></div>
-                        </a>
-                    </div>
-                </div>
-                
-            </div>
-            <div ng-hide="file.canUseLayout">
-                <div class="btn-toolbar">
-                    <div class="btn-group">
-                        <button ng-show="selectedFile.id" class="btn btn-success" ng-click="saveFile(file)">Save</button>
-                    </div>
-                </div>
-                <div ace="file.contentType" ng-model="file.content">
-                    <textarea name="file[content]"></textarea>
-                </div>
-            </div>
-        </div>
-        <div ng-hide="file.id">
-            <div class="page-header"><h2>Theme editor</h2></div>
-            <p>Edit files</p>
-        </div>
-    </div>
 </div>
-
-<style type='text/css'>
-.ace-editor {
-    border: 1px solid #E3E3E3;
-    border-radius: 0;
-    box-shadow: 0 1px 1px rgba(0, 0, 0, 0.05) inset;
-    min-height: 500px;
-    width: 100%;
-}
-
-.templates span {
-    background-color: #DDDDDD;
-    display: block;
-    margin-bottom: 5px;
-    width: 100%;
-}
-.templates a {
-    display: block;
-    height: 230px;
-    overflow: hidden;
-    margin-bottom: 15px;
-}
-.template [class*="col-span-"] {
-    padding-left: 2px;
-    padding-right: 3px;
-}
-.template .row {
-    margin-left: -2px;
-    margin-right: -3px;
-}
-</style>

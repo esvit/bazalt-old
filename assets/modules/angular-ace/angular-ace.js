@@ -1,13 +1,46 @@
 angular.module('ace', []).directive('ace', function() {
   var ACE_EDITOR_CLASS = 'ace-editor';
 
+  
+    var event = ace.require("ace/lib/event");
+  
   function loadAceEditor(element, mode) {
-    var editor = ace.edit($(element).find('.' + ACE_EDITOR_CLASS)[0]);
+    var container = $(element).find('.' + ACE_EDITOR_CLASS)[0];
+    var editor = ace.edit(container);
     editor.setShowInvisibles(true); // show hidden symbols
     editor.setFadeFoldWidgets(true);
     editor.session.setMode("ace/mode/" + mode);
     editor.session.setUseSoftTabs(true) 
     editor.renderer.setShowPrintMargin(false);
+    
+    
+    event.addListener(container, "dragover", function(e) {
+        var types = e.dataTransfer.types;
+        if (types && Array.prototype.indexOf.call(types, 'Files') !== -1)
+            return event.preventDefault(e);
+    });
+
+    event.addListener(container, "drop", function(e) {
+        var file;
+        try {
+            file = e.dataTransfer.files[0];
+            if (window.FileReader) {
+                var reader = new FileReader();
+                reader.onload = function() {
+                    //var mode = modelist.getModeForPath(file.name);
+
+                    editor.session.doc.setValue(reader.result);
+                    //modeEl.value = mode.name;
+                    //env.editor.session.setMode(mode.mode);
+                    //env.editor.session.modeName = mode.name;
+                };
+                reader.readAsText(file);
+            }
+            return event.preventDefault(e);
+        } catch(err) {
+            return event.stopEvent(e);
+        }
+    });
 
     return editor;
   }

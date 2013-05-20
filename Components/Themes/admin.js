@@ -2,20 +2,21 @@
 
 define([
     'ace/ace',
-    'ng-ace'
+    'ng-ace',
+    'colorpicker'
 ], function() {
 
     angular.module('Component.Themes.Admin', ['ace']).
         config(['$routeProvider', function($routeProvider, $locationProvider) {
             $routeProvider
                 .when('/themes', {
-                    controller: 'FileCtrl',
+                    controller: 'ThemesCtrl',
                     templateUrl: '/Components/Themes/views/admin/list.html',
                     reloadOnSearch: false
                 })
-                .when('/themes/edit:id', {
+                .when('/themes/:theme', {
                     controller: 'FileCtrl',
-                    templateUrl: '/Components/News/views/admin/edit.html',
+                    templateUrl: '/Components/Themes/views/admin/theme.html',
                     reloadOnSearch: false
                 });
         }])
@@ -25,7 +26,7 @@ define([
                 component: 'Themes',
                 url: '#!/themes',
                 title: 'Themes',
-                icon: 'icon-reorder'
+                icon: 'icon-leaf'
             });
         })
     .factory('ThemeService', function($resource) {
@@ -34,39 +35,62 @@ define([
             });
     })
     .factory('FileService', function($resource) {
-            return $resource('/rest.php/themes/:theme_id/file/:id', { 'id': '@', 'theme_id': '@' });
+            return $resource('/rest.php/themes/:theme_id/file', { 'theme_id': '@' });
     })
     .factory('LayoutService', function($resource) {
             return $resource('/rest.php/themes/layout', {});
     })
-    .controller('FileCtrl', function($scope, $routeParams, FileService, $location, LayoutService) {
+    .controller('ThemesCtrl', function($scope, ThemeService) {
+        $scope.activateMenu('Themes'); // activate admin menu
+
+        $scope.themes = ThemeService.query();
+    })
+    .controller('FileCtrl', function($scope, $routeParams, ThemeService, FileService, $location, LayoutService) {
         $scope.activateMenu('Themes'); // activate admin menu
 
         $scope.layouts = LayoutService.get();
 
         $scope.files = FileService.query({ 'theme_id': 1 }, function(files) {
-            if (typeof $routeParams.name != 'undefined') {
+            if (typeof $routeParams.file != 'undefined') {
                 angular.forEach(files, function(item) {
-                    if (item.name == $routeParams.name) {
+                    if (item.file == $routeParams.file) {
                         $scope.openFile(item);
                     }
                 });
+            } else {
+                $scope.settings_file = '/themes/default/settings.html';
+                $scope.showSettings();
             }
         });
 
         $scope.openFile = function(file) {
-            if ($scope.selectedFile && $scope.selectedFile.name == file.name) {
+            if ($scope.file && $scope.file.file == file.file) {
+                $scope.settings_file = '/themes/default/settings.html';
                 return;
             }
-            $scope.selectedFile = file;
-            $location.search({ 'name': file.name });
-            $scope.file = FileService.get({ 'theme_id': 1, 'id': file.id }, function(file) {
-                
+            $scope.settings_file = null;
+            $scope.file = file;
+            $location.search({ 'file': file.file });
+            FileService.get({ 'theme_id': 'default', 'file': file.file, 'action': 'loadFile'   }, function(file) {
+                $scope.file.content = file.content;
+                $scope.file.contentType = file.contentType;
             });
             return false;
         }
         $scope.saveFile = function(file) {
-            file.$save({ 'theme_id': file.theme_id, 'id': file.id });
+            file.$save({ 'theme_id': file.theme_id });
+        }
+        $scope.saveSettings = function() {
+            $scope.theme.$save();
+        }
+        $scope.showSettings = function(file) {
+            $location.search({});
+            $scope.file = null;
+            ThemeService.query(function(data) {
+                $scope.theme = data[0];
+            });
+            
+            $scope.settings_file = '/themes/default/settings.html';
         }
     });
 

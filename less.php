@@ -17,4 +17,10 @@ if (pathinfo($file, PATHINFO_EXTENSION) !== 'less'){
 
 header("Content-type: text/css");
 $less = new lessc();
-echo $less->compileFile($file);
+/*$less->setVariables(array(
+  "color" => "red",
+  "base" => "960px"
+));
+*/
+$content = $less->compileFile($file);
+echo $content;

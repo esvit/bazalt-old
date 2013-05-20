@@ -15,4 +15,16 @@ class Component extends CMS\Component
             $application->registerJsComponent('Component.Themes.Admin', relativePath(__DIR__ . '/admin.js'));
         }
     }
+
+    public static function recompileLess($file, CMS\Model\Theme $theme)
+    {
+        using('Framework.Vendors.lessphp');
+        $less = new \lessc();
+        $less->addImportDir(SITE_DIR . '/themes/' . $theme->id . '/assets/less');
+        $less->addImportDir(SITE_DIR . '/assets/components/bootstrap/less');
+        $less->setVariables((array)$theme->settings);
+
+        $content = $less->compileFile($file);
+        file_put_contents($file . '.css', $content);
+    }
 }
