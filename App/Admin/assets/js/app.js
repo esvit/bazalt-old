@@ -210,6 +210,6 @@ require(['bazalt-cms', 'bootstrap', 'bz-switcher'].concat(modules), function(baz
         });
     });
 
-    angular.bootstrap(document, ['admin']);
+    angular.bootstrap(document.documentElement, ['admin']);
 
 });

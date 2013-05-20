@@ -69,7 +69,7 @@ define('site', [].concat(modules), function() {
        });
     }]);
 
-    angular.bootstrap(document, ['main']);
+    angular.bootstrap(document.documentElement, ['main']);
 
     return app;
 });

@@ -13,6 +13,6 @@ require(['angular', 'bazalt-cms'], function() {
         }
     });
 
-    angular.bootstrap(document, ['loginApp']);
+    angular.bootstrap(document.documentElement, ['loginApp']);
 
 });
