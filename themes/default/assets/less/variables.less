@@ -36,8 +36,6 @@
 
 // Links
 // -------------------------
-@linkColorHover:        darken(@linkColor, 15%);
-
 
 // Typography
 // -------------------------
@@ -45,9 +43,8 @@
 @serifFontFamily:       Georgia, "Times New Roman", Times, serif;
 @monoFontFamily:        Monaco, Menlo, Consolas, "Courier New", monospace;
 
-@baseFontSize:          14px;
 @baseFontFamily:        @sansFontFamily;
-@baseLineHeight:        20px;
+@baseLineHeight:        @baseFontSize * 1.2;
 @altFontFamily:         @serifFontFamily;
 
 @headingsFontFamily:    inherit; // empty to use BS default, @baseFontFamily
@@ -74,10 +71,8 @@
 
 // Tables
 // -------------------------
-@tableBackground:                   transparent; // overall background-color
 @tableBackgroundAccent:             #f9f9f9; // for striping
 @tableBackgroundHover:              #f5f5f5; // for hover
-@tableBorder:                       #ddd; // table and cell border
 
 // Buttons
 // -------------------------
@@ -183,11 +178,6 @@
 @navbarBorder:                    darken(@navbarBackground, 12%);
 
 @navbarText:                      #777;
-@navbarLinkColor:                 #777;
-@navbarLinkColorHover:            @grayDark;
-@navbarLinkColorActive:           @gray;
-@navbarLinkBackgroundHover:       transparent;
-@navbarLinkBackgroundActive:      darken(@navbarBackground, 5%);
 
 @navbarBrandColor:                @navbarLinkColor;
 
