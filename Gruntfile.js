@@ -5,6 +5,28 @@ module.exports = function(grunt) {
     // Project configuration.
     grunt.initConfig({
         pkg: grunt.file.readJSON('package.json'),
+        php: {
+            dist: {
+                options: {
+                    port: 8000,
+                    base: '.',
+                    open: true,
+                    keepalive: true
+                }
+            }
+        },
+        phpunit: {
+            unit: {
+                configuration: 'Tests/travis/mysql.xml'
+            },
+            options: {
+                coverageHtml: 'Tests/coverage/',
+                bin: 'phpunit',
+                bootstrap: 'tests/Bootstrap.php',
+                colors: true,
+                testdox: true
+            }
+        },
         uglify: {
             options: {
                 compress: !isDev,
@@ -219,6 +241,8 @@ module.exports = function(grunt) {
     });
 
     // Load the plugin that provides the "uglify" task.
+    grunt.loadNpmTasks('grunt-php');
+    grunt.loadNpmTasks('grunt-phpunit');
     grunt.loadNpmTasks('grunt-contrib-uglify');
     grunt.loadNpmTasks('grunt-contrib-copy');
     grunt.loadNpmTasks('grunt-contrib-less');
