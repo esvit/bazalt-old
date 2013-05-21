@@ -1,124 +1,125 @@
-<h4>Base style</h4>
+<ul class="nav nav-tabs" ng-init="tab = 'colors'">
+  <li ng-class="{'active': tab == 'colors'}" class="active"><a href="" ng-click="tab = 'colors'">Colors</a></li>
+  <li ng-class="{'active': tab == 'layout'}"><a href="" ng-click="tab = 'layout'">Layout</a></li>
+</ul>
 
-<div class="one-settings">
-    Background color:
-    <div class="input-group color col col-lg-9">
-        <span class="input-group-addon"><i style="background-color: {[theme.settings.bodyBackground]}"></i></span>
-        <input type="text" colorpicker ng-model="theme.settings.bodyBackground" />
+<div class="tab-content">
+    <div ng-class="{'in active': tab == 'colors'}" class="tab-pane fade">
+        <h4>Base style</h4>
+
+        <div class="one-settings" ng-init="theme.settings.bodyBackground = theme.settings.bodyBackground || '#fff'">
+            Background color:
+            <div class="input-group color col col-lg-9">
+                <span class="input-group-addon"><i style="background-color: {[theme.settings.bodyBackground]}"></i></span>
+                <input type="text" colorpicker ng-model="theme.settings.bodyBackground" />
+            </div>
+        </div>
+
+        <div class="one-settings" ng-init="theme.settings.baseFontFamily = theme.settings.baseFontFamily || 'Arial, Helvetica, sans-serif'">
+            Base font:
+            <input type="text" fontpicker ng-model="theme.settings.baseFontFamily" />
+        </div>
+
+        <div class="one-settings" ng-init="theme.settings.textColor = theme.settings.textColor || '#333'">
+            Text color:
+            <div class="input-group color col col-lg-9">
+                <span class="input-group-addon"><i style="background-color: {[theme.settings.textColor]}"></i></span>
+                <input type="text" colorpicker ng-model="theme.settings.textColor" />
+            </div>
+        </div>
+
+        <div class="one-settings" ng-init="theme.settings.linkColor = theme.settings.linkColor || '#08c'">
+            Link color:
+            <div class="input-group color col col-lg-9">
+                <span class="input-group-addon"><i style="background-color: {[theme.settings.linkColor]}"></i></span>
+                <input type="text" colorpicker ng-model="theme.settings.linkColor" />
+            </div>
+        </div>
+
+        <div class="one-settings">
+            Link color hover:
+            <div class="input-group color col col-lg-9">
+                <span class="input-group-addon"><i style="background-color: {[theme.settings.linkColorHover]}"></i></span>
+                <input type="text" colorpicker ng-model="theme.settings.linkColorHover" />
+            </div>
+        </div>
+
+        <div class="one-settings" ng-init="theme.settings.baseFontSize = theme.settings.baseFontSize || '14px'">
+            Font-size:
+            <input type="text" ng-model="theme.settings.baseFontSize" />
+        </div>
+
+        <br />
+        <h4>Navigation style</h4>
+
+        <div class="one-settings">
+            Link color:
+            <div class="input-group color col col-lg-9">
+                <span class="input-group-addon"><i style="background-color: {[theme.settings.navbarLinkColor]}"></i></span>
+                <input type="text" colorpicker ng-model="theme.settings.navbarLinkColor" />
+            </div>
+        </div>
+
+        <div class="one-settings">
+            Link color hover:
+            <div class="input-group color col col-lg-9">
+                <span class="input-group-addon"><i style="background-color: {[theme.settings.navbarLinkColorHover]}"></i></span>
+                <input type="text" colorpicker ng-model="theme.settings.navbarLinkColorHover" />
+            </div>
+        </div>
+
+        <div class="one-settings">
+            Link color active:
+            <div class="input-group color col col-lg-9">
+                <span class="input-group-addon"><i style="background-color: {[theme.settings.navbarLinkColorActive]}"></i></span>
+                <input type="text" colorpicker ng-model="theme.settings.navbarLinkColorActive" />
+            </div>
+        </div>
+
+        <div class="one-settings">
+            Link background color hover:
+            <div class="input-group color col col-lg-9">
+                <span class="input-group-addon"><i style="background-color: {[theme.settings.navbarLinkBackgroundHover]}"></i></span>
+                <input type="text" colorpicker ng-model="theme.settings.navbarLinkBackgroundHover" />
+            </div>
+        </div>
+
+        <div class="one-settings">
+            Link background color active:
+            <div class="input-group color col col-lg-9">
+                <span class="input-group-addon"><i style="background-color: {[theme.settings.navbarLinkBackgroundActive]}"></i></span>
+                <input type="text" colorpicker ng-model="theme.settings.navbarLinkBackgroundActive" />
+            </div>
+        </div>
+
+        <br />
+        <h4>Table style</h4>
+
+        <div class="one-settings" ng-init="theme.settings.tableBackground = theme.settings.tableBackground || 'transparent'">
+            Background color:
+            <div class="input-group color col col-lg-9">
+                <span class="input-group-addon"><i style="background-color: {[theme.settings.tableBackground]}"></i></span>
+                <input type="text" colorpicker ng-model="theme.settings.tableBackground" />
+            </div>
+        </div>
+
+        <div class="one-settings" ng-init="theme.settings.tableBorder = theme.settings.tableBorder || '#ddd'">
+            Border color:
+            <div class="input-group color col col-lg-9">
+                <span class="input-group-addon"><i style="background-color: {[theme.settings.tableBorder]}"></i></span>
+                <input type="text" colorpicker ng-model="theme.settings.tableBorder" />
+            </div>
+        </div>
+    </div>
+    <div ng-class="{'in active': tab == 'layout'}" class="tab-pane fade">
+        <h4>Available Templates</h4>
+
+        <div class="templates row">
+            <div class="col-span-3" ng-repeat="layout in layouts">
+                <a ng-class="{'active': theme.settings.layout == layout}" href="javascript:;" ng-click="theme.settings.layout = layout" class="thumbnail">
+                    <div class="template" raw="layout"></div>
+                </a>
+            </div>
+        </div>
     </div>
 </div>
-
-<div class="one-settings">
-    Base font:
-    <input type="text" fontpicker ng-model="theme.settings.baseFontFamily" />
-</div>
-
-<div class="one-settings">
-    Text color:
-    <div class="input-group color col col-lg-9">
-        <span class="input-group-addon"><i style="background-color: {[theme.settings.textColor]}"></i></span>
-        <input type="text" colorpicker ng-model="theme.settings.textColor" />
-    </div>
-</div>
-
-<div class="one-settings">
-    Link color:
-    <div class="input-group color col col-lg-9">
-        <span class="input-group-addon"><i style="background-color: {[theme.settings.linkColor]}"></i></span>
-        <input type="text" colorpicker ng-model="theme.settings.linkColor" />
-    </div>
-</div>
-
-<div class="one-settings">
-    Link color hover:
-    <div class="input-group color col col-lg-9">
-        <span class="input-group-addon"><i style="background-color: {[theme.settings.linkColorHover]}"></i></span>
-        <input type="text" colorpicker ng-model="theme.settings.linkColorHover" />
-    </div>
-</div>
-
-<div class="one-settings">
-    Font-size:
-    <input type="text" ng-model="theme.settings.baseFontSize" />
-</div>
-
-<br />
-<h4>Navigation style</h4>
-
-<div class="one-settings">
-    Link color:
-    <div class="input-group color col col-lg-9">
-        <span class="input-group-addon"><i style="background-color: {[theme.settings.navbarLinkColor]}"></i></span>
-        <input type="text" colorpicker ng-model="theme.settings.navbarLinkColor" />
-    </div>
-</div>
-
-<div class="one-settings">
-    Link color hover:
-    <div class="input-group color col col-lg-9">
-        <span class="input-group-addon"><i style="background-color: {[theme.settings.navbarLinkColorHover]}"></i></span>
-        <input type="text" colorpicker ng-model="theme.settings.navbarLinkColorHover" />
-    </div>
-</div>
-
-<div class="one-settings">
-    Link color active:
-    <div class="input-group color col col-lg-9">
-        <span class="input-group-addon"><i style="background-color: {[theme.settings.navbarLinkColorActive]}"></i></span>
-        <input type="text" colorpicker ng-model="theme.settings.navbarLinkColorActive" />
-    </div>
-</div>
-
-<div class="one-settings">
-    Link background color hover:
-    <div class="input-group color col col-lg-9">
-        <span class="input-group-addon"><i style="background-color: {[theme.settings.navbarLinkBackgroundHover]}"></i></span>
-        <input type="text" colorpicker ng-model="theme.settings.navbarLinkBackgroundHover" />
-    </div>
-</div>
-
-<div class="one-settings">
-    Link background color active:
-    <div class="input-group color col col-lg-9">
-        <span class="input-group-addon"><i style="background-color: {[theme.settings.navbarLinkBackgroundActive]}"></i></span>
-        <input type="text" colorpicker ng-model="theme.settings.navbarLinkBackgroundActive" />
-    </div>
-</div>
-
-<br />
-<h4>Table style</h4>
-
-<div class="one-settings">
-    Background color:
-    <div class="input-group color col col-lg-9">
-        <span class="input-group-addon"><i style="background-color: {[theme.settings.tableBackground]}"></i></span>
-        <input type="text" colorpicker ng-model="theme.settings.tableBackground" />
-    </div>
-</div>
-
-<div class="one-settings">
-    Border color:
-    <div class="input-group color col col-lg-9">
-        <span class="input-group-addon"><i style="background-color: {[theme.settings.tableBorder]}"></i></span>
-        <input type="text" colorpicker ng-model="theme.settings.tableBorder" />
-    </div>
-</div>
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-

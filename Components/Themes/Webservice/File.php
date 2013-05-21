@@ -12,57 +12,6 @@ use Framework\CMS\Webservice\Response,
  */
 class File extends CMS\Webservice\Rest
 {
-    protected static $files = [
-        [
-            'type' => 'category',
-            'title' => 'Views'
-        ],
-        [
-            'id' => 5,
-            'type' => 'file',
-            'name' => 'views/layout.twg',
-            'title' => 'Базова сторінка',
-            'canUseLayout' => true,
-            'contentType' => 'twig'
-        ],
-        [
-            'type' => 'category',
-            'title' => 'Галерея'
-        ],
-        [
-            'id' => 1,
-            'type' => 'file',
-            'name' => 'views/gallery/albums.twg',
-            'title' => 'Список альбомів',
-            'contentType' => 'html'
-        ],
-        [
-            'id' => 2,
-            'type' => 'file',
-            'name' => 'views/gallery/album.twg',
-            'title' => 'Альбом',
-            'contentType' => 'html'
-        ],
-        [
-            'type' => 'category',
-            'title' => 'Styles'
-        ],
-        [
-            'id' => 3,
-            'type' => 'file',
-            'name' => 'assets/css/app.css',
-            'title' => 'app.css',
-            'contentType' => 'css'
-        ],
-        [
-            'id' => 4,
-            'type' => 'file',
-            'name' => 'assets/less/main.less',
-            'title' => 'main.less',
-            'contentType' => 'less'
-        ]
-    ];
-
     /**
      * @method GET
      * @priority 10
@@ -103,6 +52,7 @@ class File extends CMS\Webservice\Rest
         if (pathinfo($file_id, PATHINFO_EXTENSION) == 'less') {
             \Components\Themes\Component::recompileLess(SITE_DIR . $file_id, CMS\Model\Theme::getById('default'));
         }
+        \Components\Themes\Component::recompileLess(SITE_DIR . '/themes/' . $theme->id . '/assets/less/theme.less', $theme);
 
         return new Response(200, $data);
     }

@@ -25,7 +25,7 @@
 </div>
 <div class="row">
     <div class="col-span-12">
-        <span style="height: 65px;"></span>
+        {% block body 'body' %}
     </div>
 </div>
 <div class="row">
