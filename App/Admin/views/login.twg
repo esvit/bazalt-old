@@ -56,8 +56,8 @@
                 <div class="control-group">
                     <div class="controls">
                         <button ng-disabled="loginForm.$pristine || is_submitting" disabled="disabled" class="btn btn-success">
-                            <span class="ng-cloak" ng-show="!is_submitting">Увійти</span>
-                            <span ng-show="is_submitting">Зачекайте...</span>
+                            <span class="ng-cloak" ng-show="!is_submitting">Login</span>
+                            <span ng-show="is_submitting">Please wait...</span>
                         </button>
                     </div>
                 </div>
@@ -65,7 +65,7 @@
             
             <div ng-cloak ng-show="$user.id">
                 <h4 class="text-danger">Warning!</h4>
-                <p>Ви увійшли як: <strong>{[$user.login]}</strong>, але у Вас немає прав доступу
+                <p>You are signed in as: <strong> {[$ user.login]} </ strong>, but you do not have administrative permissions.
                 <p><button class="btn" ng-click="$user.logout()"><i class="icon-off"></i> Logout</button>
                    <a class="btn btn-link" href="/">Go away</a>
             </div>

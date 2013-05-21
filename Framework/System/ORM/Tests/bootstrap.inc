@@ -14,7 +14,15 @@ Framework\Core\Autoload::registerNamespace('ORMTest', dirname(__FILE__));
 Cache::Singleton()->initCache('Cache_Memcache_Adapter', array('host' => 'localhost', 'port' => 11211));
 Cache::Singleton()->salt('tests'); // cache salt, for memcache*/
 
-$connectionString = new ORM_Adapter_Mysql(array('server' => '127.0.0.1', 'database' => 'orm_tests_db', 'username' => 'root', 'password' => ''));
+$dbParams = array(
+    'server' => $GLOBALS['db_host'],
+    'username' => $GLOBALS['db_username'],
+    'password' => $GLOBALS['db_password'],
+    'database' => $GLOBALS['db_name'],
+    'port' => $GLOBALS['db_port']
+);
+
+$connectionString = new ORM_Adapter_Mysql($dbParams);
 ORM_Connection_Manager::add($connectionString, 'test');
 
 // Autoloading is not available if using PHP in CLI interactive mode.

@@ -210,6 +210,7 @@ module.exports = function(grunt) {
                         src: [
                             'App/**',
                             'assets/components/*.js',
+                            'assets/components/ace/**',
                             'assets/components/ckeditor/**',
                             'assets/components/bootstrap/less/*',
                             'assets/modules/**',
