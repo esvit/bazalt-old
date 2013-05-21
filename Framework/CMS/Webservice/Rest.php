@@ -51,4 +51,26 @@ abstract class Rest extends \Tonic\Resource
             default:
         }
     }
+
+    /**
+     * Condition method for the @secure annotation that checks the requests HTTP
+     * authentication details against the username and password given in the annotation.
+     *
+     * @param str $username
+     * @param str $password
+     * @throws UnauthorizedException
+     */
+    function secure($username)
+    {
+        
+        print_r(func_get_args());exit;
+        if (
+            isset($_SERVER['PHP_AUTH_USER']) && $_SERVER['PHP_AUTH_USER'] == $username &&
+            isset($_SERVER['PHP_AUTH_PW']) && $_SERVER['PHP_AUTH_PW'] == $password
+        ) {
+            return;
+        }
+        #return new Response(401, 'No entry', array('wwwAuthenticate' => 'Basic realm="My Realm"'));
+        throw new UnauthorizedException('No entry');
+    }
 }

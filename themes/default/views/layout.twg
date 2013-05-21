@@ -1,61 +1,47 @@
-<!DOCTYPE html>
-<!--[if lt IE 7]>      <html class="no-js lt-ie9 lt-ie8 lt-ie7"> <![endif]-->
-<!--[if IE 7]>         <html class="no-js lt-ie9 lt-ie8"> <![endif]-->
-<!--[if IE 8]>         <html class="no-js lt-ie9"> <![endif]-->
-<!--[if gt IE 8]><!--> <html class="no-js"> <!--<![endif]-->
-<head>
-    <meta name="keywords" content="{{ _meta.keywords }}">
-    <meta name="description" content="{{ _meta.description }}">
-    <meta name="viewport" content="width=device-width">
-    <link rel='stylesheet' type='text/css' href='http://fonts.googleapis.com/css?family=Open+Sans+Condensed:300&subset=latin,cyrillic-ext,cyrillic' />
-
-    <link rel="stylesheet" type="text/css" href="/themes/default/assets/less/theme.less.css"/>
-    
+{% extends 'master.layout.twg' %}
+{% block head %}
     <link rel="stylesheet" type="text/css" href="/themes/default/assets/css/fotorama.css"/>
     <link rel="stylesheet" type="text/css" href="/themes/default/assets/css/nivo-slider.css"/>
 
-
-    <script data-main="site" src="/assets/require.js"></script>
     <script src="/themes/default/assets/js/fotorama.js"></script>
     <script src="/themes/default/assets/js/jquery.nivo.slider.js"></script>
-</head>
-<body>
+{% endblock head %}
+{% block body %}
 
-    <div class="wrapper">
-        <div class="wrapper-container">
-            <div class="container page-heading">
-                <div class="row">
-                    <div class="span12">
-                        <div class="pull-right">
-                        {% widgets 'main-menu' %}
-                        </div>
-
-                        <a class="logo" href="/">
-                            <strong>Благодіти</strong>
-                            Вінницька ініціативна група
-                        </a>
-                    </div>
-                </div>
-            </div>
-
-            <div class="clearfix">
-                <div id="ng-view" data-ng-view ng-animate="{enter: 'view-enter'}">
-                {{content|raw}}
-                </div>
-            </div>
-        </div>
-    </div>
-    <div class="page-footer">
-        <div class="container">
+<div class="wrapper">
+    <div class="wrapper-container">
+        <div class="container page-heading">
             <div class="row">
                 <div class="span12">
                     <div class="pull-right">
-                        <a href="http://mistinfo.com/">За підтримки MistInfo</a>
+                    {% widgets 'main-menu' %}
                     </div>
-                    {% widgets 'footer-menu' %}
+
+                    <a class="logo" href="/">
+                        <strong>Благодіти</strong>
+                        Вінницька ініціативна група
+                    </a>
                 </div>
             </div>
         </div>
+
+        <div class="clearfix">
+            <div id="ng-view" data-ng-view ng-animate="{enter: 'view-enter'}">
+            {{content|raw}}
+            </div>
+        </div>
     </div>
-</body>
-</html>
+</div>
+<div class="page-footer">
+    <div class="container">
+        <div class="row">
+            <div class="span12">
+                <div class="pull-right">
+                    <a href="http://mistinfo.com/">За підтримки MistInfo</a>
+                </div>
+                {% widgets 'footer-menu' %}
+            </div>
+        </div>
+    </div>
+</div>
+{% endblock body %}

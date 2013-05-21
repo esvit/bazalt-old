@@ -15,9 +15,11 @@ bazaltCMS.directive('colorpicker', function() {
                 };
 
                 controller.$render = function() {
-                    var color = element.data('colorpicker').color;
-                    color.setColor(controller.$viewValue);
-                    element.val(color.toHex());
+                    if (controller.$viewValue != null) {
+                        var color = element.data('colorpicker').color;
+                        color.setColor(controller.$viewValue);
+                        element.val(color.toHex());
+                    }
                     /*return element.colorpicker().on('changeColor', function(e) {
                         if(updateModel) updateModel(e.color.toHex());
                     });*/

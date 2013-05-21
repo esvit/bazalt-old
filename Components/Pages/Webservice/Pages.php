@@ -81,6 +81,7 @@ class Pages extends CMS\Webservice\Rest
      * @method GET
      * @provides application/json
      * @json
+     * @secure CMS\Bazalt::ACL_CAN_LOGIN CMS\Bazalt::ACL_HAS_ADMIN_PANEL_ACCESS
      * @return \Tonic\Response
      */
     public function get()
