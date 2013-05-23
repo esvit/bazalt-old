@@ -8,6 +8,7 @@ require(['angular', 'bazalt-cms'], function() {
 
     app.controller('LoginCtrl', function ($scope, $location, $session) {
         $scope.login = function() {
+            $scope.is_submitting = true;
             $location.path('/');
             location.reload();
         }

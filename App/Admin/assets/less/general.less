@@ -66,7 +66,6 @@ h2 {
 
     &:hover.with-btn, &.with-btn.active {
         padding-right: 34px;
-        overflow: hidden;
         a.btn-delete, a {
             display: block;
         }
@@ -86,7 +85,7 @@ h2 {
             position: absolute;
             right: 0;
             top: 0;
-            z-index: 100;
+            z-index: 10;
             border: 0;
             margin: 0;
         }
@@ -373,6 +372,13 @@ li.nav-form.nav-header {
             background-image: url('../img/preloader.gif');
             background-position: center center;
             background-repeat: no-repeat;
+        }
+        span {
+            position: absolute;
+            left: 50%;
+            top: 50%;
+            margin-left: 30px;
+            margin-top: -5px;
         }
     }
 }

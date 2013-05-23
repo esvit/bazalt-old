@@ -7,7 +7,7 @@ for (var componentName in components) {
     angularComponents.push(componentName);
 }
 
-require(['bazalt-cms', 'bootstrap', 'bz-switcher'].concat(modules), function(bazaltCMS) {
+require(['modernizr', 'bazalt-cms', 'bootstrap', 'bz-switcher'].concat(modules), function(bazaltCMS) {
 
     var app = angular.module('admin', ['bazalt-cms', 'bzSwitcher'].concat(angularComponents)).
     config(function($routeProvider, $locationProvider, $httpProvider) {
@@ -25,6 +25,7 @@ require(['bazalt-cms', 'bootstrap', 'bz-switcher'].concat(modules), function(baz
                 dashboard.mainMenu[i].active = (component == dashboard.mainMenu[i].component);
             }
         };
+        $('#global_loading').hide();
     }).
     value('dashboard', {
         mainMenu: []

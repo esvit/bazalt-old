@@ -150,7 +150,7 @@ define([
             photo.thumb = '/thumb.php' + photo.image + '?h=200';
             $scope.photo = photo;
             $location.search({ id: photo.album_id, photo_id: photo.id });
-        $scope.includeFile = '/Components/Gallery/views/admin/photo.html?id=' + photo.id;
+            $scope.includeFile = '/Components/Gallery/views/admin/photo.html?id=' + photo.id;
         }
         // Edit photo
         $scope.savePhoto = function(photo) {
@@ -195,7 +195,6 @@ define([
             }
             if (album && file) {
                 album.images_count++;
-                console.info(file);
                 $scope.photos.unshift(file);
             }
             if (!$scope.$$phase) {

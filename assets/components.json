@@ -21,6 +21,7 @@
     "nestedSortable": "git://github.com/mjsarfatti/nestedSortable.git",
     "ngInfiniteScroll": "~1.0.0",
     "ace-builds": "~1.0.0",
-    "bootstrap-colorpicker": "latest"
+    "bootstrap-colorpicker": "latest",
+    "modernizr": "~2.6.2"
   }
 }

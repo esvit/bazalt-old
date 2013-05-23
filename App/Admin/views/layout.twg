@@ -26,8 +26,8 @@
     <script src="http://html5shim.googlecode.com/svn/trunk/html5.js"></script>
     <![endif]-->
 </head>
-<body ng-controller="bazaltGlobalController">
-<div class="navbar navbar-fixed-top m-header">
+<body ng-controller="bazaltGlobalController" class="loading-container">
+<div class="navbar navbar-fixed-top m-header ng-cloak">
     <a class="pull-left logo" href="/">
         <span class="navbar-brand"></span>
     </a>
@@ -80,11 +80,15 @@
 
 </div>
 <div class="wrapper">
-    <aside class="sidebar" ng-include="'/App/Admin/views/menu.html'"></aside>
+    <aside class="sidebar ng-cloak" ng-include="'/App/Admin/views/menu.html'"></aside>
 
     <div class="main-container">
         <section ng-view></section>
     </div>
+</div>
+<div id="global_loading" class="loading" style="display: block">
+    <!-- This div hide when admin is loaded -->
+    <span>Loading, please wait...</span>
 </div>
 <script data-main="admin" src="/assets/require.js"></script>
 <script src="/assets/components/ckeditor/ckeditor.js"></script>

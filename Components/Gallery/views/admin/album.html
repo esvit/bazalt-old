@@ -1,5 +1,5 @@
 <!--l ink type="text/x-gettext-translation" href="/Components/Gallery/locale/ru/Gallery.po" id="Gallery"/-->
-
+<link rel="stylesheet" type="text/css" href="/less.php/Components/Gallery/assets/less/admin.less" media="all">
 
 <div class="page-header">
     <div class="row">
@@ -9,7 +9,7 @@
         <div class="col-span-9">
             <div ng-show="album.id" style="display: none" class="btn-toolbar">
                 <div class="btn-group fileupload fileupload-new">
-                    <button class="btn btn-success btn-file" ng-click="show_uploads = !!!show_uploads">
+                    <button class="btn btn-success btn-file" ng-class="{'active': show_uploads}" ng-click="show_uploads = !!!show_uploads">
                         <span class="fileupload-new"><span class="glyphicon glyphicon-upload"></span> {['Upload file(s)'|translate:'Gallery']}</span>
                     </button>
                 </div>
@@ -46,16 +46,14 @@
                     {['Albums'|translate:'Gallery']}
                 </li>
                 <li ng-repeat="item in albums" class="with-btn" ng-class="{active: item.id == album.id}">
-                    <a class="pull-right btn btn-delete" placement="right" title="Deleting"
-                       href="javascript:;"
-                       bz-confirm="deleteAlbum(item);" message="Ви дійно бажаєте видалити цей альбом?" yes="Так"
-                       no="Ні"><span class="glyphicon glyphicon-trash"></span></a>
+                    <a class="pull-right btn btn-delete" placement="right" title="Deleting..."
+                       href="javascript:;" bz-confirm="deleteAlbum(item);"
+                       message="Are you sure you want to delete this album?"><span class="glyphicon glyphicon-trash"></span></a>
                     <a href="javascript:;" ng-click="showAlbum(item)">
                         <span ng-show="item.images_count > 0" class="pull-right label">{[item.images_count]}</span>
                         <span ng-show="item.is_hidden && item.is_published"
-                              title="Цей альбом не відображається в списку альбомів"
                               class="glyphicon glyphicon-eye-close"></span>
-                        <span ng-show="!item.is_published" title="Цей альбом не відображається в списку альбомів"
+                        <span ng-show="!item.is_published"
                               class="glyphicon glyphicon-remove"></span>
                         <span class="title">{[item.title|language]}</span>
                     </a>
@@ -66,10 +64,10 @@
             <form name="newAlbum" novalidate ng-submit="createAlbum(nAlbum)">
                 <div class="input-group col-span-12">
                     <input type="text" ng-model="nAlbum.title" maxlength="255" ng-disabled="nAlbum.busy" required
-                           placeholder="Новый альбом"/>
+                           placeholder="New album"/>
 
                     <div class="input-group-btn">
-                        <button ng-disabled="nAlbum.busy || newAlbum.$invalid" class="btn btn-primary" type="submit"
+                        <button ng-disabled="nAlbum.busy || newAlbum.$invalid" class="btn" title="Create new album" type="submit"
                                 ng-disabled="nAlbum.busy">
                             <span class="glyphicon glyphicon-plus"></span>
                         </button>
@@ -114,12 +112,20 @@
                         <a title="" href="javascript:;" ng-click="editPhoto(photo)" class="tip-top"
                            data-original-title="Edit"><span
                                 class="glyphicon glyphicon-pencil icon-white"></span></a>
-                        <a title="Видалення" href="javascript:;" bz-confirm="deletePhoto(photo);"
-                           message="Ви дійно бажаєте видалити це фото?" yes="Так" no="Ні"><span
+                        <a title="Deleting..." href="javascript:;" bz-confirm="deletePhoto(photo);"
+                           message="Are you sure you want to delete this image?"><span
                                 class="glyphicon glyphicon-trash icon-white"></span></a>
                     </div>
                 </li>
             </ul>
+
+            <!--ul id="og-grid" class="og-grid">
+                <li ng-repeat="photo in photos | orderBy:-order">
+                    <a href="#!/gallery/?id={[album.id]}&photo_id={[photo.id]}" data-largesrc="{[photo.image]}" data-title="{[photo.title|language]}" data-description="{[photo.description|language]}">
+                        <img ng-src="/thumb.php{[photo.image]}?w=200&h=160" />
+                    </a>
+                </li>
+            </ul-->
             <a href="javascript:;" class="btn btn-block" ng-disabled="busy"
                ng-show="photos.length < album.images_count"
                ng-click="nextPage()">More...</a>

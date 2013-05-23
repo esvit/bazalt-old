@@ -64,6 +64,12 @@ module.exports = function(grunt) {
                 ],
                 dest: 'assets/components/jquery-ui.js'
             },
+            'modernizr.js': {
+                src: [
+                    'assets/components/modernizr/modernizr.js'
+                ],
+                dest: 'assets/components/modernizr.js'
+            },
             'bazalt-cms.js': {
                 src: [
                     'assets/bazalt-cms/bazaltCMS.js',
