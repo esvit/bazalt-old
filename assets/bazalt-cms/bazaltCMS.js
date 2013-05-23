@@ -26,9 +26,9 @@ bazaltCMS.editor = new function() {
     };
     return editor;
 };
-bazaltCMS.factory('LanguageService', function($resource) {
+bazaltCMS.factory('LanguageService', ['$resource', function($resource) {
     return $resource('/rest.php/app/language');
-});
+}]);
 bazaltCMS.controller('bazaltGlobalController', ['$scope','$rootScope', 'languages', '$filter', '$compile',function($scope, $rootScope, languages, $filter, $compile) {
     $rootScope.languages = languages;
 

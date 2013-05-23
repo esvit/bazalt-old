@@ -166,11 +166,11 @@ define([
         $scope.remove = function (child) {
             function walk(target) {
                 var children = target.children,
-                i;
+                    i;
                 if (children) {
                     i = children.length;
                     while (i--) {
-                        if (children[i] === child) {
+                        if (children[i].id === child.id) {
                             return children.splice(i, 1);
                         } else {
                             walk(children[i])
@@ -178,8 +178,26 @@ define([
                     }
                 }
             }
-            $scope.$apply(function() {
-                walk($scope.menu);
+            if (child.depth == 0) {
+                $scope.loading.menus = true;
+            }
+            $scope.loading.elements = true;
+            MenuService.delete({ 'id': child.id }, function() {
+                $scope.loading.elements = false;
+                if (child.depth == 0) {
+                    $scope.menu = null;
+                    $scope.loading.menus = false;
+                    angular.forEach($scope.menus, function(item, key) {
+                        if (item.id == child.id) {
+                            $scope.menus.splice(key, 1);
+                        }
+                    });
+                } else {
+                    walk($scope.menu);
+                    if (!$scope.$$phase) {
+                        $scope.$apply();
+                    }
+                }
             });
         }
 

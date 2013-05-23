@@ -120,6 +120,31 @@ class Menu extends CMS\Webservice\Rest
     }
 
     /**
+     * @method DELETE
+     * @provides application/json
+     * @json
+     * @return \Tonic\Response
+     */
+    public function deleteMenuItem()
+    {
+        $data = new Data\Validator($_GET);
+
+        $menu = null;
+        $data->field('id')->required()->validator('exist_menu', function($value) use (&$menu) {
+            $menu = Element::getById((int)$value);
+
+            return ($menu != null);
+        }, "Menu dosn't exists");
+
+        if (!$data->validate()) {
+            return new Response(400, $data->errors());
+        }
+        $menu->Elements->removeAll();
+        $menu->delete();
+        return new Response(200, $menu);
+    }
+
+    /**
      * @method POST
      * @provides application/json
      * @json

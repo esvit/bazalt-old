@@ -23,14 +23,16 @@ bazaltCMS.provider('AuthService', function () {
      * returned no other expressions will be tested.
      */
     this.addIgnoreUrlExpression = function (fn) {
-      if (angular.isFunction(fn)) { ignoreUrlExpressions.push(fn); }
-      return this;
+        if (angular.isFunction(fn)) {
+            ignoreUrlExpressions.push(fn);
+        }
+        return this;
     };
 
     /**
      * Executes each of the ignore expressions to determine whether the URL
      * should be ignored.
-     * 
+     *
      * Example:
      *
      *     angular.module('mod', ['http-auth-interceptor'])
@@ -41,14 +43,16 @@ bazaltCMS.provider('AuthService', function () {
      *       });
      */
     this.shouldIgnoreUrl = function (response) {
-      var fn, i, j = ignoreUrlExpressions.length;
+        var fn, i, j = ignoreUrlExpressions.length;
 
-      for (i = 0; i < j; i++) {
-        fn = ignoreUrlExpressions[i];
-        if (fn(response) === true) { return true; }
-      }
+        for (i = 0; i < j; i++) {
+            fn = ignoreUrlExpressions[i];
+            if (fn(response) === true) {
+                return true;
+            }
+        }
 
-      return false;
+        return false;
     };
 
     /**
@@ -56,68 +60,69 @@ bazaltCMS.provider('AuthService', function () {
      * Function is attached to provider to be invisible for regular users of this service.
      */
     this.pushToBuffer = function (config, deferred) {
-      buffer.push({
-        config: config,
-        deferred: deferred
-      });
+        buffer.push({
+            config:config,
+            deferred:deferred
+        });
     };
 
     this.$get = ['$rootScope', '$injector', function ($rootScope, $injector) {
-      var $http; //initialized later because of circular dependency problem
-      function retry(config, deferred) {
-        $http = $http || $injector.get('$http');
-        $http(config).then(function (response) {
-          deferred.resolve(response);
-        });
-      }
-      function retryAll() {
-        var i;
-
-        for (i = 0; i < buffer.length; ++i) {
-          retry(buffer[i].config, buffer[i].deferred);
+        var $http; //initialized later because of circular dependency problem
+        function retry(config, deferred) {
+            $http = $http || $injector.get('$http');
+            $http(config).then(function (response) {
+                deferred.resolve(response);
+            });
         }
-        buffer = [];
-      }
 
-      return {
-        loginConfirmed: function () {
-          $rootScope.$broadcast('event:auth-loginConfirmed');
-          retryAll();
+        function retryAll() {
+            var i;
+
+            for (i = 0; i < buffer.length; ++i) {
+                retry(buffer[i].config, buffer[i].deferred);
+            }
+            buffer = [];
         }
-      };
+
+        return {
+            loginConfirmed:function () {
+                $rootScope.$broadcast('event:auth-loginConfirmed');
+                retryAll();
+            }
+        };
     }];
-  })
+})
 
-  /**
-   * $http interceptor.
-   * On 401 response - it stores the request and broadcasts 'event:angular-auth-loginRequired'.
-   */
-  .config(['$httpProvider', 'AuthServiceProvider', function ($httpProvider, AuthServiceProvider) {
+/**
+ * $http interceptor.
+ * On 401 response - it stores the request and broadcasts 'event:angular-auth-loginRequired'.
+ */
+    .config(['$httpProvider', 'AuthServiceProvider', function ($httpProvider, AuthServiceProvider) {
 
     var interceptor = ['$rootScope', '$q', function ($rootScope, $q) {
-      function success(response) {
-        return response;
-      }
-
-      function error(response) {
-        if (response.status === 401) {
-          var deferred = $q.defer();
-
-          if (!AuthServiceProvider.shouldIgnoreUrl(response)) {
-            AuthServiceProvider.pushToBuffer(response.config, deferred);
-          }
-
-          $rootScope.$broadcast('event:auth-loginRequired');
-          return deferred.promise;
+        function success(response) {
+            return response;
         }
-        // otherwise
-        return $q.reject(response);
-      }
 
-      return function (promise) {
-        return promise.then(success, error);
-      };
+        function error(response) {
+            if (response.status === 401) {
+                var deferred = $q.defer();
+
+                if (!AuthServiceProvider.shouldIgnoreUrl(response)) {
+                    AuthServiceProvider.pushToBuffer(response.config, deferred);
+                }
+
+                $rootScope.$broadcast('event:auth-loginRequired');
+                return deferred.promise;
+            }
+            // otherwise
+            return $q.reject(response);
+        }
+
+        return function (promise) {
+            return promise.then(success, error);
+        };
 
     }];
     $httpProvider.responseInterceptors.push(interceptor);
-  }]);
+}]);

@@ -1,4 +1,4 @@
-bazaltCMS.directive("bzConfirm", function($document, $parse, $timeout) {
+bazaltCMS.directive("bzConfirm", ['$document', '$parse', '$timeout', function($document, $parse, $timeout) {
     return {
         restrict: 'A',
         link: function(scope, element, attrs) {
@@ -69,4 +69,4 @@ bazaltCMS.directive("bzConfirm", function($document, $parse, $timeout) {
             });
         }
     };
-})
+}]);

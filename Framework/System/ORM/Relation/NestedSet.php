@@ -745,14 +745,14 @@ class ORM_Relation_NestedSet extends ORM_Relation_Abstract implements ORM_Interf
         $q = ORM\ORM::delete($this->name)
                 ->where(self::LEFT_FIELDNAME . ' > ?', $left)
                 ->andWhere(self::RIGHT_FIELDNAME . ' < ?', $right)
-                ->andWhere($this->column . ' = ?', $this->baseObject->{$this->refColumn});
+                ->andWhere($this->column . ' = ?', $this->baseObject->{$this->column});
         $q->exec();
 
         $q = ORM\ORM::update($this->name)
                 ->set('lft = IF(lft > ' . $left . ', lft - ' . $count . ', lft)')
                 ->set('rgt = rgt - ' . $count)
                 ->where('rgt >= ?', $right)
-                ->andWhere($this->column . ' = ?', $this->baseObject->{$this->refColumn});
+                ->andWhere($this->column . ' = ?', $this->baseObject->{$this->column});
         $q->exec();
 
         $this->baseObject->{self::RIGHT_FIELDNAME} = $left + 1;

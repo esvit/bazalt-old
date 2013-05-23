@@ -10,7 +10,7 @@ for (var componentName in components) {
 require(['modernizr', 'bazalt-cms', 'bootstrap', 'bz-switcher'].concat(modules), function(bazaltCMS) {
 
     var app = angular.module('admin', ['bazalt-cms', 'bzSwitcher'].concat(angularComponents)).
-    config(function($routeProvider, $locationProvider, $httpProvider) {
+    config(['$routeProvider', '$locationProvider', function($routeProvider, $locationProvider) {
         $routeProvider.
         when('/', {controller: 'IndexCtrl', templateUrl:'/App/Admin/views/index.html'}).
         when('/settings', {controller: 'SettingsCtrl', templateUrl:'/App/Admin/views/settings.html'}).
@@ -18,23 +18,23 @@ require(['modernizr', 'bazalt-cms', 'bootstrap', 'bz-switcher'].concat(modules),
 
         //$locationProvider.html5Mode(true);
         $locationProvider.hashPrefix('!');
-    }).
-    run(function($rootScope, LanguageService, dashboard) {
+    }]).
+    run(['$rootScope', 'LanguageService', 'dashboard', function($rootScope, LanguageService, dashboard) {
         $rootScope.activateMenu = function(component) {
             for (var i = 0; i < dashboard.mainMenu.length; i++) {
                 dashboard.mainMenu[i].active = (component == dashboard.mainMenu[i].component);
             }
         };
         $('#global_loading').hide();
-    }).
+    }]).
     value('dashboard', {
         mainMenu: []
     })
-    .factory('SettingsService', function($resource) {
+    .factory('SettingsService', ['$resource', function($resource) {
         return $resource('/rest.php/app/settings', { 'id': '@' }, {
             generateNewKey: { method: 'GET', params: { 'action': 'newSecretKey' } }
         });
-    })
+    }])
 
     app.directive('loadingContainer', function () {
         return {
@@ -49,7 +49,7 @@ require(['modernizr', 'bazalt-cms', 'bootstrap', 'bz-switcher'].concat(modules),
             }
         };
     });
-    app.directive('help', function ($timeout) {
+    app.directive('help', ['$timeout', function ($timeout) {
         return {
             restrict: 'E',
             scope: {
@@ -76,17 +76,17 @@ require(['modernizr', 'bazalt-cms', 'bootstrap', 'bz-switcher'].concat(modules),
                 });
             }
         };
-    });
+    }]);
 
-    app.controller('IndexCtrl', function ($scope, $rootScope) {
+    app.controller('IndexCtrl', ['$scope', '$rootScope', function ($scope, $rootScope) {
         $rootScope.breadcrumbs = [
             {
                 'title' : 'Dashboard',
                 'url': '#!/'
             }
         ];
-    });
-    app.controller('SettingsCtrl', function ($scope, $rootScope, SettingsService) {
+    }]);
+    app.controller('SettingsCtrl', ['$scope', '$rootScope', 'SettingsService', function ($scope, $rootScope, SettingsService) {
         $scope.loading = {};
 
         $rootScope.breadcrumbs = [
@@ -117,9 +117,9 @@ require(['modernizr', 'bazalt-cms', 'bootstrap', 'bz-switcher'].concat(modules),
                 $scope.settings.secret_key = result.key;
             });
         }
-    });
+    }]);
 
-    app.controller('MenuCtrl', function ($scope, $location, $session, $window, dashboard) {
+    app.controller('MenuCtrl', ['$scope', '$location', '$session', '$window', 'dashboard', function ($scope, $location, $session, $window, dashboard) {
         $(window).bind('resize', function(){
             $scope.wHeight = $(window).innerHeight();
             if (!$scope.$$phase) {
@@ -128,59 +128,7 @@ require(['modernizr', 'bazalt-cms', 'bootstrap', 'bz-switcher'].concat(modules),
         }).trigger('resize');
 
         $scope.more = { width: 0, menu: [], show: false };
-        $scope.menu = dashboard.mainMenu; /*[
-            {
-                title: 'Галерея',
-                url: '#!/gallery',
-                icon: 'ico-picture'
-            },
-            {
-                title: 'News',
-                url: '#!/news',
-                icon: 'ico-edit'
-            },
-            {
-                title: 'Menu',
-                url: '#!/menu',
-                icon: 'ico-reorder'
-            },
-            {
-                title: 'Themes',
-                url: '#!/themes',
-                icon: 'ico-leaf'
-            },
-            {
-                title: 'Files',
-                url: '#!/files',
-                icon: 'ico-file'
-            }*/
-            /*,
-            {
-                title: 'Notification',
-                icon: 'ico-fighter-jet',
-                notification: 6
-            },
-            {
-                title: 'Setting',
-                icon: 'ico-cogs'
-            },
-            {
-                title: 'Меню',
-                icon: 'ico-reorder'
-            },
-            {
-                title: 'Help',
-                icon: 'ico-question-sign'
-            },
-            {
-                title: 'User',
-                icon: 'ico-group'
-            },
-            {
-                title: 'Report',
-                icon: 'ico-bullhorn'
-            }*/
-        //];
+        $scope.menu = dashboard.mainMenu;
         $scope.sideMenu = $scope.menu;
 
         $scope.$watch('wHeight', function(value) {
@@ -209,7 +157,7 @@ require(['modernizr', 'bazalt-cms', 'bootstrap', 'bz-switcher'].concat(modules),
             $scope.more.width = width;
             $scope.more.menu = menu;
         });
-    });
+    }]);
 
     angular.bootstrap(document.documentElement, ['admin']);
 

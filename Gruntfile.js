@@ -1,6 +1,9 @@
 module.exports = function(grunt) {
 
     var isDev = true;
+    if (grunt.option('prod')) {
+        isDev = false;
+    }
 
     // Project configuration.
     grunt.initConfig({

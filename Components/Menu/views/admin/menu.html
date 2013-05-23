@@ -20,9 +20,9 @@
         <ul class="nav nav-pills nav-stacked nav-list">
             <li class="nav-header" ng-show="menus.length">Menu</li>
             <li ng-repeat="item in menus" class="with-btn" ng-class="{'active': menu.id == item.id}">
-                <a class="pull-right btn-delete" placement="right" title="Видалення" href="javascript:;"
-                   confirm-button="deleteAlbum(item);" message="Ви дійно бажаєте видалити цей альбом?" yes="Так"
-                   no="Ні"><span class="glyphicon glyphicon-trash"></span></a>
+                <a class="pull-right btn-delete" placement="right" title="Deleting..." href="javascript:;"
+                   bz-confirm="remove(item)" message="Are you sure want to delete this menu?">
+                   <span class="glyphicon glyphicon-trash"></span></a>
                 <a ng-href="#!/menu?id={[item.id]}">
                     {[item.title|language]}
 
@@ -38,7 +38,7 @@
                            placeholder="New menu"/>
 
                     <div class="input-group-btn">
-                        <button ng-disabled="nMenu.busy || newMenu.$invalid" class="btn btn-primary" type="submit"
+                        <button ng-disabled="nMenu.busy || newMenu.$invalid" class="btn" type="submit"
                                 ng-disabled="nMenu.busy">
                             <span class="glyphicon glyphicon-plus"></span>
                         </button>
@@ -80,7 +80,7 @@
 
                             <a class="btn" ng-click="addChild(child)" ng-class="{'btn-primary':child.is_publish}"><span class="glyphicon glyphicon-plus"></span></a>
                             <a class="btn" ng-class="{'btn-primary':child.is_publish}" placement="left" title="Deleting..." href="javascript:;"
-                               bz-confirm="remove(child)" message="Are you sure want to delete this category?"><span class="glyphicon glyphicon-trash"></span>
+                               bz-confirm="remove(child)" message="Are you sure want to delete this menu item?"><span class="glyphicon glyphicon-trash"></span>
                             </a>
                             <a class="btn" ng-class="{'btn-primary':child.is_publish, 'active': child.$settings}"
                                ng-click="child.$settings = !child.$settings; child.focus = child.$settings"><span
