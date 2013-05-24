@@ -1,3 +1,5 @@
+var path = require('path');
+
 module.exports = function(grunt) {
 
     var isDev = true;
@@ -7,7 +9,7 @@ module.exports = function(grunt) {
 
     // Project configuration.
     grunt.initConfig({
-        pkg: grunt.file.readJSON('package.json'),
+        pkg: '<json:package.json>',
         php: {
             dist: {
                 options: {
@@ -249,6 +251,11 @@ module.exports = function(grunt) {
             }
         }
     });
+
+    //var components = grunt.file.expand('Components/*/Gruntfile.js');
+    /*for (var i in components) {
+        grunt.loadTasks(path.dirname(components[i]));
+    }*/
 
     // Load the plugin that provides the "uglify" task.
     grunt.loadNpmTasks('grunt-php');
