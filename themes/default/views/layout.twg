@@ -1,10 +1,10 @@
 {% extends 'master.layout.twg' %}
 {% block head %}
-    <link rel="stylesheet" type="text/css" href="/themes/default/assets/css/fotorama.css"/>
+    <!--link rel="stylesheet" type="text/css" href="/themes/default/assets/css/fotorama.css"/>
     <link rel="stylesheet" type="text/css" href="/themes/default/assets/css/nivo-slider.css"/>
 
     <script src="/themes/default/assets/js/fotorama.js"></script>
-    <script src="/themes/default/assets/js/jquery.nivo.slider.js"></script>
+    <script src="/themes/default/assets/js/jquery.nivo.slider.js"></script-->
 {% endblock head %}
 {% block body %}
 

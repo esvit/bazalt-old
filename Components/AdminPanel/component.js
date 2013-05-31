@@ -28,6 +28,7 @@ define(['jquery-ui', 'angular-cookies'], function() {
                         }
                     }
                 ];
+                $scope.showSettings = false;
 
                 $scope.$watch('showWidgets', function(value) {
                     var body = $('body');
@@ -173,7 +174,8 @@ define(['jquery-ui', 'angular-cookies'], function() {
                     });
                 }
                 $scope.showSettings = function() {
-                    var dialog = '<div class="modal fade in"> \
+                    var dialog = $('#bz-admin-widget-settings');/*
+                        '<div class="modal fade in"> \
                                   <div class="modal-dialog" id="bz-widget_dialog"> \
                                     <div class="modal-content"> \
                                       <div class="modal-header"> \
@@ -187,14 +189,13 @@ define(['jquery-ui', 'angular-cookies'], function() {
                                       </div> \
                                     </div><!-- /.modal-content --> \
                                   </div><!-- /.modal-dalog --> \
-                                </div><!-- /.modal -->';
-                    $scope.dialog = $(dialog).appendTo('body');
-
+                                </div><!-- /.modal -->';*/
                     WidgetsService.getSettings({ id: $scope.widget.id }, function(result) {
                         $scope.widget = new WidgetsService(result.widget);
                         $scope.templates = result.templates;
-                        $('#bz-widget_settings').empty().append(result.content);
-                        $compile($('#bz-widget_dialog'))($scope)
+                        var el = dialog.find('.modal-body').html(result.content);
+                        dialog.scope().showSettings = true;
+                        $compile(el)($scope)
                     });
                 }
             },

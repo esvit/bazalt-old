@@ -51,6 +51,8 @@ class Application extends CMS\Application
 
         } catch (\Tonic\Exception $e) {
             $response = new \Tonic\Response($e->getCode(), $e->getMessage());
+        } catch (CMS\Exception\AccessDenied $e) {
+            $response = new \Tonic\Response(403, 'AccessDenied');
         }
         $response->output();
         exit;

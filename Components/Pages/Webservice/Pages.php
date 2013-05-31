@@ -20,6 +20,7 @@ class Pages extends CMS\Webservice\Rest
      * @method POST
      * @provides application/json
      * @json
+     * @acl Components\Pages\Component::ACL_HAS_ACCESS
      * @return \Tonic\Response
      */
     public function savePage()
@@ -67,6 +68,7 @@ class Pages extends CMS\Webservice\Rest
      * @method DELETE
      * @provides application/json
      * @json
+     * @acl Components\Pages\Component::ACL_HAS_ACCESS
      * @return \Tonic\Response
      */
     public function deletePage()
@@ -81,7 +83,7 @@ class Pages extends CMS\Webservice\Rest
      * @method GET
      * @provides application/json
      * @json
-     * @secure CMS\Bazalt::ACL_CAN_LOGIN CMS\Bazalt::ACL_HAS_ADMIN_PANEL_ACCESS
+     * @acl Components\Pages\Component::ACL_HAS_ACCESS
      * @return \Tonic\Response
      */
     public function get()
@@ -123,6 +125,7 @@ class Pages extends CMS\Webservice\Rest
      * @param  int $news_id
      * @provides application/json
      * @json
+     * @acl Components\Pages\Component::ACL_HAS_ACCESS
      * @return \Tonic\Response
      */
     public function getPage($page_id)

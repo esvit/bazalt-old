@@ -1,9 +1,7 @@
 <link rel="stylesheet" type="text/css" href="/less.php/Components/AdminPanel/assets/less/panel.less" />
-<link rel="stylesheet" type="text/css" href="/less.php/App/Admin/assets/less/bootstrap/bootstrap.less" />
-<link rel="stylesheet" type="text/css" href="/less.php/App/Admin/assets/less/bootstrap/mixins.less" />
 <link rel="stylesheet" type="text/css" href="/App/Admin/assets/css/font-awesome.min.css" />
 
-<div id="bz-admin-bar">
+<div class="bz-admin" id="bz-admin-bar">
     <div id="adm-userpanel">
         <div class="bz-adminpanel-container">
             <div class="bz-user-block pull-right">
@@ -40,6 +38,19 @@
                 </div>
                 <div class="cms_widget-title">{[item.title|language]}</div>
                 <!--div class="cms_widget-description">{[item.description|language]}</div-->
+            </div>
+        </div>
+    </div>
+    <div id="bz-admin-widget-settings" class="modal fade" ng-class="{'in': showSettings}">
+        <div class="modal-dialog ng-scope" id="bz-widget_dialog">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <button type="button" class="close" ng-click="showSettings = false" data-dismiss="modal" aria-hidden="true">×</button>
+                    <h4 class="modal-title">Widget settings</h4>
+                </div>
+                <div class="modal-body" id="bz-widget_settings">
+
+                </div>
             </div>
         </div>
     </div>

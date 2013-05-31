@@ -60,17 +60,13 @@ abstract class Rest extends \Tonic\Resource
      * @param str $password
      * @throws UnauthorizedException
      */
-    function secure($username)
+    protected function acl($param)
     {
-        
-        print_r(func_get_args());exit;
-        if (
-            isset($_SERVER['PHP_AUTH_USER']) && $_SERVER['PHP_AUTH_USER'] == $username &&
-            isset($_SERVER['PHP_AUTH_PW']) && $_SERVER['PHP_AUTH_PW'] == $password
-        ) {
-            return;
+        list($class, $aclName) = explode('::', $param);
+        $value = constant($param);
+        $user = CMS\User::get();
+        if (!$user->hasRight($class, $value)) {
+            throw new CMS\Exception\AccessDenied('');
         }
-        #return new Response(401, 'No entry', array('wwwAuthenticate' => 'Basic realm="My Realm"'));
-        throw new UnauthorizedException('No entry');
     }
 }
