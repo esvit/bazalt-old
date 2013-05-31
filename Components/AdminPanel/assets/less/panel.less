@@ -1,5 +1,9 @@
 @import "mixins.less";
 
+a:hover, a:focus {
+  color: #428BCA;
+}
+
 @widgetBackground: #5B80B2;
 .bz-widget {
   .bz-overlay {
@@ -220,14 +224,16 @@
 }
 
 #cms_widgets_panel {
-  background-color: #FFF;
+  background-color: #F1F1F1;
+  border-right: 1px solid #B2B2B2;
   position: fixed;
   left: -250px;
   top: 40px;
   bottom: 0;
-  width: 200px;
+  width: 175px;
+  min-width: 167px;
   z-index: 10000;
-  box-shadow: 0 0 5px #CCCCCC;
+  box-shadow: none;
   -webkit-transition: all 0.5s ease-in-out;
   -moz-transition: all 0.5s ease-in-out;
   -o-transition: all 0.5s ease-in-out;
@@ -238,6 +244,36 @@
     height: 100%;
     overflow-y: auto;
     overflow-x: hidden;
+    padding-top: 10px;
+    padding-left: 5px;
+      .cms_widget_panel-widget {
+          background: #5B80B2;
+          border: 1px solid #CCCCCC;
+          border-radius: 3px 3px 3px 3px;
+          box-shadow: 0 1px 0 rgba(255, 255, 255, 0.2) inset, 0 1px 2px rgba(0, 0, 0, 0.05);
+          display: inline-block;
+          height: 50px;
+          margin: 0 5px 10px;
+          min-width: auto;
+          opacity: 1;
+          vertical-align: top;
+          width: 50px;
+          &:hover {
+            opacity: 1;
+          }
+        .cms_widget-icon {
+          i {
+            font-size: 30px;
+            line-height: 32px;
+            color: #fff;
+          }
+        }
+        .cms_widget-title {
+          font-weight: normal;
+          font-size: 12px;
+          line-height: 20px;
+        }
+      }
   }
 
   &.show {
@@ -251,26 +287,21 @@
 }
 
 .cms_widget_panel-widget {
-  margin: 8px;
   padding: 4px 10px 4px;
   font-size: 13px;
   line-height: 16px;
   *line-height: 20px;
-  color: #333;
-  text-align: left;
-  text-shadow: 0 1px 1px rgba(255, 255, 255, .75);
-  vertical-align: middle;
+  color: #fff;
+  text-align: center;
+  text-shadow: none;
+  vertical-align: bottom;
   cursor: pointer;
-  background-color: #fff;
-  border: 1px solid #ccc;
+  background-color: transparent;
+  border: none;
   *border: 0; // Remove the border to prevent IE7's black border on input:focus
-  border-bottom-color: darken(#ccc, 10%);
-  box-shadow: inset 0 1px 0 rgba(255, 255, 255, .2), 0 1px 2px rgba(0, 0, 0, .05);
+  box-shadow: none;
   cursor: move;
   overflow: hidden;
-  min-width: 150px;
-  max-width: 200px;
-  .border-radius(4px);
 
   &.loading {
     .cms_widget-icon {
@@ -288,10 +319,6 @@
       }
     }
   }
-
-  .cms_widget-title {
-    font-weight: bold;
-  }
   .cms_widget-description {
     display: none;
     font-size: 12px;
@@ -304,10 +331,10 @@
 }
 
 #bz-admin-bar {
-  border-bottom: 1px solid #e1e1e1;
+  background-color: #F1F1F1;
+  border-bottom: 1px solid #B2B2B2;
+  box-shadow: none;
   direction: ltr;
-  background-color: #f5f5f2;
-  box-shadow: 0 -4px 0 rgba(0, 0, 0, 0.12) inset;
   color: #333;
   font: normal 12px/28px Arial, Helvetica, sans-serif;
   position: fixed;
@@ -323,19 +350,41 @@
   .bz-adminpanel-container {
     width: 100%;
     margin: 0 auto;
+    .b-dashboard {
+      display: inline-block;
+      float: left;
+      width: 11.333%;
+      min-width: 167px;
+      a {
+        &.dashboard {
+          background: url("../img/logo30.png") no-repeat scroll 0 0 transparent;
+          display: block;
+          float: none;
+          height: 30px;
+          margin: 5px auto;
+          padding: 0;
+          width: 30px;
+          &:hover {
+            border-color: transparent;
+          }
+        }
+      }
+    }
+
   }
   a {
-    font-weight: bold;
-    color: black;
-    display: block;
-    float: left;
-    height: 33px;
-    line-height: 30px;
-    padding: 4px 12px;
     border-left: 1px solid transparent;
     border-right: 1px solid transparent;
+    color: #428BCA;
+    display: block;
+    float: left;
+    font-weight: normal;
+    height: 33px;
+    line-height: 30px;
+    outline: medium none !important;
+    padding: 4px 12px;
     text-decoration: none !important;
-    outline: none !important;
+    text-shadow: 0 1px 0 #FFFFFF;
 
     &:hover, &.active {
       border-left: 1px solid #e1e1e1;
