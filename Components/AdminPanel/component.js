@@ -168,33 +168,23 @@ define(['jquery-ui', 'angular-cookies'], function() {
                         $scope.loading = false;
                         $scope.element.after(result.content);
                         $scope.element.remove();
-                        var widget = $('#bz-widget-' + result.id)
-                        $scope.dialog.remove();
+                        var widget = $('#bz-widget-' + result.id);
                         $compile(widget)($scope.$parent);
                     });
                 }
                 $scope.showSettings = function() {
-                    var dialog = $('#bz-admin-widget-settings');/*
-                        '<div class="modal fade in"> \
-                                  <div class="modal-dialog" id="bz-widget_dialog"> \
-                                    <div class="modal-content"> \
-                                      <div class="modal-header"> \
-                                        <button type="button" class="close" ng-click="close()" data-dismiss="modal" aria-hidden="true">&times;</button> \
-                                        <h4 class="modal-title">Widget settings</h4> \
-                                      </div> \
-                                      <div class="modal-body" id="bz-widget_settings"></div> \
-                                      <div class="modal-footer"> \
-                                        <a href="#" ng-click="close()" class="btn">Close</a> \
-                                        <a href="#" ng-disabled="loading" ng-click="saveSettings(widget)" class="btn btn-primary">Save changes</a> \
-                                      </div> \
-                                    </div><!-- /.modal-content --> \
-                                  </div><!-- /.modal-dalog --> \
-                                </div><!-- /.modal -->';*/
+                    var dialog = $('#bz-admin-widget-settings');
+
                     WidgetsService.getSettings({ id: $scope.widget.id }, function(result) {
                         $scope.widget = new WidgetsService(result.widget);
                         $scope.templates = result.templates;
                         var el = dialog.find('.modal-body').html(result.content);
-                        dialog.scope().showSettings = true;
+                        var scope = dialog.scope()
+                        scope.showSettings = true;
+                        scope.saveSettings = function() {
+                            $scope.saveSettings($scope.widget);
+                            scope.showSettings = false;
+                        }
                         $compile(el)($scope)
                     });
                 }

@@ -4,7 +4,7 @@
 <div class="bz-admin" id="bz-admin-bar">
     <div id="adm-userpanel">
         <div class="bz-adminpanel-container">
-            <div class="bz-user-block pull-right">
+            <!--div class="bz-user-block pull-right">
                 <a class=" dropdown-toggle" data-toggle="dropdown" href="#">
                     <img src="http://placehold.it/20x25">
                     Admin
@@ -19,8 +19,8 @@
                 <a class="" href="#">
                     <i class="icon-envelope"></i>
                 </a>
-            </div>
-            <div class="pull-right">
+            </div-->
+            <div>
                 <a class="dashboard" href="/admin.php" onclick="javascript:location.href='/admin.php'"><span></span> Dashboard</a>
                 <a ng-repeat="menuitem in menu" ng-click="menuitem.action()" href="">{[ menuitem.title ]}</a>
             </div>
@@ -31,10 +31,7 @@
         <div class="cms_widget_panel-container" widgets="base">
             <div widget="{[item.id]}" data-id="{[item.id]}" ng-repeat="item in widgets" class="cms_widget_panel-widget">
                 <div class="cms_widget-icon">
-                    <!--[if !IE]>-->
-                        <object type="image/svg+xml" data="../img/noun_project_5876.svg" height="200" width="600"></object>
-                    <!--<![endif]-->
-                    <i class="icon-picture icon-3x"></i>
+                    <!--i class="icon-picture icon-3x"></i-->
                 </div>
                 <div class="cms_widget-title">{[item.title|language]}</div>
                 <!--div class="cms_widget-description">{[item.description|language]}</div-->
@@ -50,6 +47,10 @@
                 </div>
                 <div class="modal-body" id="bz-widget_settings">
 
+                </div>
+                <div class="modal-footer">
+                    <button class="btn btn-primary" ng-click="saveSettings()">Save</button>
+                    <button class="btn" ng-click="showSettings = false">Cancel</button>
                 </div>
             </div>
         </div>

@@ -1,25 +1,146 @@
-.bz-admin {
+@widgetBackground: #5B80B2;
+
+html body .bz-admin {
+    @import "reset.less";
+
     @import "../../../../App/Admin/assets/less/bootstrap/variables.less";
     @import "../../../../App/Admin/assets/less/bootstrap/mixins.less";
     @import "../../../../App/Admin/assets/less/bootstrap/normalize.less";
-    @import "../../../../App/Admin/assets/less/bootstrap/modals.less";
     @import "../../../../App/Admin/assets/less/bootstrap/scaffolding.less";
+    @import "../../../../App/Admin/assets/less/bootstrap/modals.less";
     @import "../../../../App/Admin/assets/less/bootstrap/type.less";
     @import "../../../../App/Admin/assets/less/bootstrap/code.less";
     @import "../../../../App/Admin/assets/less/bootstrap/grid.less";
+    @import "../../../../App/Admin/assets/less/bootstrap/close.less";
     @import "../../../../App/Admin/assets/less/bootstrap/forms.less";
     @import "../../../../App/Admin/assets/less/bootstrap/buttons.less";
+    @import "../../../../App/Admin/assets/less/bootstrap/forms.less";
+    @import "../../../../App/Admin/assets/less/bootstrap/navs.less";
 
+    .modal {
+        margin-top: 40px;
+        background: none repeat scroll 0 0 rgba(91, 128, 178, 0.5);
+    }
     .modal.fade.in {
         display: block;
     }
-}
 
-a:hover, a:focus {
-    color: #428BCA;
-}
+    a:hover, a:focus {
+        color: #428BCA;
+    }
 
-@widgetBackground: #5B80B2;
+    /* Left panel with widgets */
+    #cms_widgets_panel {
+        background-color: #F1F1F1;
+        border-right: 1px solid #B2B2B2;
+        position: fixed;
+        left: -250px;
+        top: 40px;
+        bottom: 0;
+        width: 175px;
+        min-width: 167px;
+        z-index: 10000;
+        box-shadow: none;
+        -webkit-transition: all 0.5s ease-in-out;
+        -moz-transition: all 0.5s ease-in-out;
+        -o-transition: all 0.5s ease-in-out;
+        transition: all 0.5s ease-in-out;
+
+        .cms_widget_panel-container {
+            box-shadow: 2px 2px 2px #CCC;
+            width: 100%;
+            height: 100%;
+            overflow-y: auto;
+            overflow-x: hidden;
+            padding-top: 10px;
+            padding-left: 5px;
+            .cms_widget_panel-widget {
+                background: #5B80B2;
+                border-radius: 3px 3px 3px 3px;
+                box-shadow: 0 1px 0 rgba(255, 255, 255, 0.2) inset, 0 1px 2px rgba(0, 0, 0, 0.05);
+                display: inline-block;
+                height: 72px;
+                margin: 0 5px 10px;
+                padding: 5px;
+                min-width: auto;
+                opacity: 1;
+                vertical-align: top;
+                width: 72px;
+                &:hover {
+                    opacity: 1;
+                }
+                .cms_widget-icon {
+                    i {
+                        font-size: 30px;
+                        line-height: 32px;
+                        color: #fff;
+                    }
+                }
+                .cms_widget-title {
+                    font-weight: normal;
+                    font-size: 12px;
+                    line-height: 20px;
+                }
+            }
+        }
+
+        &.show {
+            -webkit-transition: all 0.5s ease-in-out;
+            -moz-transition: all 0.5s ease-in-out;
+            -o-transition: all 0.5s ease-in-out;
+            transition: all 0.5s ease-in-out;
+            display: block;
+            left: 0;
+        }
+                
+        .cms_widget_panel-widget {
+            padding: 4px 10px 4px;
+            font-size: 13px;
+            line-height: 16px;
+            *line-height: 20px;
+            color: #fff;
+            text-align: center;
+            text-shadow: none;
+            vertical-align: bottom;
+            cursor: pointer;
+            background-color: transparent;
+            border: none;
+            *border: 0; // Remove the border to prevent IE7's black border on input:focus
+            box-shadow: none;
+            cursor: move;
+            overflow: hidden;
+
+            &.loading {
+                .cms_widget-icon {
+                    display: block;
+                    width: 64px;
+                    height: 64px;
+                    background-position: center center;
+                    background-repeat: no-repeat;
+                    margin: 5px auto;
+                    background-image: url('../images/loading.gif');
+                }
+                &:hover {
+                    .cms_widget-description {
+                        display: none;
+                    }
+                }
+            }
+            .cms_widget-description {
+                display: none;
+                font-size: 12px;
+            }
+            &:hover {
+                .cms_widget-description {
+                    display: block;
+                }
+            }
+        }
+
+    }
+
+
+}
 .bz-widget_buttons {
     display: none;
 }
@@ -46,7 +167,6 @@ a:hover, a:focus {
     }
 
     .bz-widget_buttons {
-        z-index: 1000;
         position: absolute;
         top: 12%;
         left: 0;
@@ -95,7 +215,7 @@ a:hover, a:focus {
             padding: 0 7px;
             position: absolute;
             top: -1px;
-            z-index: 100;
+            z-index: 1;
         }
 
         .bz-overlay, .bz-widget_buttons {
@@ -240,115 +360,8 @@ border: 1px solid #C6D9E9;*/
     display: none;
 }
 
-.cms-manage-widgets #cms_widgets_panel {
+html body.cms-manage-widgets .bz-admin #cms_widgets_panel {
     left: 0px;
-}
-
-#cms_widgets_panel {
-    background-color: #F1F1F1;
-    border-right: 1px solid #B2B2B2;
-    position: fixed;
-    left: -250px;
-    top: 40px;
-    bottom: 0;
-    width: 175px;
-    min-width: 167px;
-    z-index: 10000;
-    box-shadow: none;
-    -webkit-transition: all 0.5s ease-in-out;
-    -moz-transition: all 0.5s ease-in-out;
-    -o-transition: all 0.5s ease-in-out;
-    transition: all 0.5s ease-in-out;
-
-    .cms_widget_panel-container {
-        width: 100%;
-        height: 100%;
-        overflow-y: auto;
-        overflow-x: hidden;
-        padding-top: 10px;
-        padding-left: 5px;
-        .cms_widget_panel-widget {
-            background: #5B80B2;
-            border: 1px solid #CCCCCC;
-            border-radius: 3px 3px 3px 3px;
-            box-shadow: 0 1px 0 rgba(255, 255, 255, 0.2) inset, 0 1px 2px rgba(0, 0, 0, 0.05);
-            display: inline-block;
-            height: 50px;
-            margin: 0 5px 10px;
-            min-width: auto;
-            opacity: 1;
-            vertical-align: top;
-            width: 50px;
-            &:hover {
-                opacity: 1;
-            }
-            .cms_widget-icon {
-                i {
-                    font-size: 30px;
-                    line-height: 32px;
-                    color: #fff;
-                }
-            }
-            .cms_widget-title {
-                font-weight: normal;
-                font-size: 12px;
-                line-height: 20px;
-            }
-        }
-    }
-
-    &.show {
-        -webkit-transition: all 0.5s ease-in-out;
-        -moz-transition: all 0.5s ease-in-out;
-        -o-transition: all 0.5s ease-in-out;
-        transition: all 0.5s ease-in-out;
-        display: block;
-        left: 0;
-    }
-}
-
-.cms_widget_panel-widget {
-    padding: 4px 10px 4px;
-    font-size: 13px;
-    line-height: 16px;
-    *line-height: 20px;
-    color: #fff;
-    text-align: center;
-    text-shadow: none;
-    vertical-align: bottom;
-    cursor: pointer;
-    background-color: transparent;
-    border: none;
-    *border: 0; // Remove the border to prevent IE7's black border on input:focus
-    box-shadow: none;
-    cursor: move;
-    overflow: hidden;
-
-    &.loading {
-        .cms_widget-icon {
-            display: block;
-            width: 64px;
-            height: 64px;
-            background-position: center center;
-            background-repeat: no-repeat;
-            margin: 5px auto;
-            background-image: url('../images/loading.gif');
-        }
-        &:hover {
-            .cms_widget-description {
-                display: none;
-            }
-        }
-    }
-    .cms_widget-description {
-        display: none;
-        font-size: 12px;
-    }
-    &:hover {
-        .cms_widget-description {
-            display: block;
-        }
-    }
 }
 
 #bz-admin-bar {
@@ -400,8 +413,8 @@ border: 1px solid #C6D9E9;*/
         display: block;
         float: left;
         font-weight: normal;
-        height: 33px;
-        line-height: 30px;
+        height: 40px;
+        line-height: 36px;
         outline: medium none !important;
         padding: 4px 12px;
         text-decoration: none !important;

@@ -17,15 +17,15 @@
 </div>
 
 <div class="bz-row">
-    <label>
-        <input class="checkbox" type="checkbox" name="acl_check"{% if options.acl_check == 'on' %} checked="checked"{% endif %} />
+    <label class="checkbox">
+        <input type="checkbox" name="acl_check"{% if options.acl_check == 'on' %} checked="checked"{% endif %} />
         {% tr %}Check URL access{% endtr %}
     </label>
 </div>
 
 <div class="bz-row">
-    <label>
-        <input class="checkbox" type="checkbox" name="attach"{% if options.attach == 'on' %} checked="checked"{% endif %} />
+    <label class="checkbox">
+        <input type="checkbox" name="attach"{% if options.attach == 'on' %} checked="checked"{% endif %} />
         {% tr %}Attach to active menu{% endtr %}
     </label>
     <div class="hint">{% tr %}Show selected menu when active menu level is XXX{% endtr %}</div>

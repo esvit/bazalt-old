@@ -8,7 +8,7 @@
     <meta name="description" content="{{ _meta.description }}">
     <meta name="viewport" content="width=device-width">
 
-    <!--link rel="stylesheet" type="text/css" href="{{ themeUrl }}/assets/less/theme.less.css"/-->
+    <link rel="stylesheet" type="text/css" href="{{ themeUrl }}/assets/less/theme.less.css"/>
 
     <script data-main="site" src="/assets/require.js"></script>
     {% block head '' %}

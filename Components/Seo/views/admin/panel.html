@@ -1,33 +1,58 @@
-<link rel="stylesheet" type="text/css" href="/less.php/Components/Seo/assets/less/panel.less" />
-
-<div id="seoModal" class="modal" ng-show="showSeo" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
-    <div class="modal-header">
-        <h4 class="modal-title">Page settings</h4>
-    </div>
-    <div class="modal-body">
-        <ul class="nav nav-tabs" id="seo-settings">
-            <li class="active"><a href="#general" data-toggle="tab">General</a></li>
-            <li><a href="#page" data-toggle="tab">Page</a></li>
-        </ul>
-        <div class="tab-content">
-            <div class="tab-pane active" id="general">
-                <div class="control-group">
-                    <label class="control-label" for="title">{[ 'Page title'|translate:'AdminPanel' ]}</label>
-                    <div class="controls">
-                        <input type="text" ng-model="pageSeo.title" />
-                        <span class="help-block">Site Title to appear at the top in the administration panel</span>
+<div class="bz-admin">
+<div id="seoModal" class="modal fade" ng-class="{'in': showSeo}" ng-show="showSeo" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
+    <div class="modal-dialog">
+    <div class="modal-content">
+        <div class="modal-header">
+            <button type="button" class="close" ng-click="showSeo = false" data-dismiss="modal" aria-hidden="true">×</button>
+            <h4 class="modal-title">Seo settings</h4>
+        </div>
+        <div class="modal-body">
+            <ul class="nav nav-tabs" id="seo-settings">
+                <li ng-class="{'active': !seoPanel}"><a href="" ng-click="seoPanel = false" data-toggle="tab">For page "{[url]}"</a></li>
+                <li ng-class="{'active': seoPanel}"><a href="" ng-click="seoPanel = true" data-toggle="tab">For route "{[route.name]}"</a></li>
+            </ul>
+            <div class="tab-content form-horizontal">
+                <br/>
+                <div class="tab-pane" ng-class="{'active': !seoPanel}">
+                    <div class="control-group">
+                        <label class="control-label" for="title">{[ 'Page title'|translate:'AdminPanel' ]}</label>
+                        <div class="controls">
+                            <input type="text" ng-model="pageSeo.title" />
+                            <span class="help-block">Site Title to appear at the top in the administration panel</span>
+                        </div>
+                    </div>
+                    <div class="control-group">
+                        <label class="control-label" for="title">{[ 'Page keywords'|translate:'AdminPanel' ]}</label>
+                        <div class="controls">
+                            <input type="text" ng-model="pageSeo.keywords" />
+                        </div>
+                    </div>
+                    <div class="control-group">
+                        <label class="control-label" for="title">{[ 'Page description'|translate:'AdminPanel' ]}</label>
+                        <div class="controls">
+                            <textarea ng-model="pageSeo.description"></textarea>
+                        </div>
                     </div>
                 </div>
-                <div class="control-group">
-                    <label class="control-label" for="title">{[ 'Page keywords'|translate:'AdminPanel' ]}</label>
-                    <div class="controls">
-                        <input type="text" ng-model="pageSeo.keywords" />
+                <div class="tab-pane" ng-class="{'active': seoPanel}">
+                    <div class="control-group">
+                        <label class="control-label" for="title">{[ 'Page title'|translate:'AdminPanel' ]}</label>
+                        <div class="controls">
+                            <input type="text" ng-model="route.title"/>
+                            <span class="help-block">Site Title to appear at the top in the administration panel</span>
+                        </div>
                     </div>
-                </div>
-                <div class="control-group">
-                    <label class="control-label" for="title">{[ 'Page description'|translate:'AdminPanel' ]}</label>
-                    <div class="controls">
-                        <textarea ng-model="pageSeo.description"></textarea>
+                    <div class="control-group">
+                        <label class="control-label" for="title">{[ 'Page keywords'|translate:'AdminPanel' ]}</label>
+                        <div class="controls">
+                            <input type="text" ng-model="route.keywords"/>
+                        </div>
+                    </div>
+                    <div class="control-group">
+                        <label class="control-label" for="title">{[ 'Page description'|translate:'AdminPanel' ]}</label>
+                        <div class="controls">
+                            <textarea ng-model="route.description"></textarea>
+                        </div>
                     </div>
                 </div>
                 <div class="control-group">
@@ -38,36 +63,13 @@
                 </span>
                     </div>
                 </div>
-                <div class="control-group">
-                    <button class="btn" ng-click="savePage()">Save</button>
-                </div>
-            </div>
-            <div class="tab-pane" id="page">
-                <p><b>{[route.name]}</b></p>
-                <div class="control-group">
-                    <label class="control-label" for="title">{[ 'Page title'|translate:'AdminPanel' ]}</label>
-                    <div class="controls">
-                        <input type="text" ng-model="route.title"/>
-                        <span class="help-block">Site Title to appear at the top in the administration panel</span>
-                    </div>
-                </div>
-                <div class="control-group">
-                    <label class="control-label" for="title">{[ 'Page keywords'|translate:'AdminPanel' ]}</label>
-                    <div class="controls">
-                        <input type="text" ng-model="route.keywords"/>
-                    </div>
-                </div>
-                <div class="control-group">
-                    <label class="control-label" for="title">{[ 'Page description'|translate:'AdminPanel' ]}</label>
-                    <div class="controls">
-                        <textarea ng-model="route.description"></textarea>
-                    </div>
-                </div>
-                <div class="control-group">
-                    <button class="btn" ng-click="saveRoute()">Save</button>
-                </div>
             </div>
         </div>
+        <div class="modal-footer">
+            <button class="btn btn-primary" ng-click="save()">Save</button>
+            <button class="btn" ng-click="showSeo = false">Cancel</button>
+        </div>
     </div>
-    <div class="modal-footer"></div>
+    </div>
+</div>
 </div>

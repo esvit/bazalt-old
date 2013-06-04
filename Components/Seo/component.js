@@ -39,19 +39,19 @@ define([], function() {
                     if (!route) {
                         return;
                     }
+                    $scope.url = $location.url();
                     $scope.route = SeoRouteService.get({ name: route }, function(result) {
                         
                     });
                 });
                 $rootScope.$on('$routeChangeSuccess', function() {
+                    $scope.url = $location.url();
                     $scope.pageSeo = SeoPageService.get({ url: $location.url() }, function(result) {
                         
                     });
                 });
-                $scope.saveRoute = function() {
+                $scope.save = function() {
                     $scope.route.$save();
-                }
-                $scope.savePage = function() {
                     $scope.pageSeo.$save();
                 }
             }],
