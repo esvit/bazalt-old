@@ -6,15 +6,15 @@
 
 <ul ng-controller="MenuCtrl" class="nav">
     <li ng-repeat="item in sideMenu" ng-class="{'active': item.active}">
-        <a href="{[item.url]}">
+        <a href="{{item.url}}">
             <span ng-show="item.notification"
-                  class="badge badge-important m-badge-notification">{[item.notification]}</span>
+                  class="badge badge-important m-badge-notification">{{item.notification}}</span>
 
             <div>
                 <div class="ico">
-                    <i class="{[item.icon]} icon-3x"></i>
+                    <i class="{{item.icon}} icon-3x"></i>
                 </div>
-                <div class="title">{[item.title]}</div>
+                <div class="title">{{item.title}}</div>
             </div>
 
             <div class="arrow">
@@ -38,14 +38,14 @@
         <div class="m-sidebar-collapsed ng-cloak" ng-show="more.show && more.menu.length">
             <ul class="nav nav-pills">
                 <li ng-repeat="item in more.menu">
-                    <a href="{[item.url]}">
-                        <span ng-show="item.notification" class="badge badge-important m-badge-notification">{[item.notification]}</span>
+                    <a href="{{item.url}}">
+                        <span ng-show="item.notification" class="badge badge-important m-badge-notification">{{item.notification}}</span>
 
                         <div>
                             <div class="ico">
-                                <i class="{[item.icon]} icon-3x"></i>
+                                <i class="{{item.icon}} icon-3x"></i>
                             </div>
-                            <div class="title">{[item.title]}</div>
+                            <div class="title">{{item.title}}</div>
                         </div>
 
                         <div class="arrow">

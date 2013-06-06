@@ -35,8 +35,8 @@
         <div class="col-span-5 breadcrumb-container hidden-phone">
             <ul class="breadcrumb ng-cloak" ng-show="breadcrumbs.length">
                 <li ng-repeat="breadcrumb in breadcrumbs">
-                    <a ng-hide="$last" ng-href="{[breadcrumb.url]}">{[breadcrumb.title]}</a>
-                    <span ng-show="$last">{[breadcrumb.title]}</span>
+                    <a ng-hide="$last" ng-href="{{ '{{' }}breadcrumb.url}}">{{ '{{' }}breadcrumb.title}}</a>
+                    <span ng-show="$last">{{ '{{' }}breadcrumb.title}}</span>
                 </li>
             </ul>
         </div>
@@ -50,16 +50,16 @@
                     <a class="btn dropdown-toggle" data-toggle="dropdown" href="#">
                                 <span ng-repeat="language in languages.all"
                                       ng-show="language.id == languages.current">
-                                      <span class="ico-flags" ng-class="language.ico"></span>{[language.id]}
+                                      <span class="ico-flags" ng-class="language.ico"></span>{{ '{{' }}language.id}}
                                 <span>
                                 <span class="caret"></span>
                     </a>
                     <ul class="dropdown-menu dropdown-languages">
                         <li ng-repeat="language in languages.all" ng-class="{'active':languages.current == language.id}">
                             <a href="javascript:;" class="clearfix" ng-click="languages.current = language.id">
-                                <small class="pull-right">Ctrl+Alt+{[$index+1]}</small>
+                                <small class="pull-right">Ctrl+Alt+{{ '{{' }}$index+1}}</small>
                                 <span class="ico-flags" ng-class="language.ico"></span>
-                                {[language.title]}
+                                {{ '{{' }}language.title}}
                             </a>
                         </li>
                         <li class="nav-header">in the near future there will be more languages</li>
@@ -67,7 +67,7 @@
                 </div>
                 <div class="btn-group pull-right" ng-show="$user.authorized()">
                     <a class="btn dropdown-toggle" data-toggle="dropdown" href="#">
-                        <i class="glyphicon glyphicon-user"></i> {[$user.login]}
+                        <i class="glyphicon glyphicon-user"></i> {{ '{{' }}$user.login}}
                         <span class="caret"></span>
                     </a>
                     <ul class="dropdown-menu">

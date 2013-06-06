@@ -13,6 +13,8 @@ themes/default/assets/img/*
 themes/default/assets/js/*
 uploads/*
 static/*
+composer.lock
+composer.phar
 .svn
 .idea
 

@@ -41,7 +41,7 @@
                     <div class="controls">
                         <input type="text" id="nickname" auto-fill-sync remote-form-component required ng-model="$user.nickname" name="nickname" placeholder="" />
                         <div class="ng-cloak help-block" ng-show="loginForm.nickname.$error.server">
-                            {[remoteForm.errors.nickname.exist_user]}
+                            {{ '{{' }}remoteForm.errors.nickname.exist_user}}
                         </div>
                     </div>
                 </div>
@@ -65,7 +65,7 @@
             
             <div ng-cloak ng-show="$user.id">
                 <h4 class="text-danger">Warning!</h4>
-                <p>You are signed in as: <strong>{[ $user.login ]}</strong>, but you do not have administrative permissions.
+                <p>You are signed in as: <strong>{{ '{{' }} $user.login }}</strong>, but you do not have administrative permissions.
                 <p><button class="btn" ng-click="$user.logout()"><i class="icon-off"></i> Logout</button>
                    <a class="btn btn-link" href="/">Go away</a>
             </div>

@@ -23,10 +23,10 @@
                 <a class="pull-right btn-delete" placement="right" title="Deleting..." href="javascript:;"
                    bz-confirm="remove(item)" message="Are you sure want to delete this menu?">
                    <span class="glyphicon glyphicon-trash"></span></a>
-                <a ng-href="#!/menu?id={[item.id]}">
-                    {[item.title|language]}
+                <a ng-href="#!/menu?id={{item.id}}">
+                    {{item.title|language}}
 
-                    <span class="label">{[item.count]}</span>
+                    <span class="label">{{item.count}}</span>
                 </a>
             </li>
         </ul>
@@ -66,8 +66,8 @@
                     <div class="item-content" ng-class="{'expanded':child.$settings}">
                         <div class="btn-group btn-group-justified with-btn">
                             <a href="javascript:;" class="btn title-item-menu" ng-class="{'btn-primary':child.is_publish}">
-                                {[child.title|language|default:'&nbsp;']}
-                                <small>{[ child.typeTitle ]}</small>
+                                {{child.title|language|default:'&nbsp;'}}
+                                <small>{{ child.typeTitle }}</small>
                             </a>
                             <!--a class="btn" ng-click="child.is_publish = !child.is_publish; updateItem(child)" ng-class="{'btn-primary active':child.is_publish}">
                                 <span class="glyphicon glyphicon-eye-open"></span>

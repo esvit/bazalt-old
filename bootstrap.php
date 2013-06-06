@@ -18,6 +18,7 @@ define('ENABLE_MULTISITING', false);
 
 define('TEMP_DIR', SITE_DIR . '/tmp');
 
+require_once 'Framework/Vendors/autoload.php';
 // Include BAZALT framework
 require_once 'Framework/Core/include.inc';
 
@@ -26,5 +27,7 @@ if (!is_file('config.php') || !filesize('config.php')) {
     exit;
 }
 require_once 'config.php';
+
+Bazalt\Thumbs\Image::initStorage(__DIR__ . '/static', '/thumb.php?file=/static', SITE_DIR);
 
 Framework\System\Session\Session::setTimeout(30 * 24 * 60 * 60);

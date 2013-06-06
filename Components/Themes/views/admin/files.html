@@ -4,9 +4,9 @@
             <li ng-repeat="file in files"
                 ng-class="{'active': file.name == selectedFile.name, 'nav-header': file.type=='category'}">
                 <a href="javascript:;" ng-show="file.type=='file'" ng-click="openFile(file)">
-                    {[file.title|default:file.name]}
+                    {{file.title|default:file.name}}
                 </a>
-                <span ng-show="file.type=='category'">{[file.title]}
+                <span ng-show="file.type=='category'">{{file.title}}
                     <help>
                         Test
                     </help>

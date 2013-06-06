@@ -8,27 +8,27 @@
         </div>
         <div class="modal-body">
             <ul class="nav nav-tabs" id="seo-settings">
-                <li ng-class="{'active': !seoPanel}"><a href="" ng-click="seoPanel = false" data-toggle="tab">For page "{[url]}"</a></li>
-                <li ng-class="{'active': seoPanel}"><a href="" ng-click="seoPanel = true" data-toggle="tab">For route "{[route.name]}"</a></li>
+                <li ng-class="{'active': !seoPanel}"><a href="" ng-click="seoPanel = false" data-toggle="tab">For page "{{url}}"</a></li>
+                <li ng-class="{'active': seoPanel}"><a href="" ng-click="seoPanel = true" data-toggle="tab">For route "{{route.name}}"</a></li>
             </ul>
             <div class="tab-content form-horizontal">
                 <br/>
                 <div class="tab-pane" ng-class="{'active': !seoPanel}">
                     <div class="control-group">
-                        <label class="control-label" for="title">{[ 'Page title'|translate:'AdminPanel' ]}</label>
+                        <label class="control-label" for="title">{{ 'Page title'|translate:'AdminPanel' }}</label>
                         <div class="controls">
                             <input type="text" ng-model="pageSeo.title" />
                             <span class="help-block">Site Title to appear at the top in the administration panel</span>
                         </div>
                     </div>
                     <div class="control-group">
-                        <label class="control-label" for="title">{[ 'Page keywords'|translate:'AdminPanel' ]}</label>
+                        <label class="control-label" for="title">{{ 'Page keywords'|translate:'AdminPanel' }}</label>
                         <div class="controls">
                             <input type="text" ng-model="pageSeo.keywords" />
                         </div>
                     </div>
                     <div class="control-group">
-                        <label class="control-label" for="title">{[ 'Page description'|translate:'AdminPanel' ]}</label>
+                        <label class="control-label" for="title">{{ 'Page description'|translate:'AdminPanel' }}</label>
                         <div class="controls">
                             <textarea ng-model="pageSeo.description"></textarea>
                         </div>
@@ -36,30 +36,30 @@
                 </div>
                 <div class="tab-pane" ng-class="{'active': seoPanel}">
                     <div class="control-group">
-                        <label class="control-label" for="title">{[ 'Page title'|translate:'AdminPanel' ]}</label>
+                        <label class="control-label" for="title">{{ 'Page title'|translate:'AdminPanel' }}</label>
                         <div class="controls">
                             <input type="text" ng-model="route.title"/>
                             <span class="help-block">Site Title to appear at the top in the administration panel</span>
                         </div>
                     </div>
                     <div class="control-group">
-                        <label class="control-label" for="title">{[ 'Page keywords'|translate:'AdminPanel' ]}</label>
+                        <label class="control-label" for="title">{{ 'Page keywords'|translate:'AdminPanel' }}</label>
                         <div class="controls">
                             <input type="text" ng-model="route.keywords"/>
                         </div>
                     </div>
                     <div class="control-group">
-                        <label class="control-label" for="title">{[ 'Page description'|translate:'AdminPanel' ]}</label>
+                        <label class="control-label" for="title">{{ 'Page description'|translate:'AdminPanel' }}</label>
                         <div class="controls">
                             <textarea ng-model="route.description"></textarea>
                         </div>
                     </div>
                 </div>
                 <div class="control-group">
-                    <label class="control-label" for="title">{[ 'Variables'|translate:'AdminPanel' ]}</label>
+                    <label class="control-label" for="title">{{ 'Variables'|translate:'AdminPanel' }}</label>
                     <div class="controls">
                 <span ng-repeat="(name, value) in metainfo.seo_vars">
-                    {[name]}: {[value]}
+                    {{name}}: {{value}}
                 </span>
                     </div>
                 </div>

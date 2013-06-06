@@ -17,7 +17,6 @@ class Extension extends \Twig_Extension
         return array(
             'number' => new \Twig_Filter_Function('twig_number_filter'),
             'truncate' => new \Twig_Filter_Function('twig_truncate_filter'),
-            'thumb' => new \Twig_Filter_Function('thumb'),
             'print_r' => new \Twig_Filter_Function('twig_print_r_filter'),
             'format_date' => new \Twig_Filter_Function('twig_format_date_filter'),
             'format_time' => new \Twig_Filter_Function('twig_format_time_filter'),

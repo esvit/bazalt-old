@@ -79,6 +79,7 @@ require(['modernizr', 'bazalt-cms', 'bootstrap', 'bz-switcher'].concat(modules),
     }]);
 
     app.controller('IndexCtrl', ['$scope', '$rootScope', function ($scope, $rootScope) {
+        $scope.activateMenu('CMS'); // activate admin menu
         $rootScope.breadcrumbs = [
             {
                 'title' : 'Dashboard',
@@ -87,6 +88,7 @@ require(['modernizr', 'bazalt-cms', 'bootstrap', 'bz-switcher'].concat(modules),
         ];
     }]);
     app.controller('SettingsCtrl', ['$scope', '$rootScope', 'SettingsService', function ($scope, $rootScope, SettingsService) {
+        $scope.activateMenu('CMS'); // activate admin menu
         $scope.loading = {};
 
         $rootScope.breadcrumbs = [

@@ -56,7 +56,7 @@ define([
 
         return PagesCategoryService;
     })
-    .controller('PagesCtrl', function($scope, $rootScope, $filter, $location, $routeParams, $q, PagesService, PagesCategoryService) {
+    .controller('PagesCtrl', function($scope, $rootScope, $filter, $location, $routeParams, $q, PagesService, PagesCategoryService, ngTableParams) {
         $scope.activateMenu('Pages'); // activate admin menu
 
         // for access from other controller
@@ -89,17 +89,27 @@ define([
             $scope.params.category_id = (category) ? category.id : null;
             $scope.update($scope.params);
         }
-
-        $scope.update = function(params) {
+        $scope.pagesTable = new ngTableParams(
+            angular.extend({
+                page: 1,
+                count: 10
+            },
+            $location.search())
+        );
+        $scope.$watch('pagesTable', function(params) {
             $scope.params = params;
             $scope.loading.pages = true;
-            $location.search(params);
-            PagesService.get(params, function(result) {
+            $location.search(params.url());
+            PagesService.get(params.url(), function(result) {
                 $scope.loading.pages = false;
-                $scope.pages = result;
+                $scope.data = result.data;
+                $scope.pagesTable.total = result.pager.total;
+                if (!$scope.$$phase) {
+                    $scope.$apply();
+                }
             });
-        }
-        $scope.update($routeParams);
+        });
+
 
         $scope.selected = function() {
             var selected = [];
@@ -140,18 +150,6 @@ define([
             return q.promise;
         }*/
 
-        $rootScope.$watch('tr', function() {
-            $rootScope.breadcrumbs = [
-                {
-                    'title' : $filter('translate')('Dashboard', 'Pages'),
-                    'url': '#!/'
-                },
-                {
-                    'title' : $filter('translate')('Pages', 'Pages'),
-                    'url': '#!/pages'
-                }
-            ];
-        });
         $rootScope.breadcrumbs = [
             {
                 'title' : $filter('translate')('Dashboard', 'Pages'),
@@ -241,22 +239,6 @@ define([
             walk(res.children);
         });
 
-
-        $rootScope.$watch('tr', function() {
-            $rootScope.breadcrumbs = [
-                {
-                    'title' : $filter('translate')('Dashboard', 'Pages'),
-                    'url': '#!/'
-                },
-                {
-                    'title' : $filter('translate')('Pages', 'Pages'),
-                    'url': '#!/pages'
-                },
-                {
-                    'title' : $filter('translate')(pageTitle, 'Pages')
-                }
-            ];
-        });
         $rootScope.breadcrumbs = [
             {
                 'title' : $filter('translate')('Dashboard', 'Pages'),

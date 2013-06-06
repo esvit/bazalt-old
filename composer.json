@@ -1,0 +1,23 @@
+{
+    "name": "Equalteam/bazalt",
+    "license": "New BSD License",
+    "authors": [
+        {
+            "name": "Vitalii Savchuk",
+            "email": "esvit666@gmail.com"
+        }
+    ],
+    "config": { 
+        "vendor-dir": "Framework/Vendors/" 
+    },
+    "autoload": {
+        "psr-0": {"Bazalt": "src"}
+    },
+    "require": {
+        "twig/twig": "*",
+        "imagine/imagine": "*",
+        "leafo/lessphp": "*",
+        "peej/tonic": "*",
+        "bazalt/thumbs": "dev-master"
+    }
+}

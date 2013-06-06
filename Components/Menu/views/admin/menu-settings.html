@@ -27,7 +27,7 @@
     <label>Menu item type:</label>
     <select ng-change="changeMenuType(child)" ng-options="type.class as type.title group by type.component_title for type in menuTypes" ng-model="child.menuType"></select>
 
-    <div class="menu-settings-external clearfix" data-title="{['Settings'|translate:'Menu']}" ng-show="child.settings" raw="child.settings"></div>
+    <div class="menu-settings-external clearfix" data-title="{{'Settings'|translate:'Menu'}}" ng-show="child.settings" raw="child.settings"></div>
     <legend></legend>
 
     <div class="text-center">

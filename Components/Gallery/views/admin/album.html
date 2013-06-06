@@ -4,33 +4,33 @@
 <div class="page-header">
     <div class="row">
         <div class="col-span-3">
-            <h2>{['Gallery'|translate:'Gallery']}</h2>
+            <h2>{{'Gallery'|translate:'Gallery'}}</h2>
         </div>
         <div class="col-span-9">
             <div ng-show="album.id" style="display: none" class="btn-toolbar">
                 <div class="btn-group fileupload fileupload-new">
                     <button class="btn btn-success btn-file" ng-class="{'active': show_uploads}" ng-click="show_uploads = !!!show_uploads">
-                        <span class="fileupload-new"><span class="glyphicon glyphicon-upload"></span> {['Upload file(s)'|translate:'Gallery']}</span>
+                        <span class="fileupload-new"><span class="glyphicon glyphicon-upload"></span> {{'Upload file(s)'|translate:'Gallery'}}</span>
                     </button>
                 </div>
 
                 <div class="btn-group">
                     <button class="btn" ng-class="{ 'active btn-success': album.is_published && !album.is_hidden }"
                             ng-click="album.is_published = true; album.is_hidden = false; album.$save()">
-                        {['Published'|translate:'Gallery']}
+                        {{'Published'|translate:'Gallery'}}
                     </button>
                     <button class="btn" ng-class="{ 'active btn-info': album.is_published && album.is_hidden }"
                             ng-click="album.is_published = true; album.is_hidden = true; album.$save()"><span
                             class="glyphicon glyphicon-eye-close"
                             ng-class="{ 'icon-white': album.is_published && album.is_hidden }"></span>
-                        {['Invisible'|translate:'Gallery']}
+                        {{'Invisible'|translate:'Gallery'}}
                     </button>
 
                     <button class="btn" ng-class="{ 'active btn-danger': !album.is_published && !album.is_hidden }"
                             ng-click="album.is_published = false; album.is_hidden = false; album.$save()"><span
                             class="glyphicon glyphicon-remove"
                             ng-class="{ 'icon-white': !album.is_published && !album.is_hidden }"></span>
-                        {['Unpublished'|translate:'Gallery']}
+                        {{'Unpublished'|translate:'Gallery'}}
                     </button>
                 </div>
             </div>
@@ -43,19 +43,19 @@
         <div class="sidebar-nav">
             <ul class="nav nav-pills nav-stacked nav-list nav-files albums-list">
                 <li class="nav-header">
-                    {['Albums'|translate:'Gallery']}
+                    {{'Albums'|translate:'Gallery'}}
                 </li>
                 <li ng-repeat="item in albums" class="with-btn" ng-class="{active: item.id == album.id}">
                     <a class="pull-right btn btn-delete" placement="right" title="Deleting..."
                        href="javascript:;" bz-confirm="deleteAlbum(item);"
                        message="Are you sure you want to delete this album?"><span class="glyphicon glyphicon-trash"></span></a>
                     <a href="javascript:;" ng-click="showAlbum(item)">
-                        <span ng-show="item.images_count > 0" class="pull-right label">{[item.images_count]}</span>
+                        <span ng-show="item.images_count > 0" class="pull-right label">{{item.images_count}}</span>
                         <span ng-show="item.is_hidden && item.is_published"
                               class="glyphicon glyphicon-eye-close"></span>
                         <span ng-show="!item.is_published"
                               class="glyphicon glyphicon-remove"></span>
-                        <span class="title">{[item.title|language]}</span>
+                        <span class="title">{{item.title|language}}</span>
                     </a>
                 </li>
             </ul>
@@ -85,18 +85,18 @@
     <div class="col-span-9" ng-show="album.id">
 
         <div class="alert alert-info" ng-show="album.is_published">
-            Url of this album:&nbsp;<code><a target="_blank" href="{[album.url]}">{[album.url]}</a></code>
+            Url of this album:&nbsp;<code><a target="_blank" href="{{album.url}}">{{album.url}}</a></code>
         </div>
         <div class="alert" ng-show="!album.is_published">
             <strong>Warning!</strong>
-            {['Publish album first'|translate:'Gallery']}
+            {{'Publish album first'|translate:'Gallery'}}
         </div>
 
         <div class="gallery-container" loading-container="busy">
 
             <div class="well photo-uploader ng-cloak" ng-show="show_uploads">
                 <p>Browse for files to upload or drag and drop them here</p>
-                <input type="file" multiple bz-uploader="addImage(album, $file)" data-url="/rest.php/gallery/{[album.id]}/" data-max-file-size="100mb" ng-model="photos" accept="*.gif,*.png,*.jpg,*.jpeg" name="file1"/>
+                <input type="file" multiple bz-uploader="addImage(album, $file)" data-url="/rest.php/gallery/{{album.id}}/" data-max-file-size="100mb" ng-model="photos" accept="*.gif,*.png,*.jpg,*.jpeg" name="file1"/>
             </div>
 
 
@@ -105,8 +105,8 @@
                 infinite-scroll-distance='0' ng-sortable="{update: update}" ng-model="photos">
                 <li class="gallery-image" ng-repeat="photo in photos | orderBy:-order">
                     <div class="thumbnail">
-                        <img ng-src="/thumb.php{[photo.image]}?w=250&h=160"/>
-                        <strong>{[photo.title|language]}</strong>
+                        <img ng-src="/thumb.php{{photo.image}}?w=250&h=160"/>
+                        <strong>{{photo.title|language}}</strong>
                     </div>
                     <div class="actions">
                         <a title="" href="javascript:;" ng-click="editPhoto(photo)" class="tip-top"
@@ -121,8 +121,8 @@
 
             <!--ul id="og-grid" class="og-grid">
                 <li ng-repeat="photo in photos | orderBy:-order">
-                    <a href="#!/gallery/?id={[album.id]}&photo_id={[photo.id]}" data-largesrc="{[photo.image]}" data-title="{[photo.title|language]}" data-description="{[photo.description|language]}">
-                        <img ng-src="/thumb.php{[photo.image]}?w=200&h=160" />
+                    <a href="#!/gallery/?id={{album.id}}&photo_id={{photo.id}}" data-largesrc="{{photo.image}}" data-title="{{photo.title|language}}" data-description="{{photo.description|language}}">
+                        <img ng-src="/thumb.php{{photo.image}}?w=200&h=160" />
                     </a>
                 </li>
             </ul-->

@@ -10,15 +10,9 @@
 </div>
 
 <div class="container">
-    <div id="gallery-fotorama" class="fotorama" data-width="940" data-height="640">
+    <div>
         {% for image in images %}
-            <a href="{{ image.url|thumb({ 'width': 940, 'height': 540 }) }}"><img alt="{{ image.title }}" src="{{ image.image|thumb({ 'width': 72, 'height': 48 }) }}"></a>
+            <a href="{{ image.image|thumb('940x540') }}"><img alt="{{ image.title }}" src="{{ image.image|thumb('72x48', { 'grayscale': true }) }}"></a>
         {% endfor %}
     </div>
 </div>
-
-<script>
-    $(function() {
-        $('#gallery-fotorama').fotorama();
-    });
-</script>

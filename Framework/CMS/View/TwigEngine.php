@@ -28,6 +28,7 @@ class TwigEngine extends View\Engine
 
         //$twig->enableAutoReload();
         $twig->addExtension(new Twig\Extension());
+        $twig->addExtension(new \Bazalt\Thumbs\Extension());
 
         foreach (self::$extensions as $ext) {
             $twig->addExtension($ext);
@@ -53,6 +54,7 @@ class TwigEngine extends View\Engine
         if (DEBUG) {
             $twig->addExtension(new \Twig_Extension_Debug());
         }
+        $twig->addExtension(new \Bazalt\Thumbs\Extension());
 
         foreach (self::$extensions as $ext) {
             $twig->addExtension($ext);

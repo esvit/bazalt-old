@@ -1,6 +1,6 @@
 var bazaltCMS = angular.module('bazalt-cms', ['ngResource']).
     config(['$interpolateProvider', function($interpolateProvider){
-        $interpolateProvider.startSymbol('{[').endSymbol(']}');
+        //$interpolateProvider.startSymbol('{[').endSymbol(']}');
     }]).
     run(['$rootScope', '$page', function($rootScope, $page) {
         $rootScope.page = $page;
