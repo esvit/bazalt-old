@@ -43,6 +43,7 @@ class File extends CMS\Webservice\Rest
         $data = (array)$this->request->data;
         $file_id = $data['file'];
 
+        $theme = CMS\Model\Theme::getById($theme_id);
         /*$user = CMS\User::get();
         if ($user->isGuest()) {
             return new Response(200, null);
@@ -50,7 +51,7 @@ class File extends CMS\Webservice\Rest
         $content = $data['content'];
         file_put_contents(SITE_DIR . $file_id, $content);
         if (pathinfo($file_id, PATHINFO_EXTENSION) == 'less') {
-            \Components\Themes\Component::recompileLess(SITE_DIR . $file_id, CMS\Model\Theme::getById('default'));
+            \Components\Themes\Component::recompileLess(SITE_DIR . $file_id, $theme);
         }
         \Components\Themes\Component::recompileLess(SITE_DIR . '/themes/' . $theme->id . '/assets/less/theme.less', $theme);
 
