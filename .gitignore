@@ -6,6 +6,7 @@ tmp
 installer.zip
 config.php
 node_modules
+Framework/Vendors/*
 assets/components/*
 Framework/Vendors/*
 assets/require.js
