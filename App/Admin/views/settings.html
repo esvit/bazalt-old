@@ -2,69 +2,87 @@
     <h2>Settings</h2>
 </div>
 
-<form ng-submit="saveSettings(settings)" loading-container="loading.settings">
-<div class="settings-group">
-    <span class="title">Site settings</span>
-    <div class="settings-container">
-        <div class="control-group">
-            <label class="control-label" for="title">Site title:</label>
-            <div class="controls">
-                <input class="input-large" ng-model="settings.title" value="MistInfo" id="title" type="text" required />
-                <span class="help-block">Site Title to appear at the top in the administration panel</span>
-            </div>
-        </div>
+<ul class="nav nav-tabs">
+    <li ng-class="{'active': part == 'general'}"><a href="#!/settings/general">General</a></li>
+    <li ng-class="{'active': part == 'languages'}"><a href="#!/settings/languages">Languages</a></li>
+    <li ng-class="{'active': part == 'notifications'}"><a href="#!/settings/notifications">Notifications</a></li>
+</ul>
 
-        <div class="control-group" loading-container="loading.key">
-            <label class="control-label">
-                Secret key:
-            </label>
-            <div class="controls">
-                <div class="input-group">
-                    <span class="input-group-btn">
-                        <button class="btn" ng-click="generateNewKey()" type="button" title="Generate new"><span class="glyphicon glyphicon-refresh"></span></button>
-                    </span>
-                    <input type="text" ng-model="settings.secret_key" value="0be5ca0a-6a3d-daa4-5115-f47afa198463" disabled>
+<div ng-show="part == 'general'">
+    <form ng-submit="saveSettings(settings)" loading-container="loading.settings">
+    <div class="settings-group">
+        <span class="title">Site settings</span>
+        <div class="settings-container">
+            <div class="control-group">
+                <label class="control-label" for="title">Site title:</label>
+                <div class="controls">
+                    <input class="input-large" ng-model="settings.title" value="MistInfo" id="title" type="text" required />
+                    <span class="help-block">Site Title to appear at the top in the administration panel</span>
                 </div>
-                <span class="help-block">Used for basic security settings site. If someone found the key, in the security it needs to change</span>
             </div>
-        </div>
-    </div>
-</div>
 
-
-<div class="settings-group">
-    <span class="title">Language settings</span>
-    <div class="settings-container">
-
-        <div class="control-group">
-            <div class="controls checkbox">
+            <div class="control-group" loading-container="loading.key">
                 <label class="control-label">
-                    <input type="checkbox" ng-model="settings.is_multilingual" checked="checked">
-                    Multilanguage site
+                    Secret key:
                 </label>
-                <span class="help-block">Turn on the "Multilanguage" section, where you can add multiple languages</span>
+                <div class="controls">
+                    <div class="input-group">
+                        <span class="input-group-btn">
+                            <button class="btn" ng-click="generateNewKey()" type="button" title="Generate new"><span class="glyphicon glyphicon-refresh"></span></button>
+                        </span>
+                        <input type="text" ng-model="settings.secret_key" value="0be5ca0a-6a3d-daa4-5115-f47afa198463" disabled>
+                    </div>
+                    <span class="help-block">Used for basic security settings site. If someone found the key, in the security it needs to change</span>
+                </div>
             </div>
         </div>
     </div>
-</div>
 
-<div class="settings-group">
-    <span class="title">Search engines</span>
-    <div class="settings-container">
-        <div class="control-group">
-            <div class="controls checkbox">
-                <label class="control-label">
-                    <input ng-model="settings.is_allow_indexing" type="checkbox" checked="checked">
-                    Allow indexing
-                </label>
-                <span class="help-block">Allow indexing site search bot</span>
+
+    <div class="settings-group">
+        <span class="title">Language settings</span>
+        <div class="settings-container">
+
+            <div class="control-group">
+                <div class="controls checkbox">
+                    <label class="control-label">
+                        <input type="checkbox" ng-model="settings.is_multilingual" checked="checked">
+                        Multilanguage site
+                    </label>
+                    <span class="help-block">Turn on the "Multilanguage" section, where you can add multiple languages</span>
+                </div>
             </div>
         </div>
     </div>
-</div>
 
-<div class="form-actions text-center">
-    <button class="btn-primary btn">Save settings</button>
-    <button class="btn" type="reset">Reset</button>
+    <div class="settings-group">
+        <span class="title">Search engines</span>
+        <div class="settings-container">
+            <div class="control-group">
+                <div class="controls checkbox">
+                    <label class="control-label">
+                        <input ng-model="settings.is_allow_indexing" type="checkbox" checked="checked">
+                        Allow indexing
+                    </label>
+                    <span class="help-block">Allow indexing site search bot</span>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <div class="form-actions text-center">
+        <button class="btn-primary btn">Save settings</button>
+        <button class="btn" type="reset">Reset</button>
+    </div>
+    </form>
 </div>
-</form>
+<div ng-show="part == 'languages'" ng-controller="LanguagesSettingsCtrl">
+    <div class="list-group">
+    <a href="#" class="list-group-item" ng-class="{'active': language.is_default}" ng-repeat="language in languages">
+        <h4 class="list-group-item-heading">{{language.title}}</h4>
+    </a>
+    </div>
+</div>
+<div ng-show="part == 'notifications'">
+
+</div>

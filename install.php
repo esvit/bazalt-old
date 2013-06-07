@@ -7,15 +7,7 @@ if (version_compare(PHP_VERSION, '5.4.0', '<')) {
 define('SITE_DIR', __DIR__);
 define('INSTALLER_DIR', __DIR__ . '/install');
 
-\spl_autoload_register(function($file) {
-    $file = str_replace('\\', '/', $file);
-    $path = SITE_DIR . '/Framework/Vendors/';
-    $filepath = $path . $file . '.php';
-
-    if (file_exists($filepath)) {
-        require_once($filepath);
-    };
-});
+require_once 'Framework/Vendors/autoload.php';
 
 /**
  * @uri /install

@@ -20,7 +20,11 @@ class Language extends CMS\Webservice\Rest
     public function get()
     {
         $result = [];
-        $languages = CMS\Language::getLanguages();
+        if (isset($_GET['all'])) {
+            $languages = CMS\Model\Language::getAll();
+        } else {
+            $languages = CMS\Language::getLanguages();
+        }
         foreach ($languages as $language) {
             $result []= $language->toArray();
         }

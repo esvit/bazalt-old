@@ -13,7 +13,8 @@ require(['modernizr', 'bazalt-cms', 'bootstrap', 'bz-switcher'].concat(modules),
     config(['$routeProvider', '$locationProvider', function($routeProvider, $locationProvider) {
         $routeProvider.
         when('/', {controller: 'IndexCtrl', templateUrl:'/App/Admin/views/index.html'}).
-        when('/settings', {controller: 'SettingsCtrl', templateUrl:'/App/Admin/views/settings.html'}).
+        when('/settings', {redirectTo:'/settings/general'}).
+        when('/settings/:part', {controller: 'SettingsCtrl', templateUrl:'/App/Admin/views/settings.html'}).
         otherwise({redirectTo:'/'});
 
         //$locationProvider.html5Mode(true);
@@ -87,9 +88,10 @@ require(['modernizr', 'bazalt-cms', 'bootstrap', 'bz-switcher'].concat(modules),
             }
         ];
     }]);
-    app.controller('SettingsCtrl', ['$scope', '$rootScope', 'SettingsService', function ($scope, $rootScope, SettingsService) {
+    app.controller('SettingsCtrl', ['$scope', '$rootScope', 'SettingsService', '$routeParams', function ($scope, $rootScope, SettingsService, $routeParams) {
         $scope.activateMenu('CMS'); // activate admin menu
         $scope.loading = {};
+        $scope.part = $routeParams.part;
 
         $rootScope.breadcrumbs = [
             {
@@ -119,6 +121,10 @@ require(['modernizr', 'bazalt-cms', 'bootstrap', 'bz-switcher'].concat(modules),
                 $scope.settings.secret_key = result.key;
             });
         }
+    }]);
+
+    app.controller('LanguagesSettingsCtrl', ['$scope', '$location', '$session', '$window', 'LanguageService', function ($scope, $location, $session, $window, LanguageService) {
+        $scope.languages = LanguageService.query({'all': true});
     }]);
 
     app.controller('MenuCtrl', ['$scope', '$location', '$session', '$window', 'dashboard', function ($scope, $location, $session, $window, dashboard) {

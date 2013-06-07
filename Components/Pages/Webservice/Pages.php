@@ -103,7 +103,9 @@ class Pages extends CMS\Webservice\Rest
         $collection = Page::getCollection(null, $category);
 
         if (!empty($_GET['sorting'])) {
-            $collection->orderBy($_GET['sorting'] . ' ' . ($_GET['sortingDirection'] == 'true' ? 'ASC' : 'DESC'));
+            foreach ($_GET['sorting'] as $name => $direction) {
+                $collection->orderBy($name . ' ' . ($direction == 'asc' ? 'ASC' : 'DESC'));
+            }
         }
         if (isset($_GET['filter']) && ($filter = json_decode($_GET['filter'], true))) {
             $collection->andWhereGroup();
