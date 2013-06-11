@@ -1,0 +1,34 @@
+<div class="clearfix">
+    <div class="brand-panel">
+        <div class="brand clearfix">
+            <div class="logo pull-left"><img src="{{themeUrl}}/assets/img/oodji.png" alt="brand_title" /></div>
+            <div class="pull-left">
+                <h2>{% if category %}{{ category.title }}{% else %}{% tr %}Products{% endtr %}{% endif %}</h2>
+            </div>
+            <a href="/magazini/" class="btn pull-right" style="margin-top: 7px; margin-right: 5px">Магазины</a>
+        </div>
+    </div>
+    <div style="float: right; width: 50%;">
+        {% widgets 'categories' %}
+    </div>
+</div>
+
+
+<div>
+    {% for product in products %}
+        <div class="product-item pull-left">
+            <a class="thumbnail" href="{{product.url()}}">
+                {% set images = product.Images.get() %}
+                {% if images|length > 0 %}
+                    <img src="{{ images.0.url|thumb({ 'width': 225, 'height': 218 }) }}" />
+                {% endif %}
+                <div class="desc">{{ product.code }}</div>
+            </a>
+        </div>
+    {% endfor %}
+</div>
+<style>
+    .bg-img {
+        background-image: none;
+    }
+</style>

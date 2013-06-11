@@ -1,0 +1,3 @@
+<td style="vertical-align: middle;">
+    <button type="button" class="btn danger" data-id="{{ item.id }}" onclick="window.list.elements.list_0.confirmDialog($(this), '{% tr %}Delete order?{% endtr %}', '{% tr %}Delete order?{% endtr %}', function(el){ window.list.elements.actions.Delete(el.data('id'), function() { var row = el.parents('tr.bz-table-row'); row.hide(100, function() { row.remove(); }); }); }); return false;">Delete</button>
+</td>

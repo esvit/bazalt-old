@@ -1,0 +1,27 @@
+<h1>Оформление заказа</h1>
+
+{% if products|length > 0 %}
+<table width="100%">
+<tr>
+    <th>{% tr %}Title{% endtr %}</th>
+    <th>{% tr %}Count{% endtr %}</th>
+    <th>{% tr %}Price{% endtr %}</th>
+</tr>
+    {% for product in products %}
+    <tr data-product-price="{{ product.price }}">
+        <td><a href="{{ product.getUrl() }}">
+        {% set images = product.Images.get() %}
+        {% if images|length > 0 %}
+            <img width="100" height="100" alt="{{ product.title }}" src="{{ images.0.getThumb('100x100') }}">
+        {% endif %}
+        {{ product.title }}</a></td>
+        <td>{{ product.count }}</td>
+        <td>{{ product.price * product.count }}</td>
+    </tr>
+    {% endfor %}
+</table>
+{% endif %}
+
+<h2>Заполните форму заказа</h2>
+
+{{ form|raw }}

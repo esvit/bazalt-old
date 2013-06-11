@@ -1,0 +1,102 @@
+<div class="block exclusive" id="basketWrap">
+    <h4 id="basketTitleWrap"><a href="{% url 'ComEcommerce.Order' %}">Корзина</a><span id="notificationsLoader"></span></h4>
+    <div class="block_content">
+    <!-- block summary -->
+    <div class="collapsed" id="cart_block_summary">
+                <span class="ajax_cart_product_txt_s hidden">товара</span>
+        <span class="ajax_cart_product_txt hidden">товар</span>
+                <span class="ajax_cart_no_product">(пустая)</span>	</div>
+    <!-- block list of products -->
+    <div class="expanded" id="cart_block_list">
+        <div id="basketItemsWrap">
+            <ul>
+            <li style="display: none"></li>
+            {% for product in cart.Products.get() %}
+            <li id="productID_{{ product.id }}"><span>{{ product.title }}({{ product.count }})</span><a href="#" onclick="return false;"><img src="/images/icon/delete.gif" id="deleteProductID_{{ product.id }}"></a></li>
+            {% endfor %}
+            </ul>
+        </div>
+
+        <p id="cart-prices">
+            <span>Всего</span>
+            <span class="price ajax_block_cart_total" id="cart_block_total">{{ cart.getSum() }}</span>
+        </p>
+        <p id="cart-buttons">
+            <a title="Оформить" class="exclusive" id="button_order_cart" href="{% url 'ComEcommerce.Order' %}">Оформить</a>
+        </p>
+    </div>
+    </div>
+</div>
+
+<script>
+$(function(){ 
+    $("#basketItemsWrap li:first").hide();
+
+	$(".ajax_add_to_cart_button").click(function() {
+		var productIDValSplitter 	= $(this).data('product-id');
+		var productIDVal 			= productIDValSplitter[1];
+		
+		var productX 		= $("#product_" + productIDVal + '').offset().left;
+		var productY 		= $("#product_" + productIDVal + '').offset().top;
+		
+		if( $("#productID_" + productIDVal).length > 0){
+			var basketX 		= $("#productID_" + productIDVal).offset().left;
+			var basketY 		= $("#productID_" + productIDVal).offset().top;
+		} else {
+			var basketX 		= $("#basketTitleWrap").offset().left;
+			var basketY 		= $("#basketTitleWrap").offset().top;
+		}
+
+		var gotoX 			= basketX - productX;
+		var gotoY 			= basketY - productY;
+		
+		var newImageWidth 	= $("#product_" + productIDVal).width() / 3;
+		var newImageHeight	= $("#product_" + productIDVal).height() / 3;
+
+        var product = $("#product_" + productIDVal + " img")
+        .clone()
+        .prependTo("#product_" + productIDVal)
+        .css({'position' : 'absolute', 'left': 0, 'top': 0 })
+        .animate({opacity: 0.8}, 100 )
+        .animate({opacity: 0.1, left: gotoX, top: gotoY, width: newImageWidth, height: newImageHeight}, 1200, function() { $(this).remove(); });
+
+        $("#notificationsLoader").html('Loading...');
+
+        ComEcommerce_Webservice_Cart.addProduct(productIDVal, 1, function(res) {
+
+            $('#cart_block_total').text(res.sum);
+            if( $("#productID_" + productIDVal).length > 0){
+                $("#productID_" + productIDVal).animate({ opacity: 0 }, 200);
+                $("#productID_" + productIDVal + ' span').text(res.product.title + "(" + res.product.count + ")");
+                $("#productID_" + productIDVal).animate({ opacity: 1 }, 200);
+                $("#notificationsLoader").empty();
+                
+            } else {
+                $("#basketItemsWrap li:first").before('<li id="productID_' + res.product.id + '"><span>' + res.product.title + "(" + res.product.count + ")</span><a href='#' onclick='return false;'><img src='/images/icon/delete.gif' id='deleteProductID_" + res.product.id + "'></a></li>");
+                $("#basketItemsWrap li:first").hide();
+                $("#basketItemsWrap li:first").show("slow");  
+                $("#notificationsLoader").empty();
+            }
+
+        });
+        
+    });
+
+    $("#basketItemsWrap li img").live("click", function(event) { 
+        var productIDValSplitter 	= (this.id).split("_");
+        var productIDVal 			= productIDValSplitter[1];
+
+        $("#notificationsLoader").html('Loading...');
+
+        ComEcommerce_Webservice_Cart.removeProduct(productIDVal, function(res) {
+
+            $('#cart_block_total').text(res.sum);
+
+            $("#productID_" + productIDVal).hide("slow",  function() {$(this).remove();});
+            $("#notificationsLoader").empty();
+
+        });
+    });
+});
+
+</script>

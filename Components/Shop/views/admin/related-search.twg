@@ -1,0 +1,19 @@
+<tr>
+    <td>Image</td>
+    <td>Title</td>
+    <td>Price</td>
+    <td></td>
+</tr>
+{% for item in items %}
+<tr>
+    <td>
+    {% set images = item.Images.get() %}
+    {% if images|length > 0 %}
+        <img style="float: left; margin-right: 5px;" src="{{ images.0.getThumb('112x109') }}" />
+    {% endif %}
+    </td>
+    <td>{{ item.title }}</td>
+    <td>{{ item.price }}</td>
+    <td><a href="#" onClick="related.relate({{ item.id }}); return false;">Ralate</a></td>
+</tr>
+{% endfor %}
