@@ -14,6 +14,14 @@ class Photo extends Base\Photo
 
     const MAX_HEIGHT = 768;
 
+    public function toArray()
+    {
+        $res = parent::toArray();
+
+        $res['thumb'] = thumb($this->image, '250x160');
+        return $res;
+    }
+
     public function url()
     {
         return Route::urlFor('Gallery.Photo', array('album' => $this->Album->alias, 'photo' => $this->id));

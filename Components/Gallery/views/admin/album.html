@@ -105,7 +105,7 @@
                 infinite-scroll-distance='0' ng-sortable="{update: update}" ng-model="photos">
                 <li class="gallery-image" ng-repeat="photo in photos | orderBy:-order">
                     <div class="thumbnail">
-                        <img ng-src="/thumb.php{{photo.image}}?w=250&h=160"/>
+                        <img ng-src="{{photo.image}}"/>
                         <strong>{{photo.title|language}}</strong>
                     </div>
                     <div class="actions">

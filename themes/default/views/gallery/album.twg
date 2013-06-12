@@ -12,7 +12,11 @@
 <div class="container">
     <div>
         {% for image in images %}
-            <a href="{{ image.image|thumb('940x540') }}"><img alt="{{ image.title }}" src="{{ image.image|thumb('72x48', { 'grayscale': true }) }}"></a>
+            <a href="#" ng-click="img = '{{ image.image }}'"><img alt="{{ image.title }}" src="{{ image.image|thumb('72x48', { 'grayscale': true }) }}"></a>
         {% endfor %}
     </div>
+</div>
+
+<div class="container">
+<img ng-src="{{ '{{' }} img }}" />
 </div>
