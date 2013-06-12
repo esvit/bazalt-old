@@ -13,7 +13,7 @@
 namespace Framework\CMS\ORM;
 
 use Framework\CMS as CMS;
-use Framework\System\ORM as ORM;
+use Bazalt\ORM as ORM;
 use Framework\Core\Event;
 
 /**

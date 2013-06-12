@@ -3,7 +3,7 @@
 namespace Components\Pages\Model;
 
 use Framework\CMS as CMS,
-    Framework\System\ORM\ORM;
+    Bazalt\ORM;
 
 class Category extends Base\Category
 {

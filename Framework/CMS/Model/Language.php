@@ -3,7 +3,7 @@
 namespace Framework\CMS\Model;
 
 use Framework\CMS as CMS;
-use Framework\System\ORM\ORM;
+use Bazalt\ORM;
 
 class Language extends Base\Language
 {

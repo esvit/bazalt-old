@@ -18,6 +18,8 @@
         "imagine/imagine": "*",
         "leafo/lessphp": "*",
         "peej/tonic": "*",
-        "bazalt/thumbs": "dev-master"
+        "analog/analog": "dev-master",
+        "bazalt/thumbs": "dev-master",
+        "bazalt/orm": "dev-master"
     }
 }

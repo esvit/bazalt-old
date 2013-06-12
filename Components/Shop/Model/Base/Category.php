@@ -28,11 +28,11 @@ abstract class Category extends \Framework\CMS\ORM\Record
 
     public function initRelations()
     {
-        $this->hasRelation('Elements', new \ORM_Relation_NestedSet('Components\Shop\Model\Category', 'shop_id'));
-        $this->hasRelation('PublicElements', new \ORM_Relation_NestedSet('Components\Shop\Model\Category', 'shop_id', null, array('is_published' => 1)));
-        // $this->hasRelation('Root', new \ORM_Relation_One2One('\Framework\CMS\Model\CategoryRoot', 'root_id', 'id'));
+        $this->hasRelation('Elements', new \Bazalt\ORM\Relation\NestedSet('Components\Shop\Model\Category', 'shop_id'));
+        $this->hasRelation('PublicElements', new \Bazalt\ORM\Relation\NestedSet('Components\Shop\Model\Category', 'shop_id', null, array('is_published' => 1)));
+        // $this->hasRelation('Root', new \Bazalt\ORM\Relation\One2One('\Framework\CMS\Model\CategoryRoot', 'root_id', 'id'));
         
-        $this->hasRelation('Products', new \ORM_Relation_Many2Many('Components\Shop\Model\Product', 'category_id', 'Components\Shop\Model\ProductsCategories', 'product_id'));
+        $this->hasRelation('Products', new \Bazalt\ORM\Relation\Many2Many('Components\Shop\Model\Product', 'category_id', 'Components\Shop\Model\ProductsCategories', 'product_id'));
     }
 
     public function initPlugins()

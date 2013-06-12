@@ -36,15 +36,15 @@ abstract class File extends \Framework\CMS\ORM\Record
 
     public function initRelations()
     {
-        $this->hasRelation('Elements', new \ORM_Relation_NestedSet('Components\Files\Model\File', 'site_id'));
-        $this->hasRelation('Items', new \ORM_Relation_NestedSet('Components\Files\Model\File', 'site_id'));
-        $this->hasRelation('Folders', new \ORM_Relation_NestedSet('Components\Files\Model\File', 'site_id', null, array('mimetype' => 'directory')));
+        $this->hasRelation('Elements', new \Bazalt\ORM\Relation\NestedSet('Components\Files\Model\File', 'site_id'));
+        $this->hasRelation('Items', new \Bazalt\ORM\Relation\NestedSet('Components\Files\Model\File', 'site_id'));
+        $this->hasRelation('Folders', new \Bazalt\ORM\Relation\NestedSet('Components\Files\Model\File', 'site_id', null, array('mimetype' => 'directory')));
     }
     
     public function initPlugins()
     {
         $this->hasPlugin('Framework\CMS\ORM\Localizable', ['title','body']);
 
-        $this->hasPlugin('Framework\System\ORM\Plugin\Timestampable', ['created' => 'created_at', 'updated' => 'updated_at']);
+        $this->hasPlugin('Bazalt\ORM\Plugin\Timestampable', ['created' => 'created_at', 'updated' => 'updated_at']);
     }
 }

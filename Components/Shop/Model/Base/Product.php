@@ -37,21 +37,21 @@ abstract class Product extends \Framework\CMS\ORM\Record
 
     public function initRelations()
     {
-        $this->hasRelation('Brand', new \ORM_Relation_One2One('Components\Shop\Model\Brand', 'brand_id',  'id'));
-        $this->hasRelation('ProductType', new \ORM_Relation_One2One('Components\Shop\Model\ProductType', 'type_id',  'id'));
-        $this->hasRelation('User', new \ORM_Relation_One2One('Framework\CMS\Model\User', 'user_id',  'id'));
-        $this->hasRelation('Variants', new \ORM_Relation_One2Many('Components\Shop\Model\ProductsVariants', 'id', 'product_id'));
-        $this->hasRelation('Images', new \ORM_Relation_One2Many('Components\Shop\Model\ProductImage', 'id', 'product_id'));
+        $this->hasRelation('Brand', new \Bazalt\ORM\Relation\One2One('Components\Shop\Model\Brand', 'brand_id',  'id'));
+        $this->hasRelation('ProductType', new \Bazalt\ORM\Relation\One2One('Components\Shop\Model\ProductType', 'type_id',  'id'));
+        $this->hasRelation('User', new \Bazalt\ORM\Relation\One2One('Framework\CMS\Model\User', 'user_id',  'id'));
+        $this->hasRelation('Variants', new \Bazalt\ORM\Relation\One2Many('Components\Shop\Model\ProductsVariants', 'id', 'product_id'));
+        $this->hasRelation('Images', new \Bazalt\ORM\Relation\One2Many('Components\Shop\Model\ProductImage', 'id', 'product_id'));
 
-        $this->hasRelation('Category', new \ORM_Relation_One2One('Components\Shop\Model\Category', 'category_id', 'id'));
+        $this->hasRelation('Category', new \Bazalt\ORM\Relation\One2One('Components\Shop\Model\Category', 'category_id', 'id'));
 
-        $this->hasRelation('Fields', new \ORM_Relation_Many2Many('Components\Shop\Model\Field', 'product_id', 'Components\Shop\Model\ProductsFields', 'field_id'));
+        $this->hasRelation('Fields', new \Bazalt\ORM\Relation\Many2Many('Components\Shop\Model\Field', 'product_id', 'Components\Shop\Model\ProductsFields', 'field_id'));
     }
     
     public function initPlugins()
     {
         $this->hasPlugin('Framework\CMS\ORM\Localizable', ['title', 'description']);
-        $this->hasPlugin('Framework\System\ORM\Plugin\Timestampable', ['created' => 'created_at', 'updated' => 'updated_at']);
+        $this->hasPlugin('Bazalt\ORM\Plugin\Timestampable', ['created' => 'created_at', 'updated' => 'updated_at']);
     }
 
 }

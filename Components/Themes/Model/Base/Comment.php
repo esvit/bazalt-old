@@ -36,9 +36,9 @@ abstract class Comment extends \Framework\CMS\ORM\Record
 
     public function initRelations()
     {
-        $this->hasRelation('Elements', new \ORM_Relation_NestedSet('\Components\News\Model\Comment', 'news_id'));
-        $this->hasRelation('User', new \ORM_Relation_One2One('\Framework\CMS\Model\User', 'user_id',  'id'));
-        $this->hasRelation('Article', new \ORM_Relation_One2One('\Components\News\Model\Article', 'news_id',  'id'));
+        $this->hasRelation('Elements', new \Bazalt\ORM\Relation\NestedSet('\Components\News\Model\Comment', 'news_id'));
+        $this->hasRelation('User', new \Bazalt\ORM\Relation\One2One('\Framework\CMS\Model\User', 'user_id',  'id'));
+        $this->hasRelation('Article', new \Bazalt\ORM\Relation\One2One('\Components\News\Model\Article', 'news_id',  'id'));
     }
 
     public function initPlugins()

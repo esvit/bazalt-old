@@ -27,8 +27,8 @@ abstract class Category extends \Framework\CMS\ORM\Record
 
     public function initRelations()
     {
-        $this->hasRelation('Elements', new \ORM_Relation_NestedSet('Components\Pages\Model\Category', 'site_id'));
-        $this->hasRelation('PublicElements', new \ORM_Relation_NestedSet('Components\Pages\Model\Category', 'site_id', null, array('is_hidden' => '0', 'is_published' => 1)));
+        $this->hasRelation('Elements', new \Bazalt\ORM\Relation\NestedSet('Components\Pages\Model\Category', 'site_id'));
+        $this->hasRelation('PublicElements', new \Bazalt\ORM\Relation\NestedSet('Components\Pages\Model\Category', 'site_id', null, array('is_hidden' => '0', 'is_published' => 1)));
     }
 
     public function initPlugins()

@@ -28,11 +28,11 @@ abstract class WidgetInstance extends \Framework\CMS\ORM\Record
 
     public function initRelations()
     {
-        $this->hasRelation('Widget', new \ORM_Relation_One2One('Framework\CMS\Model\Widget', 'widget_id', 'id'));
+        $this->hasRelation('Widget', new \Bazalt\ORM\Relation\One2One('Framework\CMS\Model\Widget', 'widget_id', 'id'));
     }
 
     public function initPlugins()
     {
-        $this->hasPlugin('Framework\System\ORM\Plugin\Serializable', 'config');
+        $this->hasPlugin('Bazalt\ORM\Plugin\Serializable', 'config');
     }
 }

@@ -4,7 +4,7 @@ namespace Framework\CMS\tests\Model;
 
 use Framework\CMS\Model\Language,
     Framework\CMS\Model\Site;
-use Framework\System\ORM\ORM;
+use Bazalt\ORM;
 
 class LanguageTest extends \Tests\BaseCase
 {

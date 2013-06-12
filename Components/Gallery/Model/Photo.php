@@ -2,7 +2,7 @@
 
 namespace Components\Gallery\Model;
 
-use Framework\System\ORM\ORM,
+use Bazalt\ORM,
     Framework\CMS as CMS,
     Framework\System\Routing\Route;
 

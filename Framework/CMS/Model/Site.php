@@ -1,7 +1,7 @@
 <?php
 
 namespace Framework\CMS\Model;
-use Framework\System\ORM\ORM;
+use Bazalt\ORM;
 
 /**
  * @property Site|null originalSite Оригінальний сайт, з якого був здійснений редірект

@@ -27,6 +27,6 @@ abstract class Theme extends \Framework\CMS\ORM\Record
 
     public function initPlugins()
     {
-        $this->hasPlugin('Framework\System\ORM\Plugin\Serializable', 'settings');
+        $this->hasPlugin('Bazalt\ORM\Plugin\Serializable', 'settings');
     }
 }

@@ -5,7 +5,7 @@ namespace Components\News\Model;
 use \Framework\CMS as CMS;
 use Framework\System\Routing\Route;
 use Framework\Core\Helper\Url;
-use Framework\System\ORM\ORM;
+use Bazalt\ORM;
 
 class Article extends Base\Article// implements CMS_Search_ISearchable
 {

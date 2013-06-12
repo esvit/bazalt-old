@@ -23,9 +23,9 @@ abstract class Component extends \Framework\CMS\ORM\Record
 
     public function initRelations()
     {
-        $this->hasRelation('Sites', new \ORM_Relation_Many2Many('Framework\CMS\Model\Site', 'component_id', 'Framework\CMS\Model\ComponentRefSite', 'site_id'));
-        $this->hasRelation('Options', new \ORM_Relation_One2Many('Framework\CMS\Model\Option', 'id', 'component_id'));
-        $this->hasRelation('Widgets', new \ORM_Relation_One2Many('Framework\CMS\Model\Widget', 'id', 'component_id'));
+        $this->hasRelation('Sites', new \Bazalt\ORM\Relation\Many2Many('Framework\CMS\Model\Site', 'component_id', 'Framework\CMS\Model\ComponentRefSite', 'site_id'));
+        $this->hasRelation('Options', new \Bazalt\ORM\Relation\One2Many('Framework\CMS\Model\Option', 'id', 'component_id'));
+        $this->hasRelation('Widgets', new \Bazalt\ORM\Relation\One2Many('Framework\CMS\Model\Widget', 'id', 'component_id'));
     }
 
     public function initPlugins()

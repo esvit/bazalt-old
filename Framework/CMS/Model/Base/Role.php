@@ -26,7 +26,7 @@ abstract class Role extends \Framework\CMS\ORM\Record
 
     public function initRelations()
     {
-        $this->hasRelation('Users', new \ORM_Relation_Many2Many('Framework\CMS\User', 'user_id', 'Framework\CMS\RoleRefUser', 'role_id'));
+        $this->hasRelation('Users', new \Bazalt\ORM\Relation\Many2Many('Framework\CMS\User', 'user_id', 'Framework\CMS\RoleRefUser', 'role_id'));
     }
 
     public function initPlugins()

@@ -24,6 +24,6 @@ abstract class FileLocale extends \Framework\CMS\ORM\Record
 
     public function initRelations()
     {
-        $this->hasRelation('File', new \ORM_Relation_One2One(self::MODEL_NAME, 'id', 'Components\Files\Model\File', 'id'));
+        $this->hasRelation('File', new \Bazalt\ORM\Relation\One2One(self::MODEL_NAME, 'id', 'Components\Files\Model\File', 'id'));
     }
 }

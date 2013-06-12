@@ -17,7 +17,7 @@ $replacement = "const MODEL_NAME = 'Components\\Shop\\Model\\\\$2';";
 $file = preg_replace($pattern, $replacement, $file);
 
 $pattern = '/new(.*)ORM_Relation_/i';
-$file = preg_replace($pattern, 'new \ORM_Relation_', $file);
+$file = preg_replace($pattern, 'new \Bazalt\ORM\Relation\', $file);
 
 $pattern = "/Com(.*)_Model_(.*)/i";
 $replacement = "Components\\\\$1\\Model\\\\$2";

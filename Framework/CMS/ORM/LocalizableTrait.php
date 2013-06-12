@@ -3,7 +3,7 @@
 namespace Framework\CMS\ORM;
 
 use Framework\CMS as CMS;
-use Framework\System\ORM\ORM;
+use Bazalt\ORM;
 
 trait LocalizableTrait
 {

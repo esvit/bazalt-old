@@ -22,6 +22,6 @@ abstract class UserSetting extends \Framework\CMS\ORM\Record
 
     public function initRelations()
     {
-        $this->hasRelation('User', new \ORM_Relation_One2One('Framework\CMS\Model\User', 'user_id',  'id'));
+        $this->hasRelation('User', new \Bazalt\ORM\Relation\One2One('Framework\CMS\Model\User', 'user_id',  'id'));
     }
 }

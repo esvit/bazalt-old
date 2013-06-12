@@ -2,7 +2,7 @@
 
 namespace Components\News\Model;
 
-use Framework\System\ORM\ORM,
+use Bazalt\ORM,
     Framework\CMS as CMS;
 use Framework\System\Routing\Route;
 use Components\News\Component;

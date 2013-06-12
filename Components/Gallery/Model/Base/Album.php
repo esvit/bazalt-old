@@ -27,7 +27,7 @@ abstract class Album extends \Framework\CMS\ORM\Record
 
     public function initRelations()
     {
-        $this->hasRelation('Photos', new \ORM_Relation_One2Many('Components\Gallery\Model\Photo', 'id', 'album_id'));
+        $this->hasRelation('Photos', new \Bazalt\ORM\Relation\One2Many('Components\Gallery\Model\Photo', 'id', 'album_id'));
         //$this->hasRelation('Elements', new \CMS_ORM_Relation_LocalizableNestedSet('ComGallery_Model_Album', 'site_id'));
         //$this->hasRelation('PublicElements', new \CMS_ORM_Relation_LocalizableNestedSet('ComGallery_Model_Album', 'site_id', null, array('is_publish' => 1)));
     }
@@ -36,6 +36,6 @@ abstract class Album extends \Framework\CMS\ORM\Record
     {
         $this->hasPlugin('Framework\CMS\ORM\Localizable', ['title', 'description']);
 
-        $this->hasPlugin('Framework\System\ORM\Plugin\Timestampable', ['created' => 'created_at']);
+        $this->hasPlugin('Bazalt\ORM\Plugin\Timestampable', ['created' => 'created_at']);
     }
 }

@@ -26,8 +26,8 @@ abstract class Widget extends \Framework\CMS\ORM\Record
 
     public function initRelations()
     {
-        $this->hasRelation('Instances', new \ORM_Relation_One2Many('Framework\CMS\Model\WidgetInstance', 'id', 'widget_id'));
-        $this->hasRelation('Component', new \ORM_Relation_One2One('Framework\CMS\Model\Component', 'component_id', 'id'));
+        $this->hasRelation('Instances', new \Bazalt\ORM\Relation\One2Many('Framework\CMS\Model\WidgetInstance', 'id', 'widget_id'));
+        $this->hasRelation('Component', new \Bazalt\ORM\Relation\One2One('Framework\CMS\Model\Component', 'component_id', 'id'));
     }
 
     public function initPlugins()

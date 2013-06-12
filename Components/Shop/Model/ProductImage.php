@@ -2,7 +2,7 @@
 
 namespace Components\Shop\Model;
 
-use Framework\System\ORM\ORM;
+use Bazalt\ORM;
 
 class ProductImage extends Base\ProductImage
 {

@@ -3,7 +3,7 @@
 namespace Framework\CMS\tests\Model;
 
 use Framework\CMS\Model\Component;
-use Framework\System\ORM\ORM;
+use Bazalt\ORM;
 
 class ComponentTest extends \Tests\BaseCase
 {

@@ -24,6 +24,6 @@ abstract class Option extends \Framework\CMS\ORM\Record
 
     public function initRelations()
     {
-        $this->hasRelation('Components', new \ORM_Relation_One2One('Framework\CMS\Model\Component', 'component_id',  'id'));
+        $this->hasRelation('Components', new \Bazalt\ORM\Relation\One2One('Framework\CMS\Model\Component', 'component_id',  'id'));
     }
 }

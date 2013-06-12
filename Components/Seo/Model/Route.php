@@ -2,7 +2,7 @@
 
 namespace Components\Seo\Model;
 
-use Framework\System\ORM\ORM,
+use Bazalt\ORM,
     Framework\CMS as CMS;
 
 class Route extends Base\Route

@@ -4,7 +4,7 @@ namespace Components\Shop\Model;
 
 use Framework\CMS as CMS,
     Framework\System\Routing as Routing,
-    Framework\System\ORM\ORM,
+    Bazalt\ORM,
     Framework\Core\Helper\Url;
 
 class Product extends Base\Product

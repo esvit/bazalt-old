@@ -1,7 +1,7 @@
 <?php
 
 namespace Framework\CMS\Model;
-use Framework\System\ORM\ORM,
+use Bazalt\ORM,
     Framework\CMS as CMS;
 
 class UserSetting extends Base\UserSetting

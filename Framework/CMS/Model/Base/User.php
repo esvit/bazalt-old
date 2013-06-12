@@ -53,14 +53,14 @@ abstract class User extends \Framework\CMS\ORM\Record
 
     public function initRelations()
     {
-        $this->hasRelation('Roles', new \ORM_Relation_Many2Many('Framework\CMS\Model\Role', 'user_id', 'Framework\CMS\Model\RoleRefUser', 'role_id'));
-        $this->hasRelation('SiteRoles', new \ORM_Relation_Many2Many('Framework\CMS\Model\Role', 'user_id', 'Framework\CMS\Model\RoleRefUser', 'role_id', array('ref.site_id' => \Framework\CMS\Bazalt::getSiteId())));
-        $this->hasRelation('Settings', new \ORM_Relation_One2Many('Framework\CMS\Model\UserSetting', 'id', 'user_id'));
-        $this->hasRelation('Sites', new \ORM_Relation_Many2Many('Framework\CMS\Model\Site', 'user_id', 'Framework\CMS\Model\SiteRefUser', 'site_id'));
+        $this->hasRelation('Roles', new \Bazalt\ORM\Relation\Many2Many('Framework\CMS\Model\Role', 'user_id', 'Framework\CMS\Model\RoleRefUser', 'role_id'));
+        $this->hasRelation('SiteRoles', new \Bazalt\ORM\Relation\Many2Many('Framework\CMS\Model\Role', 'user_id', 'Framework\CMS\Model\RoleRefUser', 'role_id', array('ref.site_id' => \Framework\CMS\Bazalt::getSiteId())));
+        $this->hasRelation('Settings', new \Bazalt\ORM\Relation\One2Many('Framework\CMS\Model\UserSetting', 'id', 'user_id'));
+        $this->hasRelation('Sites', new \Bazalt\ORM\Relation\Many2Many('Framework\CMS\Model\Site', 'user_id', 'Framework\CMS\Model\SiteRefUser', 'site_id'));
     }
 
     public function initPlugins()
     {
-        $this->hasPlugin('Framework\System\ORM\Plugin\Timestampable', ['created' => 'reg_date']);
+        $this->hasPlugin('Bazalt\ORM\Plugin\Timestampable', ['created' => 'reg_date']);
     }
 }

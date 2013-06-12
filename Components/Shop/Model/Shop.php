@@ -3,7 +3,7 @@
 namespace Components\Shop\Model;
 
 use Framework\CMS as CMS,
-    Framework\System\ORM\ORM;
+    Bazalt\ORM;
 
 class Shop extends Base\Shop
 {

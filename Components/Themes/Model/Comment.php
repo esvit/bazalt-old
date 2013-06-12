@@ -2,7 +2,7 @@
 
 namespace Components\News\Model;
 
-use Framework\System\ORM\ORM;
+use Bazalt\ORM;
 use Components\News\Component;
 
 class Comment extends Base\Comment

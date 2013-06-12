@@ -26,13 +26,13 @@ abstract class Brand extends \Framework\CMS\ORM\Record
 
     public function initRelations()
     {
-        $this->hasRelation('Elements', new \ORM_Relation_NestedSet('Components\Ecommerce\Model\Brands', 'site_id'));
+        $this->hasRelation('Elements', new \Bazalt\ORM\Relation\NestedSet('Components\Ecommerce\Model\Brands', 'site_id'));
     
     }
 
     public function initPlugins()
     {
-        $this->hasPlugin('Framework\System\ORM\Plugin\Timestampable', ['created' => 'created_at', 'updated' => 'updated_at']);
+        $this->hasPlugin('Bazalt\ORM\Plugin\Timestampable', ['created' => 'created_at', 'updated' => 'updated_at']);
     }
     
 }

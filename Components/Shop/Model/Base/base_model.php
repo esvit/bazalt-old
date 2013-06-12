@@ -35,10 +35,10 @@ $pattern = '/\n(.*)public function initPlugins()(.*)\n(.*){(.*)\n(.*)}(.*)\n(.*)
 $file = preg_replace($pattern, '', $file);
 
 $pattern = '/new(.*)ORM_Relation_/i';
-$file = preg_replace($pattern, 'new \ORM_Relation_', $file);
+$file = preg_replace($pattern, 'new \Bazalt\ORM\Relation\', $file);
 
 $pattern = '/ORM_Plugin_/i';
-$file = preg_replace($pattern, 'Framework\System\ORM\Plugin\\', $file);
+$file = preg_replace($pattern, 'Bazalt\ORM\Plugin\\', $file);
 
 $pattern = '/\$this->hasPlugin\(\'CMS_ORM_Localizable\', array\((.*)\n(.*)(.*)\'fields\' => array\((.*)\),(.*)\n(.*)\'type\' =>(.*)\n(.*)\)\);/mi';
 $file = preg_replace($pattern, '$this->hasPlugin(\'Framework\CMS\ORM\Localizable\', [$4]);', $file);

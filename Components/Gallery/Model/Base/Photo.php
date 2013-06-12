@@ -29,7 +29,7 @@ abstract class Photo extends \Framework\CMS\ORM\Record
 
     public function initRelations()
     {
-        $this->hasRelation('Album', new \ORM_Relation_One2One('Components\Gallery\Model\Album', 'album_id', 'id'));
+        $this->hasRelation('Album', new \Bazalt\ORM\Relation\One2One('Components\Gallery\Model\Album', 'album_id', 'id'));
     }
 
     public function initPlugins()

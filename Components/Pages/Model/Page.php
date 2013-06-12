@@ -3,7 +3,7 @@
 namespace Components\Pages\Model;
 
 use Framework\CMS as CMS,
-    Framework\System\ORM\ORM,
+    Bazalt\ORM,
     Framework\System\Routing as Routing;
 use Framework\Core\Helper\Url;
 

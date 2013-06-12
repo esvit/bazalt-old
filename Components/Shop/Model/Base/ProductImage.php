@@ -27,7 +27,7 @@ abstract class ProductImage extends \Framework\CMS\ORM\Record
 
     public function initRelations()
     {
-        $this->hasRelation('Product', new \ORM_Relation_One2One('Components\Shop\Model\Product', 'product_id',  'id'));
+        $this->hasRelation('Product', new \Bazalt\ORM\Relation\One2One('Components\Shop\Model\Product', 'product_id',  'id'));
     }
     
 }

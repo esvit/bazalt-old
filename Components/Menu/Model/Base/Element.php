@@ -32,14 +32,14 @@ abstract class Element extends \Framework\CMS\ORM\Record
 
     public function initRelations()
     {
-        $this->hasRelation('Component', new \ORM_Relation_One2One('Framework\CMS\Model\Component', 'component_id', 'id'));
-        $this->hasRelation('PublicElements', new \ORM_Relation_NestedSet(self::MODEL_NAME, 'root_id', 'id', ['is_publish' => 1]));
-        $this->hasRelation('Elements', new \ORM_Relation_NestedSet(self::MODEL_NAME, 'root_id', 'id'));
+        $this->hasRelation('Component', new \Bazalt\ORM\Relation\One2One('Framework\CMS\Model\Component', 'component_id', 'id'));
+        $this->hasRelation('PublicElements', new \Bazalt\ORM\Relation\NestedSet(self::MODEL_NAME, 'root_id', 'id', ['is_publish' => 1]));
+        $this->hasRelation('Elements', new \Bazalt\ORM\Relation\NestedSet(self::MODEL_NAME, 'root_id', 'id'));
     }
     
     public function initPlugins()
     {
-        $this->hasPlugin('Framework\System\ORM\Plugin\Serializable', 'config');
+        $this->hasPlugin('Bazalt\ORM\Plugin\Serializable', 'config');
 
         $this->hasPlugin('Framework\CMS\ORM\Localizable', ['title', 'description']);
     }
