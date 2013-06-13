@@ -23,6 +23,6 @@ abstract class AbstractController
             $base = $component->view();
         }
         $this->breadcrumb = Breadcrumb::root();
-        $this->view = $base->newScope();
+        $this->view = $base->newView();
     }
 }

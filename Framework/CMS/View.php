@@ -2,13 +2,11 @@
 
 namespace Framework\CMS;
 
-use Framework\System\View\Scope;
-
 if (!defined('USE_DEFAULT_THEME')) {
     define('USE_DEFAULT_THEME', true);
 }
 
-class View extends Scope
+class View extends \Bazalt\View
 {
     const DEFAULT_LAYOUT = 'layout';
 

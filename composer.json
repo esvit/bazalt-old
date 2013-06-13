@@ -20,6 +20,8 @@
         "peej/tonic": "*",
         "analog/analog": "dev-master",
         "bazalt/thumbs": "dev-master",
+        "bazalt/view": "dev-master",
+        "bazalt/routing": "dev-master",
         "bazalt/orm": "dev-master"
     }
 }

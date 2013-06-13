@@ -2,7 +2,7 @@
 
 namespace Framework\CMS;
 
-class Route extends \Framework\System\Routing\Route
+class Route extends \Bazalt\Routing\Route
 {
     protected function __construct($name, $baseRule, Route $baseRoute = null)
     {

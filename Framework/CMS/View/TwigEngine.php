@@ -2,9 +2,7 @@
 
 namespace Framework\CMS\View;
 
-use Framework\System\View as View;
-
-class TwigEngine extends View\Engine
+class TwigEngine extends \Bazalt\View\Engine
 {
     protected $localeDomain = null;
 
@@ -63,7 +61,7 @@ class TwigEngine extends View\Engine
         return $twig;
     }
 
-    public function fetch($folder, $file, View\Scope $view)
+    public function fetch($folder, $file, \Bazalt\View $view)
     {
         $vars = $view->variables();
 

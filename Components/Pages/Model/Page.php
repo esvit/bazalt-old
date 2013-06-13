@@ -3,11 +3,10 @@
 namespace Components\Pages\Model;
 
 use Framework\CMS as CMS,
-    Bazalt\ORM,
-    Framework\System\Routing as Routing;
+    Bazalt\ORM;
 use Framework\Core\Helper\Url;
 
-class Page extends Base\Page implements Routing\Sluggable
+class Page extends Base\Page implements \Bazalt\Routing\Sluggable
 {
     /**
      * Create new page without saving in database
@@ -19,7 +18,7 @@ class Page extends Base\Page implements Routing\Sluggable
         return $page;
     }
 
-    public function toUrl(Routing\Route $route)
+    public function toUrl(\Bazalt\Routing\Route $route)
     {
         return $this->url;
     }

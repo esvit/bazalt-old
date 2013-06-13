@@ -2,9 +2,7 @@
 
 namespace Framework\CMS\View;
 
-use Framework\System\View\PHP\Engine;
-
-class PHPEngine extends Engine
+class PHPEngine extends \Bazalt\View\PHP\Engine
 {
     public function __construct()
     {

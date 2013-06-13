@@ -3,7 +3,7 @@
 namespace Components\Gallery;
 
 use \Framework\CMS as CMS,
-    \Framework\System\Routing\Route;
+    \Framework\CMS\Route;
 
 class Component extends CMS\Component implements CMS\Menu\HasItems
 {
