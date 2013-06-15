@@ -152,7 +152,7 @@ class Localizable extends ORM\Plugin\AbstractPlugin
             if (!self::$language) {
                 self::$language = $defaultLang;
             }
-            $q = ORM\ORM::select(get_class($record) . 'Locale l')
+            $q = ORM::select(get_class($record) . 'Locale l')
                      ->where('l.id = ?', $record->id)
                      ->orderBy('l.completed DESC')
                      ->limit(1);
@@ -250,7 +250,7 @@ class Localizable extends ORM\Plugin\AbstractPlugin
             return null;
         }
 
-        $q = ORM\ORM::select(get_class($record) . 'Locale l')
+        $q = ORM::select(get_class($record) . 'Locale l')
             ->where('l.id = ?', $record->id);
         $locals = $q->fetchAll('stdClass');
 

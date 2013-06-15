@@ -6,7 +6,7 @@ require 'elFinderVolumeORM.class.php';
 
 use Framework\CMS as CMS,
     Components\Files\Model\File,
-    Framework\System\Routing\Route;
+    Bazalt\Routing\Route;
 
 class elFinder extends \elFinder
 {

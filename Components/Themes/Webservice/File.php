@@ -12,6 +12,39 @@ use Framework\CMS\Webservice\Response,
  */
 class File extends CMS\Webservice\Rest
 {
+    private static function _listFiles($path, $pattern, $type = null, $basePath = null)
+    {
+        if (!$type) {
+            $type = $pattern;
+        }
+        if (!$basePath) {
+            $basePath = $path;
+        }
+        $files = [];
+        if (is_dir($path)) {
+            if ($handle = opendir($path)) {
+                while (($name = readdir($handle)) !== false) {
+                    if ($name[0] != '.' && is_dir($path . "/" . $name)) {
+                        $files = array_merge($files, self::_listFiles($path . "/" . $name, $pattern, $type, $basePath));
+                    } else {
+                        if (preg_match("#(.*)\." . $pattern . "$#", $name)) {
+                            $files [] = [
+                                'type' => 'file',
+                                'file' => relativePath($path . "/" . $name),
+                                'name' => ltrim(relativePath($path . "/" . $name, $basePath), '/'),
+                                'contentType' => $type,
+                                'theme_id' => CMS\Bazalt::getSite()->theme_id
+                            ];
+                        }
+                    }
+                }
+               
+                closedir($handle);
+            }
+        }
+        return $files;
+    }
+
     /**
      * @method GET
      * @priority 10
@@ -77,38 +110,20 @@ class File extends CMS\Webservice\Rest
             'type' => 'category',
             'title' => 'LESS'
         ];
-        foreach (glob($dir . '/assets/less/*.less') as $file) {
-            $files [] = [
-                'type' => 'file',
-                'file' => relativePath($file),
-                'name' => basename($file),
-                'contentType' => 'less',
-                'theme_id' => CMS\Bazalt::getSite()->theme_id
-            ];
-        }
+        $files = array_merge($files, self::_listFiles($dir . '/assets/less', 'less'));
+
+        $files [] = [
+            'type' => 'category',
+            'title' => 'CSS'
+        ];
+        $files = array_merge($files, self::_listFiles($dir . '/assets/css', 'css'));
+
         $files [] = [
             'type' => 'category',
             'title' => 'Templates'
         ];
-        foreach (glob($dir . '/views/*.twg') as $file) {
-            $files [] = [
-                'type' => 'file',
-                'file' => relativePath($file),
-                'name' => basename($file),
-                'contentType' => 'twg',
-                'theme_id' => CMS\Bazalt::getSite()->theme_id
-            ];
-        }
-        foreach (glob($dir . '/views/*/*.twg') as $file) {
-            $files [] = [
-                'type' => 'file',
-                'file' => relativePath($file),
-                'name' => ltrim(relativePath($file, $dir . '/views'), '/'),
-                'contentType' => 'twig',
-                'theme_id' => CMS\Bazalt::getSite()->theme_id
-            ];
-        }
-        
+        $files = array_merge($files, self::_listFiles($dir . '/views', 'twg', 'twig'));
+
         $result = $files;
         return new Response(200, $result);
     }

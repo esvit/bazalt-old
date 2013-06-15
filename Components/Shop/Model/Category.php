@@ -4,7 +4,7 @@ namespace Components\Shop\Model;
 
 use Framework\CMS as CMS,
     Bazalt\ORM,
-    Framework\System\Routing as Routing;
+    Bazalt\Routing as Routing;
 
 class Category extends Base\Category implements Routing\Sluggable
 {

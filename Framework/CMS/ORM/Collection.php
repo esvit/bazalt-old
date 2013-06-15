@@ -24,7 +24,7 @@ use Framework\Core\Helper\Url;
  * @license    GPLv3
  * @version    $Revision: 133 $
  */ 
-class Collection extends \ORM_Collection
+class Collection extends \Bazalt\ORM\Collection
 {
     /**
      * Встановлює $this->currentPage, $this->countPerPage і робить вибірку данних для поточного запиту

@@ -3,11 +3,11 @@
 <div class="page-header">
     <div class="row">
         <div class="col-span-3">
-            <h2>{['Shop'|translate:'Shop']}</h2>
+            <h2>{{'Shop'|translate:'Shop'}}</h2>
         </div>
         <div class="col-span-9 text-left">
-                <button ng-click="savePage(page)" class="btn btn-primary">{['Save'|translate:'Shop']}</button>
-                <button ng-click="cancel()" class="btn btn-link">{['Cancel'|translate:'Shop']}</button>
+                <button ng-click="savePage(page)" class="btn btn-primary">{{'Save'|translate:'Shop'}}</button>
+                <button ng-click="cancel()" class="btn btn-link">{{'Cancel'|translate:'Shop'}}</button>
         </div>
     </div>
 </div>
@@ -15,9 +15,9 @@
 <div class="row" loading-container="loading">
 
     <div class="col-span-3 page-settings">
-        <div class="control-group">
+        <div class="control-group ng-cloak" ng-show="categories.length">
             <div class="controls">
-                <label>{['Category'|translate:'Shop']}</label>
+                <label>{{'Category'|translate:'Shop'}}</label>
                 <div class="bz-form-element">
                     <select ng-model="page.category_id" ng-options="category.id as category.title for category in categories"></select>
                 </div>
@@ -25,7 +25,7 @@
         </div>
         <div class="control-group">
             <div class="controls">
-                <label>{['Price'|translate:'Shop']}</label>
+                <label>{{'Price'|translate:'Shop'}}</label>
                 <div class="bz-form-element">
                     <input type="text" ng-model="page.price" />
                 </div>
@@ -33,7 +33,7 @@
         </div>
         <div class="control-group">
             <div class="controls">
-                <label>{['Code'|translate:'Shop']}</label>
+                <label>{{'Code'|translate:'Shop'}}</label>
                 <div class="bz-form-element">
                     <input type="text" ng-model="page.code" />
                 </div>
@@ -42,25 +42,25 @@
         <div class="control-group">
             <div class="controls">
                 <label class="checkbox">
-                    <input type="checkbox" bz-switcher ng-model="page.is_published"> {['Is published'|translate:'Shop']}
+                    <input type="checkbox" bz-switcher ng-model="page.is_published"> {{'Is published'|translate:'Shop'}}
                 </label>
             </div>
         </div>
 
 
         <ul class="nav nav-tabs" id="tab-page-settings">
-            <li class="active"><a href="#photo" data-toggle="tab">{['Images'|translate:'Shop']}</a></li>
+            <li class="active"><a href="#photo" data-toggle="tab">{{'Images'|translate:'Shop'}}</a></li>
         </ul>
 
         <div class="tab-content">
             <div class="tab-pane active" id="photo">
                 <div class="well photo-uploader ng-cloak">
-                    <p>{['Browse for files to upload or drag and drop them here'|translate:'Shop']}</p>
+                    <p>{{'Browse for files to upload or drag and drop them here'|translate:'Shop'}}</p>
                     <input type="file" multiple bz-uploader="addImage(page, $file)" data-url="/rest.php/shop/images/" data-max-file-size="100mb" ng-model="page.images" accept="*.gif,*.png,*.jpg,*.jpeg" name="file1"/>
                 </div>
                 <div class="clearfix uploaded-photo">
                     <a ng-repeat="image in page.images" class="col-span-2 thumbnail" href="">
-                        <img ng-src="{[image.url]}" />
+                        <img ng-src="{{image.url}}" />
                     </a>
                 </div>
             </div>
@@ -71,19 +71,19 @@
             <div class="tabbable">
                 <ul class="nav nav-tabs">
                     <li ng-repeat="language in languages.all" ng-class="{'active': languages.current == language.id}">
-                        <a href="" ng-click="languages.current = language.id">{[language.title]}</a>
+                        <a href="" ng-click="languages.current = language.id">{{language.title}}</a>
                     </li>
                 </ul>
                 <div class="tab-content">
                     <div class="tab-pane" ng-repeat="language in languages.all" ng-class="{'active in': languages.current == language.id}">
                         <div class="control-group">
-                            <label class="control-label" for="title">{['Title'|translate:'Shop']}</label>
+                            <label class="control-label" for="title">{{'Title'|translate:'Shop'}}</label>
                             <div class="controls">
                                 <input class="input-block input-xlarge" type="text" id="title" placeholder="" required ng-model="page.title[language.id]"/>
                             </div>
                         </div>
                         <div class="control-group">
-                            <label class="control-label" for="description">{['Content'|translate:'Shop']}</label>
+                            <label class="control-label" for="description">{{'Content'|translate:'Shop'}}</label>
                             <div class="controls">
                                 <textarea ckeditor required ng-model="page.description[language.id]" id="description"></textarea>
                             </div>
@@ -92,8 +92,8 @@
                 </div>
             </div>
             <div class="form-actions text-center">
-                <button ng-click="savePage(page)" class="btn btn-primary">{['Save'|translate:'Shop']}</button>
-                <button ng-click="cancel()" class="btn btn-link">{['Cancel'|translate:'Shop']}</button>
+                <button ng-click="savePage(page)" class="btn btn-primary">{{'Save'|translate:'Shop'}}</button>
+                <button ng-click="cancel()" class="btn btn-link">{{'Cancel'|translate:'Shop'}}</button>
             </div>
         </form>
     </div>
