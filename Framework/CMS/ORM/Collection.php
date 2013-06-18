@@ -12,7 +12,7 @@
 namespace Framework\CMS\ORM;
 
 use Framework\CMS as CMS;
-use Framework\System\Routing\Route;
+use Bazalt\Routing\Route;
 use Framework\Core\Helper\Url;
 
 /**

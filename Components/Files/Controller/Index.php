@@ -4,7 +4,7 @@ namespace Components\Files\Controller;
 
 use Framework\CMS as CMS,
     Components\Files\Model\File,
-    Framework\System\Routing\Route;
+    Bazalt\Routing\Route;
 
 class Index extends CMS\AbstractController
 {

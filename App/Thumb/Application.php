@@ -5,7 +5,7 @@ namespace App\Thumb;
 using('Framework.Vendors.Imagine');
 
 use Framework\CMS as CMS;
-use Framework\System\Routing\Route;
+use Bazalt\Routing\Route;
 use Framework\System\Session\Session;
 
 class Application extends CMS\Application

@@ -144,7 +144,8 @@ class View extends \Bazalt\View
         if (!count($components)) {
             $components = new \stdClass();
         }
-        $head .= '<script>';
+        $afterBody = '';
+        $head = '<script>';
         $head .= 'var components = ' . json_encode($components);
         $head .= '</script>';
 

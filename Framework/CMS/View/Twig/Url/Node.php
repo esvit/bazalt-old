@@ -25,7 +25,7 @@ class Node extends \Twig_Node
 
         // Output the route
         $compiler
-            ->write('echo \Framework\System\Routing\Route::urlFor(')
+            ->write('echo \Bazalt\Routing\Route::urlFor(')
             ->subcompile($this->getNode('route'))
             ->write(', $route_params, isset($route_params["host"]) ? $route_params["host"] : false)')
             ->raw(";\n");

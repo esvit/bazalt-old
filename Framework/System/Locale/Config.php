@@ -14,6 +14,8 @@ namespace Framework\System\Locale;
 
 use Framework\Core\Logger;
 
+require_once 'include.inc';
+
 /**
  * Locale
  *

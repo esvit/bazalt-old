@@ -3,7 +3,7 @@
 namespace Components\Seo;
 
 use \Framework\CMS as CMS;
-use Framework\System\Routing\Route,
+use Bazalt\Routing\Route,
     Framework\Core\Helper\Url;
 
 class Component extends CMS\Component

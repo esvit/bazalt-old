@@ -5,6 +5,21 @@ namespace Framework\CMS;
 using('Framework.Vendors.Neon');
 using('Framework.System.Cache');
 
+$whoops = new \Whoops\Run();
+$handler = new \Whoops\Handler\PrettyPageHandler();
+$handler->addDataTable('Killer App Details', array(
+  "Thingamajig-id" => '123'
+));
+
+// Set the title of the error page:
+$handler->setPageTitle("We're all going to be fired!");
+$whoops->pushHandler($handler);
+$jsonHandler = new  \Whoops\Handler\JsonResponseHandler();
+$jsonHandler->onlyForAjaxRequests(true);
+$whoops->pushHandler($jsonHandler);
+
+$whoops->register();
+
 use Framework\Core\Logger,
     Framework\Core\Event;
 
@@ -37,8 +52,6 @@ final class Bootstrap
 
     public static function start(Application $application)
     {
-        Catcher::startCatch();
-
         //Event::register('Locale_Config', 'OnSetUserLocale', array('CMS_Bootstrap', 'onSetUserLocale'));
 
         //self::_loadConfiguration();
@@ -46,7 +59,5 @@ final class Bootstrap
 
         self::$_application = $application;
         $application->start();
-
-        Catcher::stop();
     }
 }

@@ -3,7 +3,7 @@
 namespace Components\News\Model;
 
 use \Framework\CMS as CMS;
-use Framework\System\Routing\Route;
+use Bazalt\Routing\Route;
 use Framework\Core\Helper\Url;
 use Bazalt\ORM;
 

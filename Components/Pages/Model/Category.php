@@ -115,7 +115,7 @@ class Category extends Base\Category
         };
         $res['children'] = $toArray($elements);
         $res['count'] = $count;
-        if (!$res['config']) {
+        if (!isset($res['config'])) {
             $res['config'] = new \stdClass();
         }
         return $res;

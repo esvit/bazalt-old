@@ -2,7 +2,7 @@
 
 namespace Components\Menu\Menu;
 
-use Framework\System\Routing\Route;
+use Bazalt\Routing\Route;
 
 class Link extends \Framework\CMS\Menu\ComponentItem
 {

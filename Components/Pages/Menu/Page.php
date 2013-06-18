@@ -23,7 +23,7 @@ class Page extends \Framework\CMS\Menu\ComponentItem
         return $this->view->fetch('admin/menu/page');
     }
 
-    public function getUrl()
+    public function getUrl($params = null)
     {
         if (!($page = $this->getPage())) {
             return '#';

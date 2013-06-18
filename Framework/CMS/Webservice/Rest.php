@@ -34,7 +34,7 @@ abstract class Rest extends \Tonic\Resource
         }
     }
 
-    protected function param($type, $name, $r)
+    protected function param($type, $name)
     {
         $name = trim($name, '$');
         if (!isset($this->params[$name])) {

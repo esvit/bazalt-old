@@ -46,7 +46,7 @@ class Application extends CMS\Application
             $widgets = CMS\Model\Widget::getActiveWidgets();
             $this->view->assign('widgets', $widgets);
 
-            $this->view->assign('widgetsOn', ($_COOKIE['cms-show-manage-widgets'] == 'true'));
+            $this->view->assign('widgetsOn', isset($_COOKIE['cms-show-manage-widgets']) && ($_COOKIE['cms-show-manage-widgets'] == 'true'));
            //$this->view->display('admin/panel');
         }
     }

@@ -4,7 +4,7 @@ namespace Components\News\Model;
 
 use Bazalt\ORM,
     Framework\CMS as CMS;
-use Framework\System\Routing\Route;
+use Bazalt\Routing\Route;
 use Components\News\Component;
 
 class Category extends Base\Category

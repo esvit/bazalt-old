@@ -2,7 +2,7 @@
 
 namespace Components\Menu\Menu;
 
-use Framework\System\Routing\Route;
+use Bazalt\Routing\Route;
 
 class MainPage extends \Framework\CMS\Menu\ComponentItem
 {
@@ -11,7 +11,7 @@ class MainPage extends \Framework\CMS\Menu\ComponentItem
         return __('Main page', \Components\Menu\Component::getName());
     }
 
-    public function getUrl()
+    public function getUrl($params = null)
     {
         return Route::urlFor('home');
     }

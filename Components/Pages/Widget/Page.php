@@ -9,7 +9,7 @@ class Page extends CMS\Widget
 {
     public function fetch()
     {
-        $pageId = $this->options['pageId'];
+        $pageId = isset($this->options['pageId']) ? $this->options['pageId'] : null;
 
         $page = Model\Page::getById((int)$pageId);
         if (!$page) {

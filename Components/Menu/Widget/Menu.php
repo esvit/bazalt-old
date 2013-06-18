@@ -11,7 +11,8 @@ class Menu extends CMS\Widget
     public function fetch()
     {
         $this->options = (array)$this->options;
-        $menu_id = $this->options['menu_id'];
+        $menu_id = isset($this->options['menu_id']) ? $this->options['menu_id'] : null;
+        $menu = null;
         if (!empty($menu_id)) {
             /** @var Element $menu */
             $menu = Element::getById((int)$menu_id);

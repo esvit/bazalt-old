@@ -4,7 +4,7 @@ namespace Components\Gallery\Model;
 
 use Bazalt\ORM,
     Framework\CMS as CMS,
-    Framework\System\Routing\Route;
+    Bazalt\Routing\Route;
 
 class Photo extends Base\Photo
 {

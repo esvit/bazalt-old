@@ -26,7 +26,7 @@ if (version_compare(PHP_VERSION, '5.4.0', '<')) {
     die('Update you PHP first. Needed 5.4.0 min. You are using ' . PHP_VERSION . ' now;');
 }
 
-@date_default_timezone_set(@date_default_timezone_get());
+//@date_default_timezone_set(@date_default_timezone_get());
 
 /**
  * Check run mode

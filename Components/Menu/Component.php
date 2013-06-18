@@ -3,7 +3,7 @@
 namespace Components\Menu;
 
 use \Framework\CMS as CMS,
-    \Framework\System\Routing\Route;
+    \Bazalt\Routing\Route;
 
 class Component extends CMS\Component implements CMS\Menu\HasItems
 {

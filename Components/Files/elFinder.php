@@ -16,7 +16,7 @@ class elFinder extends \elFinder
         return $connector;
     }
 
-    public function __construct($opts)
+    public function __construct($opts = [])
     {
         $roots = File::getBySite(CMS\Bazalt::getSiteId());
 
@@ -29,7 +29,7 @@ class elFinder extends \elFinder
             // 'debug' => true,
             'roots' => array()
         );
-        define(UPLOAD_DIR, SITE_DIR . '/uploads');
+        define('UPLOAD_DIR', SITE_DIR . '/uploads');
 
         foreach ($roots as $root) {
             $opts['roots'] []= [

@@ -5,7 +5,7 @@ namespace Components\Files\Model;
 use Framework\CMS as CMS,
     Framework\Core\Helper\Url,
     Bazalt\ORM,
-    Framework\System\Routing\Route;
+    Bazalt\Routing\Route;
 
 class File extends Base\File
 {

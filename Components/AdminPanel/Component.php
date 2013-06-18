@@ -3,7 +3,7 @@
 namespace Components\AdminPanel;
 
 use \Framework\CMS as CMS;
-use Framework\System\Routing\Route;
+use Bazalt\Routing\Route;
 
 class Component extends CMS\Component
 {
