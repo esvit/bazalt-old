@@ -326,6 +326,20 @@ CREATE TABLE IF NOT EXISTS `com_shop_shops` (
   PRIMARY KEY (`id`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 
+DROP TABLE IF EXISTS `com_shop_wish_lists`;
+CREATE TABLE `com_shop_wish_lists` (
+	`user_id` INT(10) UNSIGNED NOT NULL,
+	`product_id` INT(10) UNSIGNED NOT NULL,
+	`type` VARCHAR(255) NOT NULL,
+	`created_at` DATETIME NOT NULL,
+	PRIMARY KEY (`user_id`, `product_id`, `type`),
+	INDEX `FK_wish_list_ref_products` (`product_id`),
+	CONSTRAINT `FK_wish_list_ref_products` FOREIGN KEY (`product_id`) REFERENCES `com_shop_products` (`id`) ON UPDATE NO ACTION ON DELETE CASCADE,
+	CONSTRAINT `FK_wish_list_ref_usesr` FOREIGN KEY (`user_id`) REFERENCES `cms_users` (`id`) ON UPDATE NO ACTION ON DELETE CASCADE
+)
+COLLATE='latin1_swedish_ci'
+ENGINE=InnoDB
+ROW_FORMAT=DEFAULT;
 
 INSERT INTO `cms_components` (`name`, `dependencies`, `is_active`) VALUES ('Shop', NULL, 1);
 

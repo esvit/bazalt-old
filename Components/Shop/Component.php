@@ -39,6 +39,7 @@ class Component extends CMS\Component implements CMS\Menu\HasItems
     {
         if ($application instanceof \App\Site\Application) {
           //  $application->registerJsComponent('Component.Shop', relativePath(__DIR__ . '/component.js'));
+	    $application->view()->assign('wishListCount', WishList::getCountForUser(CMS\User::getUser()));
         } else {
             $application->registerJsComponent('Component.Shop.Admin', relativePath(__DIR__ . '/admin.js'));
         }
